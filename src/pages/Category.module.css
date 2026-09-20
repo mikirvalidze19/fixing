@@ -69,8 +69,8 @@
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
 }
 
 .empty {
@@ -81,21 +81,4 @@
   text-align: center;
   color: var(--grigioscuro);
   font-size: 15px;
-}
-
-@media (min-width: 640px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1025px) {
-  .page {
-    padding: 48px 2rem 80px;
-  }
-
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
 }

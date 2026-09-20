@@ -71,8 +71,15 @@
   justify-content: center;
   border: 1px solid var(--grigiomedio);
   border-radius: 16px;
-  background: linear-gradient(180deg, #f7f7f7 0%, #ececec 100%);
+  background: #fff;
   overflow: hidden;
+  padding: 24px;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .ghost {
@@ -146,7 +153,9 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background 300ms, color 300ms;
+  transition:
+    background 300ms,
+    color 300ms;
 }
 
 .primaryBtn:hover {
@@ -169,7 +178,9 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: border-color 200ms, color 200ms;
+  transition:
+    border-color 200ms,
+    color 200ms;
 }
 
 .ghostBtn:hover {
@@ -238,14 +249,8 @@
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-
-@media (min-width: 640px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 12px;
 }
 
 @media (min-width: 1025px) {
@@ -255,11 +260,6 @@
 
   .hero {
     grid-template-columns: 1.2fr 1fr;
-    gap: 24px;
-  }
-
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
   }
 }

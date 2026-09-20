@@ -13,6 +13,18 @@ const symbolUrls = import.meta.glob(
   { eager: true, query: '?url', import: 'default' },
 ) as Record<string, string>;
 
+const productImages = import.meta.glob(
+  '../../assets/products/*.webp',
+  { eager: true, query: '?url', import: 'default' },
+) as Record<string, string>;
+
+export function productImageSrc(id: string): string {
+  const entry = Object.entries(productImages).find(([path]) =>
+    path.endsWith(`/${id}.webp`),
+  );
+  return entry ? entry[1] : '';
+}
+
 function symbolSrc(file: string): string {
   const entry = Object.entries(symbolUrls).find(([path]) => path.endsWith(`/${file}`));
   return entry ? entry[1] : '';
@@ -39,6 +51,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const [expanded, setExpanded] = useState(false);
   const symbols = symbolMap[product.id] ?? [];
   const clippable = product.titleEn.length > CLAMP_CHARS;
+  const imageSrc = productImageSrc(product.id);
 
   return (
     <article className={styles.card}>
@@ -49,9 +62,17 @@ export default function ProductCard({ product }: { product: Product }) {
       />
 
       <div className={styles.image}>
-        <span className={styles.ghost} aria-hidden="true">
-          {product.series}
-        </span>
+        {imageSrc ? (
+          <img
+            src={imageSrc}
+            alt={`${product.series} — ${product.titleEn}`}
+            loading="lazy"
+          />
+        ) : (
+          <span className={styles.ghost} aria-hidden="true">
+            {product.series}
+          </span>
+        )}
       </div>
 
       <div className={styles.details}>

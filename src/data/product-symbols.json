@@ -1,4 +1,71 @@
 {
-  "_note": "Map product id -> symbol icons shown at the bottom of the shared product card. Drop icon files into src/assets/symbols/ and list them here as {icon, label}.",
-  "symbols": {}
+  "_note": "Map product id -> Tecfi gamma_symbols_wrapper icons. Source: tecfi.it eng category gammasData icone + fire/sisma/eta/ce flags. Files in src/assets/symbols/.",
+  "symbols": {
+    "aje": [{ "icon": "ChiaveEsagonale.webp", "label": "Hex drive" }],
+    "ar": [{ "icon": "ChiaveEsagonale.webp", "label": "Hex drive" }],
+    "bf": [],
+    "chemical-anchors": [
+      { "icon": "Logo_simbolo_FUOCO.png", "label": "Fire resistance" },
+      { "icon": "Logo_simbolo_SISMICO.png", "label": "Seismic" },
+      { "icon": "Logo_simbolo_ETA.png", "label": "ETA certified" }
+    ],
+    "chemical-guns": [],
+    "dv": [
+      { "icon": "Logo_simbolo_FUOCO.png", "label": "Fire resistance" },
+      { "icon": "Logo_simbolo_ETA.png", "label": "ETA certified" }
+    ],
+    "dxe00": [{ "icon": "Logo_simbolo_ETA.png", "label": "ETA certified" }],
+    "fv01": [{ "icon": "Logo_simbolo_ETA.png", "label": "ETA certified" }],
+    "fx01": [],
+    "gs01": [
+      { "icon": "Impronta_6lobi.webp", "label": "6-lobe recess" },
+      { "icon": "Preforo_necessario.webp", "label": "Pre-drill required" }
+    ],
+    "gs02": [
+      { "icon": "Impronta_6lobi.webp", "label": "6-lobe recess" },
+      { "icon": "Preforo_necessario.webp", "label": "Pre-drill required" }
+    ],
+    "gsc": [],
+    "hl01": [],
+    "hx": [{ "icon": "ChiaveEsagonale.webp", "label": "Hex drive" }],
+    "hxe01": [{ "icon": "ChiaveEsagonale.webp", "label": "Hex drive" }],
+    "hxe05": [{ "icon": "Impronta_6lobi.webp", "label": "6-lobe recess" }],
+    "hxe06": [{ "icon": "Impronta_6lobi.webp", "label": "6-lobe recess" }],
+    "hxe46-45": [{ "icon": "Impronta_6lobi.webp", "label": "6-lobe recess" }],
+    "jo": [],
+    "kb01": [
+      { "icon": "AcciaioInoxA2.webp", "label": "Stainless steel A2" },
+      { "icon": "ChiaveEsagonale.webp", "label": "Hex drive" },
+      { "icon": "ForaturaFerro.webp", "label": "Steel drilling" },
+      { "icon": "Preforo_NOnecessario.webp", "label": "No pre-drill needed" },
+      { "icon": "Velocita-Foratura_AutoPerf.webp", "label": "Self-drilling" }
+    ],
+    "kd": [
+      { "icon": "ChiaveEsagonale.webp", "label": "Hex drive" },
+      { "icon": "ForaturaFerro.webp", "label": "Steel drilling" },
+      { "icon": "Preforo_NOnecessario.webp", "label": "No pre-drill needed" },
+      { "icon": "Velocita-Foratura_AutoPerf.webp", "label": "Self-drilling" }
+    ],
+    "plc": [
+      { "icon": "ChiaveEsagonale.webp", "label": "Hex drive" },
+      { "icon": "ForaturaFerro.webp", "label": "Steel drilling" },
+      { "icon": "Preforo_NOnecessario.webp", "label": "No pre-drill needed" },
+      { "icon": "Velocita-Foratura_AutoPerf.webp", "label": "Self-drilling" }
+    ],
+    "pm01": [],
+    "rl": [{ "icon": "ChiaveEsagonale.webp", "label": "Hex drive" }],
+    "sdc": [
+      { "icon": "ChiaveEsagonale.webp", "label": "Hex drive" },
+      { "icon": "ForaturaFerro.webp", "label": "Steel drilling" },
+      { "icon": "Preforo_NOnecessario.webp", "label": "No pre-drill needed" },
+      { "icon": "Velocita-Foratura_AutoPerf.webp", "label": "Self-drilling" }
+    ],
+    "ws01": [
+      { "icon": "Preforo_NOnecessario.webp", "label": "No pre-drill needed" }
+    ],
+    "wv01": [
+      { "icon": "Preforo_NOnecessario.webp", "label": "No pre-drill needed" }
+    ],
+    "zze": [{ "icon": "Logo_simbolo_ETA.png", "label": "ETA certified" }]
+  }
 }

@@ -7,6 +7,7 @@ import { products, type Product } from '../data/catalog';
 import ProductCard, {
   formatGel,
   minPrice,
+  productImageSrc,
 } from '../components/ProductCard/ProductCard';
 import Placeholder from './Placeholder';
 import styles from './Product.module.css';
@@ -54,8 +55,17 @@ export default function Product() {
       <p className={styles.subtitle}>{product.titleKa}</p>
 
       <div className={styles.hero}>
-        <div className={styles.image} aria-hidden="true">
-          <span className={styles.ghost}>{product.series}</span>
+        <div className={styles.image}>
+          {productImageSrc(product.id) ? (
+            <img
+              src={productImageSrc(product.id)}
+              alt={`${product.series} — ${product.titleEn}`}
+            />
+          ) : (
+            <span className={styles.ghost} aria-hidden="true">
+              {product.series}
+            </span>
+          )}
         </div>
         <div className={styles.meta}>
           <div className={styles.metaRow}>
