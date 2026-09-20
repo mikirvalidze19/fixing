@@ -1,0 +1,11 @@
+{
+  "title": "Fixing Systems — certified products and fast delivery for unbeatable fixing solutions",
+  "cta": "Find out more",
+  "to": "/contacts",
+  "stats": [
+    { "id": "catalog", "value": 8304, "label": "Catalog products" },
+    { "id": "certified", "value": 3047, "label": "Certified products" },
+    { "id": "clients", "value": 2540, "label": "Clients" },
+    { "id": "countries", "value": 65, "label": "Countries served" }
+  ]
+}

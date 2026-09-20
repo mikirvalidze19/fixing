@@ -1,0 +1,17 @@
+{
+  "roofing-fixing-systems": ["kb01", "plc", "kd", "dv", "sdc"],
+  "renewable-energy-plants": [],
+  "heavy-duty-metallic": ["hx", "hxe01", "hxe05", "hxe06", "hxe46-45", "dxe00", "hl01", "aje", "fx01", "gs01", "gs02"],
+  "chemical-fixings": ["chemical-anchors", "chemical-guns", "fv01", "pm01"],
+  "scaffoldings-ropes-nets": [],
+  "windows-frames-facades": [],
+  "light-fixing": [],
+  "drywall-hollow": ["zze", "ws01", "wv01", "gsc"],
+  "wood": [],
+  "rivets": [],
+  "sealants-foams": [],
+  "cable-plumbing": [],
+  "general-fasteners": ["bf", "jo", "ar", "rl"],
+  "drills-bits-sockets": [],
+  "inblister": []
+}

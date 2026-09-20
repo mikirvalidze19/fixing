@@ -1,0 +1,15 @@
+.wrap {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 80px 2rem;
+}
+
+.wrap h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.wrap p {
+  color: var(--maincolor);
+  opacity: 0.8;
+}

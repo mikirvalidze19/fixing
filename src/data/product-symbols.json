@@ -1,0 +1,4 @@
+{
+  "_note": "Map product id -> symbol icons shown at the bottom of the shared product card. Drop icon files into src/assets/symbols/ and list them here as {icon, label}.",
+  "symbols": {}
+}

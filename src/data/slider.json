@@ -1,0 +1,50 @@
+{
+  "autoplayMs": 6000,
+  "slides": [
+    {
+      "id": "concrete-screws",
+      "eyebrow": "HX · HXE01 · HXE05 · HXE06 · GS01 · GS02",
+      "ghost": "HXE",
+      "title": "Concrete screws",
+      "text": "For the connection of primary or secondary elements to a concrete base structure — zinc-plated, ETA-grade performance, ready in every diameter.",
+      "cta": "Find out more",
+      "to": "/products"
+    },
+    {
+      "id": "metal-anchors",
+      "eyebrow": "DXE00 · HL01 · AJE",
+      "ghost": "AJE",
+      "title": "Heavy-duty metal anchors",
+      "text": "Drop-in and expansion anchors for cracked and non-cracked concrete. Safe, certified holding power for structural fixings.",
+      "cta": "Find out more",
+      "to": "/products"
+    },
+    {
+      "id": "chemical-anchoring",
+      "eyebrow": "XWE01 · DGE · FV01 · PM01 · DH04",
+      "ghost": "XWE",
+      "title": "Chemical anchoring systems",
+      "text": "Adhesive anchors, mesh and plastic sleeves plus applicator guns — complete chemical fixing kits for solid and hollow materials.",
+      "cta": "Find out more",
+      "to": "/products"
+    },
+    {
+      "id": "roofing-screws",
+      "eyebrow": "KB01 · PLC · KD · SDC · DV",
+      "ghost": "KB01",
+      "title": "Roofing & facade screws",
+      "text": "Stainless and zinc-plated self-drilling screws, painted heads and sealing washers — certified excellence for roofing and cladding.",
+      "cta": "Find out more",
+      "to": "/products"
+    },
+    {
+      "id": "insulation-frame",
+      "eyebrow": "WS01 · WV01 · ZZE · GSC",
+      "ghost": "ZZE",
+      "title": "Insulation & frame fixings",
+      "text": "Nylon plugs for thermal insulation, polyethylene frame anchors and caps — quick, safe installation on every base material.",
+      "cta": "Find out more",
+      "to": "/products"
+    }
+  ]
+}

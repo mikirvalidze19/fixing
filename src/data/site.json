@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "siteName": "Tecfi Spa",
+    "tagline": "Fixing Systems",
+    "description": "Dealer clone of https://www.tecfi.it/en — 3,000 certified products, fixing solutions. Front-end only React app.",
+    "sourceReference": "https://www.tecfi.it/en",
+    "language": "en"
+  },
+  "header": {
+    "logo": {
+      "src": "fixing-systems-logo.png",
+      "alt": "Tecfi Spa Logo",
+      "link": "/",
+      "width": 200
+    },
+    "topBar": [],
+    "languages": {
+      "current": "en",
+      "options": [
+        { "code": "en", "label": "English", "to": "/en" },
+        { "code": "ka", "label": "Georgian", "to": "/ka" }
+      ]
+    },
+    "mainNav": [
+      { "label": "Products", "to": "/products", "menu": "mega" },
+      { "label": "Applications", "to": "/applications" },
+      { "label": "Video", "to": "/video" },
+      { "label": "Services and support", "to": "/services-and-support" },
+      { "label": "Contacts", "to": "/contacts" }
+    ]
+  },
+  "footer": {
+    "copyright": "COPYRIGHT © 2017 - 2026 TECFI SPA",
+    "vat": "P.IVA 03301781211",
+    "plants": [
+      {
+        "title": "Plants 1 and 2 (operational headquarters and correspondence)",
+        "address": "S.S. Appia km.193 - 81050 Pastorano (CE) - Italia",
+        "phone": "(+39) 0823.88.33.38"
+      },
+      {
+        "title": "Plant 3 (production)",
+        "address": "Viale delle Industrie e del Commercio n. 30, 81050 Pastorano (CE) - Italia"
+      }
+    ],
+    "sitemap": [
+      { "label": "Applications", "to": "/applications" },
+      { "label": "Services and support", "to": "/services-and-support" },
+      { "label": "Contacts", "to": "/contacts" }
+    ]
+  }
+}

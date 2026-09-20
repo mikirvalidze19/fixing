@@ -1,0 +1,126 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import sliderData from '../../data/slider.json';
+import styles from './Slider.module.css';
+
+const AUTOPLAY_MS = sliderData.autoplayMs ?? 6000;
+const SWIPE_PX = 40;
+
+export default function Slider() {
+  const slides = sliderData.slides;
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const touchX = useRef<number | null>(null);
+  const count = slides.length;
+
+  const go = useCallback(
+    (next: number) => setIndex(((next % count) + count) % count),
+    [count],
+  );
+
+  /* autoplay — pauses on hover / focus / touch */
+  useEffect(() => {
+    if (paused || count < 2) return;
+    const id = window.setInterval(() => {
+      setIndex((i) => (i + 1) % count);
+    }, AUTOPLAY_MS);
+    return () => window.clearInterval(id);
+  }, [paused, count]);
+
+  /* keyboard arrows */
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowRight') go(index + 1);
+    if (e.key === 'ArrowLeft') go(index - 1);
+  };
+
+  return (
+    <section
+      className={styles.slider}
+      aria-roledescription="carousel"
+      aria-label="Featured product categories"
+      tabIndex={0}
+      onKeyDown={onKeyDown}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+    >
+      <div
+        className={styles.track}
+        style={{ transform: `translateX(-${index * 100}%)` }}
+        onTouchStart={(e) => {
+          touchX.current = e.touches[0].clientX;
+          setPaused(true);
+        }}
+        onTouchEnd={(e) => {
+          if (touchX.current === null) return;
+          const dx = e.changedTouches[0].clientX - touchX.current;
+          if (dx > SWIPE_PX) go(index - 1);
+          else if (dx < -SWIPE_PX) go(index + 1);
+          touchX.current = null;
+          setPaused(false);
+        }}
+      >
+        {slides.map((slide, i) => (
+          <article
+            key={slide.id}
+            className={`${styles.slide} ${styles[`theme${i % 5}`]}`}
+            aria-roledescription="slide"
+            aria-label={`${i + 1} of ${count}: ${slide.title}`}
+            aria-hidden={i !== index}
+            inert={! (i === index)}
+          >
+            <span className={styles.ghost} aria-hidden="true">
+              {slide.ghost}
+            </span>
+            <div className={styles.inner}>
+              <h2 className={styles.title}>{slide.title}</h2>
+              <p className={styles.text}>{slide.text}</p>
+              <Link to={slide.to} className={styles.cta} tabIndex={i === index ? 0 : -1}>
+                {slide.cta}
+              </Link>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div className={styles.dots} role="tablist" aria-label="Slides">
+        {slides.map((slide, i) => (
+          <button
+            key={slide.id}
+            type="button"
+            role="tab"
+            aria-selected={i === index}
+            aria-label={`Go to slide ${i + 1}: ${slide.title}`}
+            className={`${styles.dot} ${i === index ? styles.dotActive : ''}`}
+            onClick={() => go(i)}
+          />
+        ))}
+      </div>
+
+      <div className={styles.arrows}>
+        <button
+          type="button"
+          className={styles.arrow}
+          aria-label="Previous slide"
+          onClick={() => go(index - 1)}
+        >
+          <ChevronLeft size={22} />
+        </button>
+        <button
+          type="button"
+          className={styles.arrow}
+          aria-label="Next slide"
+          onClick={() => go(index + 1)}
+        >
+          <ChevronRight size={22} />
+        </button>
+      </div>
+
+      <p className={styles.visuallyHidden} aria-live="polite">
+        Slide {index + 1} of {count}: {slides[index].title}
+      </p>
+    </section>
+  );
+}

@@ -1,0 +1,1110 @@
+{
+  "$schemaVersion": "1.0.0",
+  "catalog": {
+    "source": "Price List FS.pdf",
+    "sourceDate": "2026-09-03",
+    "currency": "GEL",
+    "priceBasis": "Price as printed in source PDF; tax status is not stated.",
+    "company": {
+      "nameKa": "შპს ფიქსინგ სისტემს",
+      "nameEn": "Fixing Systems LLC",
+      "addressKa": "თბილისი, ქართულ ამერიკული მეგობრობის ქ. N33 (ამერიკის საელჩოს მიმდებარედ)",
+      "phones": [
+        "+995 577 51-71-22",
+        "+995 511 42-55-11"
+      ],
+      "email": "info.fs.ge@gmail.com"
+    }
+  },
+  "products": [
+    {
+      "id": "kb01",
+      "groupNumber": 1,
+      "series": "KB01",
+      "titleKa": "უჟანგავი თვითმჭრელი ხრახნი",
+      "titleEn": "Stainless self-drilling screw",
+      "variants": [
+        {
+          "sku": "KB 01 48 016",
+          "diameterMm": "4.8",
+          "lengthMm": 16,
+          "unitsPerBox": 500,
+          "priceGel": 0.29,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "hx",
+      "groupNumber": 2,
+      "series": "HX",
+      "titleKa": "ბეტონის ხრახნი მოთუთიებული",
+      "titleEn": "Zinc-plated concrete screw",
+      "variants": [
+        {
+          "sku": "HX 21 08 080",
+          "diameterMm": 8,
+          "lengthMm": 80,
+          "unitsPerBox": 50,
+          "priceGel": 1.37,
+          "note": null
+        },
+        {
+          "sku": "HX 21 10 100",
+          "diameterMm": 10,
+          "lengthMm": 100,
+          "unitsPerBox": 25,
+          "priceGel": 2.75,
+          "note": null
+        },
+        {
+          "sku": "HX 21 12 110",
+          "diameterMm": 12,
+          "lengthMm": 110,
+          "unitsPerBox": 25,
+          "priceGel": 4.61,
+          "note": null
+        },
+        {
+          "sku": "HX 21 12 150",
+          "diameterMm": 12,
+          "lengthMm": 150,
+          "unitsPerBox": 25,
+          "priceGel": 6.07,
+          "note": null
+        },
+        {
+          "sku": "HX 21 16 090",
+          "diameterMm": 16,
+          "lengthMm": 90,
+          "unitsPerBox": 15,
+          "priceGel": 13.87,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "hxe01",
+      "groupNumber": 3,
+      "series": "HXE01",
+      "titleKa": "ბეტონის ხრახნი მოთუთიებული",
+      "titleEn": "Zinc-plated concrete screw",
+      "variants": [
+        {
+          "sku": "HXE 01 08 080",
+          "diameterMm": 8,
+          "lengthMm": 80,
+          "unitsPerBox": 50,
+          "priceGel": 1.51,
+          "note": null
+        },
+        {
+          "sku": "HXE 01 10 100",
+          "diameterMm": 10,
+          "lengthMm": 100,
+          "unitsPerBox": 25,
+          "priceGel": 2.6,
+          "note": null
+        },
+        {
+          "sku": "HXE 01 12 130",
+          "diameterMm": 12,
+          "lengthMm": 130,
+          "unitsPerBox": 25,
+          "priceGel": 4.89,
+          "note": null
+        },
+        {
+          "sku": "HXE 01 12 110",
+          "diameterMm": 12,
+          "lengthMm": 110,
+          "unitsPerBox": 25,
+          "priceGel": 4.1,
+          "note": null
+        },
+        {
+          "sku": "HXE 01 16 150",
+          "diameterMm": 16,
+          "lengthMm": 150,
+          "unitsPerBox": 10,
+          "priceGel": 11.89,
+          "note": null
+        },
+        {
+          "sku": "HXE 01 16 180",
+          "diameterMm": 16,
+          "lengthMm": 180,
+          "unitsPerBox": 10,
+          "priceGel": 17.36,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "hxe05",
+      "groupNumber": 4,
+      "series": "HXE05",
+      "titleKa": "ბრტყელთავიანი 6-კუთხა ბეტონის ხრახნი მოთუთიებული",
+      "titleEn": "Zinc-plated hexagonal flat-head concrete screw",
+      "variants": [
+        {
+          "sku": "HXE 05 08 100",
+          "diameterMm": 8,
+          "lengthMm": 100,
+          "unitsPerBox": 50,
+          "priceGel": 2.16,
+          "note": null
+        },
+        {
+          "sku": "HXE 05 08 120",
+          "diameterMm": 8,
+          "lengthMm": 120,
+          "unitsPerBox": 50,
+          "priceGel": 2.55,
+          "note": null
+        },
+        {
+          "sku": "HXE 05 08 140",
+          "diameterMm": 8,
+          "lengthMm": 140,
+          "unitsPerBox": 50,
+          "priceGel": 2.91,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "hxe06",
+      "groupNumber": 5,
+      "series": "HXE06",
+      "titleKa": "ბრტყელთავიანი 6-კუთხა ბეტონის ხრახნი მოთუთიებული",
+      "titleEn": "Zinc-plated hexagonal flat-head concrete screw",
+      "variants": [
+        {
+          "sku": "HXE 06 08 100",
+          "diameterMm": 8,
+          "lengthMm": 100,
+          "unitsPerBox": 50,
+          "priceGel": 2.18,
+          "note": null
+        },
+        {
+          "sku": "HXE 06 08 120",
+          "diameterMm": 8,
+          "lengthMm": 120,
+          "unitsPerBox": 50,
+          "priceGel": 2.59,
+          "note": null
+        },
+        {
+          "sku": "HXE 06 08 140",
+          "diameterMm": 8,
+          "lengthMm": 140,
+          "unitsPerBox": 50,
+          "priceGel": 2.94,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "hxe46-45",
+      "groupNumber": 6,
+      "series": "HXE46-45",
+      "titleKa": "ბეტონის ხრახნი ნახევრად მრგვალი თავით ნაჭდევებით, სპეციალური ანტიკოროზიული საფარით",
+      "titleEn": "Concrete screw with pan head and special anti-corrosion coating",
+      "certifications": [
+        "ETA",
+        "CE"
+      ],
+      "variants": [
+        {
+          "sku": "HXE 46 06 080",
+          "diameterMm": 6,
+          "lengthMm": 80,
+          "unitsPerBox": 10,
+          "priceGel": 1.39,
+          "note": null
+        },
+        {
+          "sku": "HXE 46 06 120",
+          "diameterMm": 6,
+          "lengthMm": 120,
+          "unitsPerBox": 10,
+          "priceGel": 1.85,
+          "note": null
+        },
+        {
+          "sku": "HXE 45 08 120",
+          "diameterMm": 8,
+          "lengthMm": 120,
+          "unitsPerBox": 10,
+          "priceGel": 3.02,
+          "note": null
+        },
+        {
+          "sku": "HXE 46 08 120",
+          "diameterMm": 8,
+          "lengthMm": 120,
+          "unitsPerBox": 10,
+          "priceGel": 3.11,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "dxe00",
+      "groupNumber": 7,
+      "series": "DXE00",
+      "titleKa": "გამჭედი ანკერ დუბელი მოთუთიებული",
+      "titleEn": "Zinc-plated drop-in anchor",
+      "variants": [
+        {
+          "sku": "DXE 00 10 045",
+          "diameterMm": "M6",
+          "lengthMm": 45,
+          "unitsPerBox": 100,
+          "priceGel": 1.34,
+          "note": null
+        },
+        {
+          "sku": "DXE 00 12 050",
+          "diameterMm": "M8",
+          "lengthMm": 50,
+          "unitsPerBox": 50,
+          "priceGel": 1.59,
+          "note": null
+        },
+        {
+          "sku": "DXE 00 15 060",
+          "diameterMm": "M10",
+          "lengthMm": 60,
+          "unitsPerBox": 25,
+          "priceGel": 2.13,
+          "note": null
+        },
+        {
+          "sku": "DXE 00 18 075",
+          "diameterMm": "M12",
+          "lengthMm": 75,
+          "unitsPerBox": 20,
+          "priceGel": 3.09,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "aje",
+      "groupNumber": 8,
+      "series": "AJE",
+      "titleKa": "გაფართოებადი ანკერი",
+      "titleEn": "Expansion anchor",
+      "variants": [
+        {
+          "sku": "AJE 01 08 090",
+          "diameterMm": 8,
+          "lengthMm": 90,
+          "unitsPerBox": 100,
+          "priceGel": 1.77,
+          "note": null
+        },
+        {
+          "sku": "AJE 01 08 110",
+          "diameterMm": 8,
+          "lengthMm": 110,
+          "unitsPerBox": 50,
+          "priceGel": 2.02,
+          "note": null
+        },
+        {
+          "sku": "AJE 01 10 095",
+          "diameterMm": 10,
+          "lengthMm": 95,
+          "unitsPerBox": 50,
+          "priceGel": 2.23,
+          "note": null
+        },
+        {
+          "sku": "AJE 01 10 105",
+          "diameterMm": 10,
+          "lengthMm": 105,
+          "unitsPerBox": 50,
+          "priceGel": 2.29,
+          "note": null
+        },
+        {
+          "sku": "AJE 01 10 125",
+          "diameterMm": 10,
+          "lengthMm": 125,
+          "unitsPerBox": 25,
+          "priceGel": 2.82,
+          "note": null
+        },
+        {
+          "sku": "AJE 01 12 125",
+          "diameterMm": 12,
+          "lengthMm": 125,
+          "unitsPerBox": 25,
+          "priceGel": 3.87,
+          "note": null
+        },
+        {
+          "sku": "AJE 01 12 145",
+          "diameterMm": 12,
+          "lengthMm": 145,
+          "unitsPerBox": 25,
+          "priceGel": 4.47,
+          "note": null
+        },
+        {
+          "sku": "AJE 01 12 165",
+          "diameterMm": 12,
+          "lengthMm": 165,
+          "unitsPerBox": 25,
+          "priceGel": 5.04,
+          "note": null
+        },
+        {
+          "sku": "AJE 01 12 205",
+          "diameterMm": 12,
+          "lengthMm": 205,
+          "unitsPerBox": 15,
+          "priceGel": 7.44,
+          "note": null
+        },
+        {
+          "sku": "AJE 01 16 145",
+          "diameterMm": 16,
+          "lengthMm": 145,
+          "unitsPerBox": 10,
+          "priceGel": 9.27,
+          "note": null
+        },
+        {
+          "sku": "AJE 01 16 225",
+          "diameterMm": 16,
+          "lengthMm": 225,
+          "unitsPerBox": 10,
+          "priceGel": 14.81,
+          "note": null
+        },
+        {
+          "sku": "AJE 01 20 200",
+          "diameterMm": 20,
+          "lengthMm": 200,
+          "unitsPerBox": 5,
+          "priceGel": 24.27,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "hl01",
+      "groupNumber": 9,
+      "series": "HL01",
+      "titleKa": "გამჭედი ანკერ დუბელი მოთუთიებული",
+      "titleEn": "Zinc-plated drop-in anchor",
+      "variants": [
+        {
+          "sku": "HL 01 12 050",
+          "diameterMm": "M12",
+          "lengthMm": 50,
+          "unitsPerBox": 100,
+          "priceGel": 1.4,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "fv01",
+      "groupNumber": 10,
+      "series": "FV01",
+      "titleKa": "პლასტმასის გილზა ქიმიური ანკერისთვის ღრუტანიან მასალებში",
+      "titleEn": "Plastic sleeve for chemical anchors in hollow materials",
+      "variants": [
+        {
+          "sku": "FV 01 12 080",
+          "diameterMm": "6-8",
+          "lengthMm": 90,
+          "unitsPerBox": 25,
+          "priceGel": 0.63,
+          "note": null
+        },
+        {
+          "sku": "FV 01 15 085",
+          "diameterMm": "8-10",
+          "lengthMm": 95,
+          "unitsPerBox": 25,
+          "priceGel": 0.69,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "pm01",
+      "groupNumber": 11,
+      "series": "PM01",
+      "titleKa": "ბადის მოთუთიებული გილზა ქიმიური ანკერისთვის ღრუტანიან მასალებში",
+      "titleEn": "Zinc-plated mesh sleeve for chemical anchors in hollow materials",
+      "variants": [
+        {
+          "sku": "PM 01 12 100",
+          "diameterMm": 10,
+          "lengthMm": 1000,
+          "unitsPerBox": 1,
+          "priceGel": 26.43,
+          "note": null
+        },
+        {
+          "sku": "PM 01 16 100",
+          "diameterMm": 14,
+          "lengthMm": 1000,
+          "unitsPerBox": 1,
+          "priceGel": 29.33,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "fx01",
+      "groupNumber": 12,
+      "series": "FX01",
+      "titleKa": "ბეტონის ხრახნი რგოლისებური თავით მოთუთიებული",
+      "titleEn": "Zinc-plated concrete screw with eye head",
+      "variants": [
+        {
+          "sku": "FX 01 14 080",
+          "diameterMm": 14,
+          "lengthMm": "80/105",
+          "unitsPerBox": 20,
+          "priceGel": 10.87,
+          "note": null
+        },
+        {
+          "sku": "FX 01 14 105",
+          "diameterMm": 14,
+          "lengthMm": "105/130",
+          "unitsPerBox": 20,
+          "priceGel": 11.47,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "gs01",
+      "groupNumber": 13,
+      "series": "GS01",
+      "titleKa": "ბეტონის Hi-Lo ხრახნი ჩაღრმავებული თავით, ნაწრთობი ლითონის მოთუთიებული",
+      "titleEn": "Hardened zinc-plated Hi-Lo concrete screw, countersunk head",
+      "certifications": [
+        "ISO 9227",
+        "Fire resistance A1",
+        "EN13501-1"
+      ],
+      "variants": [
+        {
+          "sku": "GS 01 75 080",
+          "diameterMm": "6 (7.5)",
+          "lengthMm": 90,
+          "unitsPerBox": 100,
+          "priceGel": 0.47,
+          "note": null
+        },
+        {
+          "sku": "GS 01 75 090",
+          "diameterMm": "6 (7.5)",
+          "lengthMm": 90,
+          "unitsPerBox": 100,
+          "priceGel": 0.53,
+          "note": null
+        },
+        {
+          "sku": "GS 01 75 100",
+          "diameterMm": "6 (7.5)",
+          "lengthMm": 100,
+          "unitsPerBox": 100,
+          "priceGel": 0.57,
+          "note": null
+        },
+        {
+          "sku": "GS 01 75 110",
+          "diameterMm": "6 (7.5)",
+          "lengthMm": 110,
+          "unitsPerBox": 100,
+          "priceGel": 0.64,
+          "note": null
+        },
+        {
+          "sku": "GS 01 75 120",
+          "diameterMm": "6 (7.5)",
+          "lengthMm": 120,
+          "unitsPerBox": 100,
+          "priceGel": 0.69,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "gs02",
+      "groupNumber": 14,
+      "series": "GS02",
+      "titleKa": "ბეტონის Hi-Lo ხრახნი ცილინდრული თავით, ნაწრთობი ლითონის მოთუთიებული",
+      "titleEn": "Hardened zinc-plated Hi-Lo concrete screw, cylindrical head",
+      "certifications": [
+        "ISO 9227",
+        "Fire resistance A1",
+        "EN13501-1"
+      ],
+      "variants": [
+        {
+          "sku": "GS 02 75 090",
+          "diameterMm": "6 (7.5)",
+          "lengthMm": 90,
+          "unitsPerBox": 100,
+          "priceGel": 0.53,
+          "note": null
+        },
+        {
+          "sku": "GS 02 75 100",
+          "diameterMm": "6 (7.5)",
+          "lengthMm": 100,
+          "unitsPerBox": 100,
+          "priceGel": 0.57,
+          "note": null
+        },
+        {
+          "sku": "GS 02 75 120",
+          "diameterMm": "6 (7.5)",
+          "lengthMm": 120,
+          "unitsPerBox": 100,
+          "priceGel": 0.68,
+          "note": null
+        },
+        {
+          "sku": "GS 02 75 150",
+          "diameterMm": "6 (7.5)",
+          "lengthMm": 150,
+          "unitsPerBox": 100,
+          "priceGel": 0.9,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "gsc",
+      "series": "GSC",
+      "titleKa": "ხრახრის პლასტმასის ქუდი",
+      "titleEn": "Plastic screw cap",
+      "variants": [
+        {
+          "sku": "GSC 04 00 030",
+          "diameterMm": null,
+          "lengthMm": null,
+          "unitsPerBox": 100,
+          "priceGel": 0.26,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "ws01",
+      "groupNumber": 15,
+      "series": "WS01",
+      "titleKa": "ნეილონის დუბელი თერმო საიზოლაციო მასალებისთვის",
+      "titleEn": "Nylon plug for thermal-insulation materials",
+      "variants": [
+        {
+          "sku": "WS 01 27 058",
+          "diameterMm": 33,
+          "lengthMm": 58,
+          "unitsPerBox": 25,
+          "priceGel": 2.46,
+          "note": null
+        },
+        {
+          "sku": "WS 01 27 090",
+          "diameterMm": 33,
+          "lengthMm": 90,
+          "unitsPerBox": 25,
+          "priceGel": 3.83,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "wv01",
+      "groupNumber": 16,
+      "series": "WV01",
+      "titleKa": "ნეილონის დუბელი თერმო საიზოლაციო მასალებისთვის",
+      "titleEn": "Nylon plug for thermal-insulation materials",
+      "variants": [
+        {
+          "sku": "WV 01 23 050",
+          "diameterMm": 25,
+          "lengthMm": 50,
+          "unitsPerBox": 50,
+          "priceGel": 1.46,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "bf",
+      "groupNumber": 17,
+      "series": "BF",
+      "titleKa": "ხრახნიანი ღერო მოთუთიებული",
+      "titleEn": "Zinc-plated threaded rod",
+      "standards": [
+        "ISO 898-1:1999",
+        "DIN 976-1"
+      ],
+      "grade": "8.8",
+      "variants": [
+        {
+          "sku": "BF 05 08 100",
+          "diameterMm": 8,
+          "lengthMm": 1000,
+          "unitsPerBox": 35,
+          "priceGel": 7.48,
+          "note": null
+        },
+        {
+          "sku": "BF 05 10 100",
+          "diameterMm": 10,
+          "lengthMm": 1000,
+          "unitsPerBox": 20,
+          "priceGel": 10.95,
+          "note": null
+        },
+        {
+          "sku": "BF 05 12 100",
+          "diameterMm": 12,
+          "lengthMm": 1000,
+          "unitsPerBox": 14,
+          "priceGel": 15.31,
+          "note": null
+        },
+        {
+          "sku": "BF 05 16 100",
+          "diameterMm": 16,
+          "lengthMm": 1000,
+          "unitsPerBox": 8,
+          "priceGel": 27.51,
+          "note": null
+        },
+        {
+          "sku": "BF 05 20 100",
+          "diameterMm": 20,
+          "lengthMm": 1000,
+          "unitsPerBox": 5,
+          "priceGel": 44.7,
+          "note": null
+        },
+        {
+          "sku": "BF 05 24 100",
+          "diameterMm": 24,
+          "lengthMm": 1000,
+          "unitsPerBox": 3,
+          "priceGel": 69.28,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "jo",
+      "groupNumber": 18,
+      "series": "JO",
+      "titleKa": "საყელური მოთუთიებული",
+      "titleEn": "Zinc-plated washer",
+      "standards": [
+        "ISO 7089",
+        "DIN 125"
+      ],
+      "variants": [
+        {
+          "sku": "JO 01 00 008",
+          "diameterMm": 8,
+          "lengthMm": null,
+          "unitsPerBox": 2000,
+          "priceGel": 0.08,
+          "note": null
+        },
+        {
+          "sku": "JO 01 00 010",
+          "diameterMm": 10,
+          "lengthMm": null,
+          "unitsPerBox": 2000,
+          "priceGel": 0.12,
+          "note": null
+        },
+        {
+          "sku": "JO 01 00 012",
+          "diameterMm": 12,
+          "lengthMm": null,
+          "unitsPerBox": 1000,
+          "priceGel": 0.2,
+          "note": null
+        },
+        {
+          "sku": "JO 01 00 016",
+          "diameterMm": 16,
+          "lengthMm": null,
+          "unitsPerBox": 1000,
+          "priceGel": 0.35,
+          "note": null
+        },
+        {
+          "sku": "JO 01 00 020",
+          "diameterMm": 20,
+          "lengthMm": null,
+          "unitsPerBox": 500,
+          "priceGel": 0.54,
+          "note": null
+        },
+        {
+          "sku": "JO 01 00 024",
+          "diameterMm": 24,
+          "lengthMm": null,
+          "unitsPerBox": 500,
+          "priceGel": 1.02,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "ar",
+      "groupNumber": 19,
+      "series": "AR",
+      "titleKa": "ქანჩი მოთუთიებული",
+      "titleEn": "Zinc-plated nut",
+      "standards": [
+        "DIN 267",
+        "UNI3740-4",
+        "Fire resistance A1",
+        "EN13501-1"
+      ],
+      "grade": "8 / 65",
+      "variants": [
+        {
+          "sku": "AR 01 00 008",
+          "diameterMm": 8,
+          "lengthMm": null,
+          "unitsPerBox": 1000,
+          "priceGel": 0.09,
+          "note": null
+        },
+        {
+          "sku": "AR 01 00 010",
+          "diameterMm": 10,
+          "lengthMm": null,
+          "unitsPerBox": 1000,
+          "priceGel": 0.19,
+          "note": null
+        },
+        {
+          "sku": "AR 01 00 012",
+          "diameterMm": 12,
+          "lengthMm": null,
+          "unitsPerBox": 1000,
+          "priceGel": 0.3,
+          "note": null
+        },
+        {
+          "sku": "AR 01 00 016",
+          "diameterMm": 16,
+          "lengthMm": null,
+          "unitsPerBox": 1000,
+          "priceGel": 0.65,
+          "note": null
+        },
+        {
+          "sku": "AR 01 00 020",
+          "diameterMm": 20,
+          "lengthMm": null,
+          "unitsPerBox": 500,
+          "priceGel": 1.2,
+          "note": null
+        },
+        {
+          "sku": "AR 01 00 024",
+          "diameterMm": 24,
+          "lengthMm": null,
+          "unitsPerBox": 500,
+          "priceGel": 2.01,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "rl",
+      "groupNumber": 20,
+      "series": "RL",
+      "titleKa": "ჭანჭიკი მოთუთიებული",
+      "titleEn": "Zinc-plated bolt",
+      "standards": [
+        "DIN 933",
+        "UNI5739"
+      ],
+      "grade": "8.8",
+      "variants": [
+        {
+          "sku": "RL 01 16 040",
+          "diameterMm": 16,
+          "lengthMm": 40,
+          "unitsPerBox": 25,
+          "priceGel": 1.96,
+          "note": null
+        },
+        {
+          "sku": "RL 01 16 050",
+          "diameterMm": 16,
+          "lengthMm": 50,
+          "unitsPerBox": 25,
+          "priceGel": 2.22,
+          "note": null
+        },
+        {
+          "sku": "RL 01 16 060",
+          "diameterMm": 16,
+          "lengthMm": 60,
+          "unitsPerBox": 25,
+          "priceGel": 2.5,
+          "note": null
+        },
+        {
+          "sku": "RL 01 16 070",
+          "diameterMm": 16,
+          "lengthMm": 70,
+          "unitsPerBox": 25,
+          "priceGel": 2.8,
+          "note": null
+        },
+        {
+          "sku": "RL 01 16 080",
+          "diameterMm": 16,
+          "lengthMm": 80,
+          "unitsPerBox": 25,
+          "priceGel": 3.06,
+          "note": null
+        },
+        {
+          "sku": "RL 01 16 090",
+          "diameterMm": 16,
+          "lengthMm": 90,
+          "unitsPerBox": 20,
+          "priceGel": 3.3,
+          "note": null
+        },
+        {
+          "sku": "RL 01 16 100",
+          "diameterMm": 16,
+          "lengthMm": 100,
+          "unitsPerBox": 20,
+          "priceGel": 3.79,
+          "note": null
+        },
+        {
+          "sku": "RL 01 16 120",
+          "diameterMm": 16,
+          "lengthMm": 120,
+          "unitsPerBox": 20,
+          "priceGel": 5.59,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "plc",
+      "groupNumber": 21,
+      "series": "PLC",
+      "titleKa": "თვითმჭრელი მოთუთიებული",
+      "titleEn": "Zinc-plated self-drilling screw",
+      "variants": [
+        {
+          "sku": "PLC 01 14 020",
+          "diameterMm": null,
+          "lengthMm": 20,
+          "unitsPerBox": 200,
+          "priceGel": 0.26,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "kd",
+      "groupNumber": 22,
+      "series": "KD",
+      "titleKa": "თვითმჭრელი მოთუთიებული RAL 9002 შეღებილი თავით",
+      "titleEn": "Zinc-plated self-drilling screw with RAL 9002 painted head",
+      "variants": [
+        {
+          "sku": "KD 01 63 080",
+          "diameterMm": 80,
+          "lengthMm": 100,
+          "unitsPerBox": 100,
+          "priceGel": 0.92,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "dv",
+      "groupNumber": 23,
+      "series": "DV",
+      "titleKa": "საყელური მოთუთიებული RAL 9002 შეღებილი ზედაპირით",
+      "titleEn": "Zinc-plated washer with RAL 9002 painted surface",
+      "variants": [
+        {
+          "sku": "DV 01 06 016",
+          "diameterMm": null,
+          "lengthMm": null,
+          "unitsPerBox": 500,
+          "priceGel": 0.38,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "sdc",
+      "groupNumber": 24,
+      "series": "SDC",
+      "titleKa": "თვითმჭრელი მოთუთიებული",
+      "titleEn": "Zinc-plated self-drilling screw",
+      "variants": [
+        {
+          "sku": "SDC 01 16 070",
+          "diameterMm": 6.3,
+          "lengthMm": 70,
+          "unitsPerBox": 100,
+          "priceGel": 0.56,
+          "note": null
+        },
+        {
+          "sku": "SDC 01 16 120",
+          "diameterMm": 6.3,
+          "lengthMm": 120,
+          "unitsPerBox": 100,
+          "priceGel": 0.82,
+          "note": null
+        }
+      ]
+    },
+    {
+      "id": "zze",
+      "groupNumber": 26,
+      "series": "ZZE",
+      "titleKa": "პოლიეთილენის ანკერი ლითონის/ნეილონის ლურსმნით",
+      "titleEn": "Polyethylene anchor with metal or nylon nail",
+      "certifications": [
+        "ETA"
+      ],
+      "variants": [
+        {
+          "sku": "ZZE 21 10 130",
+          "diameterMm": 10,
+          "lengthMm": 130,
+          "unitsPerBox": 200,
+          "priceGel": 0.91,
+          "note": "metal nail"
+        },
+        {
+          "sku": "ZZE 21 10 090",
+          "diameterMm": 10,
+          "lengthMm": 90,
+          "unitsPerBox": 200,
+          "priceGel": 0.74,
+          "note": "metal nail"
+        },
+        {
+          "sku": "ZZE 01 10 130",
+          "diameterMm": 10,
+          "lengthMm": 130,
+          "unitsPerBox": 200,
+          "priceGel": 0.55,
+          "note": "nylon nail"
+        },
+        {
+          "sku": "ZZE 01 10 090",
+          "diameterMm": 10,
+          "lengthMm": 90,
+          "unitsPerBox": 200,
+          "priceGel": 0.43,
+          "note": "nylon nail"
+        }
+      ]
+    },
+    {
+      "id": "chemical-anchors",
+      "groupNumber": 27,
+      "series": "XWE01 / DGE",
+      "titleKa": "ქიმიური საანკერე წებო",
+      "titleEn": "Chemical anchoring adhesive",
+      "variants": [
+        {
+          "sku": "XWE 01 00 585",
+          "diameterMm": null,
+          "lengthMm": null,
+          "unitsPerBox": 1,
+          "priceGel": 75.57,
+          "note": "epoxy; heavy constructions; C1/C2"
+        },
+        {
+          "sku": "DGE 02 00 400",
+          "diameterMm": null,
+          "lengthMm": null,
+          "unitsPerBox": 1,
+          "priceGel": 38.18,
+          "note": "vinylester; heavy constructions; C1/C2"
+        },
+        {
+          "sku": "DGE 04 00 400",
+          "diameterMm": null,
+          "lengthMm": null,
+          "unitsPerBox": 1,
+          "priceGel": 32.51,
+          "note": "hybrid two-component; medium-load constructions; C1/C2"
+        },
+        {
+          "sku": "DGE 01 00 300",
+          "diameterMm": null,
+          "lengthMm": null,
+          "unitsPerBox": 1,
+          "priceGel": 22.18,
+          "note": "light constructions"
+        }
+      ]
+    },
+    {
+      "id": "chemical-guns",
+      "groupNumber": 28,
+      "series": "DH04 / DH",
+      "titleKa": "ქიმიური საანკერე წებოს ფისტოლეტი",
+      "titleEn": "Chemical anchoring adhesive applicator gun",
+      "variants": [
+        {
+          "sku": "DH 04 00 585",
+          "diameterMm": null,
+          "lengthMm": null,
+          "unitsPerBox": 1,
+          "priceGel": 255.09,
+          "note": null
+        },
+        {
+          "sku": "DH 01 00 400",
+          "diameterMm": null,
+          "lengthMm": null,
+          "unitsPerBox": 1,
+          "priceGel": 129.77,
+          "note": null
+        }
+      ]
+    }
+  ],
+  "variantSchema": {
+    "sku": "Source article/SKU code",
+    "diameterMm": "Diameter in millimetres; null when not stated",
+    "lengthMm": "Length in millimetres; may be a string when the PDF uses a compound measurement; null when not stated",
+    "unitsPerBox": "Quantity in box",
+    "priceGel": "Price in Georgian lari (GEL), as printed in source PDF",
+    "note": "Additional source/technical note; null when none"
+  }
+}
