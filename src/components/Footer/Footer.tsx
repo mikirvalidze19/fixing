@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
-import { Mail, MapPin, Phone } from 'lucide-react';
-import logoPng from '../../assets/fixing-systems-logo.png';
-import siteData from '../../data/site.json';
-import realData from '../../data/data.json';
-import styles from './Footer.module.css';
+import { Link } from "react-router-dom";
+import { Mail, MapPin, Phone } from "lucide-react";
+import logoPng from "../../assets/fixing-systems-logo.webp";
+import siteData from "../../data/site.json";
+import realData from "../../data/data.json";
+import styles from "./Footer.module.css";
 
 export default function Footer() {
   const { company, footer } = realData;
@@ -31,7 +31,7 @@ export default function Footer() {
             {company.phones.map((phone) => (
               <p key={phone}>
                 <Phone size={15} aria-hidden="true" />
-                <a href={`tel:${phone.replace(/[^+\d]/g, '')}`}>{phone}</a>
+                <a href={`tel:${phone.replace(/[^+\d]/g, "")}`}>{phone}</a>
               </p>
             ))}
             <p>
