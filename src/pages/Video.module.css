@@ -1,0 +1,95 @@
+/* Video page — mirrors tecfi video page: crumbs, centered H1,
+   3-column video card grid. Mobile-first. */
+
+.page {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 32px 1.25rem 64px;
+}
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--grigioscuro);
+}
+
+.crumbs a {
+  color: var(--grigioscuro);
+  text-decoration: none;
+}
+
+.crumbs a:hover {
+  color: var(--darksecondarycolor);
+}
+
+.crumbs [aria-current] {
+  color: var(--maincolor);
+  font-weight: 700;
+}
+
+.title {
+  margin: 16px 0 0;
+  font-size: clamp(1.75rem, 6vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--maincolor);
+  text-align: center;
+}
+
+.grid {
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 40px 32px;
+  grid-template-columns: 1fr;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.player {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--grigiomedio);
+  background: #000;
+  aspect-ratio: 16 / 9;
+}
+
+.player video {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cardTitle {
+  margin: 16px 0 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--maincolor);
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1025px) {
+  .page {
+    padding: 48px 2rem 80px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

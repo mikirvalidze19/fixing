@@ -3,9 +3,12 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Category from './pages/Category';
+import Application from './pages/Application';
+import Applications from './pages/Applications';
 import Contacts from './pages/Contacts';
 import Home from './pages/Home';
 import Product from './pages/Product';
+import Video from './pages/Video';
 import Placeholder from './pages/Placeholder';
 import siteData from './data/site.json';
 
@@ -42,10 +45,18 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products/:slug" element={<Category />} />
+          <Route path="/applications" element={<Applications />} />
+          <Route path="/applications/:slug" element={<Application />} />
           <Route path="/product/:id" element={<Product />} />
+          <Route path="/video" element={<Video />} />
           <Route path="/contacts" element={<Contacts />} />
           {routes
-            .filter((r) => r.to !== '/contacts')
+            .filter(
+              (r) =>
+                r.to !== '/contacts' &&
+                r.to !== '/video' &&
+                r.to !== '/applications',
+            )
             .map((r) => (
               <Route key={r.to} path={r.to} element={<Placeholder title={r.label} />} />
             ))}

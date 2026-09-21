@@ -1106,5 +1106,239 @@
     "unitsPerBox": "Quantity in box",
     "priceGel": "Price in Georgian lari (GEL), as printed in source PDF",
     "note": "Additional source/technical note; null when none"
-  }
+  },
+  "applications": [
+    {
+      "slug": "roofing",
+      "label": "Roofing",
+      "description": "Fastening systems for civil and industrial roofs — self-drilling screws, washers and accessories for weatherproof coverings.",
+      "image": "https://storage.onpage.it/8cbe64153fca815e77c90faddade9f758aca4e3d.webp/1_Coperture.webp",
+      "products": [
+        "kb01",
+        "plc",
+        "kd",
+        "dv",
+        "sdc",
+        "hxe46-45"
+      ]
+    },
+    {
+      "slug": "fire-resistance",
+      "label": "Fire resistance",
+      "description": "Fire-resistant certified fasteners for construction, compliant with European fire safety regulations.",
+      "image": "https://storage.onpage.it/b8e0a555b67fb63f7d82cba930df771bd531c6a6.webp/2_Resistenza-al-fuoco.webp",
+      "products": [
+        "hx",
+        "hxe01",
+        "hxe05",
+        "hxe06",
+        "hl01",
+        "aje",
+        "chemical-anchors",
+        "chemical-guns",
+        "fv01",
+        "pm01"
+      ]
+    },
+    {
+      "slug": "scaffolding-and-nets",
+      "label": "Scaffolding and nets",
+      "description": "Fixings for scaffoldings, ropes and nets — eye-head screws, anchors and chemical systems for temporary structures.",
+      "image": "https://storage.onpage.it/5789ea9a7e5f4de6b131bf940f51a80c217341b2.webp/3_Ponteggi-e-reti.webp",
+      "products": [
+        "aje",
+        "fx01",
+        "chemical-anchors"
+      ]
+    },
+    {
+      "slug": "wood-carpentry",
+      "label": "Wood Carpentry",
+      "description": "Screws, bolts and connectors for timber structures — certified strength and durability.",
+      "image": "https://storage.onpage.it/c1b9f45ebdaaaeea6eaf3fd1973658511e78bcad.webp/4_Carpenteria-in-legno.webp",
+      "products": [
+        "gs01",
+        "gs02",
+        "bf",
+        "jo",
+        "ar",
+        "rl"
+      ]
+    },
+    {
+      "slug": "shelving",
+      "label": "Shelving",
+      "description": "High-performance anchors and bolts for industrial shelving and warehouses — heavy loads, structural safety.",
+      "image": "https://storage.onpage.it/dc91cbda832db1f294e935018cd1a4227297391c.webp/5_Scaffalature.webp",
+      "products": [
+        "hx",
+        "hxe01",
+        "hxe05",
+        "hxe06",
+        "dxe00",
+        "hl01",
+        "aje",
+        "fx01",
+        "gs01",
+        "gs02",
+        "bf",
+        "jo",
+        "ar",
+        "rl"
+      ]
+    },
+    {
+      "slug": "ventilated-facades-and-panels-insulation",
+      "label": "Ventilated façades and panels insulation",
+      "description": "Anchors for ventilated façades and thermo-acoustic insulation panels.",
+      "image": "https://storage.onpage.it/0b41354fd87ec41d942642acfaea3b14347d4054.webp/6_Facciate-ventilate.webp",
+      "products": [
+        "ws01",
+        "wv01",
+        "zze"
+      ]
+    },
+    {
+      "slug": "solar-panels",
+      "label": "Solar panels",
+      "description": "Fixing systems for solar panel mounting structures on any roof or support.",
+      "image": "https://storage.onpage.it/4b7d106e2a2f4c677a8e9161e9501ed68e43276a.webp/7_PannelliSolari.webp",
+      "products": [
+        "kb01",
+        "plc",
+        "kd",
+        "dv",
+        "sdc",
+        "hxe46-45",
+        "aje",
+        "chemical-anchors"
+      ]
+    },
+    {
+      "slug": "hydraulical-and-sanitary-systems",
+      "label": "Hydraulical and Sanitary systems",
+      "description": "Threaded rods, anchors and fixings for hydraulic and sanitary installations.",
+      "image": "https://storage.onpage.it/f868a67253190731b8f830767d2883c7b3bfaa2e.webp/8_Impianti_Idraulici.webp",
+      "products": [
+        "bf",
+        "jo",
+        "ar",
+        "rl",
+        "dxe00",
+        "hl01"
+      ]
+    },
+    {
+      "slug": "hvac",
+      "label": "HVAC",
+      "description": "Anchors and fixings for ventilation, heating and air-conditioning systems.",
+      "image": "https://storage.onpage.it/795224fb8ba81e2b4c3cf20e1733c21dc5d19271.webp/9_Ventilazione-e-riscaldamento.webp",
+      "products": [
+        "dxe00",
+        "hl01",
+        "gs01",
+        "gs02"
+      ]
+    },
+    {
+      "slug": "seismic-area",
+      "label": "Seismic area",
+      "description": "Certified anti-seismic fasteners compliant with technical construction regulations — structural safety.",
+      "image": "https://storage.onpage.it/de04c05b5bfaac6fc3251ac334a7356fae2ed3de.webp/10_Area-sismica.webp",
+      "products": [
+        "hx",
+        "hxe01",
+        "hxe05",
+        "hxe06",
+        "aje",
+        "dxe00",
+        "chemical-anchors",
+        "chemical-guns",
+        "fv01",
+        "pm01"
+      ]
+    },
+    {
+      "slug": "metal-carpentry",
+      "label": "Metal Carpentry",
+      "description": "Anchors, screws, rods and bolts for metal carpentry and steel structures.",
+      "image": "https://storage.onpage.it/9fc83379ee553d3caf603d5a63c0f00e0c5d1bbf.webp/11_Carpenteria-Metallica.webp",
+      "products": [
+        "hx",
+        "hxe01",
+        "hxe05",
+        "hxe06",
+        "dxe00",
+        "hl01",
+        "aje",
+        "gs01",
+        "gs02",
+        "bf",
+        "jo",
+        "ar",
+        "rl",
+        "chemical-anchors",
+        "chemical-guns",
+        "fv01",
+        "pm01"
+      ]
+    },
+    {
+      "slug": "safety-line",
+      "label": "Safety Line",
+      "description": "Eye-head screws and anchors for safety lines and fall-protection systems.",
+      "image": "https://storage.onpage.it/f7376f9e056979397b25dc23d97ee567fb9377f6.webp/12_Linea-Vita.webp",
+      "products": [
+        "fx01",
+        "aje",
+        "chemical-anchors"
+      ]
+    },
+    {
+      "slug": "windows-and-frames",
+      "label": "Windows and frames",
+      "description": "Screws and fixings for windows, frames and shutters.",
+      "image": "https://storage.onpage.it/4246d1848bc65fde35709304782abd6de5a2b94b.webp/13_Serramenti.webp",
+      "products": [
+        "gs01",
+        "gs02",
+        "gsc"
+      ]
+    },
+    {
+      "slug": "drywall-systems-plasterboard",
+      "label": "Drywall systems / Plasterboard",
+      "description": "Fixings for drywall systems, plasterboard and hollow walls.",
+      "image": "https://storage.onpage.it/24e8f2b12ba3f333c242ca3fb356f17da1fc0138.webp/14_Cartongesso.webp",
+      "products": [
+        "zze",
+        "ws01",
+        "wv01",
+        "gsc"
+      ]
+    },
+    {
+      "slug": "electrical-systems",
+      "label": "Electrical systems",
+      "description": "Anchors and fixings for electrical installations.",
+      "image": "https://storage.onpage.it/f3737a7323d8be5fdc19ce6392c02652b3551571.webp/15_Impianti-elettrici.webp",
+      "products": [
+        "dxe00",
+        "hl01",
+        "gs01",
+        "gs02"
+      ]
+    },
+    {
+      "slug": "corrosion-resistance",
+      "label": "Corrosion resistance",
+      "description": "Stainless and anti-corrosion coated fasteners for aggressive outdoor environments.",
+      "image": "https://storage.onpage.it/2bc9911d0649abc9b25ef9967926e7264fe4eab1.webp/16_Resistenza-alla-corrosione.webp",
+      "products": [
+        "kb01",
+        "hxe46-45",
+        "chemical-anchors"
+      ]
+    }
+  ]
 }
