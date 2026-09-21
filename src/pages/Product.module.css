@@ -124,10 +124,10 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas:
-    'image'
-    'meta'
-    'info'
-    'side';
+    "image"
+    "meta"
+    "info"
+    "side";
   gap: 16px;
 }
 
@@ -560,7 +560,7 @@
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(270px, 300px));
   gap: 12px;
 }
 
@@ -568,9 +568,9 @@
   .hero {
     grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
     grid-template-areas:
-      'image info'
-      'meta info'
-      'side side';
+      "image info"
+      "meta info"
+      "side side";
     align-items: start;
   }
 }
@@ -583,8 +583,8 @@
   .hero {
     grid-template-columns: minmax(0, 340px) minmax(0, 1fr) minmax(0, 300px);
     grid-template-areas:
-      'image info meta'
-      'image info side';
+      "image info meta"
+      "image info side";
     gap: 24px;
     align-items: start;
   }

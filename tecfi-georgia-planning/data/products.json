@@ -1115,11 +1115,16 @@
       "image": "https://storage.onpage.it/8cbe64153fca815e77c90faddade9f758aca4e3d.webp/1_Coperture.webp",
       "products": [
         "kb01",
+        "hxe01",
+        "hxe05",
+        "hxe06",
+        "hxe46-45",
+        "aje",
+        "gs01",
         "plc",
         "kd",
         "dv",
-        "sdc",
-        "hxe46-45"
+        "sdc"
       ]
     },
     {
@@ -1128,16 +1133,12 @@
       "description": "Fire-resistant certified fasteners for construction, compliant with European fire safety regulations.",
       "image": "https://storage.onpage.it/b8e0a555b67fb63f7d82cba930df771bd531c6a6.webp/2_Resistenza-al-fuoco.webp",
       "products": [
-        "hx",
         "hxe01",
         "hxe05",
         "hxe06",
-        "hl01",
+        "hxe46-45",
         "aje",
-        "chemical-anchors",
-        "chemical-guns",
-        "fv01",
-        "pm01"
+        "chemical-anchors"
       ]
     },
     {
@@ -1146,6 +1147,10 @@
       "description": "Fixings for scaffoldings, ropes and nets — eye-head screws, anchors and chemical systems for temporary structures.",
       "image": "https://storage.onpage.it/5789ea9a7e5f4de6b131bf940f51a80c217341b2.webp/3_Ponteggi-e-reti.webp",
       "products": [
+        "hxe01",
+        "hxe05",
+        "hxe06",
+        "hxe46-45",
         "aje",
         "fx01",
         "chemical-anchors"
@@ -1157,12 +1162,13 @@
       "description": "Screws, bolts and connectors for timber structures — certified strength and durability.",
       "image": "https://storage.onpage.it/c1b9f45ebdaaaeea6eaf3fd1973658511e78bcad.webp/4_Carpenteria-in-legno.webp",
       "products": [
-        "gs01",
-        "gs02",
+        "hxe01",
+        "hxe05",
+        "hxe06",
+        "hxe46-45",
+        "aje",
         "bf",
-        "jo",
-        "ar",
-        "rl"
+        "chemical-anchors"
       ]
     },
     {
@@ -1171,20 +1177,16 @@
       "description": "High-performance anchors and bolts for industrial shelving and warehouses — heavy loads, structural safety.",
       "image": "https://storage.onpage.it/dc91cbda832db1f294e935018cd1a4227297391c.webp/5_Scaffalature.webp",
       "products": [
-        "hx",
         "hxe01",
         "hxe05",
         "hxe06",
+        "hxe46-45",
         "dxe00",
-        "hl01",
         "aje",
-        "fx01",
-        "gs01",
-        "gs02",
-        "bf",
         "jo",
         "ar",
-        "rl"
+        "rl",
+        "chemical-anchors"
       ]
     },
     {
@@ -1204,12 +1206,11 @@
       "description": "Fixing systems for solar panel mounting structures on any roof or support.",
       "image": "https://storage.onpage.it/4b7d106e2a2f4c677a8e9161e9501ed68e43276a.webp/7_PannelliSolari.webp",
       "products": [
-        "kb01",
-        "plc",
-        "kd",
-        "dv",
-        "sdc",
+        "hxe01",
+        "hxe05",
+        "hxe06",
         "hxe46-45",
+        "dxe00",
         "aje",
         "chemical-anchors"
       ]
@@ -1220,12 +1221,14 @@
       "description": "Threaded rods, anchors and fixings for hydraulic and sanitary installations.",
       "image": "https://storage.onpage.it/f868a67253190731b8f830767d2883c7b3bfaa2e.webp/8_Impianti_Idraulici.webp",
       "products": [
+        "hxe01",
+        "hxe05",
+        "hxe06",
+        "hxe46-45",
+        "aje",
         "bf",
         "jo",
-        "ar",
-        "rl",
-        "dxe00",
-        "hl01"
+        "ar"
       ]
     },
     {
@@ -1234,10 +1237,15 @@
       "description": "Anchors and fixings for ventilation, heating and air-conditioning systems.",
       "image": "https://storage.onpage.it/795224fb8ba81e2b4c3cf20e1733c21dc5d19271.webp/9_Ventilazione-e-riscaldamento.webp",
       "products": [
+        "hx",
+        "hxe01",
+        "hxe05",
+        "hxe06",
+        "hxe46-45",
         "dxe00",
+        "aje",
         "hl01",
-        "gs01",
-        "gs02"
+        "fx01"
       ]
     },
     {
@@ -1246,16 +1254,12 @@
       "description": "Certified anti-seismic fasteners compliant with technical construction regulations — structural safety.",
       "image": "https://storage.onpage.it/de04c05b5bfaac6fc3251ac334a7356fae2ed3de.webp/10_Area-sismica.webp",
       "products": [
-        "hx",
         "hxe01",
         "hxe05",
         "hxe06",
+        "hxe46-45",
         "aje",
-        "dxe00",
-        "chemical-anchors",
-        "chemical-guns",
-        "fv01",
-        "pm01"
+        "chemical-anchors"
       ]
     },
     {
@@ -1268,19 +1272,21 @@
         "hxe01",
         "hxe05",
         "hxe06",
+        "hxe46-45",
         "dxe00",
-        "hl01",
         "aje",
-        "gs01",
-        "gs02",
+        "hl01",
+        "fv01",
+        "pm01",
         "bf",
         "jo",
         "ar",
         "rl",
-        "chemical-anchors",
-        "chemical-guns",
-        "fv01",
-        "pm01"
+        "plc",
+        "kd",
+        "dv",
+        "sdc",
+        "chemical-anchors"
       ]
     },
     {
@@ -1289,8 +1295,17 @@
       "description": "Eye-head screws and anchors for safety lines and fall-protection systems.",
       "image": "https://storage.onpage.it/f7376f9e056979397b25dc23d97ee567fb9377f6.webp/12_Linea-Vita.webp",
       "products": [
-        "fx01",
+        "hxe01",
+        "hxe05",
+        "hxe06",
+        "hxe46-45",
         "aje",
+        "fx01",
+        "sdc",
+        "bf",
+        "jo",
+        "ar",
+        "rl",
         "chemical-anchors"
       ]
     },
@@ -1300,6 +1315,10 @@
       "description": "Screws and fixings for windows, frames and shutters.",
       "image": "https://storage.onpage.it/4246d1848bc65fde35709304782abd6de5a2b94b.webp/13_Serramenti.webp",
       "products": [
+        "hxe01",
+        "hxe05",
+        "hxe06",
+        "hxe46-45",
         "gs01",
         "gs02",
         "gsc"
@@ -1310,12 +1329,7 @@
       "label": "Drywall systems / Plasterboard",
       "description": "Fixings for drywall systems, plasterboard and hollow walls.",
       "image": "https://storage.onpage.it/24e8f2b12ba3f333c242ca3fb356f17da1fc0138.webp/14_Cartongesso.webp",
-      "products": [
-        "zze",
-        "ws01",
-        "wv01",
-        "gsc"
-      ]
+      "products": []
     },
     {
       "slug": "electrical-systems",
@@ -1323,10 +1337,17 @@
       "description": "Anchors and fixings for electrical installations.",
       "image": "https://storage.onpage.it/f3737a7323d8be5fdc19ce6392c02652b3551571.webp/15_Impianti-elettrici.webp",
       "products": [
+        "hx",
+        "hxe01",
+        "hxe05",
+        "hxe06",
+        "hxe46-45",
         "dxe00",
+        "aje",
         "hl01",
-        "gs01",
-        "gs02"
+        "ws01",
+        "wv01",
+        "chemical-anchors"
       ]
     },
     {
@@ -1336,8 +1357,7 @@
       "image": "https://storage.onpage.it/2bc9911d0649abc9b25ef9967926e7264fe4eab1.webp/16_Resistenza-alla-corrosione.webp",
       "products": [
         "kb01",
-        "hxe46-45",
-        "chemical-anchors"
+        "hxe46-45"
       ]
     }
   ]
