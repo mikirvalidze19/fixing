@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import ScrollProgress from './components/ScrollProgress/ScrollProgress';
 import Category from './pages/Category';
 import Application from './pages/Application';
 import Applications from './pages/Applications';
@@ -64,6 +65,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <ScrollProgress />
     </BrowserRouter>
   );
 }

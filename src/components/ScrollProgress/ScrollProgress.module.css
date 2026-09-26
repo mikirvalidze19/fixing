@@ -1,0 +1,77 @@
+.btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 500;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--maincolorheader);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform: translateY(12px) scale(0.9);
+  pointer-events: none;
+  transition: opacity 300ms, transform 300ms, background 250ms;
+}
+
+.show {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.btn:hover {
+  background: var(--maincolor);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--secondarycolor);
+  outline-offset: 3px;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  transform: rotate(-90deg);
+}
+
+.track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 4;
+}
+
+.bar {
+  fill: none;
+  stroke: var(--secondarycolor);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 1025px) {
+  .btn {
+    right: 28px;
+    bottom: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}
