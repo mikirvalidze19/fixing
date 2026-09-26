@@ -2,6 +2,22 @@ import { Link } from 'react-router-dom';
 import videos from '../data/videos.json';
 import styles from './Video.module.css';
 
+function getYouTubeId(url: string): string {
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname.includes('youtu.be')) {
+      return parsed.pathname.replace('/', '').split(/[?#]/)[0];
+    }
+    const v = parsed.searchParams.get('v');
+    if (v) return v;
+    const embedMatch = parsed.pathname.match(/\/embed\/([\w-]+)/);
+    if (embedMatch) return embedMatch[1];
+  } catch {
+    // fall through
+  }
+  return url;
+}
+
 export default function Video() {
   return (
     <div className={styles.page}>
@@ -17,16 +33,15 @@ export default function Video() {
 
       <ul className={styles.grid}>
         {videos.map((video) => (
-          <li key={video.src} className={styles.card}>
+          <li key={video.youtube} className={styles.card}>
             <div className={styles.player}>
-              <video
-                controls
-                controlsList="nodownload"
-                preload="none"
-                poster={video.poster}
-              >
-                <source src={video.src} type="video/mp4" />
-              </video>
+              <iframe
+                src={`https://www.youtube.com/embed/${getYouTubeId(video.youtube)}?rel=0`}
+                title={video.title}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
             </div>
             <h2 className={styles.cardTitle}>{video.title}</h2>
           </li>

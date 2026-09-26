@@ -63,10 +63,12 @@
   aspect-ratio: 16 / 9;
 }
 
-.player video {
+.player video,
+.player iframe {
   width: 100%;
   height: 100%;
   display: block;
+  border: 0;
 }
 
 .cardTitle {

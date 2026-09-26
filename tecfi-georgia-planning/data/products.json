@@ -9,10 +9,7 @@
       "nameKa": "შპს ფიქსინგ სისტემს",
       "nameEn": "Fixing Systems LLC",
       "addressKa": "თბილისი, ქართულ ამერიკული მეგობრობის ქ. N33 (ამერიკის საელჩოს მიმდებარედ)",
-      "phones": [
-        "+995 577 51-71-22",
-        "+995 511 42-55-11"
-      ],
+      "phones": ["+995 555 42-44-42", "+995 511 42-55-11"],
       "email": "info.fs.ge@gmail.com"
     }
   },
@@ -212,10 +209,7 @@
       "series": "HXE46-45",
       "titleKa": "ბეტონის ხრახნი ნახევრად მრგვალი თავით ნაჭდევებით, სპეციალური ანტიკოროზიული საფარით",
       "titleEn": "Concrete screw with pan head and special anti-corrosion coating",
-      "certifications": [
-        "ETA",
-        "CE"
-      ],
+      "certifications": ["ETA", "CE"],
       "variants": [
         {
           "sku": "HXE 46 06 080",
@@ -495,11 +489,7 @@
       "series": "GS01",
       "titleKa": "ბეტონის Hi-Lo ხრახნი ჩაღრმავებული თავით, ნაწრთობი ლითონის მოთუთიებული",
       "titleEn": "Hardened zinc-plated Hi-Lo concrete screw, countersunk head",
-      "certifications": [
-        "ISO 9227",
-        "Fire resistance A1",
-        "EN13501-1"
-      ],
+      "certifications": ["ISO 9227", "Fire resistance A1", "EN13501-1"],
       "variants": [
         {
           "sku": "GS 01 75 080",
@@ -549,11 +539,7 @@
       "series": "GS02",
       "titleKa": "ბეტონის Hi-Lo ხრახნი ცილინდრული თავით, ნაწრთობი ლითონის მოთუთიებული",
       "titleEn": "Hardened zinc-plated Hi-Lo concrete screw, cylindrical head",
-      "certifications": [
-        "ISO 9227",
-        "Fire resistance A1",
-        "EN13501-1"
-      ],
+      "certifications": ["ISO 9227", "Fire resistance A1", "EN13501-1"],
       "variants": [
         {
           "sku": "GS 02 75 090",
@@ -653,10 +639,7 @@
       "series": "BF",
       "titleKa": "ხრახნიანი ღერო მოთუთიებული",
       "titleEn": "Zinc-plated threaded rod",
-      "standards": [
-        "ISO 898-1:1999",
-        "DIN 976-1"
-      ],
+      "standards": ["ISO 898-1:1999", "DIN 976-1"],
       "grade": "8.8",
       "variants": [
         {
@@ -715,10 +698,7 @@
       "series": "JO",
       "titleKa": "საყელური მოთუთიებული",
       "titleEn": "Zinc-plated washer",
-      "standards": [
-        "ISO 7089",
-        "DIN 125"
-      ],
+      "standards": ["ISO 7089", "DIN 125"],
       "variants": [
         {
           "sku": "JO 01 00 008",
@@ -776,12 +756,7 @@
       "series": "AR",
       "titleKa": "ქანჩი მოთუთიებული",
       "titleEn": "Zinc-plated nut",
-      "standards": [
-        "DIN 267",
-        "UNI3740-4",
-        "Fire resistance A1",
-        "EN13501-1"
-      ],
+      "standards": ["DIN 267", "UNI3740-4", "Fire resistance A1", "EN13501-1"],
       "grade": "8 / 65",
       "variants": [
         {
@@ -840,10 +815,7 @@
       "series": "RL",
       "titleKa": "ჭანჭიკი მოთუთიებული",
       "titleEn": "Zinc-plated bolt",
-      "standards": [
-        "DIN 933",
-        "UNI5739"
-      ],
+      "standards": ["DIN 933", "UNI5739"],
       "grade": "8.8",
       "variants": [
         {
@@ -994,9 +966,7 @@
       "series": "ZZE",
       "titleKa": "პოლიეთილენის ანკერი ლითონის/ნეილონის ლურსმნით",
       "titleEn": "Polyethylene anchor with metal or nylon nail",
-      "certifications": [
-        "ETA"
-      ],
+      "certifications": ["ETA"],
       "variants": [
         {
           "sku": "ZZE 21 10 130",
@@ -1194,11 +1164,7 @@
       "label": "Ventilated façades and panels insulation",
       "description": "Anchors for ventilated façades and thermo-acoustic insulation panels.",
       "image": "https://storage.onpage.it/0b41354fd87ec41d942642acfaea3b14347d4054.webp/6_Facciate-ventilate.webp",
-      "products": [
-        "ws01",
-        "wv01",
-        "zze"
-      ]
+      "products": ["ws01", "wv01", "zze"]
     },
     {
       "slug": "solar-panels",
@@ -1314,15 +1280,7 @@
       "label": "Windows and frames",
       "description": "Screws and fixings for windows, frames and shutters.",
       "image": "https://storage.onpage.it/4246d1848bc65fde35709304782abd6de5a2b94b.webp/13_Serramenti.webp",
-      "products": [
-        "hxe01",
-        "hxe05",
-        "hxe06",
-        "hxe46-45",
-        "gs01",
-        "gs02",
-        "gsc"
-      ]
+      "products": ["hxe01", "hxe05", "hxe06", "hxe46-45", "gs01", "gs02", "gsc"]
     },
     {
       "slug": "drywall-systems-plasterboard",
@@ -1355,10 +1313,7 @@
       "label": "Corrosion resistance",
       "description": "Stainless and anti-corrosion coated fasteners for aggressive outdoor environments.",
       "image": "https://storage.onpage.it/2bc9911d0649abc9b25ef9967926e7264fe4eab1.webp/16_Resistenza-alla-corrosione.webp",
-      "products": [
-        "kb01",
-        "hxe46-45"
-      ]
+      "products": ["kb01", "hxe46-45"]
     }
   ]
 }
