@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, MapPin, Phone } from "lucide-react";
+import CopyButton from "../CopyButton/CopyButton";
 import logoPng from "../../assets/fixing-systems-logo.webp";
 import siteData from "../../data/site.json";
 import realData from "../../data/data.json";
@@ -27,16 +28,19 @@ export default function Footer() {
             <p>
               <MapPin size={15} aria-hidden="true" />
               <span>{company.addressEn}</span>
+              <CopyButton value={company.addressEn} label="Copy address" />
             </p>
             {company.phones.map((phone) => (
               <p key={phone}>
                 <Phone size={15} aria-hidden="true" />
                 <a href={`tel:${phone.replace(/[^+\d]/g, "")}`}>{phone}</a>
+                <CopyButton value={phone.replace(/[^+\d]/g, "")} label={`Copy ${phone}`} />
               </p>
             ))}
             <p>
               <Mail size={15} aria-hidden="true" />
               <a href={`mailto:${company.email}`}>{company.email}</a>
+              <CopyButton value={company.email} label={`Copy ${company.email}`} />
             </p>
           </address>
           <a

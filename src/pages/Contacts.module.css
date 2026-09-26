@@ -321,7 +321,22 @@
   transition: border-color 250ms, background 250ms;
 }
 
-a.rowLink:hover {
+.rowMain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.copyBtn {
+  color: #fff;
+}
+
+a.rowLink:hover,
+div.rowLink:hover {
   border-color: var(--secondarycolor);
   background: rgba(255, 204, 0, 0.08);
 }
@@ -369,7 +384,7 @@ a.rowLink:hover {
   overflow-wrap: anywhere;
 }
 
-a.rowLink:hover .rowValueStrong {
+.rowLink:hover .rowValueStrong {
   color: var(--secondarycolor);
 }
 
@@ -378,7 +393,7 @@ a.rowLink:hover .rowValueStrong {
   color: rgba(255, 255, 255, 0.4);
 }
 
-a.rowLink:hover .rowArrow {
+.rowLink:hover .rowArrow {
   color: var(--secondarycolor);
 }
 

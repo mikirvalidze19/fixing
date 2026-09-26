@@ -10,6 +10,7 @@ import {
   Phone,
 } from 'lucide-react';
 import companyData from '../data/data.json';
+import CopyButton from '../components/CopyButton/CopyButton';
 import styles from './Contacts.module.css';
 
 const { company } = companyData;
@@ -113,15 +114,46 @@ export default function Contacts() {
                 <span className={styles.rowLabel}>Visit us</span>
                 <span className={styles.rowValue}>{company.addressEn}</span>
               </span>
+              <CopyButton
+                value={company.addressEn}
+                label="Copy address"
+                className={styles.copyBtn}
+              />
             </div>
             {company.phones.map((phone) => (
-              <a key={phone} className={styles.rowLink} href={tel(phone)}>
+              <div key={phone} className={styles.rowLink}>
+                <a className={styles.rowMain} href={tel(phone)}>
+                  <span className={styles.rowIcon} aria-hidden="true">
+                    <Phone size={19} strokeWidth={2} />
+                  </span>
+                  <span className={styles.rowText}>
+                    <span className={styles.rowLabel}>Call us</span>
+                    <span className={styles.rowValueStrong}>{phone}</span>
+                  </span>
+                  <ArrowUpRight
+                    size={18}
+                    aria-hidden="true"
+                    className={styles.rowArrow}
+                  />
+                </a>
+                <CopyButton
+                  value={phone.replace(/[^+\d]/g, '')}
+                  label={`Copy ${phone}`}
+                  className={styles.copyBtn}
+                />
+              </div>
+            ))}
+            <div className={styles.rowLink}>
+              <a
+                className={styles.rowMain}
+                href={`mailto:${company.email}`}
+              >
                 <span className={styles.rowIcon} aria-hidden="true">
-                  <Phone size={19} strokeWidth={2} />
+                  <Mail size={19} strokeWidth={2} />
                 </span>
                 <span className={styles.rowText}>
-                  <span className={styles.rowLabel}>Call us</span>
-                  <span className={styles.rowValueStrong}>{phone}</span>
+                  <span className={styles.rowLabel}>Email us</span>
+                  <span className={styles.rowValueStrong}>{company.email}</span>
                 </span>
                 <ArrowUpRight
                   size={18}
@@ -129,24 +161,12 @@ export default function Contacts() {
                   className={styles.rowArrow}
                 />
               </a>
-            ))}
-            <a
-              className={styles.rowLink}
-              href={`mailto:${company.email}`}
-            >
-              <span className={styles.rowIcon} aria-hidden="true">
-                <Mail size={19} strokeWidth={2} />
-              </span>
-              <span className={styles.rowText}>
-                <span className={styles.rowLabel}>Email us</span>
-                <span className={styles.rowValueStrong}>{company.email}</span>
-              </span>
-              <ArrowUpRight
-                size={18}
-                aria-hidden="true"
-                className={styles.rowArrow}
+              <CopyButton
+                value={company.email}
+                label={`Copy ${company.email}`}
+                className={styles.copyBtn}
               />
-            </a>
+            </div>
           </address>
         </section>
 
