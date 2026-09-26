@@ -1,0 +1,6 @@
+id,slug,name,eyebrow,ghost,title,text,cta,link_to,sort_order,is_active
+0,concrete-screws,Concrete screws,HX · HXE01 · HXE05 · HXE06 · GS01 · GS02,HXE,Concrete screws,"For the connection of primary or secondary elements to a concrete base structure — zinc-plated, ETA-grade performance, ready in every diameter.",Find out more,/products,0,true
+1,metal-anchors,Heavy-duty metal anchors,DXE00 · HL01 · AJE,AJE,Heavy-duty metal anchors,"Drop-in and expansion anchors for cracked and non-cracked concrete. Safe, certified holding power for structural fixings.",Find out more,/products,1,true
+2,chemical-anchoring,Chemical anchoring systems,XWE01 · DGE · FV01 · PM01 · DH04,XWE,Chemical anchoring systems,"Adhesive anchors, mesh and plastic sleeves plus applicator guns — complete chemical fixing kits for solid and hollow materials.",Find out more,/products,2,true
+3,roofing-screws,Roofing & facade screws,KB01 · PLC · KD · SDC · DV,KB01,Roofing & facade screws,"Stainless and zinc-plated self-drilling screws, painted heads and sealing washers — certified excellence for roofing and cladding.",Find out more,/products,3,true
+4,insulation-frame,Insulation & frame fixings,WS01 · WV01 · ZZE · GSC,ZZE,Insulation & frame fixings,"Nylon plugs for thermal insulation, polyethylene frame anchors and caps — quick, safe installation on every base material.",Find out more,/products,4,true
