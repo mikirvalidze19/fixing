@@ -7,8 +7,39 @@ import styles from './Slider.module.css';
 const AUTOPLAY_MS = sliderData.autoplayMs ?? 6000;
 const SWIPE_PX = 40;
 
+type Slide = {
+  id: string;
+  title: string;
+  text: string;
+  cta: string;
+  to: string;
+  background?: string;
+  foreground?: string;
+  variant?: string;
+  alt?: string;
+};
+
+const sliderImages = import.meta.glob(
+  '../../assets/slider/*.{png,webp,jpg,jpeg}',
+  { eager: true, query: '?url', import: 'default' },
+) as Record<string, string>;
+
+const productImages = import.meta.glob(
+  '../../assets/products/*.{png,webp,jpg,jpeg}',
+  { eager: true, query: '?url', import: 'default' },
+) as Record<string, string>;
+
+function sliderImageSrc(file?: string): string {
+  if (!file) return '';
+  const all = { ...productImages, ...sliderImages };
+  const entry = Object.entries(all).find(([path]) =>
+    path.endsWith(`/${file}`),
+  );
+  return entry ? entry[1] : '';
+}
+
 export default function Slider() {
-  const slides = sliderData.slides;
+  const slides = sliderData.slides as Slide[];
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const touchX = useRef<number | null>(null);
@@ -65,15 +96,22 @@ export default function Slider() {
         {slides.map((slide, i) => (
           <article
             key={slide.id}
-            className={`${styles.slide} ${styles[`theme${i % 5}`]}`}
+            className={`${styles.slide} ${styles[`theme${i % 5}`]} ${slide.background ? styles.hasImage : ''} ${slide.variant === 'chemical' ? styles.chemical : ''} ${slide.variant === 'heavy' ? styles.heavy : ''} ${slide.variant === 'fasteners' ? styles.fasteners : ''}`}
             aria-roledescription="slide"
             aria-label={`${i + 1} of ${count}: ${slide.title}`}
             aria-hidden={i !== index}
             inert={! (i === index)}
           >
-            <span className={styles.ghost} aria-hidden="true">
-              {slide.ghost}
-            </span>
+            {slide.background ? (
+              <img
+                className={`${styles.bg} ${slide.variant === 'chemical' ? styles.chemBg : ''} ${slide.variant === 'heavy' ? styles.heavyBg : ''} ${slide.variant === 'fasteners' ? styles.fastenersBg : ''}`}
+                src={sliderImageSrc(slide.background)}
+                alt=""
+                aria-hidden="true"
+                loading={i === 0 ? 'eager' : 'lazy'}
+              />
+            ) : null}
+            <span className={styles.scrim} aria-hidden="true" />
             <div className={styles.inner}>
               <h2 className={styles.title}>{slide.title}</h2>
               <p className={styles.text}>{slide.text}</p>
@@ -81,6 +119,14 @@ export default function Slider() {
                 {slide.cta}
               </Link>
             </div>
+            {slide.foreground ? (
+              <img
+                className={`${styles.foreground} ${slide.variant === 'fasteners' ? styles.fastenersFg : ''}`}
+                src={sliderImageSrc(slide.foreground)}
+                alt={slide.alt ?? slide.title}
+                loading={i === 0 ? 'eager' : 'lazy'}
+              />
+            ) : null}
           </article>
         ))}
       </div>

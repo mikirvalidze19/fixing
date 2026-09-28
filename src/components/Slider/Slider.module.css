@@ -22,6 +22,8 @@
   min-width: 100%;
   display: flex;
   align-items: center;
+  flex-direction: column;
+  justify-content: center;
   overflow: hidden;
   padding: 64px 1.25rem 96px;
 }
@@ -53,18 +55,185 @@
     linear-gradient(115deg, #222222 50%, #333333 100%);
 }
 
-.ghost {
+/* photo slides (e.g. Roofing fixing systems from tecfi.it/en) */
+.hasImage {
+  background: #1a1a1a;
+}
+
+.bg {
   position: absolute;
-  right: -1rem;
-  bottom: -2.5rem;
-  font-size: clamp(6rem, 22vw, 17rem);
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.08);
-  user-select: none;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
   pointer-events: none;
+}
+
+/* dark scrim for text readability — matches reference left-side darkening */
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    rgba(20, 20, 20, 0.72) 0%,
+    rgba(20, 20, 20, 0.55) 38%,
+    rgba(20, 20, 20, 0.15) 65%,
+    rgba(20, 20, 20, 0.05) 100%
+  );
+}
+
+/* foreground product cutout (roof1.webp — 3 roofing screws) */
+.foreground {
+  position: relative;
+  z-index: 2;
+  width: min(58vw, 255px);
+  height: auto;
+  object-fit: contain;
+  margin: 24px auto 0;
+  filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.45));
+  pointer-events: none;
+}
+
+.hasImage .inner {
+  z-index: 2;
+}
+
+/* ——— Chemical slide premium grade ———
+   Source photo is washed-out / low-contrast, so we color-grade it
+   with filters + layered scrims into a dark tecfi-style hero. */
+.chemBg {
+  /* punch + warmth + depth: fixes flat beige wall */
+  filter: contrast(1.18) saturate(1.35) brightness(0.82) sepia(0.14);
+  transform: scale(1.04);
+  object-position: 70% center;
+}
+
+.chemical .scrim {
+  background:
+    radial-gradient(90% 70% at 85% 30%, rgba(255, 204, 0, 0.22) 0%, transparent 55%),
+    radial-gradient(120% 100% at 50% 100%, rgba(0, 0, 0, 0.45) 0%, transparent 60%),
+    linear-gradient(
+      100deg,
+      rgba(16, 16, 16, 0.82) 0%,
+      rgba(16, 16, 16, 0.62) 36%,
+      rgba(16, 16, 16, 0.22) 62%,
+      rgba(16, 16, 16, 0.12) 100%
+    );
+}
+
+/* brand yellow ring accent — echoes roof slide curves */
+.chemical::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  right: -12%;
+  top: -28%;
+  width: 46%;
+  aspect-ratio: 1;
+  border: 2px solid rgba(255, 204, 0, 0.65);
+  border-radius: 999px;
+  pointer-events: none;
+  box-shadow: 0 0 60px rgba(255, 204, 0, 0.12);
+}
+
+.chemical .title {
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55);
+}
+
+.chemical .text {
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* ——— Heavy-duty full-bleed grade ———
+   Source: anchors in grass, neon lawn, harsh daylight.
+   Dark cinematic grade kills the lawn glare, steel pops. */
+.heavy {
+  background: #141414;
+}
+
+.heavyBg {
+  filter: saturate(0.72) contrast(1.18) brightness(0.68) sepia(0.18);
+  transform: scale(1.05);
+  object-position: center 72%;
+}
+
+.heavy .scrim {
+  background:
+    radial-gradient(90% 70% at 82% 25%, rgba(255, 204, 0, 0.2) 0%, transparent 55%),
+    radial-gradient(120% 100% at 50% 100%, rgba(0, 0, 0, 0.5) 0%, transparent 60%),
+    linear-gradient(
+      100deg,
+      rgba(14, 14, 14, 0.82) 0%,
+      rgba(14, 14, 14, 0.6) 38%,
+      rgba(14, 14, 14, 0.22) 65%,
+      rgba(14, 14, 14, 0.12) 100%
+    );
+}
+
+.heavy .title {
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6);
+}
+
+.heavy .text {
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.55);
+}
+
+/* ——— General fasteners full-bleed grade ———
+   Source: bright steel close-up, slightly cool/flat.
+   Deep cinematic grade for dark tecfi hero. */
+.fasteners {
+  background: #141414;
+}
+
+.fastenersBg {
+  filter: saturate(0.9) contrast(1.2) brightness(0.66) sepia(0.16);
+  transform: scale(1.05);
+  object-position: center 60%;
+}
+
+.fasteners .scrim {
+  background:
+    radial-gradient(90% 70% at 80% 20%, rgba(255, 204, 0, 0.2) 0%, transparent 55%),
+    radial-gradient(120% 100% at 50% 100%, rgba(0, 0, 0, 0.5) 0%, transparent 60%),
+    linear-gradient(
+      100deg,
+      rgba(14, 14, 14, 0.82) 0%,
+      rgba(14, 14, 14, 0.6) 38%,
+      rgba(14, 14, 14, 0.22) 65%,
+      rgba(14, 14, 14, 0.12) 100%
+    );
+}
+
+.fasteners .title {
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6);
+}
+
+.fasteners .text {
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.55);
+}
+
+/* legacy studio-card treatment (kept if a foreground cutout is used) */
+.fastenersFg {
+  width: min(84vw, 520px);
+  height: auto;
+  aspect-ratio: 21 / 6;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #fff;
+  padding: 18px 22px;
+  filter: contrast(1.06) brightness(1.0);
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.55),
+    0 0 80px rgba(255, 204, 0, 0.1);
 }
 
 .inner {
@@ -211,10 +380,31 @@
 
   .slide {
     padding: 80px 2rem 110px;
+    flex-direction: row;
   }
 
-  .ghost {
-    right: 2rem;
+  .hasImage {
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .hasImage .inner {
+    flex: 0 1 560px;
+    margin: 0;
+  }
+
+  .foreground {
+    flex: 0 1 420px;
+    width: min(32vw, 420px);
+    max-height: 390px;
+    margin: 0;
+  }
+
+  .fastenersFg {
+    flex: 0 1 520px;
+    width: min(38vw, 520px);
+    aspect-ratio: 21 / 6;
+    max-height: none;
   }
 
   .inner {

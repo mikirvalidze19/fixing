@@ -2,49 +2,48 @@
   "autoplayMs": 6000,
   "slides": [
     {
-      "id": "concrete-screws",
-      "eyebrow": "HX · HXE01 · HXE05 · HXE06 · GS01 · GS02",
-      "ghost": "HXE",
-      "title": "Concrete screws",
-      "text": "For the connection of primary or secondary elements to a concrete base structure — zinc-plated, ETA-grade performance, ready in every diameter.",
-      "cta": "Find out more",
-      "to": "/products"
-    },
-    {
-      "id": "metal-anchors",
+      "id": "heavy-duty-metallic",
       "eyebrow": "DXE00 · HL01 · AJE",
-      "ghost": "AJE",
       "title": "Heavy-duty metal anchors",
       "text": "Drop-in and expansion anchors for cracked and non-cracked concrete. Safe, certified holding power for structural fixings.",
       "cta": "Find out more",
-      "to": "/products"
+      "to": "/products/heavy-duty-metallic",
+      "background": "Heavy-Duty.webp",
+      "variant": "heavy",
+      "alt": "Heavy-duty metal anchors — expansion and drop-in anchors for structural concrete fixings"
     },
     {
-      "id": "chemical-anchoring",
+      "id": "chemical-fixings",
       "eyebrow": "XWE01 · DGE · FV01 · PM01 · DH04",
-      "ghost": "XWE",
       "title": "Chemical anchoring systems",
-      "text": "Adhesive anchors, mesh and plastic sleeves plus applicator guns — complete chemical fixing kits for solid and hollow materials.",
+      "text": "High-strength resins, threaded rods, sleeves and applicator guns — certified hold for cracked concrete, solid and hollow materials",
       "cta": "Find out more",
-      "to": "/products"
+      "to": "/products/chemical-fixings",
+      "background": "chemical.webp",
+      "variant": "chemical",
+      "alt": "Chemical anchoring system — applicator gun injecting high-strength resin"
     },
     {
-      "id": "roofing-screws",
-      "eyebrow": "KB01 · PLC · KD · SDC · DV",
-      "ghost": "KB01",
-      "title": "Roofing & facade screws",
-      "text": "Stainless and zinc-plated self-drilling screws, painted heads and sealing washers — certified excellence for roofing and cladding.",
+      "id": "roofing-fixing-systems",
+      "eyebrow": "Roofing fixing systems",
+      "title": "Roofing fixing systems",
+      "text": "Certified excellence, high performance and a wide selection",
       "cta": "Find out more",
-      "to": "/products"
+      "to": "/products/roofing-fixing-systems",
+      "background": "roof.webp",
+      "foreground": "roof1.webp",
+      "alt": "Roofing fixing systems — installer fixing metal roofing and Tecfi roofing screws"
     },
     {
-      "id": "insulation-frame",
-      "eyebrow": "WS01 · WV01 · ZZE · GSC",
-      "ghost": "ZZE",
-      "title": "Insulation & frame fixings",
-      "text": "Nylon plugs for thermal insulation, polyethylene frame anchors and caps — quick, safe installation on every base material.",
+      "id": "general-fasteners",
+      "eyebrow": "BF · RL · AR · JO",
+      "title": "General fasteners",
+      "text": "Threaded rods, bolts, nuts and washers in zinc-plated steel — everyday assemblies and connections of every kind",
       "cta": "Find out more",
-      "to": "/products"
+      "to": "/products/general-fasteners",
+      "background": "General fasteners.webp",
+      "variant": "fasteners",
+      "alt": "General fasteners — zinc-plated bolts, nuts, threaded rods and washers"
     }
   ]
 }
