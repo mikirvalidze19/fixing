@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import categories from '../data/product-categories.json';
 import categoryProducts from '../data/category-products.json';
 import { products, type Product } from '../data/catalog';
@@ -12,30 +13,34 @@ const PREVIEW_CHARS = 180;
 const productMap = categoryProducts as Record<string, string[]>;
 
 export default function Category() {
+  const { t } = useTranslation();
   const { slug } = useParams();
   const [expanded, setExpanded] = useState(false);
   const category = categories.find((c) => c.slug === slug);
 
-  if (!category) return <Placeholder title="Category not found" />;
+  if (!category) return <Placeholder title={t('categoryPage.notFound')} />;
+
+  const label = t(`categories.${category.slug}.label`, { defaultValue: category.label });
+  const description = t(`categories.${category.slug}.description`, { defaultValue: category.description });
 
   const items = (productMap[category.slug] ?? [])
     .map((id) => products.find((p) => p.id === id))
     .filter((p): p is Product => Boolean(p));
 
-  const long = category.description.length > PREVIEW_CHARS;
+  const long = description.length > PREVIEW_CHARS;
   const text = expanded || !long
-    ? category.description
-    : `${category.description.slice(0, PREVIEW_CHARS)}…`;
+    ? description
+    : `${description.slice(0, PREVIEW_CHARS)}…`;
 
   return (
     <div className={styles.page}>
-      <nav className={styles.crumbs} aria-label="Breadcrumb">
-        <Link to="/">Home</Link>
+      <nav className={styles.crumbs} aria-label={t('common.breadcrumb')}>
+        <Link to="/">{t('common.home')}</Link>
         <span aria-hidden="true">|</span>
-        <span aria-current="page">{category.label}</span>
+        <span aria-current="page">{label}</span>
       </nav>
 
-      <h1 className={styles.title}>{category.label}</h1>
+      <h1 className={styles.title}>{label}</h1>
       <p className={styles.desc}>
         {text}{' '}
         {long && (
@@ -44,7 +49,7 @@ export default function Category() {
             className={styles.more}
             onClick={() => setExpanded((v) => !v)}
           >
-            [{expanded ? 'show less' : 'show more'}]
+            [{expanded ? t('categoryPage.showLess') : t('categoryPage.showMore')}]
           </button>
         )}
       </p>
@@ -52,7 +57,7 @@ export default function Category() {
       {items.length > 0 ? (
         <>
           <p className={styles.count}>
-            {items.length} {items.length === 1 ? 'product' : 'products'}
+            {items.length} {items.length === 1 ? t('categoryPage.product') : t('categoryPage.products')}
           </p>
           <ul className={styles.grid}>
             {items.map((product) => (
@@ -64,7 +69,7 @@ export default function Category() {
         </>
       ) : (
         <p className={styles.empty}>
-          No products in this category yet — check back soon.
+          {t('categoryPage.empty')}
         </p>
       )}
     </div>

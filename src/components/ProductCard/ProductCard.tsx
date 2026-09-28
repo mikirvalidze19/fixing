@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { ChevronDown } from 'lucide-react';
 import type { Product } from '../../data/catalog';
 import symbolsData from '../../data/product-symbols.json';
@@ -48,9 +49,11 @@ const CLAMP_CHARS = 60;
    the chevron sits above the overlay so it stays clickable.
    Equal height via flex + clamped text. */
 export default function ProductCard({ product }: { product: Product }) {
+  const { t, i18n } = useTranslation();
+  const title = i18n.language === 'ka' && product.titleKa ? product.titleKa : product.titleEn;
   const [expanded, setExpanded] = useState(false);
   const symbols = symbolMap[product.id] ?? [];
-  const clippable = product.titleEn.length > CLAMP_CHARS;
+  const clippable = title.length > CLAMP_CHARS;
   const imageSrc = productImageSrc(product.id);
 
   return (
@@ -58,14 +61,14 @@ export default function ProductCard({ product }: { product: Product }) {
       <Link
         to={`/product/${product.id}`}
         className={styles.cardLink}
-        aria-label={`${product.series} — ${product.titleEn}. View product details.`}
+        aria-label={`${product.series} — ${title}. ${t('productCard.viewDetails')}`}
       />
 
       <div className={styles.image}>
         {imageSrc ? (
           <img
             src={imageSrc}
-            alt={`${product.series} — ${product.titleEn}`}
+            alt={`${product.series} — ${title}`}
             loading="lazy"
           />
         ) : (
@@ -78,21 +81,21 @@ export default function ProductCard({ product }: { product: Product }) {
       <div className={styles.details}>
         <h4 className={styles.code}>{product.series}</h4>
         <p className={`${styles.desc} ${expanded ? styles.descOpen : ''}`}>
-          {product.titleEn}
+          {title}
         </p>
         {clippable && (
           <button
             type="button"
             className={`${styles.toggle} ${expanded ? styles.toggleOpen : ''}`}
             aria-expanded={expanded}
-            aria-label={expanded ? 'Show less' : 'Show full description'}
+            aria-label={expanded ? t('productCard.showLess') : t('productCard.showFull')}
             onClick={() => setExpanded((v) => !v)}
           >
             <ChevronDown size={16} strokeWidth={2.2} aria-hidden="true" />
           </button>
         )}
 
-        <div className={styles.symbols} aria-label="Product symbols">
+        <div className={styles.symbols} aria-label={t('productCard.symbols')}>
           {symbols.map((symbol) => (
             <img
               key={symbol.icon}
@@ -106,11 +109,11 @@ export default function ProductCard({ product }: { product: Product }) {
       </div>
 
       <div className={styles.priceBar}>
-        <span className={styles.from}>from</span>
+        <span className={styles.from}>{t('productCard.from')}</span>
         <strong className={styles.amount}>{formatGel(minPrice(product))}</strong>
         <span className={styles.variants}>
           {product.variants.length}{' '}
-          {product.variants.length === 1 ? 'variant' : 'variants'}
+          {product.variants.length === 1 ? t('productCard.variant') : t('productCard.variants')}
         </span>
       </div>
     </article>

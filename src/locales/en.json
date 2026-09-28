@@ -1,0 +1,229 @@
+{
+  "nav": {
+    "products": "Products",
+    "applications": "Applications",
+    "video": "Video",
+    "services": "Services and support",
+    "contacts": "Contacts",
+    "top": "Top",
+    "primary": "Primary",
+    "mobile": "Mobile",
+    "search": "Search",
+    "language": "Language",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "languages": {
+    "en": "English",
+    "ka": "Georgian"
+  },
+  "common": {
+    "home": "Home",
+    "breadcrumb": "Breadcrumb"
+  },
+  "slider": {
+    "featured": "Featured product categories",
+    "prev": "Previous slide",
+    "next": "Next slide",
+    "goTo": "Go to slide {{n}}: {{title}}",
+    "live": "Slide {{current}} of {{total}}: {{title}}",
+    "slides": {
+      "heavy-duty-metallic": {
+        "title": "Heavy-duty metal anchors",
+        "text": "Drop-in and expansion anchors for cracked and non-cracked concrete. Safe, certified holding power for structural fixings.",
+        "cta": "Find out more"
+      },
+      "chemical-fixings": {
+        "title": "Chemical anchoring systems",
+        "text": "High-strength resins, threaded rods, sleeves and applicator guns — certified hold for cracked concrete, solid and hollow materials",
+        "cta": "Find out more"
+      },
+      "roofing-fixing-systems": {
+        "title": "Roofing fixing systems",
+        "text": "Certified excellence, high performance and a wide selection",
+        "cta": "Find out more"
+      },
+      "general-fasteners": {
+        "title": "General fasteners",
+        "text": "Threaded rods, bolts, nuts and washers in zinc-plated steel — everyday assemblies and connections of every kind",
+        "cta": "Find out more"
+      }
+    }
+  },
+  "categories": {
+    "roofing-fixing-systems": {
+      "label": "Roofing fixing systems",
+      "description": "Professional fasteners for roofs — certified screws for every covering and supporting structure, saddle washers with foam or EPDM gaskets for a perfect seal, and accessories for safe, durable, weatherproof roofing systems."
+    },
+    "renewable-energy-plants": {
+      "label": "Fixing systems for renewable energy plants",
+      "description": "Fixing systems for photovoltaic and renewable energy plants — corrosion-resistant anchors and screws for mounting solar structures on any roof or ground support."
+    },
+    "heavy-duty-metallic": {
+      "label": "Heavy duty metallic fixing systems",
+      "description": "Heavy-duty metallic anchors and concrete screws for structural fixings — high load capacity in cracked and non-cracked concrete with certified performance."
+    },
+    "chemical-fixings": {
+      "label": "Chemical fixings and accessories",
+      "description": "Chemical anchoring adhesives with mesh sleeves and applicator guns — complete kits for threaded rods and rebar in solid and hollow base materials."
+    },
+    "scaffoldings-ropes-nets": {
+      "label": "Fixing systems for scaffoldings, ropes and nets",
+      "description": "Fixings for scaffoldings, ropes and nets — eye screws, ring bolts and anchors for temporary structures, safety lines and nets."
+    },
+    "windows-frames-facades": {
+      "label": "Windows, frames and façades",
+      "description": "Fixings for windows, frames and façades — frame anchors and screws for precise, durable installation on concrete, brick and hollow walls."
+    },
+    "light-fixing": {
+      "label": "Light Fixing systems",
+      "description": "Light fixing systems for fast, everyday installations — nylon plugs and screws for light loads on all common base materials."
+    },
+    "drywall-hollow": {
+      "label": "Drywall and hollow fixing systems",
+      "description": "Fixings for drywall and hollow walls — cavity anchors and insulation plugs for plasterboard, hollow blocks and thermal insulation."
+    },
+    "wood": {
+      "label": "Fixing systems for wood",
+      "description": "Screws and fixings for timber construction — hardened wood screws for structural joints with fast driving and high pull-out resistance."
+    },
+    "rivets": {
+      "label": "Rivets",
+      "description": "Blind rivets for metal sheets and profiles — quick, vibration-resistant joints in aluminium, steel and mixed materials."
+    },
+    "sealants-foams": {
+      "label": "Sealants and Foams",
+      "description": "Sealants and foams for joints and gaps — elastic sealing and PU foams for insulation, weatherproofing and acoustic comfort."
+    },
+    "cable-plumbing": {
+      "label": "Cable and Plumbing Fixings",
+      "description": "Cable and plumbing fixings — clips, saddles and clamps for neat, secure routing of pipes, cables and conduits."
+    },
+    "general-fasteners": {
+      "label": "General fasteners",
+      "description": "General fasteners — threaded rods, bolts, nuts and washers in zinc-plated steel for assemblies and connections of every kind."
+    },
+    "drills-bits-sockets": {
+      "label": "Drills, bits and sockets",
+      "description": "Drills, bits and sockets — professional accessories for drilling and driving, matched to our screws and anchors."
+    },
+    "inblister": {
+      "label": "inBlister",
+      "description": "inBlister retail packs — handy ready-to-use fixing kits for DIY and small jobs, clearly labelled and easy to store."
+    }
+  },
+  "categoryPage": {
+    "notFound": "Category not found",
+    "showMore": "show more",
+    "showLess": "show less",
+    "product": "product",
+    "products": "products",
+    "empty": "No products in this category yet — check back soon."
+  },
+  "application": {
+    "notFound": "Application not found",
+    "empty": "No products in this application yet — check back soon."
+  },
+  "applications": {
+    "title": "Applications"
+  },
+  "productCard": {
+    "viewDetails": "View product details.",
+    "from": "from",
+    "variant": "variant",
+    "variants": "variants",
+    "showLess": "Show less",
+    "showFull": "Show full description",
+    "symbols": "Product symbols"
+  },
+  "productPage": {
+    "notFound": "Product not found",
+    "startingFrom": "Starting from",
+    "variants": "Variants",
+    "size": "size",
+    "sizes": "sizes",
+    "requestPrice": "Request price",
+    "technicalHelp": "Technical help",
+    "technicalData": "Technical data",
+    "standards": "Standards and assessments",
+    "category": "Category",
+    "diameters": "Diameters",
+    "lengths": "Lengths",
+    "packSizes": "Pack sizes",
+    "priceRange": "Price range",
+    "availableVariants": "Available variants",
+    "related": "Related products",
+    "video": "Product video",
+    "colSku": "SKU",
+    "colDiameter": "Ø (mm)",
+    "colLength": "Length (mm)",
+    "colUnits": "Units / box",
+    "colPrice": "Price",
+    "colNote": "Note",
+    "certFire": "Fire resistance",
+    "certSeismic": "Seismic assessment",
+    "certEta": "European Technical Assessment",
+    "certDefault": "Certified",
+    "aboutOffers": "{{series}} series offers {{count}} {{unit}}",
+    "aboutIn": " in {{category}}",
+    "aboutDiameters": ", diameters {{range}}",
+    "aboutLengths": ", lengths {{range}}",
+    "aboutPrices": ". Prices {{range}} per pack"
+  },
+  "highlighted": {
+    "title": "Highlighted Products",
+    "subtitle": "Best sellers from our fixing range — certified quality, ready to ship."
+  },
+  "stats": {
+    "title": "Fixing Systems — certified products and fast delivery for unbeatable fixing solutions",
+    "cta": "Find out more",
+    "catalog": "Catalog products",
+    "certified": "Certified products",
+    "clients": "Clients",
+    "countries": "Countries served"
+  },
+  "contacts": {
+    "title": "Contacts",
+    "eyebrow": "Get in touch",
+    "lead": "Talk to our team — we help you pick the right fixing solution and answer technical questions fast.",
+    "callNow": "Call now",
+    "sendEmail": "Send email",
+    "whoWeAre": "Who we are",
+    "aboutUs": "About us",
+    "aboutText": "{{nameEn}} ({{nameKa}}) is a Georgia-based importer of professional fixing systems — certified anchors, screws and anchoring solutions for contractors, technical buyers and engineers, with local stock and support in Tbilisi.",
+    "aboutNote": "Catalogue & enquiry website — no online checkout. For prices or technical help, call or email and we will respond promptly.",
+    "perkStock": "Local stock",
+    "perkStockText": "Tbilisi warehouse",
+    "perkHelp": "Technical help",
+    "perkHelpText": "Sizing & application",
+    "perkCertified": "Certified range",
+    "perkCertifiedText": "Professional systems",
+    "directLines": "Direct lines",
+    "contactInfo": "Contact info",
+    "visitUs": "Visit us",
+    "callUs": "Call us",
+    "emailUs": "Email us",
+    "findUs": "Find us",
+    "ourLocation": "Our location",
+    "nearEmbassy": "{{address}} — near the US Embassy.",
+    "getDirections": "Get directions",
+    "brandName": "Fixing Systems LLC"
+  },
+  "videoPage": {
+    "title": "Video"
+  },
+  "placeholder": {
+    "notFound": "Page not found",
+    "body": "Section coming next — header is done, page content will follow the tecfi.it layout."
+  },
+  "footer": {
+    "contact": "Contact",
+    "sitemap": "Sitemap",
+    "maps": "Maps",
+    "copyAddress": "Copy address"
+  },
+  "copy": {
+    "copy": "Copy",
+    "copied": "Copied!"
+  }
+}

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import ScrollProgress from './components/ScrollProgress/ScrollProgress';
@@ -14,6 +15,14 @@ import Placeholder from './pages/Placeholder';
 import siteData from './data/site.json';
 
 type NavRoute = { label: string; to: string; children?: NavRoute[] };
+
+const TITLE_KEYS: Record<string, string> = {
+  Products: 'nav.products',
+  Applications: 'nav.applications',
+  Video: 'nav.video',
+  'Services and support': 'nav.services',
+  Contacts: 'nav.contacts',
+};
 
 function collectRoutes() {
   const routes: { label: string; to: string }[] = [];
@@ -37,7 +46,10 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const { t } = useTranslation();
   const routes = collectRoutes();
+  const routeTitle = (label: string) =>
+    t(TITLE_KEYS[label] ?? label, { defaultValue: label });
   return (
     <BrowserRouter>
       <ScrollToTop />
@@ -59,9 +71,9 @@ export default function App() {
                 r.to !== '/applications',
             )
             .map((r) => (
-              <Route key={r.to} path={r.to} element={<Placeholder title={r.label} />} />
+              <Route key={r.to} path={r.to} element={<Placeholder title={routeTitle(r.label)} />} />
             ))}
-          <Route path="*" element={<Placeholder title="Page not found" />} />
+          <Route path="*" element={<Placeholder title={t('placeholder.notFound')} />} />
         </Routes>
       </main>
       <Footer />

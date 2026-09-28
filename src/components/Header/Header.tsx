@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Check, ChevronDown, Globe, Menu, Search, X } from "lucide-react";
 import logoPng from "../../assets/fixing-systems-logo.webp";
 import siteData from "../../data/site.json";
@@ -16,6 +17,17 @@ type NavItem = {
 
 const mainNav = siteData.header.mainNav as NavItem[];
 const topBar = siteData.header.topBar as ChildLink[];
+
+/* English nav labels → locale keys. Unknown labels fall back to themselves. */
+const NAV_KEYS: Record<string, string> = {
+  Products: "nav.products",
+  Applications: "nav.applications",
+  Video: "nav.video",
+  "Services and support": "nav.services",
+  Contacts: "nav.contacts",
+};
+
+const LANG_CODES = ["en", "ka"] as const;
 
 /* tecfi category icons bundled locally (downloaded with permission) */
 const categoryIconUrls = import.meta.glob("../../assets/categories/*.webp", {
@@ -42,7 +54,7 @@ function LangSwitcher({
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const { header } = siteData;
+  const { t } = useTranslation();
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -84,20 +96,20 @@ function LangSwitcher({
         />
       </button>
       <ul className={styles.langMenu} role="listbox" aria-label={label}>
-        {header.languages.options.map((opt) => {
-          const active = opt.code === lang;
+        {LANG_CODES.map((code) => {
+          const active = code === lang;
           return (
-            <li key={opt.code} role="option" aria-selected={active}>
+            <li key={code} role="option" aria-selected={active}>
               <button
                 type="button"
                 className={active ? styles.langOptionActive : styles.langOption}
                 onClick={() => {
-                  onChange(opt.code);
+                  onChange(code);
                   setOpen(false);
                 }}
               >
-                <span className={styles.langCode}>{opt.code}</span>
-                <span className={styles.langLabel}>{opt.label}</span>
+                <span className={styles.langCode}>{code}</span>
+                <span className={styles.langLabel}>{t(`languages.${code}`, { defaultValue: code })}</span>
                 {active && (
                   <Check
                     size={14}
@@ -117,7 +129,13 @@ function LangSwitcher({
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [lang, setLang] = useState(siteData.header.languages.current);
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language === "ka" ? "ka" : "en";
+  const changeLang = (code: string) => void i18n.changeLanguage(code);
+  const navLabel = (label: string) =>
+    t(NAV_KEYS[label] ?? label, { defaultValue: label });
+  const categoryLabel = (slug: string, fallback: string) =>
+    t(`categories.${slug}.label`, { defaultValue: fallback });
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileCatsOpen, setMobileCatsOpen] = useState(false);
   const location = useLocation();
@@ -185,11 +203,11 @@ export default function Header() {
             <div className={styles.rightInner}>
               {/* TOP ROW — News / Contacts / lang / search / account */}
               <div className={styles.topRow}>
-                <nav className={styles.topNav} aria-label="Top">
+                <nav className={styles.topNav} aria-label={t("nav.top")}>
                   <ul>
                     {topBar.map((item) => (
                       <li key={item.label}>
-                        <NavLink to={item.to}>{item.label}</NavLink>
+                        <NavLink to={item.to}>{navLabel(item.label)}</NavLink>
                       </li>
                     ))}
                   </ul>
@@ -198,14 +216,14 @@ export default function Header() {
                 <div className={styles.topIcons}>
                   <LangSwitcher
                     lang={lang}
-                    onChange={setLang}
-                    label="Language"
+                    onChange={changeLang}
+                    label={t("nav.language")}
                   />
 
                   <button
                     type="button"
                     className={styles.searchBtn}
-                    aria-label="Search"
+                    aria-label={t("nav.search")}
                   >
                     <Search size={20} strokeWidth={1.8} aria-hidden="true" />
                   </button>
@@ -214,7 +232,7 @@ export default function Header() {
 
               {/* BOTTOM ROW — main nav (Products opens mega dropdown, not a page) */}
               <div className={styles.bottomRow}>
-                <nav className={styles.mainNav} aria-label="Primary">
+                <nav className={styles.mainNav} aria-label={t("nav.primary")}>
                   <ul>
                     {mainNav.map((item) =>
                       item.menu === "mega" ? (
@@ -228,7 +246,7 @@ export default function Header() {
                             onFocus={() => setMegaOpen(true)}
                             onClick={() => setMegaOpen((v) => !v)}
                           >
-                            {item.label}
+                            {navLabel(item.label)}
                           </button>
                         </li>
                       ) : (
@@ -242,13 +260,13 @@ export default function Header() {
                               isActive ? styles.active : ""
                             }
                           >
-                            {item.label}
+                            {navLabel(item.label)}
                           </NavLink>
                           {item.children && (
                             <ul className={styles.subMenu}>
                               {item.children.map((child) => (
                                 <li key={child.label}>
-                                  <Link to={child.to}>{child.label}</Link>
+                                  <Link to={child.to}>{navLabel(child.label)}</Link>
                                 </li>
                               ))}
                             </ul>
@@ -264,11 +282,11 @@ export default function Header() {
 
           {/* MOBILE — lang pill + hamburger (mobile-first base, hidden on desktop) */}
           <div className={styles.mobileControls}>
-            <LangSwitcher lang={lang} onChange={setLang} label="Language" />
+            <LangSwitcher lang={lang} onChange={changeLang} label={t("nav.language")} />
             <button
               type="button"
               className={styles.burger}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-label={mobileOpen ? t("nav.closeMenu") : t("nav.openMenu")}
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((v) => !v)}
             >
@@ -304,7 +322,7 @@ export default function Header() {
                   loading="lazy"
                 />
               </span>
-              <span className={styles.megaLabel}>{cat.label}</span>
+              <span className={styles.megaLabel}>{categoryLabel(cat.slug, cat.label)}</span>
             </Link>
           ))}
         </div>
@@ -314,7 +332,7 @@ export default function Header() {
       <div
         className={`${styles.drawer} ${mobileOpen ? styles.drawerOpen : ""}`}
       >
-        <nav aria-label="Mobile">
+        <nav aria-label={t("nav.mobile")}>
           <ul>
             {mainNav.map((item) =>
               item.menu === "mega" ? (
@@ -325,7 +343,7 @@ export default function Header() {
                     aria-expanded={mobileCatsOpen}
                     onClick={() => setMobileCatsOpen((v) => !v)}
                   >
-                    <span>{item.label}</span>
+                    <span>{navLabel(item.label)}</span>
                     <ChevronDown
                       size={18}
                       className={`${styles.drawerChevron} ${mobileCatsOpen ? styles.drawerChevronOpen : ""}`}
@@ -348,7 +366,7 @@ export default function Header() {
                             aria-hidden="true"
                             loading="lazy"
                           />
-                          <span>{cat.label}</span>
+                          <span>{categoryLabel(cat.slug, cat.label)}</span>
                         </Link>
                       </li>
                     ))}
@@ -357,7 +375,7 @@ export default function Header() {
               ) : (
                 <li key={item.label}>
                   <Link to={item.to} onClick={() => setMobileOpen(false)}>
-                    {item.label}
+                    {navLabel(item.label)}
                   </Link>
                   {item.children && (
                     <ul className={styles.drawerSub}>
@@ -367,7 +385,7 @@ export default function Header() {
                             to={child.to}
                             onClick={() => setMobileOpen(false)}
                           >
-                            {child.label}
+                            {navLabel(child.label)}
                           </Link>
                         </li>
                       ))}
@@ -381,7 +399,7 @@ export default function Header() {
             {topBar.map((item) => (
               <li key={item.label}>
                 <Link to={item.to} onClick={() => setMobileOpen(false)}>
-                  {item.label}
+                  {navLabel(item.label)}
                 </Link>
               </li>
             ))}

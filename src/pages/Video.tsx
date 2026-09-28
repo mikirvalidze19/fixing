@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import videos from '../data/videos.json';
 import styles from './Video.module.css';
 
@@ -19,17 +20,18 @@ function getYouTubeId(url: string): string {
 }
 
 export default function Video() {
+  const { t } = useTranslation();
   return (
     <div className={styles.page}>
-      <nav className={styles.crumbs} aria-label="Breadcrumb">
-        <Link to="/">Home</Link>
+      <nav className={styles.crumbs} aria-label={t('common.breadcrumb')}>
+        <Link to="/">{t('common.home')}</Link>
         <span aria-hidden="true">|</span>
-        <Link to="/services-and-support">Services and support</Link>
+        <Link to="/services-and-support">{t('nav.services')}</Link>
         <span aria-hidden="true">|</span>
-        <span aria-current="page">Video</span>
+        <span aria-current="page">{t('videoPage.title')}</span>
       </nav>
 
-      <h1 className={styles.title}>Video</h1>
+      <h1 className={styles.title}>{t('videoPage.title')}</h1>
 
       <ul className={styles.grid}>
         {videos.map((video) => (

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import sliderData from '../../data/slider.json';
 import styles from './Slider.module.css';
@@ -39,11 +40,19 @@ function sliderImageSrc(file?: string): string {
 }
 
 export default function Slider() {
+  const { t } = useTranslation();
   const slides = sliderData.slides as Slide[];
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const touchX = useRef<number | null>(null);
   const count = slides.length;
+
+  const slideTitle = (slide: Slide) =>
+    t(`slider.slides.${slide.id}.title`, { defaultValue: slide.title });
+  const slideText = (slide: Slide) =>
+    t(`slider.slides.${slide.id}.text`, { defaultValue: slide.text });
+  const slideCta = (slide: Slide) =>
+    t(`slider.slides.${slide.id}.cta`, { defaultValue: slide.cta });
 
   const go = useCallback(
     (next: number) => setIndex(((next % count) + count) % count),
@@ -69,7 +78,7 @@ export default function Slider() {
     <section
       className={styles.slider}
       aria-roledescription="carousel"
-      aria-label="Featured product categories"
+      aria-label={t('slider.featured')}
       tabIndex={0}
       onKeyDown={onKeyDown}
       onMouseEnter={() => setPaused(true)}
@@ -98,7 +107,7 @@ export default function Slider() {
             key={slide.id}
             className={`${styles.slide} ${styles[`theme${i % 5}`]} ${slide.background ? styles.hasImage : ''} ${slide.variant === 'chemical' ? styles.chemical : ''} ${slide.variant === 'heavy' ? styles.heavy : ''} ${slide.variant === 'fasteners' ? styles.fasteners : ''}`}
             aria-roledescription="slide"
-            aria-label={`${i + 1} of ${count}: ${slide.title}`}
+            aria-label={t('slider.live', { current: i + 1, total: count, title: slideTitle(slide) })}
             aria-hidden={i !== index}
             inert={! (i === index)}
           >
@@ -113,17 +122,17 @@ export default function Slider() {
             ) : null}
             <span className={styles.scrim} aria-hidden="true" />
             <div className={styles.inner}>
-              <h2 className={styles.title}>{slide.title}</h2>
-              <p className={styles.text}>{slide.text}</p>
+              <h2 className={styles.title}>{slideTitle(slide)}</h2>
+              <p className={styles.text}>{slideText(slide)}</p>
               <Link to={slide.to} className={styles.cta} tabIndex={i === index ? 0 : -1}>
-                {slide.cta}
+                {slideCta(slide)}
               </Link>
             </div>
             {slide.foreground ? (
               <img
                 className={`${styles.foreground} ${slide.variant === 'fasteners' ? styles.fastenersFg : ''}`}
                 src={sliderImageSrc(slide.foreground)}
-                alt={slide.alt ?? slide.title}
+                alt={slide.alt ?? slideTitle(slide)}
                 loading={i === 0 ? 'eager' : 'lazy'}
               />
             ) : null}
@@ -131,14 +140,14 @@ export default function Slider() {
         ))}
       </div>
 
-      <div className={styles.dots} role="tablist" aria-label="Slides">
+      <div className={styles.dots} role="tablist" aria-label={t('slider.featured')}>
         {slides.map((slide, i) => (
           <button
             key={slide.id}
             type="button"
             role="tab"
             aria-selected={i === index}
-            aria-label={`Go to slide ${i + 1}: ${slide.title}`}
+            aria-label={t('slider.goTo', { n: i + 1, title: slideTitle(slide) })}
             className={`${styles.dot} ${i === index ? styles.dotActive : ''}`}
             onClick={() => go(i)}
           />
@@ -149,7 +158,7 @@ export default function Slider() {
         <button
           type="button"
           className={styles.arrow}
-          aria-label="Previous slide"
+          aria-label={t('slider.prev')}
           onClick={() => go(index - 1)}
         >
           <ChevronLeft size={22} />
@@ -157,7 +166,7 @@ export default function Slider() {
         <button
           type="button"
           className={styles.arrow}
-          aria-label="Next slide"
+          aria-label={t('slider.next')}
           onClick={() => go(index + 1)}
         >
           <ChevronRight size={22} />
@@ -165,7 +174,7 @@ export default function Slider() {
       </div>
 
       <p className={styles.visuallyHidden} aria-live="polite">
-        Slide {index + 1} of {count}: {slides[index].title}
+        {t('slider.live', { current: index + 1, total: count, title: slideTitle(slides[index]) })}
       </p>
     </section>
   );

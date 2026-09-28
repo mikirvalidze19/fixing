@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import type { TFunction } from 'i18next';
 import { ChevronDown, Mail, Phone } from 'lucide-react';
 import categories from '../data/product-categories.json';
 import categoryProducts from '../data/category-products.json';
@@ -52,14 +54,14 @@ const standardSrc = (file: string) => assetSrc(standardUrls, file);
 
 const isCert = (file: string) => file.startsWith('Logo_simbolo_');
 
-const certLabel = (file: string) =>
+const certLabel = (t: TFunction, file: string) =>
   file.includes('FUOCO')
-    ? 'Fire resistance'
+    ? t('productPage.certFire')
     : file.includes('SISMICO')
-      ? 'Seismic assessment'
+      ? t('productPage.certSeismic')
       : file.includes('ETA')
-        ? 'European Technical Assessment'
-        : 'Certified';
+        ? t('productPage.certEta')
+        : t('productPage.certDefault');
 
 function findCategory(productId: string) {
   return categories.find((c) => (productMap[c.slug] ?? []).includes(productId));
@@ -68,6 +70,7 @@ function findCategory(productId: string) {
 const cell = (value: number | string | null) => value ?? '—';
 
 export default function Product() {
+  const { t, i18n } = useTranslation();
   const { id } = useParams();
   const [openSku, setOpenSku] = useState<string | null>(null);
   const product = products.find((p) => p.id === id);
@@ -76,9 +79,13 @@ export default function Product() {
     setOpenSku(null);
   }, [id]);
 
-  if (!product) return <Placeholder title="Product not found" />;
+  if (!product) return <Placeholder title={t('productPage.notFound')} />;
 
+  const title = i18n.language === 'ka' && product.titleKa ? product.titleKa : product.titleEn;
   const category = findCategory(product.id);
+  const categoryLabel = category
+    ? t(`categories.${category.slug}.label`, { defaultValue: category.label })
+    : '';
   const related = category
     ? (productMap[category.slug] ?? [])
         .filter((pid) => pid !== product.id)
@@ -116,22 +123,28 @@ export default function Product() {
       : vals.length === 1
         ? `${vals[0]} ${unit}`
         : `${vals[0]}–${vals[vals.length - 1]} ${unit}`;
-  const aboutText =
-    `${product.series} series offers ${product.variants.length} ` +
-    `${product.variants.length === 1 ? 'size' : 'sizes'}` +
-    `${category ? ` in ${category.label}` : ''}` +
-    `${rangeText(diameters, 'mm Ø') ? `, diameters ${rangeText(diameters, 'mm Ø')}` : ''}` +
-    `${rangeText(lengths, 'mm') ? `, lengths ${rangeText(lengths, 'mm')}` : ''}` +
-    `${priceRange ? `. Prices ${priceRange} per pack` : ''}.`;
+  const unit = product.variants.length === 1 ? t('productPage.size') : t('productPage.sizes');
+  let aboutText = t('productPage.aboutOffers', {
+    series: product.series,
+    count: product.variants.length,
+    unit,
+  });
+  if (category) aboutText += t('productPage.aboutIn', { category: categoryLabel });
+  const diaRange = rangeText(diameters, 'mm Ø');
+  if (diaRange) aboutText += t('productPage.aboutDiameters', { range: diaRange });
+  const lenRange = rangeText(lengths, 'mm');
+  if (lenRange) aboutText += t('productPage.aboutLengths', { range: lenRange });
+  if (priceRange) aboutText += t('productPage.aboutPrices', { range: priceRange });
+  aboutText += '.';
 
   return (
     <div className={styles.page}>
-      <nav className={styles.crumbs} aria-label="Breadcrumb">
-        <Link to="/">Home</Link>
+      <nav className={styles.crumbs} aria-label={t('common.breadcrumb')}>
+        <Link to="/">{t('common.home')}</Link>
         <span aria-hidden="true">|</span>
         {category ? (
           <>
-            <Link to={`/products/${category.slug}`}>{category.label}</Link>
+            <Link to={`/products/${category.slug}`}>{categoryLabel}</Link>
             <span aria-hidden="true">|</span>
           </>
         ) : null}
@@ -143,7 +156,7 @@ export default function Product() {
           {productImageSrc(product.id) ? (
             <img
               src={productImageSrc(product.id)}
-              alt={`${product.series} — ${product.titleEn}`}
+              alt={`${product.series} — ${title}`}
             />
           ) : (
             <span className={styles.ghost} aria-hidden="true">
@@ -154,16 +167,16 @@ export default function Product() {
 
         <div className={styles.meta}>
           <div className={styles.metaRow}>
-            <span className={styles.metaLabel}>Starting from</span>
+            <span className={styles.metaLabel}>{t('productPage.startingFrom')}</span>
             <strong className={styles.metaPrice}>
               {formatGel(minPrice(product))}
             </strong>
           </div>
           <div className={styles.metaRow}>
-            <span className={styles.metaLabel}>Variants</span>
+            <span className={styles.metaLabel}>{t('productPage.variants')}</span>
             <span className={styles.metaValue}>
               {product.variants.length}{' '}
-              {product.variants.length === 1 ? 'size' : 'sizes'}
+              {unit}
             </span>
           </div>
           <div className={styles.actions}>
@@ -173,7 +186,7 @@ export default function Product() {
                 href={`mailto:${company.email}?subject=Enquiry%20${encodeURIComponent(product.series)}`}
               >
                 <Mail size={16} strokeWidth={2.2} aria-hidden="true" />
-                Request price
+                {t('productPage.requestPrice')}
               </a>
             )}
             <a
@@ -181,18 +194,18 @@ export default function Product() {
               href={`tel:${company.phones[0].replace(/[^+\d]/g, '')}`}
             >
               <Phone size={16} strokeWidth={2.2} aria-hidden="true" />
-              Technical help
+              {t('productPage.technicalHelp')}
             </a>
           </div>
         </div>
 
         <div className={styles.info}>
           <h1 className={styles.name}>{product.series}</h1>
-          <p className={styles.desc}>{product.titleEn}</p>
+          <p className={styles.desc}>{title}</p>
           <p className={styles.about}>{aboutText}</p>
 
           {specs.length > 0 && (
-            <ul className={styles.specs} aria-label="Technical data">
+            <ul className={styles.specs} aria-label={t('productPage.technicalData')}>
               {specs.map((spec) => (
                 <li key={spec.icon} className={styles.spec}>
                   <img src={symbolSrc(spec.icon)} alt="" aria-hidden="true" />
@@ -205,33 +218,33 @@ export default function Product() {
           <dl className={styles.facts}>
             {category && (
               <div className={styles.fact}>
-                <dt>Category</dt>
+                <dt>{t('productPage.category')}</dt>
                 <dd>
-                  <Link to={`/products/${category.slug}`}>{category.label}</Link>
+                  <Link to={`/products/${category.slug}`}>{categoryLabel}</Link>
                 </dd>
               </div>
             )}
             {diameters.length > 0 && (
               <div className={styles.fact}>
-                <dt>Diameters</dt>
+                <dt>{t('productPage.diameters')}</dt>
                 <dd>{diameters.map((d) => `${d} mm`).join(', ')}</dd>
               </div>
             )}
             {lengths.length > 0 && (
               <div className={styles.fact}>
-                <dt>Lengths</dt>
+                <dt>{t('productPage.lengths')}</dt>
                 <dd>{lengths.map((l) => `${l} mm`).join(', ')}</dd>
               </div>
             )}
             {packs.length > 0 && (
               <div className={styles.fact}>
-                <dt>Pack sizes</dt>
+                <dt>{t('productPage.packSizes')}</dt>
                 <dd>{packs.map((p) => `${p} pcs`).join(', ')}</dd>
               </div>
             )}
             {priceRange && (
               <div className={styles.fact}>
-                <dt>Price range</dt>
+                <dt>{t('productPage.priceRange')}</dt>
                 <dd>{priceRange}</dd>
               </div>
             )}
@@ -240,7 +253,7 @@ export default function Product() {
 
         <aside className={styles.side}>
           {standards.length > 0 ? (
-            <ul className={styles.standards} aria-label="Standards and assessments">
+            <ul className={styles.standards} aria-label={t('productPage.standards')}>
               {standards.map((item) => (
                 <li key={`${item.label}-${item.value}`} className={styles.standard}>
                   <img
@@ -266,7 +279,7 @@ export default function Product() {
             </ul>
           ) : (
             certs.length > 0 && (
-              <ul className={styles.standards} aria-label="Standards and assessments">
+              <ul className={styles.standards} aria-label={t('productPage.standards')}>
                 {certs.map((cert) => (
                   <li key={cert.icon} className={styles.standard}>
                     <img
@@ -276,7 +289,7 @@ export default function Product() {
                       aria-hidden="true"
                     />
                     <div>
-                      <p className={styles.stdLabel}>{certLabel(cert.icon)}</p>
+                      <p className={styles.stdLabel}>{certLabel(t, cert.icon)}</p>
                       <p className={styles.stdValue}>{cert.label}</p>
                     </div>
                   </li>
@@ -287,39 +300,39 @@ export default function Product() {
         </aside>
       </div>
 
-      <h2 className={styles.sectionTitle}>Available variants</h2>
+      <h2 className={styles.sectionTitle}>{t('productPage.availableVariants')}</h2>
       <div className={styles.tableWrap}>
         <table className={styles.table}>
           <thead>
             <tr>
-              <th scope="col">SKU</th>
-              <th scope="col">Ø (mm)</th>
-              <th scope="col">Length (mm)</th>
-              <th scope="col">Units / box</th>
-              <th scope="col">Price</th>
-              <th scope="col">Note</th>
+              <th scope="col">{t('productPage.colSku')}</th>
+              <th scope="col">{t('productPage.colDiameter')}</th>
+              <th scope="col">{t('productPage.colLength')}</th>
+              <th scope="col">{t('productPage.colUnits')}</th>
+              <th scope="col">{t('productPage.colPrice')}</th>
+              <th scope="col">{t('productPage.colNote')}</th>
             </tr>
           </thead>
           <tbody>
             {product.variants.map((v) => (
               <tr key={v.sku}>
-                <td data-label="SKU" className={styles.sku}>
+                <td data-label={t('productPage.colSku')} className={styles.sku}>
                   {v.sku}
                 </td>
-                <td data-label="Ø (mm)">{cell(v.diameterMm)}</td>
-                <td data-label="Length (mm)">{cell(v.lengthMm)}</td>
-                <td data-label="Units / box">{v.unitsPerBox}</td>
-                <td data-label="Price" className={styles.price}>
+                <td data-label={t('productPage.colDiameter')}>{cell(v.diameterMm)}</td>
+                <td data-label={t('productPage.colLength')}>{cell(v.lengthMm)}</td>
+                <td data-label={t('productPage.colUnits')}>{v.unitsPerBox}</td>
+                <td data-label={t('productPage.colPrice')} className={styles.price}>
                   {formatGel(v.priceGel)}
                 </td>
-                <td data-label="Note">{cell(v.note)}</td>
+                <td data-label={t('productPage.colNote')}>{cell(v.note)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
 
-      <ul className={styles.cards} aria-label="Available variants">
+      <ul className={styles.cards} aria-label={t('productPage.availableVariants')}>
         {product.variants.map((v) => {
           const open = openSku === v.sku;
           return (
@@ -351,23 +364,23 @@ export default function Product() {
                 <div className={styles.cardInner}>
                   <dl className={styles.details}>
                     <div className={styles.detail}>
-                      <dt>Ø (mm)</dt>
+                      <dt>{t('productPage.colDiameter')}</dt>
                       <dd>{cell(v.diameterMm)}</dd>
                     </div>
                     <div className={styles.detail}>
-                      <dt>Length (mm)</dt>
+                      <dt>{t('productPage.colLength')}</dt>
                       <dd>{cell(v.lengthMm)}</dd>
                     </div>
                     <div className={styles.detail}>
-                      <dt>Units / box</dt>
+                      <dt>{t('productPage.colUnits')}</dt>
                       <dd>{v.unitsPerBox}</dd>
                     </div>
                     <div className={styles.detail}>
-                      <dt>Price</dt>
+                      <dt>{t('productPage.colPrice')}</dt>
                       <dd className={styles.price}>{formatGel(v.priceGel)}</dd>
                     </div>
                     <div className={styles.detail}>
-                      <dt>Note</dt>
+                      <dt>{t('productPage.colNote')}</dt>
                       <dd>{cell(v.note)}</dd>
                     </div>
                   </dl>
@@ -379,11 +392,11 @@ export default function Product() {
       </ul>
 
       {videoId && (
-        <section className={styles.videoSection} aria-label="Product video">
+        <section className={styles.videoSection} aria-label={t('productPage.video')}>
           <div className={styles.video}>
             <iframe
               src={`https://www.youtube.com/embed/${videoId}`}
-              title={`${product.series} video`}
+              title={`${product.series} — ${t('videoPage.title')}`}
               loading="lazy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -395,7 +408,7 @@ export default function Product() {
       {related.length > 0 && (
         <section aria-labelledby="related-heading">
           <h2 id="related-heading" className={styles.sectionTitle}>
-            Related products
+            {t('productPage.related')}
           </h2>
           <ul className={styles.grid}>
             {related.map((item) => (

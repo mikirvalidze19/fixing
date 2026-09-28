@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   ArrowUpRight,
   BadgeCheck,
@@ -18,13 +19,17 @@ const embedSrc =
   'https://www.google.com/maps?q=Georgian-American+Friendship+Street+33+Tbilisi&output=embed';
 const tel = (p: string) => `tel:${p.replace(/[^+\d]/g, '')}`;
 
-const perks = [
-  { icon: PackageCheck, title: 'Local stock', text: 'Tbilisi warehouse' },
-  { icon: Headset, title: 'Technical help', text: 'Sizing & application' },
-  { icon: BadgeCheck, title: 'Certified range', text: 'Professional systems' },
-];
-
 export default function Contacts() {
+  const { t, i18n } = useTranslation();
+  const isKa = i18n.language === 'ka';
+  const address = isKa ? company.addressKa : company.addressEn;
+
+  const perks = [
+    { icon: PackageCheck, title: t('contacts.perkStock'), text: t('contacts.perkStockText') },
+    { icon: Headset, title: t('contacts.perkHelp'), text: t('contacts.perkHelpText') },
+    { icon: BadgeCheck, title: t('contacts.perkCertified'), text: t('contacts.perkCertifiedText') },
+  ];
+
   return (
     <div className={styles.page}>
       {/* ── HERO — dark industrial band, same language as Slider/Stats ── */}
@@ -33,30 +38,29 @@ export default function Contacts() {
           CONTACTS
         </span>
         <div className={styles.heroInner}>
-          <nav className={styles.crumbs} aria-label="Breadcrumb">
-            <Link to="/">Home</Link>
+          <nav className={styles.crumbs} aria-label={t('common.breadcrumb')}>
+            <Link to="/">{t('common.home')}</Link>
             <span aria-hidden="true">/</span>
-            <span aria-current="page">Contacts</span>
+            <span aria-current="page">{t('contacts.title')}</span>
           </nav>
-          <p className={styles.eyebrow}>Get in touch</p>
+          <p className={styles.eyebrow}>{t('contacts.eyebrow')}</p>
           <h1 className={styles.title}>
-            Contacts<span className={styles.dot}>.</span>
+            {t('contacts.title')}<span className={styles.dot}>.</span>
           </h1>
           <p className={styles.lead}>
-            Talk to our team — we help you pick the right fixing solution and
-            answer technical questions fast.
+            {t('contacts.lead')}
           </p>
           <div className={styles.heroActions}>
             <a className={styles.cta} href={tel(company.phones[0])}>
               <Phone size={17} strokeWidth={2.2} aria-hidden="true" />
-              Call now
+              {t('contacts.callNow')}
             </a>
             <a
               className={styles.ctaGhost}
               href={`mailto:${company.email}?subject=Enquiry%20from%20website`}
             >
               <Mail size={17} strokeWidth={2} aria-hidden="true" />
-              Send email
+              {t('contacts.sendEmail')}
             </a>
           </div>
         </div>
@@ -66,20 +70,15 @@ export default function Contacts() {
         {/* ── 1 · ABOUT ── */}
         <section className={styles.about} aria-labelledby="about-heading">
           <div className={styles.aboutMain}>
-            <p className={styles.sectionEyebrow}>Who we are</p>
+            <p className={styles.sectionEyebrow}>{t('contacts.whoWeAre')}</p>
             <h2 id="about-heading" className={styles.sectionTitle}>
-              About us
+              {t('contacts.aboutUs')}
             </h2>
             <p className={styles.aboutText}>
-              <strong>{company.nameEn}</strong> ({company.nameKa}) is a
-              Georgia-based importer of professional fixing systems — certified
-              anchors, screws and anchoring solutions for contractors,
-              technical buyers and engineers, with local stock and support in
-              Tbilisi.
+              {t('contacts.aboutText', { nameEn: company.nameEn, nameKa: company.nameKa })}
             </p>
             <p className={styles.aboutNote}>
-              Catalogue &amp; enquiry website — no online checkout. For prices
-              or technical help, call or email and we will respond promptly.
+              {t('contacts.aboutNote')}
             </p>
           </div>
           <ul className={styles.perks}>
@@ -100,9 +99,9 @@ export default function Contacts() {
         {/* ── 2 · CONTACT INFO — dark panel ── */}
         <section className={styles.contact} aria-labelledby="contact-heading">
           <div className={styles.contactHead}>
-            <p className={styles.sectionEyebrowDark}>Direct lines</p>
+            <p className={styles.sectionEyebrowDark}>{t('contacts.directLines')}</p>
             <h2 id="contact-heading" className={styles.contactTitle}>
-              Contact info
+              {t('contacts.contactInfo')}
             </h2>
           </div>
           <address className={styles.rows}>
@@ -111,12 +110,12 @@ export default function Contacts() {
                 <MapPin size={19} strokeWidth={2} />
               </span>
               <span className={styles.rowText}>
-                <span className={styles.rowLabel}>Visit us</span>
-                <span className={styles.rowValue}>{company.addressEn}</span>
+                <span className={styles.rowLabel}>{t('contacts.visitUs')}</span>
+                <span className={styles.rowValue}>{address}</span>
               </span>
               <CopyButton
-                value={company.addressEn}
-                label="Copy address"
+                value={address}
+                label={t('footer.copyAddress')}
                 className={styles.copyBtn}
               />
             </div>
@@ -127,7 +126,7 @@ export default function Contacts() {
                     <Phone size={19} strokeWidth={2} />
                   </span>
                   <span className={styles.rowText}>
-                    <span className={styles.rowLabel}>Call us</span>
+                    <span className={styles.rowLabel}>{t('contacts.callUs')}</span>
                     <span className={styles.rowValueStrong}>{phone}</span>
                   </span>
                   <ArrowUpRight
@@ -152,7 +151,7 @@ export default function Contacts() {
                   <Mail size={19} strokeWidth={2} />
                 </span>
                 <span className={styles.rowText}>
-                  <span className={styles.rowLabel}>Email us</span>
+                  <span className={styles.rowLabel}>{t('contacts.emailUs')}</span>
                   <span className={styles.rowValueStrong}>{company.email}</span>
                 </span>
                 <ArrowUpRight
@@ -173,17 +172,17 @@ export default function Contacts() {
         {/* ── 3 · MAP ── */}
         <section className={styles.map} aria-labelledby="map-heading">
           <div className={styles.mapHead}>
-            <p className={styles.sectionEyebrow}>Find us</p>
+            <p className={styles.sectionEyebrow}>{t('contacts.findUs')}</p>
             <h2 id="map-heading" className={styles.sectionTitle}>
-              Our location
+              {t('contacts.ourLocation')}
             </h2>
             <p className={styles.mapSub}>
-              {company.addressEn} — near the US Embassy.
+              {t('contacts.nearEmbassy', { address })}
             </p>
           </div>
           <div className={styles.mapFrame}>
             <iframe
-              title={`Map — ${company.addressEn}`}
+              title={`Map — ${address}`}
               src={embedSrc}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -192,9 +191,9 @@ export default function Contacts() {
             <div className={styles.mapCard}>
               <p className={styles.mapCardLabel}>
                 <MapPin size={15} strokeWidth={2.2} aria-hidden="true" />
-                Fixing Systems LLC
+                {t('contacts.brandName')}
               </p>
-              <p className={styles.mapCardAddr}>{company.addressEn}</p>
+              <p className={styles.mapCardAddr}>{address}</p>
               <a
                 className={styles.directions}
                 href={company.mapUrl}
@@ -202,7 +201,7 @@ export default function Contacts() {
                 rel="noreferrer"
               >
                 <Navigation size={15} strokeWidth={2.2} aria-hidden="true" />
-                Get directions
+                {t('contacts.getDirections')}
               </a>
             </div>
           </div>

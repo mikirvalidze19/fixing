@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Check, Copy } from 'lucide-react';
 import styles from './CopyButton.module.css';
 
@@ -27,6 +28,7 @@ async function copyText(value: string): Promise<boolean> {
 }
 
 export default function CopyButton({ value, label, className }: Props) {
+  const { t } = useTranslation();
   const id = useId();
   const [copied, setCopied] = useState(false);
   const timer = useRef<number | null>(null);
@@ -62,7 +64,7 @@ export default function CopyButton({ value, label, className }: Props) {
       className={className ? `${styles.btn} ${className}` : styles.btn}
       onClick={onClick}
       aria-label={label}
-      title={copied ? 'Copied!' : label}
+      title={copied ? t('copy.copied') : label}
     >
       {copied ? (
         <Check size={15} strokeWidth={2.4} aria-hidden="true" />
@@ -70,7 +72,7 @@ export default function CopyButton({ value, label, className }: Props) {
         <Copy size={15} strokeWidth={2} aria-hidden="true" />
       )}
       <span className={styles.tip} aria-hidden="true">
-        {copied ? 'Copied!' : 'Copy'}
+        {copied ? t('copy.copied') : t('copy.copy')}
       </span>
     </button>
   );
