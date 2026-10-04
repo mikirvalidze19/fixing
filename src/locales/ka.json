@@ -212,6 +212,15 @@
   "videoPage": {
     "title": "ვიდეო"
   },
+  "services": {
+    "title": "Services & support",
+    "lead": "The services and support we provide to our customers for our products",
+    "assistance": "Assistance and Information",
+    "download": "Download",
+    "sales": "General Sales Conditions",
+    "calculation": "Chemical fixing calculation",
+    "open": "Open"
+  },
   "placeholder": {
     "notFound": "Page not found",
     "body": "Section coming next — header is done, page content will follow the tecfi.it layout."

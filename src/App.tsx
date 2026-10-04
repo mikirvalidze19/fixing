@@ -11,6 +11,7 @@ import Contacts from './pages/Contacts';
 import Home from './pages/Home';
 import Product from './pages/Product';
 import Video from './pages/Video';
+import Services from './pages/Services';
 import Placeholder from './pages/Placeholder';
 import siteData from './data/site.json';
 
@@ -62,12 +63,14 @@ export default function App() {
           <Route path="/applications/:slug" element={<Application />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/video" element={<Video />} />
+          <Route path="/services-and-support" element={<Services />} />
           <Route path="/contacts" element={<Contacts />} />
           {routes
             .filter(
               (r) =>
                 r.to !== '/contacts' &&
                 r.to !== '/video' &&
+                r.to !== '/services-and-support' &&
                 r.to !== '/applications',
             )
             .map((r) => (

@@ -1,0 +1,92 @@
+/* Services & support — mirrors tecfi.it servizi-e-supporto:
+   breadcrumb, centered H1 + lead, 2-col service card grid.
+   Mobile-first. */
+
+.page {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 32px 1.25rem 64px;
+}
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--grigioscuro);
+}
+
+.crumbs a {
+  color: var(--grigioscuro);
+  text-decoration: none;
+}
+
+.crumbs a:hover {
+  color: var(--darksecondarycolor);
+}
+
+.crumbs [aria-current] {
+  color: var(--maincolor);
+  font-weight: 700;
+}
+
+.title {
+  margin: 16px 0 0;
+  font-size: clamp(1.75rem, 6vw, 3rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--maincolor);
+  text-align: center;
+  view-transition-name: services-title;
+}
+
+.lead {
+  margin: 12px auto 0;
+  max-width: 720px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--maincolor);
+  text-align: center;
+}
+
+.grid {
+  margin: 40px auto 0;
+  padding: 0;
+  display: grid;
+  gap: 40px;
+  max-width: 860px;
+  animation: services-enter 320ms ease both;
+  justify-content: space-around;
+}
+
+@keyframes services-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(250px, 280px));
+  }
+}
+
+@media (min-width: 1025px) {
+  .page {
+    padding: 48px 2rem 80px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid {
+    animation: none;
+  }
+}

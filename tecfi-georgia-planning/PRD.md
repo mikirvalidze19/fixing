@@ -106,7 +106,7 @@ Recreate the simple Tecfi-style support hub: Assistance & information, Downloads
 Use the supplied importer details:
 
 - Address: თბილისი, ქართულ ამერიკული მეგობრობის ქ. N33 (ამერიკის საელჩოს მიმდებარედ)
-- Phones: +995 555 42-44-42; +995 511 42-55-11
+- Phones:  +995 511 42-55-11
 - Email: info.fs.ge@gmail.com
 
 Include a map link/embed only once the exact public location and privacy requirements are approved.
