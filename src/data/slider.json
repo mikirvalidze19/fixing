@@ -2,6 +2,18 @@
   "autoplayMs": 6000,
   "slides": [
     {
+      "id": "tecfi-company",
+      "title": "Tecfi S.p.A. — Fixing Systems",
+      "text": "Design, testing and certified production of fixing systems — watch the Tecfi company video.",
+      "cta": "Watch all videos",
+      "to": "/video",
+      "video": {
+        "src": "https://storage.onpage.it/6d9e98e4e94b42a188164c8bbecf27f33884dc49/Tecfi%20S.p.A.%20-%20Fixing%20Systems%20-%20versione%20breve.mp4",
+        "poster": "https://www.tecfi.it/wp-content/uploads/2024/10/poster_video_azienda.jpg"
+      },
+      "alt": "Tecfi S.p.A. company video — Fixing Systems"
+    },
+    {
       "id": "heavy-duty-metallic",
       "eyebrow": "DXE00 · HL01 · AJE",
       "title": "Heavy-duty metal anchors",

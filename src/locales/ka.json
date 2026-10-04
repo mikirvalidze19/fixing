@@ -28,6 +28,11 @@
     "goTo": "Go to slide {{n}}: {{title}}",
     "live": "Slide {{current}} of {{total}}: {{title}}",
     "slides": {
+      "tecfi-company": {
+        "title": "Tecfi S.p.A. — Fixing Systems",
+        "text": "Design, testing and certified production of fixing systems — watch the Tecfi company video.",
+        "cta": "Watch all videos"
+      },
       "heavy-duty-metallic": {
         "title": "Heavy-duty metal anchors",
         "text": "Drop-in and expansion anchors for cracked and non-cracked concrete. Safe, certified holding power for structural fixings.",

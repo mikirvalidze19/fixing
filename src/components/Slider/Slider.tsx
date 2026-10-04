@@ -1,12 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Maximize, Minimize } from 'lucide-react';
 import sliderData from '../../data/slider.json';
 import styles from './Slider.module.css';
 
 const AUTOPLAY_MS = sliderData.autoplayMs ?? 6000;
 const SWIPE_PX = 40;
+
+type SlideVideo = {
+  src: string;
+  poster?: string;
+};
 
 type Slide = {
   id: string;
@@ -18,6 +23,7 @@ type Slide = {
   foreground?: string;
   variant?: string;
   alt?: string;
+  video?: SlideVideo;
 };
 
 const sliderImages = import.meta.glob(
@@ -39,11 +45,112 @@ function sliderImageSrc(file?: string): string {
   return entry ? entry[1] : '';
 }
 
+/* Background video for a video slide — full-bleed behind the same
+ * title/text/cta overlay image slides use. Autoplays muted (browser
+ * requirement) when its slide is active, pauses + rewinds when it
+ * leaves. Reduced-motion users get native controls instead. */
+function VideoSlideMedia({
+  src,
+  poster,
+  active,
+  label,
+  tabbable,
+  onPlayingChange,
+  onEnded,
+}: {
+  src: string;
+  poster?: string;
+  active: boolean;
+  label: string;
+  tabbable: boolean;
+  onPlayingChange: (playing: boolean) => void;
+  onEnded: () => void;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const reducedMotion =
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* play on entry, pause + rewind on exit */
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || reducedMotion) return;
+    if (active) {
+      video.muted = true;
+      video.play().catch(() => undefined);
+    } else {
+      video.pause();
+      video.currentTime = 0;
+    }
+  }, [active, reducedMotion]);
+
+  /* track fullscreen so the button icon reflects state */
+  useEffect(() => {
+    const onChange = () =>
+      setIsFullscreen(document.fullscreenElement != null);
+    document.addEventListener('fullscreenchange', onChange);
+    return () => document.removeEventListener('fullscreenchange', onChange);
+  }, []);
+
+  const toggleFullscreen = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => undefined);
+      return;
+    }
+    if (video.requestFullscreen) {
+      video.requestFullscreen().catch(() => undefined);
+      return;
+    }
+    /* iOS Safari fallback */
+    const legacy = video as HTMLVideoElement & {
+      webkitEnterFullscreen?: () => void;
+    };
+    legacy.webkitEnterFullscreen?.();
+  };
+
+  return (
+    <>
+      <video
+        ref={videoRef}
+        className={styles.video}
+        src={src}
+        poster={poster}
+        muted
+        playsInline
+        preload="metadata"
+        controls={reducedMotion}
+        aria-label={label}
+        tabIndex={-1}
+        onPlay={() => onPlayingChange(true)}
+        onPause={() => onPlayingChange(false)}
+        onEnded={onEnded}
+      />
+      {reducedMotion ? null : (
+        <button
+          type="button"
+          className={styles.fullscreenBtn}
+          aria-label={isFullscreen ? 'Exit fullscreen' : 'View fullscreen'}
+          aria-pressed={isFullscreen}
+          tabIndex={tabbable ? 0 : -1}
+          onClick={toggleFullscreen}
+        >
+          {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
+        </button>
+      )}
+    </>
+  );
+}
+
 export default function Slider() {
   const { t } = useTranslation();
   const slides = sliderData.slides as Slide[];
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [videoPlaying, setVideoPlaying] = useState(false);
   const touchX = useRef<number | null>(null);
   const count = slides.length;
 
@@ -59,14 +166,23 @@ export default function Slider() {
     [count],
   );
 
-  /* autoplay — pauses on hover / focus / touch */
+  const handleSlideEnd = useCallback(() => {
+    setIndex((i) => (i + 1) % count);
+  }, [count]);
+
+  const handleVideoPlaying = useCallback((playing: boolean) => {
+    setVideoPlaying(playing);
+  }, []);
+
+  /* autoplay — pauses on hover / focus / touch, and while a slide
+   * video is playing. Clock resets on every slide change. */
   useEffect(() => {
-    if (paused || count < 2) return;
+    if (paused || videoPlaying || count < 2) return;
     const id = window.setInterval(() => {
       setIndex((i) => (i + 1) % count);
     }, AUTOPLAY_MS);
     return () => window.clearInterval(id);
-  }, [paused, count]);
+  }, [paused, videoPlaying, count, index]);
 
   /* keyboard arrows */
   const onKeyDown = (e: React.KeyboardEvent) => {
@@ -105,13 +221,23 @@ export default function Slider() {
         {slides.map((slide, i) => (
           <article
             key={slide.id}
-            className={`${styles.slide} ${styles[`theme${i % 5}`]} ${slide.background ? styles.hasImage : ''} ${slide.variant === 'chemical' ? styles.chemical : ''} ${slide.variant === 'heavy' ? styles.heavy : ''} ${slide.variant === 'fasteners' ? styles.fasteners : ''}`}
+            className={`${styles.slide} ${styles[`theme${i % 5}`]} ${slide.background ? styles.hasImage : ''} ${slide.video ? styles.videoSlide : ''} ${slide.variant === 'chemical' ? styles.chemical : ''} ${slide.variant === 'heavy' ? styles.heavy : ''} ${slide.variant === 'fasteners' ? styles.fasteners : ''}`}
             aria-roledescription="slide"
             aria-label={t('slider.live', { current: i + 1, total: count, title: slideTitle(slide) })}
             aria-hidden={i !== index}
             inert={! (i === index)}
           >
-            {slide.background ? (
+            {slide.video ? (
+              <VideoSlideMedia
+                src={slide.video.src}
+                poster={slide.video.poster}
+                active={i === index}
+                label={slide.alt ?? slideTitle(slide)}
+                tabbable={i === index}
+                onPlayingChange={handleVideoPlaying}
+                onEnded={handleSlideEnd}
+              />
+            ) : slide.background ? (
               <img
                 className={`${styles.bg} ${slide.variant === 'chemical' ? styles.chemBg : ''} ${slide.variant === 'heavy' ? styles.heavyBg : ''} ${slide.variant === 'fasteners' ? styles.fastenersBg : ''}`}
                 src={sliderImageSrc(slide.background)}
