@@ -156,17 +156,20 @@ export default function Header() {
       }
     };
     document.addEventListener("mousedown", onOutside);
-    document.addEventListener("touchstart", onOutside);
+    document.addEventListener("touchstart", onOutside, { passive: true });
     return () => {
       document.removeEventListener("mousedown", onOutside);
       document.removeEventListener("touchstart", onOutside);
     };
   }, [mobileOpen]);
 
-  /* close mega panel on navigation */
-  useEffect(() => {
+  /* close mega panel on navigation — derived during render instead of
+     synced in an effect (no cascading render after navigation commits) */
+  const [prevPathname, setPrevPathname] = useState(location.pathname);
+  if (prevPathname !== location.pathname) {
+    setPrevPathname(location.pathname);
     setMegaOpen(false);
-  }, [location.pathname]);
+  }
 
   return (
     <header

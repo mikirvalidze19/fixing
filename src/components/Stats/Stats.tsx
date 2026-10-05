@@ -8,16 +8,18 @@ const DURATION_MS = 1600;
 
 function Counter({ value, locale }: { value: number; locale: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [display, setDisplay] = useState(0);
+  /* Reduced-motion target is known before first paint — initialize
+   * directly instead of syncing it in an effect. */
+  const reducedMotion =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const [display, setDisplay] = useState(reducedMotion ? value : 0);
   const started = useRef(false);
 
   useEffect(() => {
+    if (reducedMotion) return;
     const el = ref.current;
     if (!el) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setDisplay(value);
-      return;
-    }
     const observer = new IntersectionObserver(
       (entries) => {
         if (!entries[0].isIntersecting || started.current) return;
@@ -36,7 +38,7 @@ function Counter({ value, locale }: { value: number; locale: string }) {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, [value]);
+  }, [value, reducedMotion]);
 
   return (
     <span ref={ref} className={styles.value}>

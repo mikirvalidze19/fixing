@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowUp } from 'lucide-react';
+import type { ScrollState } from '../../models/scroll-progress';
 import styles from './ScrollProgress.module.css';
 
 const SIZE = 52;
@@ -9,29 +10,33 @@ const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 const BOTTOM_THRESHOLD_PX = 8;
 const SCROLLABLE_THRESHOLD_PX = 4;
 
-export default function ScrollProgress() {
-  const [visible, setVisible] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [atBottom, setAtBottom] = useState(false);
-  const raf = useRef<number | null>(null);
+/* Pure DOM read — scroll position exists before paint, so the initial
+ * state is derived during render instead of synced in an effect. */
+function readScrollState(): ScrollState {
+  const doc = document.documentElement;
+  const scrollable = doc.scrollHeight - window.innerHeight;
+  return {
+    visible: scrollable > SCROLLABLE_THRESHOLD_PX,
+    progress:
+      scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0,
+    atBottom:
+      window.innerHeight + window.scrollY >= doc.scrollHeight - BOTTOM_THRESHOLD_PX,
+  };
+}
 
-  const update = useCallback(() => {
-    const doc = document.documentElement;
-    const scrollable = doc.scrollHeight - window.innerHeight;
-    setVisible(scrollable > SCROLLABLE_THRESHOLD_PX);
-    setProgress(scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0);
-    setAtBottom(window.innerHeight + window.scrollY >= doc.scrollHeight - BOTTOM_THRESHOLD_PX);
-  }, []);
+export default function ScrollProgress() {
+  const [scroll, setScroll] = useState<ScrollState>(readScrollState);
+  const { visible, progress, atBottom } = scroll;
+  const raf = useRef<number | null>(null);
 
   useEffect(() => {
     const onScrollOrResize = () => {
       if (raf.current) return;
       raf.current = window.requestAnimationFrame(() => {
         raf.current = null;
-        update();
+        setScroll(readScrollState());
       });
     };
-    update();
     window.addEventListener('scroll', onScrollOrResize, { passive: true });
     window.addEventListener('resize', onScrollOrResize);
     return () => {
@@ -39,7 +44,7 @@ export default function ScrollProgress() {
       window.removeEventListener('resize', onScrollOrResize);
       if (raf.current) window.cancelAnimationFrame(raf.current);
     };
-  }, [update]);
+  }, []);
 
   const onClick = () => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

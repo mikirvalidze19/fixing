@@ -186,6 +186,7 @@ export default function Contacts() {
               src={embedSrc}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
+              sandbox="allow-scripts"
               allowFullScreen
             />
             <div className={styles.mapCard}>

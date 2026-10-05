@@ -26,3 +26,15 @@ export type Application = {
   image: string;
   products: string[];
 };
+
+/* A product category row (product-categories.json). The `| undefined`
+ * preserves find-first semantics: a product may belong to no category. */
+export type ProductCategory =
+  | {
+      id: number;
+      slug: string;
+      label: string;
+      icon: string;
+      description: string;
+    }
+  | undefined;

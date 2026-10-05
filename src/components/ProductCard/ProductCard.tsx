@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ChevronDown } from 'lucide-react';
 import type { Product } from '../../models/catalog';
 import type { ProductSymbol } from '../../models/product';
+import { formatGel, minPrice, productImageSrc } from '../../utils/product';
 import symbolsData from '../../data/product-symbols.json';
 import styles from './ProductCard.module.css';
 
@@ -14,29 +15,9 @@ const symbolUrls = import.meta.glob(
   { eager: true, query: '?url', import: 'default' },
 ) as Record<string, string>;
 
-const productImages = import.meta.glob(
-  '../../assets/products/*.webp',
-  { eager: true, query: '?url', import: 'default' },
-) as Record<string, string>;
-
-export function productImageSrc(id: string): string {
-  const entry = Object.entries(productImages).find(([path]) =>
-    path.endsWith(`/${id}.webp`),
-  );
-  return entry ? entry[1] : '';
-}
-
 function symbolSrc(file: string): string {
   const entry = Object.entries(symbolUrls).find(([path]) => path.endsWith(`/${file}`));
   return entry ? entry[1] : '';
-}
-
-export function minPrice(product: Product): number {
-  return Math.min(...product.variants.map((v) => v.priceGel));
-}
-
-export function formatGel(value: number): string {
-  return `₾${value.toFixed(2)}`;
 }
 
 /* Long descriptions get the tecfi-style expand chevron. */

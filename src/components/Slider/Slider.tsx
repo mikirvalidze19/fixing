@@ -186,7 +186,9 @@ export default function Slider() {
         }}
         onTouchEnd={(e) => {
           if (touchX.current === null) return;
-          const dx = e.changedTouches[0].clientX - touchX.current;
+          const touch = e.changedTouches[0];
+          if (!touch) return;
+          const dx = touch.clientX - touchX.current;
           if (dx > SWIPE_PX) go(index - 1);
           else if (dx < -SWIPE_PX) go(index + 1);
           touchX.current = null;
