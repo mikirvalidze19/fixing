@@ -14,8 +14,7 @@ import Video from './pages/Video';
 import Services from './pages/Services';
 import Placeholder from './pages/Placeholder';
 import siteData from './data/site.json';
-
-type NavRoute = { label: string; to: string; children?: NavRoute[] };
+import type { NavLink } from './models/navigation';
 
 const TITLE_KEYS: Record<string, string> = {
   Products: 'nav.products',
@@ -30,8 +29,8 @@ function collectRoutes() {
   const push = (label: string, to: string) => {
     if (!routes.some((r) => r.to === to)) routes.push({ label, to });
   };
-  (siteData.header.topBar as NavRoute[]).forEach((l) => push(l.label, l.to));
-  (siteData.header.mainNav as NavRoute[]).forEach((l) => {
+  (siteData.header.topBar as NavLink[]).forEach((l) => push(l.label, l.to));
+  (siteData.header.mainNav as NavLink[]).forEach((l) => {
     push(l.label, l.to);
     l.children?.forEach((c) => push(c.label, c.to));
   });

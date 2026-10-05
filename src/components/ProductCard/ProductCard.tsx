@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ChevronDown } from 'lucide-react';
-import type { Product } from '../../data/catalog';
+import type { Product } from '../../models/catalog';
+import type { ProductSymbol } from '../../models/product';
 import symbolsData from '../../data/product-symbols.json';
 import styles from './ProductCard.module.css';
 
-type Symbol = { icon: string; label: string };
-const symbolMap = symbolsData.symbols as Record<string, Symbol[]>;
+const symbolMap = symbolsData.symbols as Record<string, ProductSymbol[]>;
 
 const symbolUrls = import.meta.glob(
   '../../assets/symbols/*.{png,webp,svg}',

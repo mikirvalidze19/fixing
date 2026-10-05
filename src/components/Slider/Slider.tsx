@@ -3,28 +3,11 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ChevronLeft, ChevronRight, Maximize, Minimize } from 'lucide-react';
 import sliderData from '../../data/slider.json';
+import type { Slide, VideoSlideMediaProps } from '../../models/slider';
 import styles from './Slider.module.css';
 
 const AUTOPLAY_MS = sliderData.autoplayMs ?? 6000;
 const SWIPE_PX = 40;
-
-type SlideVideo = {
-  src: string;
-  poster?: string;
-};
-
-type Slide = {
-  id: string;
-  title: string;
-  text: string;
-  cta: string;
-  to: string;
-  background?: string;
-  foreground?: string;
-  variant?: string;
-  alt?: string;
-  video?: SlideVideo;
-};
 
 const sliderImages = import.meta.glob(
   '../../assets/slider/*.{png,webp,jpg,jpeg}',
@@ -57,15 +40,7 @@ function VideoSlideMedia({
   tabbable,
   onPlayingChange,
   onEnded,
-}: {
-  src: string;
-  poster?: string;
-  active: boolean;
-  label: string;
-  tabbable: boolean;
-  onPlayingChange: (playing: boolean) => void;
-  onEnded: () => void;
-}) {
+}: VideoSlideMediaProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const reducedMotion =

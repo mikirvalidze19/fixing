@@ -1,4 +1,10 @@
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties } from 'react';
+import type {
+  ServiceCardIconProps,
+  ServiceCardLinkOverlayProps,
+  ServiceCardProps,
+  ServiceCardTitleProps,
+} from '../../models/service-card';
 import styles from './ServiceCard.module.css';
 
 /* Service card primitives — plain named exports, no namespace tricks.
@@ -6,14 +12,7 @@ import styles from './ServiceCard.module.css';
  * below, whole card clickable via an overlay anchor (tecfi `s_serv_link`
  * pattern) — the card itself is the button. */
 
-export function ServiceCard({
-  children,
-  name,
-}: {
-  children: ReactNode;
-  /** Unique view-transition identity, e.g. "download". */
-  name: string;
-}) {
+export function ServiceCard({ children, name }: ServiceCardProps) {
   return (
     <article
       className={styles.card}
@@ -24,17 +23,11 @@ export function ServiceCard({
   );
 }
 
-export function ServiceCardTitle({ children }: { children: ReactNode }) {
+export function ServiceCardTitle({ children }: ServiceCardTitleProps) {
   return <h3 className={styles.title}>{children}</h3>;
 }
 
-export function ServiceCardIcon({
-  children,
-  label,
-}: {
-  children: ReactNode;
-  label: string;
-}) {
+export function ServiceCardIcon({ children, label }: ServiceCardIconProps) {
   return (
     <div className={styles.icon} role="img" aria-label={label}>
       {children}
@@ -46,10 +39,7 @@ export function ServiceCardIcon({
 export function ServiceCardLinkOverlay({
   href,
   label,
-}: {
-  href: string;
-  label: string;
-}) {
+}: ServiceCardLinkOverlayProps) {
   return (
     <a
       href={href}

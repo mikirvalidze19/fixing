@@ -8,7 +8,9 @@ import categoryProducts from '../data/category-products.json';
 import companyData from '../data/data.json';
 import symbolsData from '../data/product-symbols.json';
 import extraData from '../data/product-extra.json';
-import { products, type Product } from '../data/catalog';
+import { products } from '../data/catalog';
+import type { Product } from '../models/catalog';
+import type { ProductStandard, ProductSymbol } from '../models/product';
 import ProductCard, {
   formatGel,
   minPrice,
@@ -20,13 +22,11 @@ import styles from './Product.module.css';
 const productMap = categoryProducts as Record<string, string[]>;
 const { company } = companyData;
 
-type Symbol = { icon: string; label: string };
-const symbolMap = (symbolsData as { symbols: Record<string, Symbol[]> }).symbols;
+const symbolMap = (symbolsData as { symbols: Record<string, ProductSymbol[]> }).symbols;
 
-type Standard = { icon: string; label: string; value: string; badge: string };
 const extra = extraData as {
   videos: Record<string, string>;
-  standards: Record<string, Standard[]>;
+  standards: Record<string, ProductStandard[]>;
 };
 
 const symbolUrls = import.meta.glob(

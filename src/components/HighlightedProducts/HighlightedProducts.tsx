@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { products, type Product } from '../../data/catalog';
+import { products } from '../../data/catalog';
+import type { Product } from '../../models/catalog';
 import highlightedData from '../../data/highlighted.json';
 import ProductCard from '../ProductCard/ProductCard';
 import styles from './HighlightedProducts.module.css';

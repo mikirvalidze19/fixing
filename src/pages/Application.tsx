@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { applications, products, type Product } from '../data/catalog';
+import { applications, products } from '../data/catalog';
+import type { Product } from '../models/catalog';
 import ProductCard from '../components/ProductCard/ProductCard';
 import Placeholder from './Placeholder';
 import styles from './Applications.module.css';

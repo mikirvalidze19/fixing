@@ -1,12 +1,11 @@
 import siteData from './site.json';
+import type { NavLink } from '../models/navigation';
 
 /**
  * Single source of truth for AI context.
  * Every UI string / route lives in `site.json`.
  * Import { siteInfo, getWebsiteContext } anywhere AI needs website knowledge.
  */
-
-export type NavLink = { label: string; to: string; children?: NavLink[] };
 
 export const siteInfo = {
   siteName: siteData.meta.siteName as string,

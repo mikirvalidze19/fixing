@@ -1,28 +1,9 @@
 import source from "../../tecfi-georgia-planning/data/products.json";
+import type { Application, Product } from '../models/catalog';
 
-export type Variant = {
-  sku: string;
-  diameterMm: number | string | null;
-  lengthMm: number | string | null;
-  unitsPerBox: number;
-  priceGel: number;
-  note: string | null;
-};
-export type Product = {
-  id: string;
-  series: string;
-  titleKa: string;
-  titleEn: string;
-  variants: Variant[];
-};
+export type { Application, Product, Variant } from '../models/catalog';
+
 export const products = source.products as Product[];
-export type Application = {
-  slug: string;
-  label: string;
-  description: string;
-  image: string;
-  products: string[];
-};
 export const applications = (
   source as unknown as { applications?: Application[] }
 ).applications ?? [];

@@ -5,18 +5,11 @@ import { Check, ChevronDown, Globe, Menu, Search, X } from "lucide-react";
 import logoPng from "../../assets/fixing-systems-logo.webp";
 import siteData from "../../data/site.json";
 import categories from "../../data/product-categories.json";
+import type { NavItem, NavLink as NavLinkType } from "../../models/navigation";
 import styles from "./Header.module.css";
 
-type ChildLink = { label: string; to: string };
-type NavItem = {
-  label: string;
-  to: string;
-  menu?: string;
-  children?: ChildLink[];
-};
-
 const mainNav = siteData.header.mainNav as NavItem[];
-const topBar = siteData.header.topBar as ChildLink[];
+const topBar = siteData.header.topBar as NavLinkType[];
 
 /* English nav labels → locale keys. Unknown labels fall back to themselves. */
 const NAV_KEYS: Record<string, string> = {
