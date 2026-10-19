@@ -1,0 +1,252 @@
+/* Header search — drops down from the fixed header, matching the
+   dark mega-panel styling. Mobile-first; two result columns on desktop. */
+
+.panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  background: var(--maincolorheader);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 40px rgba(0, 0, 0, 0.45);
+  max-height: calc(100vh - var(--headerH));
+  overflow-y: auto;
+  animation: drop 200ms ease;
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.inner {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 16px 1.25rem 20px;
+}
+
+.field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.fieldIcon {
+  position: absolute;
+  left: 16px;
+  color: var(--grigioscuro);
+  pointer-events: none;
+}
+
+.input {
+  width: 100%;
+  padding: 14px 48px 14px 46px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font: inherit;
+  font-size: 16px;
+  outline: none;
+  transition:
+    border-color 200ms,
+    background 200ms,
+    box-shadow 200ms;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.input:focus {
+  border-color: var(--secondarycolor);
+  background: #1b1b1b;
+  box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.15);
+}
+
+.input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.clear {
+  position: absolute;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  cursor: pointer;
+  transition:
+    background 200ms,
+    color 200ms;
+}
+
+.clear:hover {
+  background: var(--secondarycolor);
+  color: #222;
+}
+
+.hint {
+  margin: 14px 2px 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 14px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 14px 2px 0;
+  color: var(--secondarycolor);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.kbd {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.results {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition:
+    background 200ms,
+    border-color 200ms;
+}
+
+.result:hover,
+.result:focus-visible {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 204, 0, 0.35);
+  outline: none;
+}
+
+.thumb {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  padding: 6px;
+  object-fit: contain;
+}
+
+.thumbGhost {
+  padding: 4px;
+  color: var(--maincolor);
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1.1;
+  text-align: center;
+  overflow: hidden;
+}
+
+.resultText {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.series {
+  color: var(--secondarycolor);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.name {
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.category {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.price {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.price small {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 800px) {
+  .inner {
+    padding: 22px 2rem 26px;
+  }
+
+  .results {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+}

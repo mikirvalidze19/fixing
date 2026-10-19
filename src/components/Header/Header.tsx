@@ -6,6 +6,7 @@ import logoPng from "../../assets/fixing-systems-logo.webp";
 import siteData from "../../data/site.json";
 import categories from "../../data/product-categories.json";
 import type { NavItem, NavLink as NavLinkType } from "../../models/navigation";
+import SearchPanel from "../SearchPanel/SearchPanel";
 import styles from "./Header.module.css";
 
 const mainNav = siteData.header.mainNav as NavItem[];
@@ -131,6 +132,7 @@ export default function Header() {
     t(`categories.${slug}.label`, { defaultValue: fallback });
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileCatsOpen, setMobileCatsOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const location = useLocation();
   const { header } = siteData;
   const productsActive = location.pathname.startsWith("/products");
@@ -141,6 +143,7 @@ export default function Header() {
       if (e.key === "Escape") {
         setMobileOpen(false);
         setMegaOpen(false);
+        setSearchOpen(false);
       }
     };
     document.addEventListener("keydown", onKey);
@@ -163,13 +166,41 @@ export default function Header() {
     };
   }, [mobileOpen]);
 
-  /* close mega panel on navigation — derived during render instead of
-     synced in an effect (no cascading render after navigation commits) */
+  /* close search panel on outside tap/click */
+  useEffect(() => {
+    if (!searchOpen) return;
+    const onOutside = (e: MouseEvent | TouchEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setSearchOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onOutside);
+    document.addEventListener("touchstart", onOutside, { passive: true });
+    return () => {
+      document.removeEventListener("mousedown", onOutside);
+      document.removeEventListener("touchstart", onOutside);
+    };
+  }, [searchOpen]);
+
+  /* close mega panel and search on navigation — derived during render instead
+     of synced in an effect (no cascading render after navigation commits) */
   const [prevPathname, setPrevPathname] = useState(location.pathname);
   if (prevPathname !== location.pathname) {
     setPrevPathname(location.pathname);
     setMegaOpen(false);
+    setSearchOpen(false);
   }
+
+  const toggleSearch = () => {
+    setSearchOpen((open) => !open);
+    setMegaOpen(false);
+    setMobileOpen(false);
+  };
+
+  const toggleMega = () => {
+    setMegaOpen((open) => !open);
+    setSearchOpen(false);
+  };
 
   return (
     <header
@@ -218,8 +249,11 @@ export default function Header() {
 
                   <button
                     type="button"
-                    className={styles.searchBtn}
+                    className={`${styles.searchBtn} ${searchOpen ? styles.searchBtnActive : ""}`}
                     aria-label={t("nav.search")}
+                    aria-expanded={searchOpen}
+                    aria-controls={searchOpen ? "site-search-panel" : undefined}
+                    onClick={toggleSearch}
                   >
                     <Search size={20} strokeWidth={1.8} aria-hidden="true" />
                   </button>
@@ -238,9 +272,15 @@ export default function Header() {
                             className={`${styles.megaButton} ${productsActive || megaOpen ? styles.megaButtonActive : ""}`}
                             aria-expanded={megaOpen}
                             aria-haspopup="true"
-                            onMouseEnter={() => setMegaOpen(true)}
-                            onFocus={() => setMegaOpen(true)}
-                            onClick={() => setMegaOpen((v) => !v)}
+                            onMouseEnter={() => {
+                              setMegaOpen(true);
+                              setSearchOpen(false);
+                            }}
+                            onFocus={() => {
+                              setMegaOpen(true);
+                              setSearchOpen(false);
+                            }}
+                            onClick={toggleMega}
                           >
                             {navLabel(item.label)}
                           </button>
@@ -282,6 +322,16 @@ export default function Header() {
             <button
               type="button"
               className={styles.burger}
+              aria-label={t("nav.search")}
+              aria-expanded={searchOpen}
+              aria-controls={searchOpen ? "site-search-panel" : undefined}
+              onClick={toggleSearch}
+            >
+              <Search size={22} strokeWidth={2} aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              className={styles.burger}
               aria-label={mobileOpen ? t("nav.closeMenu") : t("nav.openMenu")}
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen((v) => !v)}
@@ -295,6 +345,8 @@ export default function Header() {
           </div>
         </div>
       </div>
+
+      {searchOpen && <SearchPanel onClose={() => setSearchOpen(false)} />}
 
       {/* PRODUCTS mega dropdown — same 15 categories + tecfi icons */}
       <div

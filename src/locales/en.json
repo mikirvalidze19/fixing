@@ -17,6 +17,16 @@
     "en": "English",
     "ka": "Georgian"
   },
+  "search": {
+    "title": "Search products",
+    "placeholder": "Search by name, series or SKU…",
+    "clear": "Clear search",
+    "hint": "Start typing to search the catalogue — product name, series code or SKU.",
+    "noResults": "No products found for “{{query}}”.",
+    "results_one": "{{count}} result",
+    "results_other": "{{count}} results",
+    "openFirst": "Press Enter to open the first result"
+  },
   "common": {
     "home": "Home",
     "breadcrumb": "Breadcrumb"
