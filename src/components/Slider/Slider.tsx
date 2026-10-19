@@ -28,6 +28,14 @@ function sliderImageSrc(file?: string): string {
   return entry ? entry[1] : '';
 }
 
+/* Variant styling is data-driven: a slide with `variant: "drywall"`
+ * picks up .drywall / .drywallBg / .drywallFg from the CSS module when
+ * those classes exist. Missing classes resolve to '' (no-op). */
+function variantClass(variant: string | undefined, suffix: string): string {
+  if (!variant) return '';
+  return styles[`${variant}${suffix}`] ?? '';
+}
+
 /* Background video for a video slide — full-bleed behind the same
  * title/text/cta overlay image slides use. Autoplays muted (browser
  * requirement) when its slide is active, pauses + rewinds when it
@@ -198,7 +206,7 @@ export default function Slider() {
         {slides.map((slide, i) => (
           <article
             key={slide.id}
-            className={`${styles.slide} ${styles[`theme${i % 5}`]} ${slide.background ? styles.hasImage : ''} ${slide.video ? styles.videoSlide : ''} ${slide.variant === 'chemical' ? styles.chemical : ''} ${slide.variant === 'heavy' ? styles.heavy : ''} ${slide.variant === 'fasteners' ? styles.fasteners : ''}`}
+            className={`${styles.slide} ${styles[`theme${i % 5}`]} ${slide.background || slide.foreground ? styles.hasImage : ''} ${slide.video ? styles.videoSlide : ''} ${variantClass(slide.variant, '')}`}
             aria-roledescription="slide"
             aria-label={t('slider.live', { current: i + 1, total: count, title: slideTitle(slide) })}
             aria-hidden={i !== index}
@@ -216,7 +224,7 @@ export default function Slider() {
               />
             ) : slide.background ? (
               <img
-                className={`${styles.bg} ${slide.variant === 'chemical' ? styles.chemBg : ''} ${slide.variant === 'heavy' ? styles.heavyBg : ''} ${slide.variant === 'fasteners' ? styles.fastenersBg : ''}`}
+                className={`${styles.bg} ${variantClass(slide.variant, 'Bg')}`}
                 src={sliderImageSrc(slide.background)}
                 alt=""
                 aria-hidden="true"
@@ -233,7 +241,7 @@ export default function Slider() {
             </div>
             {slide.foreground ? (
               <img
-                className={`${styles.foreground} ${slide.variant === 'fasteners' ? styles.fastenersFg : ''}`}
+                className={`${styles.foreground} ${variantClass(slide.variant, 'Fg')}`}
                 src={sliderImageSrc(slide.foreground)}
                 alt={slide.alt ?? slideTitle(slide)}
                 loading={i === 0 ? 'eager' : 'lazy'}

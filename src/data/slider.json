@@ -56,6 +56,17 @@
       "background": "General fasteners.webp",
       "variant": "fasteners",
       "alt": "General fasteners — zinc-plated bolts, nuts, threaded rods and washers"
+    },
+    {
+      "id": "drywall-hollow",
+      "eyebrow": "ZZE · handyplug",
+      "title": "Drywall and hollow fixing systems",
+      "text": "Handyplug nylon anchors and cavity fixings for plasterboard, insulation panels and hollow walls — fast, secure fixing without specialist tools.",
+      "cta": "Find out more",
+      "to": "/products/drywall-hollow",
+      "background": "Drywall-hollow-systems.jpeg",
+      "variant": "drywall",
+      "alt": "ZZE handyplug plastic anchor for fixing thermo-acoustic insulation panels — drywall and hollow fixing systems"
     }
   ]
 }
