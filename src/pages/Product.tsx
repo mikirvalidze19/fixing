@@ -424,14 +424,17 @@ function ProductStandards({
                 aria-hidden="true"
               />
               <div>
-                <p className={styles.stdLabel}>{item.label}</p>
-                <p className={styles.stdValue}>{item.value}</p>
+                {item.label ? (
+                  <p className={styles.stdLabel}>{item.label}</p>
+                ) : null}
+                {item.value ? (
+                  <p className={styles.stdValue}>{item.value}</p>
+                ) : null}
                 {item.badge && (
                   <img
                     className={styles.stdBadge}
                     src={standardSrc(item.badge)}
-                    alt={`${item.label} ${item.value}`}
-                    loading="lazy"
+                    alt={[item.label, item.value].filter(Boolean).join(' ')}
                   />
                 )}
               </div>

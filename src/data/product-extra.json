@@ -1,31 +1,261 @@
 {
   "standards": {
+    "kb01": [],
+    "hx": [],
     "hxe01": [
       {
-        "badge": "Logo_ETACE.webp",
         "icon": "eta-ce-tab1.webp",
         "label": "European Technical Assessment",
-        "value": "EAD 330747-00-0601"
+        "value": "EAD 330747-00-0601",
+        "badge": "Logo_ETACE.webp"
       },
       {
-        "badge": "Logo_SISMICO_C2-C1.webp",
         "icon": "sismica-tab.webp",
-        "label": "Seismic assessment",
-        "value": "C2 - C1"
+        "label": "",
+        "value": "Valutazione sismica C2 - C1",
+        "badge": "Logo_SISMICO_C2-C1.webp"
       },
       {
-        "badge": "Logo_FUOCO_R120_IT.webp",
         "icon": "fuoco-tab.webp",
-        "label": "Fire resistance",
-        "value": "R120"
+        "label": "",
+        "value": "R120",
+        "badge": "Logo_FUOCO_R120_IT.webp"
       },
       {
-        "badge": "Logo_ETACE.webp",
         "icon": "eta-ce-tab.webp",
         "label": "European Technical Assessment",
-        "value": "EAD 330232-01-0601"
+        "value": "EAD 330232-01-0601",
+        "badge": "Logo_ETACE.webp"
       }
-    ]
+    ],
+    "hxe05": [
+      {
+        "icon": "eta-ce-tab1.webp",
+        "label": "European Technical Assessment",
+        "value": "EAD 330747-00-0601",
+        "badge": "Logo_ETACE.webp"
+      },
+      {
+        "icon": "fuoco-tab.webp",
+        "label": "",
+        "value": "R120",
+        "badge": "Logo_FUOCO_R120_IT.webp"
+      },
+      {
+        "icon": "sismica-tab.webp",
+        "label": "",
+        "value": "Valutazione sismica C1",
+        "badge": "Logo_SISMICO_C1.webp"
+      },
+      {
+        "icon": "eta-ce-tab.webp",
+        "label": "European Technical Assessment",
+        "value": "EAD 330232-01-0601",
+        "badge": "Logo_ETACE.webp"
+      }
+    ],
+    "hxe06": [
+      {
+        "icon": "eta-ce-tab1.webp",
+        "label": "European Technical Assessment",
+        "value": "EAD 330747-00-0601",
+        "badge": "Logo_ETACE.webp"
+      },
+      {
+        "icon": "sismica-tab.webp",
+        "label": "",
+        "value": "Valutazione sismica C1",
+        "badge": "Logo_SISMICO_C1.webp"
+      },
+      {
+        "icon": "fuoco-tab.webp",
+        "label": "",
+        "value": "R120",
+        "badge": "Logo_FUOCO_R120_IT.webp"
+      },
+      {
+        "icon": "eta-ce-tab.webp",
+        "label": "European Technical Assessment",
+        "value": "EAD 330232-01-0601",
+        "badge": "Logo_ETACE.webp"
+      }
+    ],
+    "hxe46-45": [
+      {
+        "icon": "eta-ce-tab1.webp",
+        "label": "European Technical Assessment",
+        "value": "EAD 330747-00-0601",
+        "badge": "Logo_ETACE.webp"
+      },
+      {
+        "icon": "sismica-tab.webp",
+        "label": "",
+        "value": "Valutazione sismica C1",
+        "badge": "Logo_SISMICO_C1.webp"
+      },
+      {
+        "icon": "fuoco-tab.webp",
+        "label": "",
+        "value": "R120",
+        "badge": "Logo_FUOCO_R120_IT.webp"
+      },
+      {
+        "icon": "eta-ce-tab.webp",
+        "label": "European Technical Assessment",
+        "value": "EAD 330232-01-0601",
+        "badge": "Logo_ETACE.webp"
+      }
+    ],
+    "dxe00": [
+      {
+        "icon": "fuoco-tab.webp",
+        "label": "Fire reaction",
+        "value": "A1",
+        "badge": "Logo_FUOCO_A1_IT.webp"
+      },
+      {
+        "icon": "eta-ce-tab.webp",
+        "label": "European Technical Assessment",
+        "value": "EAD 330232-01-0601",
+        "badge": "Logo_ETACE.webp"
+      }
+    ],
+    "aje": [
+      {
+        "icon": "sismica-tab.webp",
+        "label": "",
+        "value": "Valutazione sismica C2 - C1",
+        "badge": "Logo_SISMICO_C2-C1.webp"
+      },
+      {
+        "icon": "fuoco-tab.webp",
+        "label": "",
+        "value": "R120",
+        "badge": "Logo_FUOCO_R120_IT.webp"
+      },
+      {
+        "icon": "eta-ce-tab.webp",
+        "label": "European Technical Assessment",
+        "value": "EAD 330232-01-0601",
+        "badge": "Logo_ETACE.webp"
+      }
+    ],
+    "hl01": [],
+    "fv01": [
+      {
+        "icon": "fuoco-tab.webp",
+        "label": "Fire reaction",
+        "value": "A1",
+        "badge": "Logo_FUOCO_A1_IT.webp"
+      },
+      {
+        "icon": "eta-ce-tab.webp",
+        "label": "European Technical Assessment*",
+        "value": "",
+        "badge": "Logo_ETACE.webp"
+      }
+    ],
+    "pm01": [],
+    "fx01": [],
+    "gs01": [],
+    "gs02": [],
+    "gsc": [],
+    "ws01": [],
+    "wv01": [],
+    "bf": [],
+    "jo": [],
+    "ar": [],
+    "rl": [],
+    "plc": [],
+    "kd": [
+      {
+        "icon": "fuoco-tab.webp",
+        "label": "Fire reaction",
+        "value": "A1",
+        "badge": "Logo_FUOCO_A1_IT.webp"
+      },
+      {
+        "icon": "eta-ce-tab.webp",
+        "label": "European Technical Assessment",
+        "value": "EAD 330047-01-0602",
+        "badge": "Logo_ETACE.webp"
+      }
+    ],
+    "dv": [
+      {
+        "icon": "eta-ce-tab.webp",
+        "label": "European Technical Assessment*",
+        "value": "*EAD 330047-01-0602",
+        "badge": "Logo_ETACE.webp"
+      },
+      {
+        "icon": "fuoco-tab.webp",
+        "label": "Fire reaction",
+        "value": "A1",
+        "badge": "Logo_FUOCO_A1_IT.webp"
+      }
+    ],
+    "sdc": [
+      {
+        "icon": "fuoco-tab.webp",
+        "label": "Fire reaction",
+        "value": "A1",
+        "badge": "Logo_FUOCO_A1_IT.webp"
+      },
+      {
+        "icon": "eta-ce-tab.webp",
+        "label": "European Technical Assessment",
+        "value": "EAD 330047-01-0602",
+        "badge": "Logo_ETACE.webp"
+      }
+    ],
+    "zze": [
+      {
+        "icon": "eta-ce-tab.webp",
+        "label": "European Technical Assessment",
+        "value": "EAD330196-01-0604",
+        "badge": "Logo_ETACE.webp"
+      }
+    ],
+    "chemical-anchors": [
+      {
+        "icon": "fuoco-tab.webp",
+        "label": "",
+        "value": "Barre di ripresa",
+        "badge": "Logo_FUOCO_rebars.webp"
+      },
+      {
+        "icon": "sismica-tab.webp",
+        "label": "",
+        "value": "Valutazione sismica REBAR",
+        "badge": "Logo_SISMICO_REBARs.webp"
+      },
+      {
+        "icon": "eta-ce-tab.webp",
+        "label": "European Technical Assessment",
+        "value": "EAD330087-01-0601",
+        "badge": "Logo_ETACE.webp"
+      },
+      {
+        "icon": "fuoco-tab.webp",
+        "label": "",
+        "value": "Testato al fuoco",
+        "badge": "Logo_FUOCO_testato_IT.webp"
+      },
+      {
+        "icon": "sismica-tab.webp",
+        "label": "",
+        "value": "Valutazione sismica EOTA TR049 C2-C1",
+        "badge": "Logo_SISMICO_C2-C1_tr049.webp"
+      },
+      {
+        "icon": "eta-ce-tab.webp",
+        "label": "European Technical Assessment",
+        "value": "EAD 330499-01-0601 V01",
+        "badge": "Logo_ETACE.webp"
+      }
+    ],
+    "chemical-guns": []
   },
   "videos": {
     "kb01": "LgrV0heTM7o",
