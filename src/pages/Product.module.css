@@ -210,6 +210,149 @@
   max-width: 110px;
 }
 
+/* Technical features (tecfi technical_features_wrapper, always visible) */
+.featuresSection {
+  margin-top: 8px;
+}
+
+.features {
+  margin: 16px 0 0;
+  padding: 16px 20px;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--grigiomedio);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.feature {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--maincolor);
+}
+
+.featureLabel {
+  font-weight: 700;
+  color: var(--grigioscuro);
+}
+
+.featureValue {
+  font-weight: 800;
+}
+
+.featureDot {
+  display: inline-block;
+  margin-right: 8px;
+  font-weight: 900;
+  color: var(--darksecondarycolor);
+}
+
+.featureText {
+  font-weight: 400;
+  color: var(--maincolor);
+}
+
+/* Technical documentation download links (tecfi docs_list) */
+.docsSection {
+  margin-top: 8px;
+}
+
+.docs {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 10px;
+}
+
+.docLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--grigiomedio);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--maincolor);
+  text-decoration: none;
+  transition:
+    border-color 200ms,
+    box-shadow 200ms;
+}
+
+.docLink:hover {
+  border-color: var(--darksecondarycolor);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.docLink:focus-visible {
+  outline: 2px solid var(--darksecondarycolor);
+  outline-offset: 2px;
+}
+
+.docIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--grigiochiaro);
+  color: var(--darksecondarycolor);
+}
+
+.docText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.docName {
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.docMeta {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--grigioscuro);
+}
+
+.docArrow {
+  flex: none;
+  margin-left: auto;
+  color: var(--grigioscuro);
+  transition: color 200ms;
+}
+
+.docLink:hover .docArrow {
+  color: var(--darksecondarycolor);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .docLink,
+  .docArrow {
+    transition: none;
+  }
+}
+
 /* YouTube embed (tecfi video_yt_container) */
 .videoSection {
   margin-top: 24px;

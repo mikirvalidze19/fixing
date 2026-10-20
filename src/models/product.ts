@@ -16,6 +16,16 @@ export type ProductStandard = {
   badge: string;
 };
 
+export type ProductDocument = {
+  label: string;
+  url: string;
+};
+
+export type ProductFeature = {
+  label: string | null;
+  value: string;
+};
+
 /* View-model assembled by useProductData for the Product page. */
 export type ProductData = {
   product: Product;
@@ -26,6 +36,8 @@ export type ProductData = {
   specs: ProductSymbol[];
   certs: ProductSymbol[];
   standards: ProductStandard[];
+  documents: ProductDocument[];
+  features: ProductFeature[];
   videoId: string | undefined;
   hasPrice: boolean;
   diameters: number[];

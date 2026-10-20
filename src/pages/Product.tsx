@@ -2,15 +2,23 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
-import { ChevronDown, Mail, Phone } from 'lucide-react';
+import { ChevronDown, ExternalLink, FileText, Mail, Phone } from 'lucide-react';
 import categories from '../data/product-categories.json';
 import categoryProducts from '../data/category-products.json';
 import companyData from '../data/data.json';
 import symbolsData from '../data/product-symbols.json';
 import extraData from '../data/product-extra.json';
+import documentsData from '../data/product-docs.json';
+import featuresData from '../data/product-features.json';
 import { products } from '../data/catalog';
 import type { Product, ProductCategory } from '../models/catalog';
-import type { ProductData, ProductStandard, ProductSymbol } from '../models/product';
+import type {
+  ProductData,
+  ProductDocument,
+  ProductFeature,
+  ProductStandard,
+  ProductSymbol,
+} from '../models/product';
 import ProductCard from '../components/ProductCard/ProductCard';
 import { formatGel, minPrice, productImageSrc } from '../utils/product';
 import Placeholder from './Placeholder';
@@ -25,6 +33,9 @@ const extra = extraData as {
   videos: Record<string, string>;
   standards: Record<string, ProductStandard[]>;
 };
+
+const documentMap = documentsData as Record<string, ProductDocument[]>;
+const featureMap = featuresData as Record<string, ProductFeature[]>;
 
 const symbolUrls = import.meta.glob(
   '../assets/symbols/*.{png,webp,svg}',
@@ -168,6 +179,8 @@ function useProductData(id: string | undefined): ProductData | null {
     specs: symbols.filter((s) => !isCert(s.icon)),
     certs: symbols.filter((s) => isCert(s.icon)),
     standards: extra.standards[product.id] ?? [],
+    documents: documentMap[product.id] ?? [],
+    features: featureMap[product.id] ?? [],
     videoId: extra.videos[product.id],
     hasPrice: product.variants.some(
       (v) => typeof v.priceGel === 'number' && v.priceGel > 0,
@@ -220,10 +233,12 @@ export default function Product() {
         <ProductStandards standards={data.standards} certs={data.certs} />
       </div>
 
+      <ProductFeatures features={data.features} />
       <h2 className={styles.sectionTitle}>{t('productPage.availableVariants')}</h2>
       <VariantTable product={data.product} />
       {/* key remount resets the open card on navigation — no reset effect */}
       <VariantCards key={data.product.id} product={data.product} />
+      <ProductDocuments documents={data.documents} />
       <ProductVideo videoId={data.videoId} series={data.product.series} />
       <RelatedProducts related={data.related} />
     </div>
@@ -541,6 +556,87 @@ function VariantCards({ product }: { product: Product }) {
         );
       })}
     </ul>
+  );
+}
+
+function ProductFeatures({ features }: { features: ProductFeature[] }) {
+  const { t } = useTranslation();
+  if (features.length === 0) return null;
+  return (
+    <section
+      className={styles.featuresSection}
+      aria-labelledby="product-features-heading"
+    >
+      <h2 id="product-features-heading" className={styles.sectionTitle}>
+        {t('productPage.technicalFeatures')}
+      </h2>
+      <ul className={styles.features}>
+        {features.map((feature) => (
+          <li
+            key={`${feature.label ?? ''}-${feature.value}`}
+            className={styles.feature}
+          >
+            {feature.label ? (
+              <>
+                <span className={styles.featureLabel}>{feature.label}:</span>{' '}
+                <strong className={styles.featureValue}>{feature.value}</strong>
+              </>
+            ) : (
+              <>
+                <span className={styles.featureDot} aria-hidden="true">
+                  •
+                </span>
+                <span className={styles.featureText}>{feature.value}</span>
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+function ProductDocuments({ documents }: { documents: ProductDocument[] }) {
+  const { t } = useTranslation();
+  if (documents.length === 0) return null;
+  return (
+    <section className={styles.docsSection} aria-labelledby="product-docs-heading">
+      <h2 id="product-docs-heading" className={styles.sectionTitle}>
+        {t('productPage.technicalDocumentation')}
+      </h2>
+      <ul className={styles.docs}>
+        {documents.map((doc) => {
+          const [name, size] = doc.label.split('|').map((part) => part.trim());
+          return (
+            <li key={doc.url}>
+              <a
+                className={styles.docLink}
+                href={doc.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className={styles.docIcon} aria-hidden="true">
+                  <FileText size={18} strokeWidth={2.2} />
+                </span>
+                <span className={styles.docText}>
+                  <span className={styles.docName}>{name}</span>
+                  {size ? <span className={styles.docMeta}>{size}</span> : null}
+                </span>
+                <span className={styles.srOnly}>
+                  {t('productPage.opensNewTab')}
+                </span>
+                <ExternalLink
+                  className={styles.docArrow}
+                  size={16}
+                  strokeWidth={2.2}
+                  aria-hidden="true"
+                />
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 }
 
