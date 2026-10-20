@@ -1,71 +1,241 @@
 {
-  "_note": "Map product id -> Tecfi gamma_symbols_wrapper icons. Source: tecfi.it eng category gammasData icone + fire/sisma/eta/ce flags. Files in src/assets/symbols/.",
+  "_note": "Map product id -> Tecfi full_icons_gamma_details_wrapper icons, labels and values. Source: tecfi.it eng product pages. value null means Tecfi shows no value. Files in src/assets/symbols/.",
   "symbols": {
-    "aje": [{ "icon": "ChiaveEsagonale.webp", "label": "Hex drive" }],
-    "ar": [{ "icon": "ChiaveEsagonale.webp", "label": "Hex drive" }],
+    "aje": [
+      {
+        "icon": "ChiaveEsagonale.webp",
+        "label": "Across flat",
+        "value": "Chiave dado SW"
+      }
+    ],
+    "ar": [
+      {
+        "icon": "ChiaveEsagonale.webp",
+        "label": "Across flat",
+        "value": "Chiave SW"
+      }
+    ],
     "bf": [],
     "chemical-anchors": [
-      { "icon": "Logo_simbolo_FUOCO.png", "label": "Fire resistance" },
-      { "icon": "Logo_simbolo_SISMICO.png", "label": "Seismic" },
-      { "icon": "Logo_simbolo_ETA.png", "label": "ETA certified" }
+      {
+        "icon": "Logo_simbolo_FUOCO.png",
+        "label": "Fire resistance"
+      },
+      {
+        "icon": "Logo_simbolo_SISMICO.png",
+        "label": "Seismic"
+      },
+      {
+        "icon": "Logo_simbolo_ETA.png",
+        "label": "ETA certified"
+      }
     ],
     "chemical-guns": [],
     "dv": [
-      { "icon": "Logo_simbolo_FUOCO.png", "label": "Fire resistance" },
-      { "icon": "Logo_simbolo_ETA.png", "label": "ETA certified" }
+      {
+        "icon": "Logo_simbolo_FUOCO.png",
+        "label": "Fire resistance"
+      },
+      {
+        "icon": "Logo_simbolo_ETA.png",
+        "label": "ETA certified"
+      }
     ],
-    "dxe00": [{ "icon": "Logo_simbolo_ETA.png", "label": "ETA certified" }],
-    "fv01": [{ "icon": "Logo_simbolo_ETA.png", "label": "ETA certified" }],
+    "dxe00": [
+      {
+        "icon": "Logo_simbolo_ETA.png",
+        "label": "ETA certified"
+      }
+    ],
+    "fv01": [
+      {
+        "icon": "Logo_simbolo_ETA.png",
+        "label": "ETA certified"
+      }
+    ],
     "fx01": [],
     "gs01": [
-      { "icon": "Impronta_6lobi.webp", "label": "6-lobe recess" },
-      { "icon": "Preforo_necessario.webp", "label": "Pre-drill required" }
+      {
+        "icon": "Impronta_6lobi.webp",
+        "label": "6 lobe recess",
+        "value": null
+      },
+      {
+        "icon": "Preforo_necessario.webp",
+        "label": "Pre-drilling required",
+        "value": null
+      }
     ],
     "gs02": [
-      { "icon": "Impronta_6lobi.webp", "label": "6-lobe recess" },
-      { "icon": "Preforo_necessario.webp", "label": "Pre-drill required" }
+      {
+        "icon": "Impronta_6lobi.webp",
+        "label": "6 lobe recess",
+        "value": null
+      },
+      {
+        "icon": "Preforo_necessario.webp",
+        "label": "Pre-drilling required",
+        "value": null
+      }
     ],
     "gsc": [],
     "hl01": [],
-    "hx": [{ "icon": "ChiaveEsagonale.webp", "label": "Hex drive" }],
-    "hxe01": [{ "icon": "ChiaveEsagonale.webp", "label": "Hex drive" }],
-    "hxe05": [{ "icon": "Impronta_6lobi.webp", "label": "6-lobe recess" }],
-    "hxe06": [{ "icon": "Impronta_6lobi.webp", "label": "6-lobe recess" }],
-    "hxe46-45": [{ "icon": "Impronta_6lobi.webp", "label": "6-lobe recess" }],
+    "hx": [
+      {
+        "icon": "ChiaveEsagonale.webp",
+        "label": "Across flat",
+        "value": "Chiave SW"
+      }
+    ],
+    "hxe01": [
+      {
+        "icon": "ChiaveEsagonale.webp",
+        "label": "Across flat",
+        "value": "Chiave SW"
+      }
+    ],
+    "hxe05": [
+      {
+        "icon": "Impronta_6lobi.webp",
+        "label": "6 lobe recess",
+        "value": null
+      }
+    ],
+    "hxe06": [
+      {
+        "icon": "Impronta_6lobi.webp",
+        "label": "6 lobe recess",
+        "value": null
+      }
+    ],
+    "hxe46-45": [
+      {
+        "icon": "Impronta_6lobi.webp",
+        "label": "6 lobe recess",
+        "value": null
+      }
+    ],
     "jo": [],
     "kb01": [
-      { "icon": "AcciaioInoxA2.webp", "label": "Stainless steel A2" },
-      { "icon": "ChiaveEsagonale.webp", "label": "Hex drive" },
-      { "icon": "ForaturaFerro.webp", "label": "Steel drilling" },
-      { "icon": "Preforo_NOnecessario.webp", "label": "No pre-drill needed" },
-      { "icon": "Velocita-Foratura_AutoPerf.webp", "label": "Self-drilling" }
+      {
+        "icon": "ChiaveEsagonale.webp",
+        "label": "Across flat",
+        "value": "8"
+      },
+      {
+        "icon": "Preforo_NOnecessario.webp",
+        "label": "Pre-drilling not required",
+        "value": null
+      },
+      {
+        "icon": "ForaturaFerro.webp",
+        "label": "Drilling capacity",
+        "value": "Max 1,5+1,5 mm in alluminio"
+      },
+      {
+        "icon": "Velocita-Foratura_AutoPerf.webp",
+        "label": "Drilling speed",
+        "value": "1800-2500"
+      },
+      {
+        "icon": "AcciaioInoxA2.webp",
+        "label": "A2 Stainless Steel",
+        "value": null
+      }
     ],
     "kd": [
-      { "icon": "ChiaveEsagonale.webp", "label": "Hex drive" },
-      { "icon": "ForaturaFerro.webp", "label": "Steel drilling" },
-      { "icon": "Preforo_NOnecessario.webp", "label": "No pre-drill needed" },
-      { "icon": "Velocita-Foratura_AutoPerf.webp", "label": "Self-drilling" }
+      {
+        "icon": "ChiaveEsagonale.webp",
+        "label": "Across flat",
+        "value": "10"
+      },
+      {
+        "icon": "Preforo_NOnecessario.webp",
+        "label": "Pre-drilling not required",
+        "value": null
+      },
+      {
+        "icon": "ForaturaFerro.webp",
+        "label": "Drilling capacity",
+        "value": "Max 8 mm"
+      },
+      {
+        "icon": "Velocita-Foratura_AutoPerf.webp",
+        "label": "Drilling speed",
+        "value": "1000-1800"
+      }
     ],
     "plc": [
-      { "icon": "ChiaveEsagonale.webp", "label": "Hex drive" },
-      { "icon": "ForaturaFerro.webp", "label": "Steel drilling" },
-      { "icon": "Preforo_NOnecessario.webp", "label": "No pre-drill needed" },
-      { "icon": "Velocita-Foratura_AutoPerf.webp", "label": "Self-drilling" }
+      {
+        "icon": "ChiaveEsagonale.webp",
+        "label": "Across flat",
+        "value": "8"
+      },
+      {
+        "icon": "Preforo_NOnecessario.webp",
+        "label": "Pre-drilling not required",
+        "value": null
+      },
+      {
+        "icon": "ForaturaFerro.webp",
+        "label": "Drilling capacity",
+        "value": "Max 2 mm"
+      },
+      {
+        "icon": "Velocita-Foratura_AutoPerf.webp",
+        "label": "Drilling speed",
+        "value": "1800-2500"
+      }
     ],
     "pm01": [],
-    "rl": [{ "icon": "ChiaveEsagonale.webp", "label": "Hex drive" }],
+    "rl": [
+      {
+        "icon": "ChiaveEsagonale.webp",
+        "label": "Across flat",
+        "value": "Chiave SW"
+      }
+    ],
     "sdc": [
-      { "icon": "ChiaveEsagonale.webp", "label": "Hex drive" },
-      { "icon": "ForaturaFerro.webp", "label": "Steel drilling" },
-      { "icon": "Preforo_NOnecessario.webp", "label": "No pre-drill needed" },
-      { "icon": "Velocita-Foratura_AutoPerf.webp", "label": "Self-drilling" }
+      {
+        "icon": "ChiaveEsagonale.webp",
+        "label": "Across flat",
+        "value": "10"
+      },
+      {
+        "icon": "Preforo_NOnecessario.webp",
+        "label": "Pre-drilling not required",
+        "value": null
+      },
+      {
+        "icon": "ForaturaFerro.webp",
+        "label": "Drilling capacity",
+        "value": "Max 6 mm"
+      },
+      {
+        "icon": "Velocita-Foratura_AutoPerf.webp",
+        "label": "Drilling speed",
+        "value": "1000-1800"
+      }
     ],
     "ws01": [
-      { "icon": "Preforo_NOnecessario.webp", "label": "No pre-drill needed" }
+      {
+        "icon": "Preforo_NOnecessario.webp",
+        "label": "Pre-drilling not required",
+        "value": null
+      }
     ],
     "wv01": [
-      { "icon": "Preforo_NOnecessario.webp", "label": "No pre-drill needed" }
+      {
+        "icon": "Preforo_NOnecessario.webp",
+        "label": "Pre-drilling not required",
+        "value": null
+      }
     ],
-    "zze": [{ "icon": "Logo_simbolo_ETA.png", "label": "ETA certified" }]
+    "zze": [
+      {
+        "icon": "Logo_simbolo_ETA.png",
+        "label": "ETA certified"
+      }
+    ]
   }
 }

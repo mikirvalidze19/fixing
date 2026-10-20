@@ -354,8 +354,12 @@ function ProductInfo({ data }: { data: ProductData }) {
         <ul className={styles.specs} aria-label={t('productPage.technicalData')}>
           {specs.map((spec) => (
             <li key={spec.icon} className={styles.spec}>
-              <img src={symbolSrc(spec.icon)} alt="" aria-hidden="true" />
-              <span>{spec.label}</span>
+              <img
+                src={symbolSrc(spec.icon)}
+                alt={spec.label}
+                title={spec.label}
+              />
+              {spec.value ? <span>{spec.value}</span> : null}
             </li>
           ))}
         </ul>

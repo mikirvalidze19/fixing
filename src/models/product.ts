@@ -7,6 +7,7 @@ import type { Product, ProductCategory } from './catalog';
 export type ProductSymbol = {
   icon: string;
   label: string;
+  value?: string | null;
 };
 
 export type ProductStandard = {

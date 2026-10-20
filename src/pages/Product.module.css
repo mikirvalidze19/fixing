@@ -189,8 +189,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  min-width: 64px;
+  gap: 10px;
+  min-width: 50px;
   text-align: center;
 }
 
@@ -203,10 +203,10 @@
 }
 
 .spec span {
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 400;
   color: var(--maincolor);
-  line-height: 1.3;
+  line-height: 1.4;
   max-width: 110px;
 }
 
