@@ -1,0 +1,33 @@
+{
+  "id": "ae01",
+  "series": "AE01",
+  "titleEn": "AE",
+  "titleKa": "AE",
+  "category": "roofing-fixing-systems",
+  "youtube": "https://youtu.be/LgrV0heTM7o?si=Cez7YBpQM8s2w4a7",
+  "image": "/content/images/products/ae15.webp",
+  "descriptionEn": "Central hole Ø8mm available on request* with delivery time to be agreed upon.\n\n*replace AE with PY in the item code",
+  "descriptionKa": "Central hole Ø8mm available on request* with delivery time to be agreed upon.\n\n*replace AE with PY in the item code",
+  "certifications": [
+    "logo-simbolo-eta",
+    "logo-simbolo-fuoco",
+    "logo-simbolo-sismico"
+  ],
+  "standards": [
+    {
+      "value": "Fire reaction A1"
+    },
+    {
+      "value": "*EAD 330047-01-0602"
+    }
+  ],
+  "variants": [
+    {
+      "sku": "AE 05 00 015",
+      "diameterMm": "10",
+      "lengthMm": "40",
+      "unitsPerBox": 11,
+      "priceGel": 10
+    }
+  ]
+}
