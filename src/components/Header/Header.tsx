@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Check, ChevronDown, Globe, Menu, Search, X } from "lucide-react";
 import logoPng from "../../assets/fixing-systems-logo.webp";
 import siteData from "../../data/site.json";
-import categories from "../../data/product-categories.json";
+import { categories } from "../../data/catalog";
 import type { NavItem, NavLink as NavLinkType } from "../../models/navigation";
 import SearchPanel from "../SearchPanel/SearchPanel";
 import styles from "./Header.module.css";

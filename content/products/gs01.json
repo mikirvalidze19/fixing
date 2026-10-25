@@ -1,0 +1,75 @@
+{
+  "id": "gs01",
+  "series": "GS01",
+  "titleEn": "Hardened zinc-plated Hi-Lo concrete screw, countersunk head",
+  "titleKa": "ბეტონის Hi-Lo ხრახნი ჩაღრმავებული თავით, ნაწრთობი ლითონის მოთუთიებული",
+  "category": "heavy-duty-metallic",
+  "youtube": null,
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 13,
+  "certifications": [],
+  "specs": [
+    {
+      "icon": "impronta-6lobi",
+      "label": "6 lobe recess",
+      "value": null
+    },
+    {
+      "icon": "preforo-necessario",
+      "label": "Pre-drilling required",
+      "value": null
+    }
+  ],
+  "standards": [],
+  "documents": [
+    {
+      "label": "Technical data sheet IT-EN | (760 KB)",
+      "url": "https://storage.onpage.it/d13f7820c5c8ebcb4c6cab3f15fbef496319b66f/GS01-GS02%20-%20Technical%20Data%20Sheet_v.2.01_IT-EN.pdf"
+    }
+  ],
+  "features": [],
+  "variants": [
+    {
+      "sku": "GS 01 75 080",
+      "diameterMm": "6 (7.5)",
+      "lengthMm": 90,
+      "unitsPerBox": 100,
+      "priceGel": 0.47,
+      "note": null
+    },
+    {
+      "sku": "GS 01 75 090",
+      "diameterMm": "6 (7.5)",
+      "lengthMm": 90,
+      "unitsPerBox": 100,
+      "priceGel": 0.53,
+      "note": null
+    },
+    {
+      "sku": "GS 01 75 100",
+      "diameterMm": "6 (7.5)",
+      "lengthMm": 100,
+      "unitsPerBox": 100,
+      "priceGel": 0.57,
+      "note": null
+    },
+    {
+      "sku": "GS 01 75 110",
+      "diameterMm": "6 (7.5)",
+      "lengthMm": 110,
+      "unitsPerBox": 100,
+      "priceGel": 0.64,
+      "note": null
+    },
+    {
+      "sku": "GS 01 75 120",
+      "diameterMm": "6 (7.5)",
+      "lengthMm": 120,
+      "unitsPerBox": 100,
+      "priceGel": 0.69,
+      "note": null
+    }
+  ]
+}

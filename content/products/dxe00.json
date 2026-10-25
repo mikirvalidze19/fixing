@@ -1,0 +1,77 @@
+{
+  "id": "dxe00",
+  "series": "DXE00",
+  "titleEn": "Zinc-plated drop-in anchor",
+  "titleKa": "გამჭედი ანკერ დუბელი მოთუთიებული",
+  "category": "heavy-duty-metallic",
+  "youtube": null,
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 7,
+  "certifications": [
+    "logo-simbolo-eta"
+  ],
+  "specs": [],
+  "standards": [
+    {
+      "standard": "fire-reaction-logo-fuoco-a1-it",
+      "label": "Fire reaction",
+      "value": "A1"
+    },
+    {
+      "standard": "european-technical-assessment-eta-ce-tab-webp-logo-etace",
+      "label": "European Technical Assessment",
+      "value": "EAD 330232-01-0601"
+    }
+  ],
+  "documents": [
+    {
+      "label": "DoP - Declaration of Performance EN | (2 MB)",
+      "url": "https://storage.onpage.it/3b2ce852528c498298fbe1f2d18a407115a9e3c4/DXE_Declaration%20of%20Performance%20-%20v.2.01_EN.pdf"
+    },
+    {
+      "label": "ETA Certification - EN | (2 MB)",
+      "url": "https://storage.onpage.it/94ceb1d2839e385d4300751c36428945c76652b3/DXE_ETA100453en.pdf"
+    },
+    {
+      "label": "ETA Certification - DE | (2 MB)",
+      "url": "https://storage.onpage.it/40d44db81b88d3fe5abbe5facb1b7bf3df318c71/DXE_ETA100453de.pdf"
+    }
+  ],
+  "features": [],
+  "variants": [
+    {
+      "sku": "DXE 00 10 045",
+      "diameterMm": "M6",
+      "lengthMm": 45,
+      "unitsPerBox": 100,
+      "priceGel": 1.34,
+      "note": null
+    },
+    {
+      "sku": "DXE 00 12 050",
+      "diameterMm": "M8",
+      "lengthMm": 50,
+      "unitsPerBox": 50,
+      "priceGel": 1.59,
+      "note": null
+    },
+    {
+      "sku": "DXE 00 15 060",
+      "diameterMm": "M10",
+      "lengthMm": 60,
+      "unitsPerBox": 25,
+      "priceGel": 2.13,
+      "note": null
+    },
+    {
+      "sku": "DXE 00 18 075",
+      "diameterMm": "M12",
+      "lengthMm": 75,
+      "unitsPerBox": 20,
+      "priceGel": 3.09,
+      "note": null
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "id": "fv01",
+  "series": "FV01",
+  "titleEn": "Plastic sleeve for chemical anchors in hollow materials",
+  "titleKa": "პლასტმასის გილზა ქიმიური ანკერისთვის ღრუტანიან მასალებში",
+  "category": "chemical-fixings",
+  "youtube": null,
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 10,
+  "certifications": [
+    "logo-simbolo-eta"
+  ],
+  "specs": [],
+  "standards": [
+    {
+      "standard": "fire-reaction-logo-fuoco-a1-it",
+      "label": "Fire reaction",
+      "value": "A1"
+    },
+    {
+      "standard": "european-technical-assessment-eta-ce-tab-webp-logo-etace",
+      "label": "European Technical Assessment*",
+      "value": ""
+    }
+  ],
+  "documents": [
+    {
+      "label": "Technical data sheet IT-EN | (500 KB)",
+      "url": "https://storage.onpage.it/99d0424654b0b56eb6b41163e5400daf692da0c9/FV01%20-%20Technical%20Data%20Sheet_v.2.01_IT-EN.pdf"
+    }
+  ],
+  "features": [
+    {
+      "label": null,
+      "value": "This product is covered by European Technical Assessment, if used with Tecfi ETA-CE chemical anchors."
+    }
+  ],
+  "variants": [
+    {
+      "sku": "FV 01 12 080",
+      "diameterMm": "6-8",
+      "lengthMm": 90,
+      "unitsPerBox": 25,
+      "priceGel": 0.63,
+      "note": null
+    },
+    {
+      "sku": "FV 01 15 085",
+      "diameterMm": "8-10",
+      "lengthMm": 95,
+      "unitsPerBox": 25,
+      "priceGel": 0.69,
+      "note": null
+    }
+  ]
+}

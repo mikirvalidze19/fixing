@@ -1,0 +1,78 @@
+{
+  "id": "ar",
+  "series": "AR",
+  "titleEn": "Zinc-plated nut",
+  "titleKa": "ქანჩი მოთუთიებული",
+  "category": "general-fasteners",
+  "youtube": null,
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 19,
+  "certifications": [],
+  "specs": [
+    {
+      "icon": "chiaveesagonale",
+      "label": "Across flat",
+      "value": "Chiave SW"
+    }
+  ],
+  "standards": [],
+  "documents": [
+    {
+      "label": "Technical data sheet IT-EN | (236 KB)",
+      "url": "https://storage.onpage.it/d3735faeef16daf01f13b705af5197b5a6e2597f/AR01%20-%20Technical%20Data%20Sheet_v.2.00_IT-EN.pdf"
+    }
+  ],
+  "features": [],
+  "variants": [
+    {
+      "sku": "AR 01 00 008",
+      "diameterMm": 8,
+      "lengthMm": null,
+      "unitsPerBox": 1000,
+      "priceGel": 0.09,
+      "note": null
+    },
+    {
+      "sku": "AR 01 00 010",
+      "diameterMm": 10,
+      "lengthMm": null,
+      "unitsPerBox": 1000,
+      "priceGel": 0.19,
+      "note": null
+    },
+    {
+      "sku": "AR 01 00 012",
+      "diameterMm": 12,
+      "lengthMm": null,
+      "unitsPerBox": 1000,
+      "priceGel": 0.3,
+      "note": null
+    },
+    {
+      "sku": "AR 01 00 016",
+      "diameterMm": 16,
+      "lengthMm": null,
+      "unitsPerBox": 1000,
+      "priceGel": 0.65,
+      "note": null
+    },
+    {
+      "sku": "AR 01 00 020",
+      "diameterMm": 20,
+      "lengthMm": null,
+      "unitsPerBox": 500,
+      "priceGel": 1.2,
+      "note": null
+    },
+    {
+      "sku": "AR 01 00 024",
+      "diameterMm": 24,
+      "lengthMm": null,
+      "unitsPerBox": 500,
+      "priceGel": 2.01,
+      "note": null
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "id": "jo",
+  "series": "JO",
+  "titleEn": "Zinc-plated washer",
+  "titleKa": "საყელური მოთუთიებული",
+  "category": "general-fasteners",
+  "youtube": null,
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 18,
+  "certifications": [],
+  "specs": [],
+  "standards": [],
+  "documents": [
+    {
+      "label": "Technical data sheet IT-EN | (273 KB)",
+      "url": "https://storage.onpage.it/485ec0f753cc0cf11fa0cfd999eb90615672b125/JO01%20-%20Technical%20Data%20Sheet_v.2.00_IT-EN.pdf"
+    }
+  ],
+  "features": [],
+  "variants": [
+    {
+      "sku": "JO 01 00 008",
+      "diameterMm": 8,
+      "lengthMm": null,
+      "unitsPerBox": 2000,
+      "priceGel": 0.08,
+      "note": null
+    },
+    {
+      "sku": "JO 01 00 010",
+      "diameterMm": 10,
+      "lengthMm": null,
+      "unitsPerBox": 2000,
+      "priceGel": 0.12,
+      "note": null
+    },
+    {
+      "sku": "JO 01 00 012",
+      "diameterMm": 12,
+      "lengthMm": null,
+      "unitsPerBox": 1000,
+      "priceGel": 0.2,
+      "note": null
+    },
+    {
+      "sku": "JO 01 00 016",
+      "diameterMm": 16,
+      "lengthMm": null,
+      "unitsPerBox": 1000,
+      "priceGel": 0.35,
+      "note": null
+    },
+    {
+      "sku": "JO 01 00 020",
+      "diameterMm": 20,
+      "lengthMm": null,
+      "unitsPerBox": 500,
+      "priceGel": 0.54,
+      "note": null
+    },
+    {
+      "sku": "JO 01 00 024",
+      "diameterMm": 24,
+      "lengthMm": null,
+      "unitsPerBox": 500,
+      "priceGel": 1.02,
+      "note": null
+    }
+  ]
+}

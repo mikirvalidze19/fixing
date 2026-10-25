@@ -13,6 +13,7 @@ import Product from './pages/Product';
 import Video from './pages/Video';
 import Services from './pages/Services';
 import Placeholder from './pages/Placeholder';
+import Admin from './pages/Admin';
 import siteData from './data/site.json';
 import type { NavLink } from './models/navigation';
 
@@ -75,6 +76,7 @@ export default function App() {
             .map((r) => (
               <Route key={r.to} path={r.to} element={<Placeholder title={routeTitle(r.label)} />} />
             ))}
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<Placeholder title={t('placeholder.notFound')} />} />
         </Routes>
       </main>

@@ -1,0 +1,68 @@
+{
+  "id": "kd",
+  "series": "KD",
+  "titleEn": "Zinc-plated self-drilling screw with RAL 9002 painted head",
+  "titleKa": "თვითმჭრელი მოთუთიებული RAL 9002 შეღებილი თავით",
+  "category": "roofing-fixing-systems",
+  "youtube": "LgrV0heTM7o",
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 22,
+  "certifications": [],
+  "specs": [
+    {
+      "icon": "chiaveesagonale",
+      "label": "Across flat",
+      "value": "10"
+    },
+    {
+      "icon": "preforo-nonecessario",
+      "label": "Pre-drilling not required",
+      "value": null
+    },
+    {
+      "icon": "foraturaferro",
+      "label": "Drilling capacity",
+      "value": "Max 8 mm"
+    },
+    {
+      "icon": "velocita-foratura-autoperf",
+      "label": "Drilling speed",
+      "value": "1000-1800"
+    }
+  ],
+  "standards": [
+    {
+      "standard": "fire-reaction-logo-fuoco-a1-it",
+      "label": "Fire reaction",
+      "value": "A1"
+    },
+    {
+      "standard": "european-technical-assessment-eta-ce-tab-webp-logo-etace",
+      "label": "European Technical Assessment",
+      "value": "EAD 330047-01-0602"
+    }
+  ],
+  "documents": [
+    {
+      "label": "DoP - Declaration of Performance EN | (3 MB)",
+      "url": "https://storage.onpage.it/7128f7dd92c911b5975a38dc65bf4fd2e9e1ded1/KD_Declaration%20of%20Performance%20-%20v.1.03_EN.pdf"
+    },
+    {
+      "label": "ETA Certification - EN | (64 MB)",
+      "url": "https://storage.onpage.it/fcd8197bb53cf9dfe5269f13ddd0a676229a68a9/ETA-18-0713.pdf"
+    }
+  ],
+  "features": [],
+  "variants": [
+    {
+      "sku": "KD 01 63 080",
+      "diameterMm": 80,
+      "lengthMm": 100,
+      "unitsPerBox": 100,
+      "priceGel": 0.92,
+      "note": null
+    }
+  ]
+}

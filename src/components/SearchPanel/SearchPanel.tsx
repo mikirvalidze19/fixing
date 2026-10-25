@@ -100,7 +100,7 @@ export default function SearchPanel({ onClose }: { onClose: () => void }) {
             </p>
             <ul id={RESULTS_ID} className={styles.results} aria-label={t('search.title')}>
               {results.map((result) => {
-                const image = productImageSrc(result.product.id);
+                const image = productImageSrc(result.product);
                 return (
                   <li key={result.product.id}>
                     <Link

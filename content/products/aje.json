@@ -1,0 +1,150 @@
+{
+  "id": "aje",
+  "series": "AJE",
+  "titleEn": "Expansion anchor",
+  "titleKa": "გაფართოებადი ანკერი",
+  "category": "heavy-duty-metallic",
+  "youtube": "vfBZq4hPoXg",
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 8,
+  "certifications": [],
+  "specs": [
+    {
+      "icon": "chiaveesagonale",
+      "label": "Across flat",
+      "value": "Chiave dado SW"
+    }
+  ],
+  "standards": [
+    {
+      "standard": "valutazione-sismica-c2-c1-logo-sismico-c2-c1",
+      "label": "",
+      "value": "Valutazione sismica C2 - C1"
+    },
+    {
+      "standard": "r120-logo-fuoco-r120-it",
+      "label": "",
+      "value": "R120"
+    },
+    {
+      "standard": "european-technical-assessment-eta-ce-tab-webp-logo-etace",
+      "label": "European Technical Assessment",
+      "value": "EAD 330232-01-0601"
+    }
+  ],
+  "documents": [
+    {
+      "label": "DoP - Declaration of Performance EN | (1 MB)",
+      "url": "https://storage.onpage.it/2cd7092f30e26cdecd3b6bb2821118bc5c8a4938/AJE_Declaration%20of%20Performance%20-%20v.3.00_EN.pdf"
+    },
+    {
+      "label": "ETA Certification - EN | (2 MB)",
+      "url": "https://storage.onpage.it/45312c4c40e7cfac2adeaf4a7e397beccb6955d1/AJE_ETA110319en.pdf"
+    },
+    {
+      "label": "ETA Certification - DE | (2 MB)",
+      "url": "https://storage.onpage.it/d78822d604f3bc122b3fa41a23fb0580faa30d97/AJE_ETA110319de.pdf"
+    }
+  ],
+  "features": [],
+  "variants": [
+    {
+      "sku": "AJE 01 08 090",
+      "diameterMm": 8,
+      "lengthMm": 90,
+      "unitsPerBox": 100,
+      "priceGel": 1.77,
+      "note": null
+    },
+    {
+      "sku": "AJE 01 08 110",
+      "diameterMm": 8,
+      "lengthMm": 110,
+      "unitsPerBox": 50,
+      "priceGel": 2.02,
+      "note": null
+    },
+    {
+      "sku": "AJE 01 10 095",
+      "diameterMm": 10,
+      "lengthMm": 95,
+      "unitsPerBox": 50,
+      "priceGel": 2.23,
+      "note": null
+    },
+    {
+      "sku": "AJE 01 10 105",
+      "diameterMm": 10,
+      "lengthMm": 105,
+      "unitsPerBox": 50,
+      "priceGel": 2.29,
+      "note": null
+    },
+    {
+      "sku": "AJE 01 10 125",
+      "diameterMm": 10,
+      "lengthMm": 125,
+      "unitsPerBox": 25,
+      "priceGel": 2.82,
+      "note": null
+    },
+    {
+      "sku": "AJE 01 12 125",
+      "diameterMm": 12,
+      "lengthMm": 125,
+      "unitsPerBox": 25,
+      "priceGel": 3.87,
+      "note": null
+    },
+    {
+      "sku": "AJE 01 12 145",
+      "diameterMm": 12,
+      "lengthMm": 145,
+      "unitsPerBox": 25,
+      "priceGel": 4.47,
+      "note": null
+    },
+    {
+      "sku": "AJE 01 12 165",
+      "diameterMm": 12,
+      "lengthMm": 165,
+      "unitsPerBox": 25,
+      "priceGel": 5.04,
+      "note": null
+    },
+    {
+      "sku": "AJE 01 12 205",
+      "diameterMm": 12,
+      "lengthMm": 205,
+      "unitsPerBox": 15,
+      "priceGel": 7.44,
+      "note": null
+    },
+    {
+      "sku": "AJE 01 16 145",
+      "diameterMm": 16,
+      "lengthMm": 145,
+      "unitsPerBox": 10,
+      "priceGel": 9.27,
+      "note": null
+    },
+    {
+      "sku": "AJE 01 16 225",
+      "diameterMm": 16,
+      "lengthMm": 225,
+      "unitsPerBox": 10,
+      "priceGel": 14.81,
+      "note": null
+    },
+    {
+      "sku": "AJE 01 20 200",
+      "diameterMm": 20,
+      "lengthMm": 200,
+      "unitsPerBox": 5,
+      "priceGel": 24.27,
+      "note": null
+    }
+  ]
+}

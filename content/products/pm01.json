@@ -1,0 +1,40 @@
+{
+  "id": "pm01",
+  "series": "PM01",
+  "titleEn": "Zinc-plated mesh sleeve for chemical anchors in hollow materials",
+  "titleKa": "ბადის მოთუთიებული გილზა ქიმიური ანკერისთვის ღრუტანიან მასალებში",
+  "category": "chemical-fixings",
+  "youtube": null,
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 11,
+  "certifications": [],
+  "specs": [],
+  "standards": [],
+  "documents": [
+    {
+      "label": "Technical data sheet IT-EN | (411 KB)",
+      "url": "https://storage.onpage.it/ab1125a593809a0c24cd22f6bd7ccf48617028fc/PM01%20-%20Technical%20Data%20Sheet_v.2.00_IT.pdf"
+    }
+  ],
+  "features": [],
+  "variants": [
+    {
+      "sku": "PM 01 12 100",
+      "diameterMm": 10,
+      "lengthMm": 1000,
+      "unitsPerBox": 1,
+      "priceGel": 26.43,
+      "note": null
+    },
+    {
+      "sku": "PM 01 16 100",
+      "diameterMm": 14,
+      "lengthMm": 1000,
+      "unitsPerBox": 1,
+      "priceGel": 29.33,
+      "note": null
+    }
+  ]
+}

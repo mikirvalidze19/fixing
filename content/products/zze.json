@@ -1,0 +1,68 @@
+{
+  "id": "zze",
+  "series": "ZZE",
+  "titleEn": "Polyethylene anchor with metal or nylon nail",
+  "titleKa": "პოლიეთილენის ანკერი ლითონის/ნეილონის ლურსმნით",
+  "category": "drywall-hollow",
+  "youtube": "kaxmk2cuJVk",
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 26,
+  "certifications": [
+    "logo-simbolo-eta"
+  ],
+  "specs": [],
+  "standards": [
+    {
+      "standard": "european-technical-assessment-eta-ce-tab-webp-logo-etace",
+      "label": "European Technical Assessment",
+      "value": "EAD330196-01-0604"
+    }
+  ],
+  "documents": [
+    {
+      "label": "DoP - Declaration of Performance EN | (1 MB)",
+      "url": "https://storage.onpage.it/54c16bc0c50e6521deec8ad4b9b3f2a007067489/ZZE_Declaration%20of%20Performance%20-%20v.1.04_EN.pdf"
+    },
+    {
+      "label": "ETA Certification - EN | (778 KB)",
+      "url": "https://storage.onpage.it/61cff920c1a2f9454297d8e4f220550e791d8e48/ETA150641%20Tecfi%20ZZ%20Handyplug%20r2%202021.pdf"
+    }
+  ],
+  "features": [],
+  "variants": [
+    {
+      "sku": "ZZE 21 10 130",
+      "diameterMm": 10,
+      "lengthMm": 130,
+      "unitsPerBox": 200,
+      "priceGel": 0.91,
+      "note": "metal nail"
+    },
+    {
+      "sku": "ZZE 21 10 090",
+      "diameterMm": 10,
+      "lengthMm": 90,
+      "unitsPerBox": 200,
+      "priceGel": 0.74,
+      "note": "metal nail"
+    },
+    {
+      "sku": "ZZE 01 10 130",
+      "diameterMm": 10,
+      "lengthMm": 130,
+      "unitsPerBox": 200,
+      "priceGel": 0.55,
+      "note": "nylon nail"
+    },
+    {
+      "sku": "ZZE 01 10 090",
+      "diameterMm": 10,
+      "lengthMm": 90,
+      "unitsPerBox": 200,
+      "priceGel": 0.43,
+      "note": "nylon nail"
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "id": "chemical-anchors",
+  "series": "XWE01 / DGE",
+  "titleEn": "Chemical anchoring adhesive",
+  "titleKa": "ქიმიური საანკერე წებო",
+  "category": "chemical-fixings",
+  "youtube": null,
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 27,
+  "certifications": [
+    "logo-simbolo-fuoco",
+    "logo-simbolo-sismico",
+    "logo-simbolo-eta"
+  ],
+  "specs": [],
+  "standards": [
+    {
+      "standard": "barre-di-ripresa-logo-fuoco-rebars",
+      "label": "",
+      "value": "Barre di ripresa"
+    },
+    {
+      "standard": "valutazione-sismica-rebar-logo-sismico-rebars",
+      "label": "",
+      "value": "Valutazione sismica REBAR"
+    },
+    {
+      "standard": "european-technical-assessment-eta-ce-tab-webp-logo-etace",
+      "label": "European Technical Assessment",
+      "value": "EAD330087-01-0601"
+    },
+    {
+      "standard": "testato-al-fuoco-logo-fuoco-testato-it",
+      "label": "",
+      "value": "Testato al fuoco"
+    },
+    {
+      "standard": "valutazione-sismica-eota-tr049-c2-c1-logo-sismico-c2-c1-tr049",
+      "label": "",
+      "value": "Valutazione sismica EOTA TR049 C2-C1"
+    },
+    {
+      "standard": "european-technical-assessment-eta-ce-tab-webp-logo-etace",
+      "label": "European Technical Assessment",
+      "value": "EAD 330499-01-0601 V01"
+    }
+  ],
+  "documents": [
+    {
+      "label": "EPD certification | (928 KB)",
+      "url": "https://storage.onpage.it/a9c5de6ae188f38302e67d5f20f52caded4c1a68/TecfiSpA_XWE01_EPD.pdf"
+    },
+    {
+      "label": "DoP - Declaration of Performance EN Concrete | (225 KB)",
+      "url": "https://storage.onpage.it/aa331a5bddd656d1f030fa514d29b66fca8b8404/XWE01_Declaration%20of%20Performance_Concrete%20-%20v.1.00_EN.pdf"
+    },
+    {
+      "label": "DoP - Declaration of Performance EN Rebars | (214 KB)",
+      "url": "https://storage.onpage.it/dc2ed7bf37bbd335f042d349b9a23b4bc72b2ce4/XWE01_Declaration%20of%20Performance_Rebars%20-%20v.1.00_EN.pdf"
+    },
+    {
+      "label": "Material Safety Data Sheet EN | (764 KB)",
+      "url": "https://storage.onpage.it/ff52cc2a1ad32f600a71b10af86df718dab3bdfc/XWE_MaterialSafetyDataSheet_v.01_EN.pdf"
+    },
+    {
+      "label": "ETA Certification - EN Rebars | (12 MB)",
+      "url": "https://storage.onpage.it/eba10c489717d3086854a7dae586c23c7d89bc6a/XWE01_ETA230862_Rebar.pdf"
+    },
+    {
+      "label": "ETA Certification - EN Concrete | (4 MB)",
+      "url": "https://storage.onpage.it/389081d45e96d8f02ad293a58be80c3bb4f5bcbf/XWE01_ETA230696_Concrete_light.pdf"
+    }
+  ],
+  "features": [
+    {
+      "label": null,
+      "value": "State-of-the-art Dual Component 3:1 Epoxy resin for heavy duty fixings, available in the following options:"
+    },
+    {
+      "label": null,
+      "value": "XWE 01 00 585 (ml 585) with 1 special nozzle, to be used with Tecfi professional gun (code DH04)"
+    },
+    {
+      "label": null,
+      "value": "XWE 01 00 440 (ml 440) > available on request"
+    },
+    {
+      "label": null,
+      "value": "XWE 01 01 400 (ml 1.400) > available on request"
+    },
+    {
+      "label": "Storage",
+      "value": "Shelf life of 24 months. During cold months, store the cartridge in a heated place."
+    },
+    {
+      "label": "Installation temperature",
+      "value": "(during the installation) 0°C ÷ +40°C"
+    },
+    {
+      "label": "Service temperature",
+      "value": "(ambient temperature after full curing) -40°C ÷ +40°C with T0,max long term temperature of 24°C"
+    },
+    {
+      "label": null,
+      "value": "-40°C ÷ +72°C with T0,max long term temperature of 50°C"
+    }
+  ],
+  "variants": [
+    {
+      "sku": "XWE 01 00 585",
+      "diameterMm": null,
+      "lengthMm": null,
+      "unitsPerBox": 1,
+      "priceGel": 75.57,
+      "note": "epoxy; heavy constructions; C1/C2"
+    },
+    {
+      "sku": "DGE 02 00 400",
+      "diameterMm": null,
+      "lengthMm": null,
+      "unitsPerBox": 1,
+      "priceGel": 38.18,
+      "note": "vinylester; heavy constructions; C1/C2"
+    },
+    {
+      "sku": "DGE 04 00 400",
+      "diameterMm": null,
+      "lengthMm": null,
+      "unitsPerBox": 1,
+      "priceGel": 32.51,
+      "note": "hybrid two-component; medium-load constructions; C1/C2"
+    },
+    {
+      "sku": "DGE 01 00 300",
+      "diameterMm": null,
+      "lengthMm": null,
+      "unitsPerBox": 1,
+      "priceGel": 22.18,
+      "note": "light constructions"
+    }
+  ]
+}

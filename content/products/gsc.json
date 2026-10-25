@@ -1,0 +1,31 @@
+{
+  "id": "gsc",
+  "series": "GSC",
+  "titleEn": "Plastic screw cap",
+  "titleKa": "ხრახრის პლასტმასის ქუდი",
+  "category": "drywall-hollow",
+  "youtube": null,
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "certifications": [],
+  "specs": [],
+  "standards": [],
+  "documents": [
+    {
+      "label": "Technical data sheet IT-EN | (247 KB)",
+      "url": "https://storage.onpage.it/9cc2012b9817e63024c7bc6e2c0833bc96fe338f/GSC%20-%20Technical%20Data%20Sheet_v.2.00_IT-EN.pdf"
+    }
+  ],
+  "features": [],
+  "variants": [
+    {
+      "sku": "GSC 04 00 030",
+      "diameterMm": null,
+      "lengthMm": null,
+      "unitsPerBox": 100,
+      "priceGel": 0.26,
+      "note": null
+    }
+  ]
+}

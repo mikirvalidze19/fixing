@@ -1,0 +1,70 @@
+{
+  "id": "hx",
+  "series": "HX",
+  "titleEn": "Zinc-plated concrete screw",
+  "titleKa": "ბეტონის ხრახნი მოთუთიებული",
+  "category": "heavy-duty-metallic",
+  "youtube": null,
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 2,
+  "certifications": [],
+  "specs": [
+    {
+      "icon": "chiaveesagonale",
+      "label": "Across flat",
+      "value": "Chiave SW"
+    }
+  ],
+  "standards": [],
+  "documents": [
+    {
+      "label": "Technical data sheet IT-EN | (1 MB)",
+      "url": "https://storage.onpage.it/c7d836cdc014c0fd3ce45aac65821bcc9926317d/HX21%20-%20Technical%20Data%20Sheet_v.2.00_IT-EN.pdf"
+    }
+  ],
+  "features": [],
+  "variants": [
+    {
+      "sku": "HX 21 08 080",
+      "diameterMm": 8,
+      "lengthMm": 80,
+      "unitsPerBox": 50,
+      "priceGel": 1.37,
+      "note": null
+    },
+    {
+      "sku": "HX 21 10 100",
+      "diameterMm": 10,
+      "lengthMm": 100,
+      "unitsPerBox": 25,
+      "priceGel": 2.75,
+      "note": null
+    },
+    {
+      "sku": "HX 21 12 110",
+      "diameterMm": 12,
+      "lengthMm": 110,
+      "unitsPerBox": 25,
+      "priceGel": 4.61,
+      "note": null
+    },
+    {
+      "sku": "HX 21 12 150",
+      "diameterMm": 12,
+      "lengthMm": 150,
+      "unitsPerBox": 25,
+      "priceGel": 6.07,
+      "note": null
+    },
+    {
+      "sku": "HX 21 16 090",
+      "diameterMm": 16,
+      "lengthMm": 90,
+      "unitsPerBox": 15,
+      "priceGel": 13.87,
+      "note": null
+    }
+  ]
+}

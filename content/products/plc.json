@@ -1,0 +1,74 @@
+{
+  "id": "plc",
+  "series": "PLC",
+  "titleEn": "Zinc-plated self-drilling screw",
+  "titleKa": "თვითმჭრელი მოთუთიებული",
+  "category": "roofing-fixing-systems",
+  "youtube": "LgrV0heTM7o",
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 21,
+  "certifications": [],
+  "specs": [
+    {
+      "icon": "chiaveesagonale",
+      "label": "Across flat",
+      "value": "8"
+    },
+    {
+      "icon": "preforo-nonecessario",
+      "label": "Pre-drilling not required",
+      "value": null
+    },
+    {
+      "icon": "foraturaferro",
+      "label": "Drilling capacity",
+      "value": "Max 2 mm"
+    },
+    {
+      "icon": "velocita-foratura-autoperf",
+      "label": "Drilling speed",
+      "value": "1800-2500"
+    }
+  ],
+  "standards": [],
+  "documents": [
+    {
+      "label": "Technical data sheet IT-EN | (299 KB)",
+      "url": "https://storage.onpage.it/aeef8f31da8f1e73d3da87739dfb19a7c03dcfba/PL01-PLC01%20-%20Technical%20Data%20Sheet_v.2.01_IT-EN.pdf"
+    }
+  ],
+  "features": [
+    {
+      "label": "Key",
+      "value": "8"
+    },
+    {
+      "label": null,
+      "value": "Does not require pre-punching"
+    },
+    {
+      "label": "Minimum thickness of the base metal support",
+      "value": "0,6 mm"
+    },
+    {
+      "label": "Drilling capacity",
+      "value": "2 mm"
+    },
+    {
+      "label": "Drilling speed",
+      "value": "1800 ÷ 2500 rpm"
+    }
+  ],
+  "variants": [
+    {
+      "sku": "PLC 01 14 020",
+      "diameterMm": null,
+      "lengthMm": 20,
+      "unitsPerBox": 200,
+      "priceGel": 0.26,
+      "note": null
+    }
+  ]
+}

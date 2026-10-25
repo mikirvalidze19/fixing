@@ -3,22 +3,8 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ChevronDown } from 'lucide-react';
 import type { Product } from '../../models/catalog';
-import type { ProductSymbol } from '../../models/product';
 import { formatGel, minPrice, productImageSrc } from '../../utils/product';
-import symbolsData from '../../data/product-symbols.json';
 import styles from './ProductCard.module.css';
-
-const symbolMap = symbolsData.symbols as Record<string, ProductSymbol[]>;
-
-const symbolUrls = import.meta.glob(
-  '../../assets/symbols/*.{png,webp,svg}',
-  { eager: true, query: '?url', import: 'default' },
-) as Record<string, string>;
-
-function symbolSrc(file: string): string {
-  const entry = Object.entries(symbolUrls).find(([path]) => path.endsWith(`/${file}`));
-  return entry ? entry[1] : '';
-}
 
 /* Long descriptions get the tecfi-style expand chevron. */
 const CLAMP_CHARS = 60;
@@ -33,9 +19,9 @@ export default function ProductCard({ product }: { product: Product }) {
   const { t, i18n } = useTranslation();
   const title = i18n.language === 'ka' && product.titleKa ? product.titleKa : product.titleEn;
   const [expanded, setExpanded] = useState(false);
-  const symbols = symbolMap[product.id] ?? [];
+  const symbols = product.specs ?? [];
   const clippable = title.length > CLAMP_CHARS;
-  const imageSrc = productImageSrc(product.id);
+  const imageSrc = productImageSrc(product);
 
   return (
     <article className={styles.card}>
@@ -77,10 +63,10 @@ export default function ProductCard({ product }: { product: Product }) {
         )}
 
         <div className={styles.symbols} aria-label={t('productCard.symbols')}>
-          {symbols.map((symbol) => (
+          {symbols.map((symbol, index) => (
             <img
-              key={symbol.icon}
-              src={symbolSrc(symbol.icon)}
+              key={`${symbol.icon}-${index}`}
+              src={symbol.icon}
               alt={symbol.label}
               title={symbol.label}
               loading="lazy"

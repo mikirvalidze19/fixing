@@ -1,0 +1,72 @@
+{
+  "id": "bf",
+  "series": "BF",
+  "titleEn": "Zinc-plated threaded rod",
+  "titleKa": "ხრახნიანი ღერო მოთუთიებული",
+  "category": "general-fasteners",
+  "youtube": null,
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 17,
+  "certifications": [],
+  "specs": [],
+  "standards": [],
+  "documents": [
+    {
+      "label": "Technical data sheet IT-EN | (259 KB)",
+      "url": "https://storage.onpage.it/0b10f97740dc0555226bdbd945ade733d17c22a5/BF05%20-%20Technical%20Data%20Sheet_v.2.00_IT-EN.pdf"
+    }
+  ],
+  "features": [],
+  "variants": [
+    {
+      "sku": "BF 05 08 100",
+      "diameterMm": 8,
+      "lengthMm": 1000,
+      "unitsPerBox": 35,
+      "priceGel": 7.48,
+      "note": null
+    },
+    {
+      "sku": "BF 05 10 100",
+      "diameterMm": 10,
+      "lengthMm": 1000,
+      "unitsPerBox": 20,
+      "priceGel": 10.95,
+      "note": null
+    },
+    {
+      "sku": "BF 05 12 100",
+      "diameterMm": 12,
+      "lengthMm": 1000,
+      "unitsPerBox": 14,
+      "priceGel": 15.31,
+      "note": null
+    },
+    {
+      "sku": "BF 05 16 100",
+      "diameterMm": 16,
+      "lengthMm": 1000,
+      "unitsPerBox": 8,
+      "priceGel": 27.51,
+      "note": null
+    },
+    {
+      "sku": "BF 05 20 100",
+      "diameterMm": 20,
+      "lengthMm": 1000,
+      "unitsPerBox": 5,
+      "priceGel": 44.7,
+      "note": null
+    },
+    {
+      "sku": "BF 05 24 100",
+      "diameterMm": 24,
+      "lengthMm": 1000,
+      "unitsPerBox": 3,
+      "priceGel": 69.28,
+      "note": null
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "id": "hxe05",
+  "series": "HXE05",
+  "titleEn": "Zinc-plated hexagonal flat-head concrete screw",
+  "titleKa": "ბრტყელთავიანი 6-კუთხა ბეტონის ხრახნი მოთუთიებული",
+  "category": "heavy-duty-metallic",
+  "youtube": "DA2M-kUpvIo",
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 4,
+  "certifications": [],
+  "specs": [
+    {
+      "icon": "impronta-6lobi",
+      "label": "6 lobe recess",
+      "value": null
+    }
+  ],
+  "standards": [
+    {
+      "standard": "european-technical-assessment-logo-etace",
+      "label": "European Technical Assessment",
+      "value": "EAD 330747-00-0601"
+    },
+    {
+      "standard": "r120-logo-fuoco-r120-it",
+      "label": "",
+      "value": "R120"
+    },
+    {
+      "standard": "valutazione-sismica-c1-logo-sismico-c1",
+      "label": "",
+      "value": "Valutazione sismica C1"
+    },
+    {
+      "standard": "european-technical-assessment-eta-ce-tab-webp-logo-etace",
+      "label": "European Technical Assessment",
+      "value": "EAD 330232-01-0601"
+    }
+  ],
+  "documents": [
+    {
+      "label": "ETA Certification - EN Multiple Use | (691 KB)",
+      "url": "https://storage.onpage.it/7d23e6544af14bd8ef54899af0ef3e6f41b1829f/HXE_ETA211065_MU.pdf"
+    },
+    {
+      "label": "ETA Certification - EN | (1 MB)",
+      "url": "https://storage.onpage.it/fc5189beed2da25856c2207462770de341c5c168/HXE_ETA240741%28EAD330232%29.pdf"
+    },
+    {
+      "label": "DoP - Declaration of Performance EN Concrete | (1 MB)",
+      "url": "https://storage.onpage.it/7201e291a5a430c4cc3f7f2315653bd3eeb9678d/HXE_Declaration%20of%20Performance%20_Concrete%20-%20v.2.00_EN.pdf"
+    },
+    {
+      "label": "DoP - Declaration of Performance EN Multiple Use | (2 MB)",
+      "url": "https://storage.onpage.it/ab59e4c8570cc8bd816cef4380d841936a91b75f/HXE_Declaration%20of%20Performance%20-%20MultipleUse%20-%20v.1.00_EN.pdf"
+    }
+  ],
+  "features": [
+    {
+      "label": null,
+      "value": "According to EAD 330747-00-0601, in hollow slab as well (Ø6 and Ø8: see DoP for details)"
+    },
+    {
+      "label": null,
+      "value": "In Option 1 and Option 7 for cracked and non-cracked concrete (Ø8)"
+    }
+  ],
+  "variants": [
+    {
+      "sku": "HXE 05 08 100",
+      "diameterMm": 8,
+      "lengthMm": 100,
+      "unitsPerBox": 50,
+      "priceGel": 2.16,
+      "note": null
+    },
+    {
+      "sku": "HXE 05 08 120",
+      "diameterMm": 8,
+      "lengthMm": 120,
+      "unitsPerBox": 50,
+      "priceGel": 2.55,
+      "note": null
+    },
+    {
+      "sku": "HXE 05 08 140",
+      "diameterMm": 8,
+      "lengthMm": 140,
+      "unitsPerBox": 50,
+      "priceGel": 2.91,
+      "note": null
+    }
+  ]
+}

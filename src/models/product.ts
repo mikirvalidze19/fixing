@@ -1,31 +1,16 @@
 /* Feature models: product pages and cards.
- * Shared by pages/Product.tsx and components/ProductCard. */
+ * Shared by pages/Product.tsx and components/ProductCard. Row/data types
+ * live in models/catalog — this module holds the assembled view-model. */
 
-import type { Product, ProductCategory } from './catalog';
-
-
-export type ProductSymbol = {
-  icon: string;
-  label: string;
-  value?: string | null;
-};
-
-export type ProductStandard = {
-  icon: string;
-  label: string;
-  value: string;
-  badge: string;
-};
-
-export type ProductDocument = {
-  label: string;
-  url: string;
-};
-
-export type ProductFeature = {
-  label: string | null;
-  value: string;
-};
+import type {
+  CertRow,
+  DocumentRow,
+  FeatureRow,
+  Product,
+  ProductCategory,
+  StandardRow,
+  SymbolRow,
+} from './catalog';
 
 /* View-model assembled by useProductData for the Product page. */
 export type ProductData = {
@@ -34,11 +19,11 @@ export type ProductData = {
   category: ProductCategory;
   categoryLabel: string;
   related: Product[];
-  specs: ProductSymbol[];
-  certs: ProductSymbol[];
-  standards: ProductStandard[];
-  documents: ProductDocument[];
-  features: ProductFeature[];
+  specs: SymbolRow[];
+  certs: CertRow[];
+  standards: StandardRow[];
+  documents: DocumentRow[];
+  features: FeatureRow[];
   videoId: string | undefined;
   hasPrice: boolean;
   diameters: number[];

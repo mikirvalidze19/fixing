@@ -1,0 +1,74 @@
+{
+  "id": "kb01",
+  "series": "KB01",
+  "titleEn": "Stainless self-drilling screw",
+  "titleKa": "უჟანგავი თვითმჭრელი ხრახნი",
+  "category": "roofing-fixing-systems",
+  "youtube": "LgrV0heTM7o",
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 1,
+  "certifications": [],
+  "specs": [
+    {
+      "icon": "chiaveesagonale",
+      "label": "Across flat",
+      "value": "8"
+    },
+    {
+      "icon": "preforo-nonecessario",
+      "label": "Pre-drilling not required",
+      "value": null
+    },
+    {
+      "icon": "foraturaferro",
+      "label": "Drilling capacity",
+      "value": "Max 1,5+1,5 mm in alluminio"
+    },
+    {
+      "icon": "velocita-foratura-autoperf",
+      "label": "Drilling speed",
+      "value": "1800-2500"
+    },
+    {
+      "icon": "acciaioinoxa2",
+      "label": "A2 Stainless Steel",
+      "value": null
+    }
+  ],
+  "standards": [],
+  "documents": [],
+  "features": [
+    {
+      "label": "Across flats",
+      "value": "8"
+    },
+    {
+      "label": "Key",
+      "value": "8"
+    },
+    {
+      "label": null,
+      "value": "Does not require pre-punching"
+    },
+    {
+      "label": "Drilling capacity",
+      "value": "1,5+ 1,5 in aluminium"
+    },
+    {
+      "label": "Drilling speed",
+      "value": "1800 ÷ 2500 rpm"
+    }
+  ],
+  "variants": [
+    {
+      "sku": "KB 01 48 016",
+      "diameterMm": "4.8",
+      "lengthMm": 16,
+      "unitsPerBox": 500,
+      "priceGel": 0.29,
+      "note": null
+    }
+  ]
+}

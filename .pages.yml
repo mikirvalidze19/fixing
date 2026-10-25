@@ -1,0 +1,362 @@
+# Pages CMS configuration — https://pagescms.org
+#
+# This file defines the editor forms for the Fixing Systems Georgia catalog.
+# Editors open https://app.pagescms.org/mikirvalidze19/fixing, log in with a
+# GitHub account that has write access to this repository, and manage the
+# products. Every save is a commit; Cloudflare Pages rebuilds and publishes
+# automatically.
+#
+# The site (React app) reads everything from the `content/` folder at build
+# time via src/data/catalog.ts — no backend involved.
+
+media:
+  - name: products
+    label: Product photos
+    input: content/images/products
+    output: /content/images/products
+    extensions: [webp, jpg, jpeg, png]
+  - name: badges
+    label: Certification badge artwork
+    input: content/images/badges
+    output: /content/images/badges
+    extensions: [webp, jpg, jpeg, png, svg]
+  - name: icons
+    label: Spec icon artwork
+    input: content/images/icons
+    output: /content/images/icons
+    extensions: [webp, jpg, jpeg, png, svg]
+  - name: standards
+    label: Standards artwork
+    input: content/images/standards
+    output: /content/images/standards
+    extensions: [webp, jpg, jpeg, png, svg]
+
+content:
+  # ---------------------------------------------------------------- products
+  - name: products
+    label: Products
+    type: collection
+    path: content/products
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: id
+      sort: series
+      order: asc
+    fields:
+      - name: id
+        label: ID (short code, lowercase)
+        type: string
+        required: true
+        pattern: "^[a-z0-9][a-z0-9-]*$"
+        description: "Lowercase letters/numbers/dashes, unique. Becomes the page address (/product/{id}), e.g. hxe01"
+      - name: series
+        label: Series code
+        type: string
+        required: true
+        description: "As printed on the price list, e.g. HXE01"
+      - name: titleEn
+        label: Title (English)
+        type: string
+        required: true
+      - name: titleKa
+        label: Title (Georgian)
+        type: string
+        required: true
+      - name: category
+        label: Category
+        type: select
+        description: Where the product appears in the catalog and navigation
+        options:
+          values:
+            - name: roofing-fixing-systems
+              label: Roofing fixing systems
+            - name: renewable-energy-plants
+              label: Fixing systems for renewable energy plants
+            - name: heavy-duty-metallic
+              label: Heavy duty metallic fixing systems
+            - name: chemical-fixings
+              label: Chemical fixings and accessories
+            - name: scaffoldings-ropes-nets
+              label: Fixing systems for scaffoldings, ropes and nets
+            - name: windows-frames-facades
+              label: Windows, frames and façades
+            - name: light-fixing
+              label: Light fixing systems
+            - name: drywall-hollow
+              label: Drywall and hollow fixing systems
+            - name: wood
+              label: Fixing systems for wood
+            - name: rivets
+              label: Rivets
+            - name: sealants-foams
+              label: Sealants and foams
+            - name: cable-plumbing
+              label: Cable and plumbing fixings
+            - name: general-fasteners
+              label: General fasteners
+            - name: drills-bits-sockets
+              label: Drills, bits and sockets
+            - name: inblister
+              label: inBlister
+      - name: youtube
+        label: YouTube link
+        type: string
+        description: "Paste the full YouTube link (watch/youtu.be) or just the video ID. Shown at the bottom of the product page."
+      - name: image
+        label: Product photo
+        type: image
+        options:
+          media: products
+          rename: safe
+        description: "Tip: name the file after the product ID before uploading (e.g. hxe01.jpg). Without a photo the site shows the series code."
+      - name: descriptionEn
+        label: Description (English)
+        type: text
+        description: "Optional. Leave empty to auto-generate the intro text from the price table."
+      - name: descriptionKa
+        label: Description (Georgian)
+        type: text
+        description: "Optional. Leave empty to auto-generate the intro text from the price table."
+      - name: certifications
+        label: Certifications
+        type: reference
+        options:
+          collection: badges
+          multiple: true
+          value: "{key}"
+          label: "{key}"
+        description: "Pick the certification badges. New badges can be added under Badges in the sidebar."
+      - name: specs
+        label: Tech specs (icons under the title)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+        fields:
+          - name: icon
+            label: Icon
+            type: reference
+            options:
+              collection: icons
+              value: "{key}"
+              label: "{key}"
+            description: "Pick a spec icon. New icons can be added under Spec icons in the sidebar."
+          - name: label
+            label: Label
+            type: string
+          - name: value
+            label: Value
+            type: string
+      - name: standards
+        label: Standards box (right side)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+        fields:
+          - name: standard
+            label: Standard
+            type: reference
+            options:
+              collection: standards
+              value: "{key}"
+              label: "{key}"
+          - name: value
+            label: Value
+            type: string
+            description: "e.g. the EAD or assessment number"
+      - name: documents
+        label: Documents (PDF links)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+        fields:
+          - name: name
+            label: Name
+            type: string
+            required: true
+          - name: size
+            label: File size
+            type: string
+            description: Optional, e.g. 1 MB
+          - name: url
+            label: Link
+            type: string
+            required: true
+      - name: features
+        label: Technical features
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+        fields:
+          - name: label
+            label: Label
+            type: string
+            description: Optional
+          - name: value
+            label: Text
+            type: text
+            required: true
+      - name: variants
+        label: Variants (prices)
+        type: object
+        list:
+          min: 1
+          collapsible:
+            collapsed: true
+            summary: "{sku}"
+        fields:
+          - name: sku
+            label: SKU
+            type: string
+            required: true
+            description: Preserve spaces exactly as printed, e.g. "HXE 01 08 080"
+          - name: diameterMm
+            label: Diameter (mm)
+            type: string
+          - name: lengthMm
+            label: Length (mm)
+            type: string
+          - name: unitsPerBox
+            label: Units per box
+            type: number
+          - name: priceGel
+            label: Price (GEL)
+            type: number
+          - name: note
+            label: Note
+            type: string
+
+  # ------------------------------------------------------- badge library
+  - name: badges
+    label: Badges
+    type: collection
+    path: content/badges
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: key
+      sort: key
+      order: asc
+    fields:
+      - name: key
+        label: Key (short code, lowercase)
+        type: string
+        required: true
+        pattern: "^[a-z0-9][a-z0-9-]*$"
+      - name: label
+        label: Label (English)
+        type: string
+        required: true
+      - name: labelKa
+        label: Label (Georgian)
+        type: string
+      - name: value
+        label: Second line
+        type: string
+        description: "Optional extra line shown under the badge on the product page (leave empty to hide)."
+      - name: image
+        label: Badge artwork
+        type: image
+        options:
+          media: badges
+          rename: safe
+        required: true
+
+  # ------------------------------------------------------- spec icon library
+  - name: specIcons
+    label: Spec icons
+    type: collection
+    path: content/icons
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: key
+      sort: key
+      order: asc
+    fields:
+      - name: key
+        label: Key (short code, lowercase)
+        type: string
+        required: true
+        pattern: "^[a-z0-9][a-z0-9-]*$"
+      - name: label
+        label: Label
+        type: string
+        required: true
+      - name: labelKa
+        label: Label (Georgian)
+        type: string
+      - name: image
+        label: Icon artwork
+        type: image
+        options:
+          media: icons
+          rename: safe
+        required: true
+
+  # ------------------------------------------------------- standards library
+  - name: standardDefs
+    label: Standards
+    type: collection
+    path: content/standards
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: key
+      sort: key
+      order: asc
+    fields:
+      - name: key
+        label: Key (short code, lowercase)
+        type: string
+        required: true
+        pattern: "^[a-z0-9][a-z0-9-]*$"
+      - name: label
+        label: Label (English)
+        type: string
+        required: true
+      - name: labelKa
+        label: Label (Georgian)
+        type: string
+      - name: tab
+        label: Tab artwork
+        type: image
+        options:
+          media: standards
+          rename: safe
+        required: true
+      - name: badge
+        label: Badge artwork
+        type: image
+        options:
+          media: standards
+          rename: safe
+
+  # ------------------------------------------------------- featured on home
+  - name: highlighted
+    label: Featured products (home page)
+    type: file
+    path: src/data/highlighted.json
+    format: json
+    fields:
+      - name: title
+        label: Section title
+        type: string
+      - name: subtitle
+        label: Section subtitle
+        type: string
+      - name: cta
+        label: Button text
+        type: string
+      - name: items
+        label: Products
+        type: reference
+        options:
+          collection: products
+          multiple: true
+          value: "{id}"
+          label: "{series}"

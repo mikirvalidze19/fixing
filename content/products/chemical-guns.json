@@ -1,0 +1,35 @@
+{
+  "id": "chemical-guns",
+  "series": "DH04 / DH",
+  "titleEn": "Chemical anchoring adhesive applicator gun",
+  "titleKa": "ქიმიური საანკერე წებოს ფისტოლეტი",
+  "category": "chemical-fixings",
+  "youtube": null,
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 28,
+  "certifications": [],
+  "specs": [],
+  "standards": [],
+  "documents": [],
+  "features": [],
+  "variants": [
+    {
+      "sku": "DH 04 00 585",
+      "diameterMm": null,
+      "lengthMm": null,
+      "unitsPerBox": 1,
+      "priceGel": 255.09,
+      "note": null
+    },
+    {
+      "sku": "DH 01 00 400",
+      "diameterMm": null,
+      "lengthMm": null,
+      "unitsPerBox": 1,
+      "priceGel": 129.77,
+      "note": null
+    }
+  ]
+}

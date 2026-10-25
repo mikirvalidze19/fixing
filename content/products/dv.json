@@ -1,0 +1,41 @@
+{
+  "id": "dv",
+  "series": "DV",
+  "titleEn": "Zinc-plated washer with RAL 9002 painted surface",
+  "titleKa": "საყელური მოთუთიებული RAL 9002 შეღებილი ზედაპირით",
+  "category": "roofing-fixing-systems",
+  "youtube": "LgrV0heTM7o",
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 23,
+  "certifications": [
+    "logo-simbolo-fuoco",
+    "logo-simbolo-eta"
+  ],
+  "specs": [],
+  "standards": [
+    {
+      "standard": "european-technical-assessment-eta-ce-tab-webp-logo-etace",
+      "label": "European Technical Assessment*",
+      "value": "*EAD 330047-01-0602"
+    },
+    {
+      "standard": "fire-reaction-logo-fuoco-a1-it",
+      "label": "Fire reaction",
+      "value": "A1"
+    }
+  ],
+  "documents": [],
+  "features": [],
+  "variants": [
+    {
+      "sku": "DV 01 06 016",
+      "diameterMm": null,
+      "lengthMm": null,
+      "unitsPerBox": 500,
+      "priceGel": 0.38,
+      "note": null
+    }
+  ]
+}

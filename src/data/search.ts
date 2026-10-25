@@ -1,6 +1,4 @@
-import { products } from './catalog';
-import categories from './product-categories.json';
-import categoryProducts from './category-products.json';
+import { categoryProducts, categories, products } from './catalog';
 import type { Product } from '../models/catalog';
 
 export type ProductSearchResult = {

@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import categories from '../data/product-categories.json';
-import categoryProducts from '../data/category-products.json';
-import { products } from '../data/catalog';
+import { categories, categoryProducts, products } from '../data/catalog';
 import type { Product } from '../models/catalog';
 import ProductCard from '../components/ProductCard/ProductCard';
 import Placeholder from './Placeholder';

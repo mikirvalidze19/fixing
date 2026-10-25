@@ -3,89 +3,30 @@ import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
 import { ChevronDown, ExternalLink, FileText, Mail, Phone } from 'lucide-react';
-import categories from '../data/product-categories.json';
-import categoryProducts from '../data/category-products.json';
 import companyData from '../data/data.json';
-import symbolsData from '../data/product-symbols.json';
-import extraData from '../data/product-extra.json';
-import documentsData from '../data/product-docs.json';
-import featuresData from '../data/product-features.json';
-import { products } from '../data/catalog';
-import type { Product, ProductCategory } from '../models/catalog';
+import {
+  categoryProducts,
+  productCategory,
+  products,
+} from '../data/catalog';
 import type {
-  ProductData,
-  ProductDocument,
-  ProductFeature,
-  ProductStandard,
-  ProductSymbol,
-} from '../models/product';
+  DocumentRow,
+  FeatureRow,
+  Product,
+  ProductCategory,
+  StandardRow,
+} from '../models/catalog';
+import type { ProductData } from '../models/product';
 import ProductCard from '../components/ProductCard/ProductCard';
-import { formatGel, minPrice, productImageSrc } from '../utils/product';
+import { formatGel, minPrice, pickLabel, productImageSrc } from '../utils/product';
 import Placeholder from './Placeholder';
 import styles from './Product.module.css';
 
-const productMap = categoryProducts as Record<string, string[]>;
 const { company } = companyData;
 
-const symbolMap = (symbolsData as { symbols: Record<string, ProductSymbol[]> }).symbols;
+const productMap = categoryProducts as Record<string, string[]>;
 
-const extra = extraData as {
-  videos: Record<string, string>;
-  standards: Record<string, ProductStandard[]>;
-};
-
-const documentMap = documentsData as Record<string, ProductDocument[]>;
-const featureMap = featuresData as Record<string, ProductFeature[]>;
-
-const symbolUrls = import.meta.glob(
-  '../assets/symbols/*.{png,webp,svg}',
-  { eager: true, query: '?url', import: 'default' },
-) as Record<string, string>;
-
-const standardUrls = import.meta.glob(
-  '../assets/standards/*.{png,webp,svg}',
-  { eager: true, query: '?url', import: 'default' },
-) as Record<string, string>;
-
-function assetSrc(
-  urls: Record<string, string>,
-  file: string,
-): string {
-  const entry = Object.entries(urls).find(([path]) =>
-    path.endsWith(`/${file}`),
-  );
-  return entry ? entry[1] : '';
-}
-
-const symbolSrc = (file: string) => assetSrc(symbolUrls, file);
-const standardSrc = (file: string) => assetSrc(standardUrls, file);
-
-const isCert = (file: string) => file.startsWith('Logo_simbolo_');
-
-const certLabel = (t: TFunction, file: string) =>
-  file.includes('FUOCO')
-    ? t('productPage.certFire')
-    : file.includes('SISMICO')
-      ? t('productPage.certSeismic')
-      : file.includes('ETA')
-        ? t('productPage.certEta')
-        : t('productPage.certDefault');
-
-/* Reverse index: product id → its category, built once at module level
- * so per-render lookups are O(1) instead of scanning every category
- * list. The `has` guard preserves first-match order. */
-const productCategoryIndex = new Map<string, (typeof categories)[number]>();
-for (const entry of categories) {
-  for (const id of productMap[entry.slug] ?? []) {
-    if (!productCategoryIndex.has(id)) {
-      productCategoryIndex.set(id, entry);
-    }
-  }
-}
-
-function findCategory(productId: string) {
-  return productCategoryIndex.get(productId);
-}
+/* Category lookup comes straight from the catalog adapter. */
 
 const cell = (value: number | string | null) => value ?? '—';
 
@@ -156,7 +97,7 @@ function useProductData(id: string | undefined): ProductData | null {
   const { t, i18n } = useTranslation();
   const product = products.find((p) => p.id === id);
   if (!product) return null;
-  const category = findCategory(product.id);
+  const category = productCategory(product.id);
   const categoryLabel = category
     ? t(`categories.${category.slug}.label`, { defaultValue: category.label })
     : '';
@@ -169,19 +110,21 @@ function useProductData(id: string | undefined): ProductData | null {
   const priceRange = priceRangeText(prices);
   const sizeUnit =
     product.variants.length === 1 ? t('productPage.size') : t('productPage.sizes');
-  const symbols = symbolMap[product.id] ?? [];
+  /* Editor-written description wins; otherwise the auto-generated text. */
+  const customAbout =
+    i18n.language === 'ka' ? product.descriptionKa : product.descriptionEn;
   return {
     product,
     title: selectTitle(i18n.language, product),
     category,
     categoryLabel,
     related: findRelated(product.id, category),
-    specs: symbols.filter((s) => !isCert(s.icon)),
-    certs: symbols.filter((s) => isCert(s.icon)),
-    standards: extra.standards[product.id] ?? [],
-    documents: documentMap[product.id] ?? [],
-    features: featureMap[product.id] ?? [],
-    videoId: extra.videos[product.id],
+    specs: product.specs ?? [],
+    certs: product.certs ?? [],
+    standards: product.standards ?? [],
+    documents: product.documents ?? [],
+    features: product.features ?? [],
+    videoId: product.youtube ?? undefined,
     hasPrice: product.variants.some(
       (v) => typeof v.priceGel === 'number' && v.priceGel > 0,
     ),
@@ -190,16 +133,18 @@ function useProductData(id: string | undefined): ProductData | null {
     packs,
     priceRange,
     sizeUnit,
-    aboutText: buildAboutText(t, {
-      series: product.series,
-      count: product.variants.length,
-      sizeUnit,
-      category,
-      categoryLabel,
-      diameters,
-      lengths,
-      priceRange,
-    }),
+    aboutText:
+      (customAbout && customAbout.trim()) ||
+      buildAboutText(t, {
+        series: product.series,
+        count: product.variants.length,
+        sizeUnit,
+        category,
+        categoryLabel,
+        diameters,
+        lengths,
+        priceRange,
+      }),
   };
 }
 
@@ -220,8 +165,7 @@ export default function Product() {
 
       <div className={styles.hero}>
         <ProductHeroImage
-          productId={data.product.id}
-          series={data.product.series}
+          product={data.product}
           title={data.title}
         />
         <ProductMeta
@@ -230,7 +174,7 @@ export default function Product() {
           hasPrice={data.hasPrice}
         />
         <ProductInfo data={data} />
-        <ProductStandards standards={data.standards} certs={data.certs} />
+        <ProductStandards rows={[...data.standards, ...data.certs]} />
       </div>
 
       <ProductFeatures features={data.features} />
@@ -271,22 +215,20 @@ function ProductCrumbs({
 }
 
 function ProductHeroImage({
-  productId,
-  series,
+  product,
   title,
 }: {
-  productId: string;
-  series: string;
+  product: Product;
   title: string;
 }) {
-  const src = productImageSrc(productId);
+  const src = productImageSrc(product);
   return (
     <div className={styles.image}>
       {src ? (
-        <img src={src} alt={`${series} — ${title}`} />
+        <img src={src} alt={`${product.series} — ${title}`} />
       ) : (
         <span className={styles.ghost} aria-hidden="true">
-          {series}
+          {product.series}
         </span>
       )}
     </div>
@@ -352,10 +294,13 @@ function ProductInfo({ data }: { data: ProductData }) {
 
       {specs.length > 0 && (
         <ul className={styles.specs} aria-label={t('productPage.technicalData')}>
-          {specs.map((spec) => (
-            <li key={spec.icon} className={styles.spec}>
+          {specs.map((spec, index) => (
+            <li
+              key={`${spec.icon}-${index}`}
+              className={styles.spec}
+            >
               <img
-                src={symbolSrc(spec.icon)}
+                src={spec.icon}
                 alt={spec.label}
                 title={spec.label}
               />
@@ -403,64 +348,42 @@ function ProductInfo({ data }: { data: ProductData }) {
   );
 }
 
-function ProductStandards({
-  standards,
-  certs,
-}: {
-  standards: ProductStandard[];
-  certs: ProductSymbol[];
-}) {
-  const { t } = useTranslation();
+/* Standards & certifications box — normalized rows already carry resolved
+ * image URLs and display labels; standards rows come first (as before). */
+function ProductStandards({ rows }: { rows: StandardRow[] }) {
+  const { t, i18n } = useTranslation();
+  if (rows.length === 0) return null;
+  const lang = i18n.language;
   return (
     <aside className={styles.side}>
-      {standards.length > 0 ? (
-        <ul className={styles.standards} aria-label={t('productPage.standards')}>
-          {standards.map((item) => (
-            <li key={`${item.label}-${item.value}`} className={styles.standard}>
+      <ul className={styles.standards} aria-label={t('productPage.standards')}>
+        {rows.map((item, index) => {
+          const label = pickLabel(item, lang);
+          return (
+            <li key={`${index}-${label}`} className={styles.standard}>
               <img
                 className={styles.stdIcon}
-                src={standardSrc(item.icon)}
+                src={item.icon}
                 alt=""
                 aria-hidden="true"
               />
               <div>
-                {item.label ? (
-                  <p className={styles.stdLabel}>{item.label}</p>
-                ) : null}
+                {label ? <p className={styles.stdLabel}>{label}</p> : null}
                 {item.value ? (
                   <p className={styles.stdValue}>{item.value}</p>
                 ) : null}
                 {item.badge && (
                   <img
                     className={styles.stdBadge}
-                    src={standardSrc(item.badge)}
-                    alt={[item.label, item.value].filter(Boolean).join(' ')}
+                    src={item.badge}
+                    alt={[label, item.value].filter(Boolean).join(' ')}
                   />
                 )}
               </div>
             </li>
-          ))}
-        </ul>
-      ) : (
-        certs.length > 0 && (
-          <ul className={styles.standards} aria-label={t('productPage.standards')}>
-            {certs.map((cert) => (
-              <li key={cert.icon} className={styles.standard}>
-                <img
-                  className={styles.stdIcon}
-                  src={symbolSrc(cert.icon)}
-                  alt=""
-                  aria-hidden="true"
-                />
-                <div>
-                  <p className={styles.stdLabel}>{certLabel(t, cert.icon)}</p>
-                  <p className={styles.stdValue}>{cert.label}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )
-      )}
+          );
+        })}
+      </ul>
     </aside>
   );
 }
@@ -566,7 +489,7 @@ function VariantCards({ product }: { product: Product }) {
   );
 }
 
-function ProductFeatures({ features }: { features: ProductFeature[] }) {
+function ProductFeatures({ features }: { features: FeatureRow[] }) {
   const { t } = useTranslation();
   if (features.length === 0) return null;
   return (
@@ -603,7 +526,7 @@ function ProductFeatures({ features }: { features: ProductFeature[] }) {
   );
 }
 
-function ProductDocuments({ documents }: { documents: ProductDocument[] }) {
+function ProductDocuments({ documents }: { documents: DocumentRow[] }) {
   const { t } = useTranslation();
   if (documents.length === 0) return null;
   return (

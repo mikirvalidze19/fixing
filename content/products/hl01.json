@@ -1,0 +1,32 @@
+{
+  "id": "hl01",
+  "series": "HL01",
+  "titleEn": "Zinc-plated drop-in anchor",
+  "titleKa": "გამჭედი ანკერ დუბელი მოთუთიებული",
+  "category": "heavy-duty-metallic",
+  "youtube": null,
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 9,
+  "certifications": [],
+  "specs": [],
+  "standards": [],
+  "documents": [
+    {
+      "label": "Technical data sheet IT-EN | (1,022 KB)",
+      "url": "https://storage.onpage.it/21182441f53dbd6c2d71a1cfdb99fb45b3dc6d78/HL01%20-%20Technical%20Data%20Sheet_v.5.00_IT-EN.pdf"
+    }
+  ],
+  "features": [],
+  "variants": [
+    {
+      "sku": "HL 01 12 050",
+      "diameterMm": "M12",
+      "lengthMm": 50,
+      "unitsPerBox": 100,
+      "priceGel": 1.4,
+      "note": null
+    }
+  ]
+}

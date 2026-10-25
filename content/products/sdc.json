@@ -1,0 +1,97 @@
+{
+  "id": "sdc",
+  "series": "SDC",
+  "titleEn": "Zinc-plated self-drilling screw",
+  "titleKa": "თვითმჭრელი მოთუთიებული",
+  "category": "roofing-fixing-systems",
+  "youtube": "LgrV0heTM7o",
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 24,
+  "certifications": [],
+  "specs": [
+    {
+      "icon": "chiaveesagonale",
+      "label": "Across flat",
+      "value": "10"
+    },
+    {
+      "icon": "preforo-nonecessario",
+      "label": "Pre-drilling not required",
+      "value": null
+    },
+    {
+      "icon": "foraturaferro",
+      "label": "Drilling capacity",
+      "value": "Max 6 mm"
+    },
+    {
+      "icon": "velocita-foratura-autoperf",
+      "label": "Drilling speed",
+      "value": "1000-1800"
+    }
+  ],
+  "standards": [
+    {
+      "standard": "fire-reaction-logo-fuoco-a1-it",
+      "label": "Fire reaction",
+      "value": "A1"
+    },
+    {
+      "standard": "european-technical-assessment-eta-ce-tab-webp-logo-etace",
+      "label": "European Technical Assessment",
+      "value": "EAD 330047-01-0602"
+    }
+  ],
+  "documents": [
+    {
+      "label": "DoP - Declaration of Performance EN | (1 MB)",
+      "url": "https://storage.onpage.it/84a7360800b6db6126598cc7a07c7cb99401bb40/SD01-SDC-SDF_Declaration%20of%20Performance%20-%20v.1.04_EN.pdf"
+    },
+    {
+      "label": "ETA Certification - EN | (64 MB)",
+      "url": "https://storage.onpage.it/fcd8197bb53cf9dfe5269f13ddd0a676229a68a9/ETA-18-0713.pdf"
+    }
+  ],
+  "features": [
+    {
+      "label": "Key",
+      "value": "10"
+    },
+    {
+      "label": null,
+      "value": "Does not require pre-punching"
+    },
+    {
+      "label": "Drilling capacity",
+      "value": "6 mm"
+    },
+    {
+      "label": "Minimum thickness of the base metal support",
+      "value": "2 mm"
+    },
+    {
+      "label": "Drilling speed",
+      "value": "1000 ÷ 1800 rpm"
+    }
+  ],
+  "variants": [
+    {
+      "sku": "SDC 01 16 070",
+      "diameterMm": 6.3,
+      "lengthMm": 70,
+      "unitsPerBox": 100,
+      "priceGel": 0.56,
+      "note": null
+    },
+    {
+      "sku": "SDC 01 16 120",
+      "diameterMm": 6.3,
+      "lengthMm": 120,
+      "unitsPerBox": 100,
+      "priceGel": 0.82,
+      "note": null
+    }
+  ]
+}

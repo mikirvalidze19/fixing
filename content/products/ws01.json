@@ -1,0 +1,46 @@
+{
+  "id": "ws01",
+  "series": "WS01",
+  "titleEn": "Nylon plug for thermal-insulation materials",
+  "titleKa": "ნეილონის დუბელი თერმო საიზოლაციო მასალებისთვის",
+  "category": "drywall-hollow",
+  "youtube": null,
+  "image": null,
+  "descriptionEn": null,
+  "descriptionKa": null,
+  "groupNumber": 15,
+  "certifications": [],
+  "specs": [
+    {
+      "icon": "preforo-nonecessario",
+      "label": "Pre-drilling not required",
+      "value": null
+    }
+  ],
+  "standards": [],
+  "documents": [
+    {
+      "label": "Technical data sheet IT-EN | (411 KB)",
+      "url": "https://storage.onpage.it/de9adcf8f30a0cdab2389ba26df274e8ebb151c3/WS01%20-%20Technical%20Data%20Sheet_v.2.00_IT-EN.pdf"
+    }
+  ],
+  "features": [],
+  "variants": [
+    {
+      "sku": "WS 01 27 058",
+      "diameterMm": 33,
+      "lengthMm": 58,
+      "unitsPerBox": 25,
+      "priceGel": 2.46,
+      "note": null
+    },
+    {
+      "sku": "WS 01 27 090",
+      "diameterMm": 33,
+      "lengthMm": 90,
+      "unitsPerBox": 25,
+      "priceGel": 3.83,
+      "note": null
+    }
+  ]
+}
