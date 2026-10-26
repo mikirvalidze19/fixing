@@ -8,6 +8,11 @@
   "image": "/content/images/products/acm01.webp",
   "descriptionEn": "Zinc plated steel bar (one end threaded), with zinc plated hexagonal nut with zinc plated steel rhomboidal gasket with PE foam",
   "descriptionKa": "Zinc plated steel bar (one end threaded), with zinc plated hexagonal nut with zinc plated steel rhomboidal gasket with PE foam",
+  "certifications": [
+    "logo-simbolo-sismico",
+    "logo-simbolo-fuoco",
+    "logo-simbolo-eta"
+  ],
   "documents": [
     {
       "name": "Technical Data Sheet_v.2.00_IT-EN.pdf",
