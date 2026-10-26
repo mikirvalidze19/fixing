@@ -13,6 +13,14 @@
     "logo-simbolo-fuoco",
     "logo-simbolo-eta"
   ],
+  "standards": [
+    {
+      "value": "*EAD 330047-01-0602"
+    },
+    {
+      "value": "Fire reaction A1"
+    }
+  ],
   "documents": [
     {
       "name": "Technical Data Sheet_v.2.00_IT-EN.pdf",
