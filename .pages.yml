@@ -200,6 +200,15 @@ content:
             label: Text
             type: text
             required: true
+      - name: variantColumns
+        label: Price table columns (optional)
+        type: reference
+        options:
+          collection: tableHeaders
+          multiple: true
+          value: "{key}"
+          label: "{label}"
+        description: "Pick the columns in display order from the searchable list (leave empty for the standard table: SKU / Ø / Length / Units / Price / Note). Need a different header? Add it once under Table headers in the sidebar — it then appears here for every product. SKU and Price are still used for search and the 'from ₾' card price even when not shown in the table."
       - name: variants
         label: Variants (prices)
         type: object
@@ -229,6 +238,18 @@ content:
           - name: note
             label: Note
             type: string
+          - name: text1
+            label: Extra 1 value
+            type: string
+            description: Value for the custom column "Extra 1" if used in Price table columns
+          - name: text2
+            label: Extra 2 value
+            type: string
+            description: Value for the custom column "Extra 2" if used in Price table columns
+          - name: text3
+            label: Extra 3 value
+            type: string
+            description: Value for the custom column "Extra 3" if used in Price table columns
 
   # ------------------------------------------------------- badge library
   - name: badges
@@ -335,6 +356,56 @@ content:
         options:
           media: standards
           rename: safe
+
+  # ------------------------------------------------------- table headers library
+  - name: tableHeaders
+    label: Table headers
+    type: collection
+    path: content/headers
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: key
+      sort: key
+      order: asc
+    fields:
+      - name: key
+        label: Key (short code, lowercase)
+        type: string
+        required: true
+        pattern: "^[a-z0-9][a-z0-9-]*$"
+      - name: label
+        label: Header text (English)
+        type: string
+        required: true
+        description: Shown as the column title, e.g. Thread
+      - name: labelKa
+        label: Header text (Georgian)
+        type: string
+      - name: slot
+        label: What the column shows
+        type: select
+        required: true
+        options:
+          values:
+            - name: sku
+              label: SKU
+            - name: diameterMm
+              label: Diameter mm
+            - name: lengthMm
+              label: Length mm
+            - name: unitsPerBox
+              label: Units per box
+            - name: priceGel
+              label: Price GEL
+            - name: note
+              label: Note
+            - name: text1
+              label: Extra text 1
+            - name: text2
+              label: Extra text 2
+            - name: text3
+              label: Extra text 3
 
   # ------------------------------------------------------- featured on home
   - name: highlighted

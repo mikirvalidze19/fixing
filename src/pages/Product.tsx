@@ -15,6 +15,8 @@ import type {
   Product,
   ProductCategory,
   StandardRow,
+  Variant,
+  VariantColumn,
 } from '../models/catalog';
 import type { ProductData } from '../models/product';
 import ProductCard from '../components/ProductCard/ProductCard';
@@ -28,9 +30,47 @@ const productMap = categoryProducts as Record<string, string[]>;
 
 /* Category lookup comes straight from the catalog adapter. */
 
-const cell = (value: number | string | null) => value ?? '—';
+const cell = (value: number | string | null | undefined) => value ?? '—';
 
 /* Pure derivation helpers (ordinary functions — no JSX, no hooks). */
+
+/* Standard "Available variants" columns — identical for every product that
+ * has no custom `variantColumns` (localized as before). */
+function defaultColumns(t: TFunction): VariantColumn[] {
+  return [
+    { key: 'sku', slot: 'sku', label: t('productPage.colSku') },
+    { key: 'diameterMm', slot: 'diameterMm', label: t('productPage.colDiameter') },
+    { key: 'lengthMm', slot: 'lengthMm', label: t('productPage.colLength') },
+    { key: 'unitsPerBox', slot: 'unitsPerBox', label: t('productPage.colUnits') },
+    { key: 'priceGel', slot: 'priceGel', label: t('productPage.colPrice') },
+    { key: 'note', slot: 'note', label: t('productPage.colNote') },
+  ];
+}
+
+/* Cell text for one variant + data slot. Standard slots keep their exact
+ * legacy rendering (em dash when missing, formatted price). */
+function cellFor(variant: Variant, slot: string): string {
+  switch (slot) {
+    case 'sku':
+      return variant.sku;
+    case 'priceGel':
+      return typeof variant.priceGel === 'number'
+        ? formatGel(variant.priceGel)
+        : '—';
+    case 'diameterMm':
+      return String(cell(variant.diameterMm));
+    case 'lengthMm':
+      return String(cell(variant.lengthMm));
+    case 'unitsPerBox':
+      return String(cell(variant.unitsPerBox));
+    case 'note':
+      return String(cell(variant.note));
+    default: {
+      const value = (variant as unknown as Record<string, string | null>)[slot];
+      return String(cell(value));
+    }
+  }
+}
 
 function uniqNums(values: (number | string | null)[]): number[] {
   return [...new Set(values.filter((v): v is number => typeof v === 'number'))].sort(
@@ -124,6 +164,10 @@ function useProductData(id: string | undefined): ProductData | null {
     standards: product.standards ?? [],
     documents: product.documents ?? [],
     features: product.features ?? [],
+    columns:
+      product.variantColumns && product.variantColumns.length > 0
+        ? product.variantColumns
+        : defaultColumns(t),
     videoId: product.youtube ?? undefined,
     hasPrice: product.variants.some(
       (v) => typeof v.priceGel === 'number' && v.priceGel > 0,
@@ -179,9 +223,13 @@ export default function Product() {
 
       <ProductFeatures features={data.features} />
       <h2 className={styles.sectionTitle}>{t('productPage.availableVariants')}</h2>
-      <VariantTable product={data.product} />
+      <VariantTable product={data.product} columns={data.columns} />
       {/* key remount resets the open card on navigation — no reset effect */}
-      <VariantCards key={data.product.id} product={data.product} />
+      <VariantCards
+        key={data.product.id}
+        product={data.product}
+        columns={data.columns}
+      />
       <ProductDocuments documents={data.documents} />
       <ProductVideo videoId={data.videoId} series={data.product.series} />
       <RelatedProducts related={data.related} />
@@ -388,34 +436,47 @@ function ProductStandards({ rows }: { rows: StandardRow[] }) {
   );
 }
 
-function VariantTable({ product }: { product: Product }) {
-  const { t } = useTranslation();
+function VariantTable({
+  product,
+  columns,
+}: {
+  product: Product;
+  columns: VariantColumn[];
+}) {
+  const { i18n } = useTranslation();
   return (
     <div className={styles.tableWrap}>
       <table className={styles.table}>
         <thead>
           <tr>
-            <th scope="col">{t('productPage.colSku')}</th>
-            <th scope="col">{t('productPage.colDiameter')}</th>
-            <th scope="col">{t('productPage.colLength')}</th>
-            <th scope="col">{t('productPage.colUnits')}</th>
-            <th scope="col">{t('productPage.colPrice')}</th>
-            <th scope="col">{t('productPage.colNote')}</th>
+            {columns.map((col) => (
+              <th key={col.key} scope="col">
+                {pickLabel(col, i18n.language)}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
           {product.variants.map((v) => (
             <tr key={v.sku}>
-              <td data-label={t('productPage.colSku')} className={styles.sku}>
-                {v.sku}
-              </td>
-              <td data-label={t('productPage.colDiameter')}>{cell(v.diameterMm)}</td>
-              <td data-label={t('productPage.colLength')}>{cell(v.lengthMm)}</td>
-              <td data-label={t('productPage.colUnits')}>{v.unitsPerBox}</td>
-              <td data-label={t('productPage.colPrice')} className={styles.price}>
-                {formatGel(v.priceGel)}
-              </td>
-              <td data-label={t('productPage.colNote')}>{cell(v.note)}</td>
+              {columns.map((col) => {
+                const value = cellFor(v, col.slot);
+                return (
+                  <td
+                    key={col.key}
+                    data-label={pickLabel(col, i18n.language)}
+                    className={
+                      col.slot === 'sku'
+                        ? styles.sku
+                        : col.slot === 'priceGel'
+                          ? styles.price
+                          : undefined
+                    }
+                  >
+                    {value}
+                  </td>
+                );
+              })}
             </tr>
           ))}
         </tbody>
@@ -424,8 +485,14 @@ function VariantTable({ product }: { product: Product }) {
   );
 }
 
-function VariantCards({ product }: { product: Product }) {
-  const { t } = useTranslation();
+function VariantCards({
+  product,
+  columns,
+}: {
+  product: Product;
+  columns: VariantColumn[];
+}) {
+  const { t, i18n } = useTranslation();
   const [openSku, setOpenSku] = useState<string | null>(null);
   return (
     <ul className={styles.cards} aria-label={t('productPage.availableVariants')}>
@@ -459,26 +526,21 @@ function VariantCards({ product }: { product: Product }) {
             >
               <div className={styles.cardInner}>
                 <dl className={styles.details}>
-                  <div className={styles.detail}>
-                    <dt>{t('productPage.colDiameter')}</dt>
-                    <dd>{cell(v.diameterMm)}</dd>
-                  </div>
-                  <div className={styles.detail}>
-                    <dt>{t('productPage.colLength')}</dt>
-                    <dd>{cell(v.lengthMm)}</dd>
-                  </div>
-                  <div className={styles.detail}>
-                    <dt>{t('productPage.colUnits')}</dt>
-                    <dd>{v.unitsPerBox}</dd>
-                  </div>
-                  <div className={styles.detail}>
-                    <dt>{t('productPage.colPrice')}</dt>
-                    <dd className={styles.price}>{formatGel(v.priceGel)}</dd>
-                  </div>
-                  <div className={styles.detail}>
-                    <dt>{t('productPage.colNote')}</dt>
-                    <dd>{cell(v.note)}</dd>
-                  </div>
+                  {columns.map((col) => {
+                    const value = cellFor(v, col.slot);
+                    const label = pickLabel(col, i18n.language);
+                    return (
+                      <div
+                        key={col.key}
+                        className={styles.detail}
+                      >
+                        <dt>{label}</dt>
+                        <dd className={col.slot === 'priceGel' ? styles.price : undefined}>
+                          {value}
+                        </dd>
+                      </div>
+                    );
+                  })}
                 </dl>
               </div>
             </div>

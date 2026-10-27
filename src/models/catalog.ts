@@ -14,6 +14,23 @@ export type Variant = {
   unitsPerBox: number;
   priceGel: number;
   note: string | null;
+  /* Free slots for products whose price-table columns differ from the
+   * standard set. Headers are defined per product in `variantColumns`. */
+  text1?: string | null;
+  text2?: string | null;
+  text3?: string | null;
+};
+
+/* One price-table column. Editors build tables by picking entries from the
+ * shared "Table headers" library (content/headers/, managed like badges):
+ * each library entry carries the header text (EN/KA) and the `slot` of the
+ * Variant field it displays (sku, diameterMm, … or the free text1–text3
+ * slots). `key` is the library identity, `slot` the data it shows. */
+export type VariantColumn = {
+  key: string;
+  slot: string;
+  label: string;
+  labelKa?: string | null;
 };
 
 /* A spec-symbol row (small icon + label + optional value under the title).
@@ -67,6 +84,10 @@ export type Product = {
   image?: string | null;
   descriptionEn?: string | null;
   descriptionKa?: string | null;
+  /* Custom "Available variants" table columns, in display order. When
+   * absent the standard set (SKU / Ø / length / pcs per box / price / note)
+   * is used — localized as before. */
+  variantColumns?: VariantColumn[];
   specs?: SymbolRow[];
   certs?: CertRow[];
   standards?: StandardRow[];
@@ -123,4 +144,12 @@ export type StandardDef = {
   labelKa?: string | null;
   tab: string;
   badge?: string | null;
+};
+
+/* Price-table header definition (shared library, content/headers/). */
+export type TableHeaderDef = {
+  key: string;
+  label: string;
+  labelKa?: string | null;
+  slot: string;
 };

@@ -10,6 +10,7 @@ import type {
   ProductCategory,
   StandardRow,
   SymbolRow,
+  VariantColumn,
 } from './catalog';
 
 /* View-model assembled by useProductData for the Product page. */
@@ -24,6 +25,7 @@ export type ProductData = {
   standards: StandardRow[];
   documents: DocumentRow[];
   features: FeatureRow[];
+  columns: VariantColumn[];
   videoId: string | undefined;
   hasPrice: boolean;
   diameters: number[];

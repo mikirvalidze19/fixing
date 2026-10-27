@@ -22,7 +22,9 @@ import type {
   StandardDef,
   StandardRow,
   SymbolRow,
+  TableHeaderDef,
   Variant,
+  VariantColumn,
 } from '../models/catalog';
 import { libraryImageUrl } from './images';
 
@@ -47,6 +49,11 @@ const iconFiles = import.meta.glob<any>(
 
 const standardFiles = import.meta.glob<any>(
   '../../content/standards/*.json',
+  { eager: true, import: 'default' },
+);
+
+const headerFiles = import.meta.glob<any>(
+  '../../content/headers/*.json',
   { eager: true, import: 'default' },
 );
 
@@ -82,6 +89,7 @@ function indexByKey<T extends { key: string }>(
 export const badges = indexByKey<BadgeDef>(badgeFiles);
 export const specIcons = indexByKey<SpecIconDef>(iconFiles);
 export const standardDefs = indexByKey<StandardDef>(standardFiles);
+export const tableHeaders = indexByKey<TableHeaderDef>(headerFiles);
 
 /* --- Legacy seed fallback (only used while content/ is empty) ---------- */
 
@@ -148,6 +156,9 @@ type RawProduct = {
   standards?: (Partial<StandardRow> & { standard?: string })[] | null;
   documents?: (Partial<DocumentRow> & { name?: string; size?: string })[] | null;
   features?: (Partial<FeatureRow> & { label?: string | null; value?: string })[] | null;
+  /* Ordered header keys from the shared Table headers library, or the
+   * legacy inline-object format. */
+  variantColumns?: (string | (Partial<VariantColumn> & { key?: string }))[] | null;
   variants: Variant[];
 };
 
@@ -219,9 +230,50 @@ function normalizeFeatures(raw: RawProduct): FeatureRow[] {
  * strings. Both pass through untouched — the UI renders either. */
 function normalizeVariants(variants: Variant[]): Variant[] {
   return variants.map((v) => ({
+    text1: null,
+    text2: null,
+    text3: null,
     ...v,
     note: v.note ?? null,
   }));
+}
+
+/* Custom price-table columns. Editors pick ordered entries from the shared
+ * "Table headers" library (`content/headers/`). Accepts the reference
+ * format (bare keys) plus the older inline-object format for safety.
+ * Unknown or duplicate keys are ignored; slot defaults to the key. */
+function normalizeColumns(raw: RawProduct): VariantColumn[] {
+  const seen = new Set<string>();
+  const out: VariantColumn[] = [];
+  for (const entry of raw.variantColumns ?? []) {
+    let col: VariantColumn | null = null;
+    if (typeof entry === 'string') {
+      const def = tableHeaders[entry];
+      if (!def) {
+        console.warn(`[catalog] Unknown table header "${entry}" on product ${raw.id} — column skipped`);
+        continue;
+      }
+      if (seen.has(def.key)) continue;
+      seen.add(def.key);
+      col = {
+        key: def.key,
+        slot: def.slot || def.key,
+        label: def.label || def.key,
+        labelKa: def.labelKa ?? null,
+      };
+    } else if (entry && typeof entry === 'object' && entry.key) {
+      if (seen.has(entry.key)) continue;
+      seen.add(entry.key);
+      col = {
+        key: entry.key,
+        slot: entry.slot || entry.key,
+        label: entry.label || entry.key,
+        labelKa: entry.labelKa ?? null,
+      };
+    }
+    if (col) out.push(col);
+  }
+  return out;
 }
 
 function normalizeProduct(raw: RawProduct): Product {
@@ -238,6 +290,7 @@ function normalizeProduct(raw: RawProduct): Product {
     image: raw.image ?? null,
     descriptionEn: raw.descriptionEn ?? null,
     descriptionKa: raw.descriptionKa ?? null,
+    variantColumns: normalizeColumns(raw),
     specs: normalizeSpecs(raw),
     certs,
     standards: normalizeStandards(raw),
