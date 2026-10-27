@@ -69,7 +69,8 @@ variant row is just a `cells` array — **one value per column, in the same
 order**. Two picked columns → two cells; six picked columns → six cells.
 Rows are `cells`-only; legacy named-field rows (`"sku": "…"`,
 `"priceGel": 2.5`) are converted by the normalizer / `npm run migrate:table`
-and should not be used in new files.
+and should not be used in new files. Blank cells are a dash `-` (empty
+entries are rejected — the CMS drops them, which would misalign the row).
 
 2. Copy any product photo to `content/images/products/test-01.jpg`
    (any .jpg/.png/.webp works — the CMS will do this upload for the editor).

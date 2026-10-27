@@ -111,8 +111,8 @@
     {
       "cells": [
         "XWE 01 00 585",
-        null,
-        null,
+        "-",
+        "-",
         1,
         75.57,
         "epoxy; heavy constructions; C1/C2"
@@ -121,8 +121,8 @@
     {
       "cells": [
         "DGE 02 00 400",
-        null,
-        null,
+        "-",
+        "-",
         1,
         38.18,
         "vinylester; heavy constructions; C1/C2"
@@ -131,8 +131,8 @@
     {
       "cells": [
         "DGE 04 00 400",
-        null,
-        null,
+        "-",
+        "-",
         1,
         32.51,
         "hybrid two-component; medium-load constructions; C1/C2"
@@ -141,8 +141,8 @@
     {
       "cells": [
         "DGE 01 00 300",
-        null,
-        null,
+        "-",
+        "-",
         1,
         22.18,
         "light constructions"

@@ -47,6 +47,23 @@ const slotOfKey = new Map(LEGACY.map(([key, slot]) => [key, slot]));
 const SLOT_TYPE = new Map(LEGACY.map(([, slot, type]) => [slot, type]));
 const SLOT_ROLE = new Map(LEGACY.map(([, slot, , role]) => [slot, role]));
 
+/* --- 0. Blank-cell convention ------------------------------------------- */
+
+/* A blank printed cell is stored as a literal dash "-". WHY: Pages CMS
+ * strips null/"" values out of every array (lib/schema.ts sanitizeObject)
+ * when it loads a file into the editor AND when it saves it — an empty
+ * cell would shift all following values and misalign the row. Dashes are
+ * ordinary (non-empty) strings, so the round trip keeps every cell in
+ * place; the site itself treats dashes (and stray spaces) as blank. */
+const DASH = /^[-–—]*$/;
+
+function dashifyCell(value) {
+  if (typeof value === 'string') {
+    return DASH.test(value.trim()) ? '-' : value;
+  }
+  return value ?? '-';
+}
+
 /* --- 1. Column library -------------------------------------------------- */
 
 /* Read the old headers library. Returns defs keyed by header key plus a
@@ -134,19 +151,13 @@ function columnKeysFor(raw, headerDefs, warnings, id) {
 
 function migrateProduct(raw, headerDefs, warnings) {
   const variants = raw.variants ?? [];
-  /* Idempotency: cells-rows (or an already-explicit columns list with no
-   * variants) mean the file is already in the generic shape. */
-  if (variants.length > 0 && variants.every((v) => Array.isArray(v.cells))) return false;
-  if (variants.length === 0 && Array.isArray(raw.columns)) return false;
-
   const id = raw.id ?? '(no id)';
   const keys = columnKeysFor(raw, headerDefs, warnings, id);
 
   const cells = variants.map((variant) =>
     keys.map((key) => {
       const slot = headerDefs.get(key)?.slot ?? slotOfKey.get(key) ?? key;
-      const value = variant[slot];
-      return value === undefined ? null : value;
+      return dashifyCell(variant[slot]);
     }),
   );
 
@@ -156,7 +167,21 @@ function migrateProduct(raw, headerDefs, warnings) {
    * variantColumns position (after description) when present. */
   out.columns = keys;
   out.variants = cells.map((row) => ({ cells: row }));
-  return { out, keys };
+  return { out };
+}
+
+/* Blank cells → dashes for products already in the generic shape (the
+ * first migration run happened before the dash convention existed). */
+function dashifyProduct(raw) {
+  let changed = false;
+  const variants = (raw.variants ?? []).map((variant) => {
+    if (!Array.isArray(variant.cells)) return variant;
+    const cells = variant.cells.map(dashifyCell);
+    if (cells.some((cell, i) => cell !== variant.cells[i])) changed = true;
+    return { ...variant, cells };
+  });
+  if (!changed) return null;
+  return { out: { ...raw, variants } };
 }
 
 /* --- Run ----------------------------------------------------------------- */
@@ -166,25 +191,28 @@ const headerDefs = readHeaderDefs();
 const seededColumns = ensureColumnFiles(headerDefs);
 
 let converted = 0;
-let skipped = 0;
+let dashified = 0;
+let unchanged = 0;
 if (fs.existsSync(path.join(ROOT, PRODUCTS_DIR))) {
   for (const name of fs.readdirSync(path.join(ROOT, PRODUCTS_DIR))) {
     if (!name.endsWith('.json')) continue;
     const file = `${PRODUCTS_DIR}/${name}`;
     const raw = readJson(file);
-    const result = migrateProduct(raw, headerDefs, warnings);
-    if (result === false || result === undefined) {
-      skipped += 1;
-      continue;
-    }
+    const variants = raw.variants ?? [];
+    const isGeneric = variants.length > 0 && variants.every((v) => Array.isArray(v.cells));
+
+    const result = isGeneric
+      ? dashifyProduct(raw)
+      : variants.length > 0 || !Array.isArray(raw.columns)
+        ? migrateProduct(raw, headerDefs, warnings)
+        : null;
+
+    if (!result) { unchanged += 1; continue; }
     writeJson(file, result.out);
-    converted += 1;
+    if (isGeneric) dashified += 1; else converted += 1;
   }
 }
 
-/* Add display metadata to freshly seeded columns from the headers defs
- * (labels were already written in ensureColumnFiles). */
-
 console.log(`Columns library seeded/kept: ${seededColumns} new → ${COLUMNS_DIR}/`);
-console.log(`Products converted: ${converted} (already generic: ${skipped})`);
+console.log(`Products converted: ${converted}, blank cells dashified: ${dashified}, unchanged: ${unchanged}`);
 for (const w of warnings) console.warn(`WARNING: ${w}`);

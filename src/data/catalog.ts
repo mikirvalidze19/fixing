@@ -248,7 +248,7 @@ function normalizeSpecs(raw: RawProduct): SymbolRow[] {
     const ref = row.icon ?? '';
     const def = specIcons[ref];
     return {
-      icon: libraryImageUrl(def?.image ?? ref, 'symbols'),
+      icon: libraryImageUrl(def?.image ?? ref, 'icons'),
       label: row.label ?? def?.label ?? '',
       labelKa: row.labelKa ?? def?.labelKa ?? null,
       value: row.value ?? null,
@@ -267,7 +267,7 @@ function normalizeCerts(raw: RawProduct): CertRow[] {
     }
     return [
       {
-        icon: libraryImageUrl(def.image, 'symbols'),
+        icon: libraryImageUrl(def.image, 'badges'),
         label: def.label ?? '',
         labelKa: def.labelKa ?? null,
         value: def.value ?? null,
@@ -307,16 +307,22 @@ function normalizeFeatures(raw: RawProduct): FeatureRow[] {
   }));
 }
 
-/* "8", "4,8" → numbers so typed (sortable) columns behave like numbers;
- * anything unparseable stays text and blank stays null. */
+/* Blank-cell conventions: a blank printed cell is stored as a dash "-" in
+ * the content files (a CMS-real string — the CMS strips null/"" from
+ * arrays, which would misalign the table). Dashes, whitespace-only and
+ * empty cell values all mean "blank" here. Numeric-looking strings in
+ * number columns become numbers so typed columns behave like numbers. */
+const BLANK = /^[-–—]*$/; // plain / en / em dash, trimmed
+
 function toCell(value: unknown, type: ColumnType | null | undefined): number | string | null {
-  if (value === undefined || value === null || value === '') return null;
-  const trimmed = typeof value === 'string' ? value.trim() : value;
-  if (trimmed === '') return null;
-  if (type === 'number' && typeof trimmed === 'string' && /^-?\d+([.,]\d+)?$/.test(trimmed)) {
+  if (value === undefined || value === null) return null;
+  if (typeof value !== 'string') return value as number | string;
+  const trimmed = value.trim();
+  if (trimmed === '' || BLANK.test(trimmed)) return null;
+  if (type === 'number' && /^-?\d+([.,]\d+)?$/.test(trimmed)) {
     return Number(trimmed.replace(',', '.'));
   }
-  return trimmed as number | string;
+  return trimmed;
 }
 
 /* The product's pick in display order. Reads the generic `columns` field,

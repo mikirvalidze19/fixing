@@ -34,7 +34,7 @@ Open the editor → **Products** → **Add** and fill the form:
 | Documents | Name, optional size and full PDF link (hosted anywhere online). |
 | Technical features | The bullet list under "Technical features". |
 | Price table columns | **STEP 1 — pick these before adding variants.** Choose the columns this product's table uses from the shared **Table columns** list, in your display order (e.g. pick 3 columns out of 10 — the variant rows below will then show exactly those 3 inputs per row). Need a column that doesn't exist yet (e.g. "Thread")? Add it once under **Table columns** in the sidebar — header text EN/KA, type (Number/Text), optionally a special use (SKU / Price / Diameter / Length) — and it becomes selectable for every product from then on. |
-| Variants (prices) | **STEP 2 — the price rows.** One row per variant printed on the price list. Each row carries **one value per chosen column, in the same order** as the columns you picked above (standard order: SKU / Ø / Length / Units / Price / Note). Keep SKU values exactly as printed, e.g. `HX 21 08 080`; leave a value empty when the printed cell is blank. |
+| Variants (prices) | **STEP 2 — the price rows.** One row per variant printed on the price list. Each row carries **one value per chosen column, in the same order** as the columns you picked above (standard order: SKU / Ø / Length / Units / Price / Note). Keep SKU values exactly as printed, e.g. `HX 21 08 080`. For a cell that is **blank** on the price list, type `-` (one dash) — an empty entry is rejected, because it would shift the rest of the row. |
 
 Press **Save/Publish** → Pages CMS commits to GitHub → Cloudflare Pages publishes. Re-check the site in ~2 minutes.
 

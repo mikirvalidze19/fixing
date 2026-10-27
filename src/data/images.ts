@@ -1,10 +1,11 @@
 /* Media resolution.
- * Maps any image reference — a CMS-uploaded repo path (e.g.
- * "/content/images/products/hxe01.webp") or a legacy asset file name
- * (e.g. "Logo_simbolo_FUOCO.png") — to a build-time URL.
+ * All editor-managed artwork lives in `content/images/**` exactly like the
+ * CMS uploads it — a library def stores the repo path the CMS wrote (e.g.
+ * "/content/images/badges/Logo_simbolo_ETA.png"), product photos can also
+ * carry a CMS path. Each is resolved to a build-time URL here.
  *
- * CMS uploads live under content/images/**, legacy artwork stays in
- * src/assets/**. Both sets are indexed once at module load. */
+ * Bare file names/themes from the pre-2026 files are still matched by
+ * suffix (compatibility for old checkouts of content files). */
 
 const contentProductImages = import.meta.glob<string>(
   '../../content/images/products/*',
@@ -26,18 +27,10 @@ const contentStandardImages = import.meta.glob<string>(
   { eager: true, query: '?url', import: 'default' },
 );
 
+/* Legacy bundled product photos (one `<id>.webp` per product) — fallback
+ * for catalogue items that have not been re-uploaded through the CMS. */
 const legacyProductImages = import.meta.glob<string>(
   '../assets/products/*.webp',
-  { eager: true, query: '?url', import: 'default' },
-);
-
-const legacySymbolImages = import.meta.glob<string>(
-  '../assets/symbols/*.{png,webp,svg}',
-  { eager: true, query: '?url', import: 'default' },
-);
-
-const legacyStandardImages = import.meta.glob<string>(
-  '../assets/standards/*.{png,webp,svg}',
   { eager: true, query: '?url', import: 'default' },
 );
 
@@ -69,25 +62,24 @@ export function productImageUrl(id: string, stored?: string | null): string {
   return '';
 }
 
-/* Symbol/badge/spec-icon artwork: any of
- *  - a content path ("/content/images/{badges|icons|standards}/…"),
- *  - a library key present in the shared libraries,
- *  - a legacy file name in src/assets/symbols or src/assets/standards. */
-type LibraryKind = 'symbols' | 'standards';
+/* Library artwork (badges / spec icons / standards). Primary lookup is the
+ * artifact group folder; the other two folders act as a fallback so a
+ * typo'd group still resolves. */
+type LibraryKind = 'badges' | 'icons' | 'standards';
 
-export function libraryImageUrl(
-  ref: string,
-  kind: LibraryKind = 'symbols',
-): string {
-  if (!ref) return '';
-  const hasPath = ref.includes('/');
-  if (hasPath) {
-    const hit =
-      findBySuffix(contentBadgeImages, ref) ||
-      findBySuffix(contentIconImages, ref) ||
-      findBySuffix(contentStandardImages, ref);
+const LIBRARY_URLS: Record<LibraryKind, Record<string, string>> = {
+  badges: contentBadgeImages,
+  icons: contentIconImages,
+  standards: contentStandardImages,
+};
+const LIBRARY_KINDS: LibraryKind[] = ['badges', 'icons', 'standards'];
+
+export function libraryImageUrl(ref: string, kind: LibraryKind): string {
+  const primary = findBySuffix(LIBRARY_URLS[kind], ref);
+  if (primary) return primary;
+  for (const other of LIBRARY_KINDS.filter((k) => k !== kind)) {
+    const hit = findBySuffix(LIBRARY_URLS[other], ref);
     if (hit) return hit;
   }
-  const legacy = kind === 'symbols' ? legacySymbolImages : legacyStandardImages;
-  return findBySuffix(legacy, ref);
+  return '';
 }

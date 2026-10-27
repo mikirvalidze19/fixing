@@ -225,7 +225,9 @@ content:
             label: Values (one per chosen column, same order)
             type: string
             list: true
-            description: "One row item per cell of the price table, top to bottom as printed. Enter exactly one value per chosen column, in the SAME order as the Price table columns above (e.g. if you picked SKU / Ø / Price: \"HX 21 08 080\", \"8\", \"1.37\"). Leave an item empty when the printed cell is blank. Changed the column selection? Update these values to match the new order."
+            options:
+              minlength: 1
+            description: "One row item per cell of the price table, top to bottom as printed. Enter exactly one item per chosen column, in the SAME order as the Price table columns above (e.g. if you picked SKU / Ø / Price: \"HX 21 08 080\", \"8\", \"1.37\"). IMPORTANT: for a cell that is blank on the price list, type a single dash (-) — an empty entry is rejected, because the CMS would drop it and shift all following columns. Changed the column selection? Update these values to match the new order."
 
   # ------------------------------------------------------- badge library
   - name: badges

@@ -48,8 +48,8 @@ A product picks its columns and stores raw rows — the file *is* the table:
   "id": "hxe01",
   "columns": ["sku", "diametermm", "lengthmm", "unitsperbox", "pricegel", "note"],
   "variants": [
-    { "cells": ["HXE 01 08 080", "8", "80", "50", "1.51", null] },
-    { "cells": ["HXE 01 10 100", "10", "100", "25", "2.60", null] }
+    { "cells": ["HXE 01 08 080", "8", "80", "50", "1.51", "-"] },
+    { "cells": ["HXE 01 10 100", "10", "100", "25", "2.60", "-"] }
   ]
 }
 ```
@@ -57,10 +57,14 @@ A product picks its columns and stores raw rows — the file *is* the table:
 * `columns[i]` — key from the Column library, in display order (the subset the
   editor chose for **this** product: e.g. 3 columns out of 10 in the library).
 * `variants[n].cells[i]` — the value for `columns[i]`, positionally aligned.
-  Numbers stay numbers, blanks stay `null`.
+* **Blank cells are a literal dash `-`** (or `—` /empty/space — all treated
+  as blank by the site). Why a dash: Pages CMS *strips* null/"" values from
+  every array when it loads a file into its editor and when it saves — a
+  blank column value would shift every following cell. Dashes survive the
+  round trip, keep every position, and the site renders them as blank.
 * CMS flow for editors (Add product): **Step 1** pick columns (multi-select in
   the wanted display order) → **Step 2** each variant row offers exactly one
-  value per picked column.
+  value per picked column (`-` for blank cells; empty entries are rejected).
 
 ## Layer 3 — Normalized runtime model (`src/models/catalog.ts`)
 
