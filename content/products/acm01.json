@@ -1,0 +1,46 @@
+{
+  "id": "acm01",
+  "series": "ACM01",
+  "titleEn": "ACM01",
+  "titleKa": "ACM01",
+  "category": "roofing-fixing-systems",
+  "youtube": "https://youtu.be/LgrV0heTM7o?si=q9zLLdqdtX3W4pLw",
+  "image": "/content/images/products/acm01.webp",
+  "descriptionEn": "Zinc plated steel bar (one end threaded), with zinc plated hexagonal nut with zinc plated steel rhomboidal gasket with PE foam",
+  "descriptionKa": "Zinc plated steel bar (one end threaded), with zinc plated hexagonal nut with zinc plated steel rhomboidal gasket with PE foam",
+  "certifications": [
+    "logo-simbolo-sismico",
+    "logo-simbolo-fuoco",
+    "logo-simbolo-eta"
+  ],
+  "standards": [
+    {
+      "value": "*EAD 330047-01-0602"
+    },
+    {
+      "value": "Fire reaction A1"
+    }
+  ],
+  "documents": [
+    {
+      "name": "Technical Data Sheet_v.2.00_IT-EN.pdf",
+      "url": "https://storage.onpage.it/a5b538eba8b57ab5a50cb6e80659c2b0cbda7d7a/ACxx%20-%20Technical%20Data%20Sheet_v.2.00_IT-EN.pdf"
+    }
+  ],
+  "variants": [
+    {
+      "sku": "ACM 01 06 100",
+      "diameterMm": "10",
+      "lengthMm": "100",
+      "unitsPerBox": 100,
+      "priceGel": 25
+    },
+    {
+      "sku": "ACM 01 06 120",
+      "diameterMm": "10",
+      "lengthMm": "120",
+      "unitsPerBox": 20,
+      "priceGel": 40
+    }
+  ]
+}
