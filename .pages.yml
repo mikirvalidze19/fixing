@@ -209,25 +209,26 @@ content:
           multiple: true
           value: "{key}"
           label: "{label}"
-        description: "STEP 1 — choose which columns this product's price table uses, in display order, from the searchable Table columns list. If the site shows nothing useful here, add new columns once under Table columns in the sidebar (they then become available to every product). STEP 2 — each variant row below must carry exactly one value per chosen column, in this same order."
+        description: "STEP 1 — choose which columns this product's price table uses, in display order, from the searchable Table columns list (leave empty when the product has NO price table — the site then skips its variants section). If a needed column is missing, add it once under Table columns in the sidebar (it then becomes available to every product). STEP 2 — each variant row below then carries ONE line per chosen column, in this same order."
       - name: variants
         label: Variants (prices)
         type: object
+        # OPTIONAL — a product without a price table simply leaves this
+        # empty; the site then shows no variants section for it.
         list:
-          min: 1
           collapsible:
             collapsed: true
             summary: "Row {index}"
         fields:
           # STEP 2 of the variants flow: pick columns first (see `columns`
-          # above), then enter one value per column here.
-          - name: cells
-            label: Values (one per chosen column, same order)
-            type: string
-            list: true
-            options:
-              minlength: 1
-            description: "One row item per cell of the price table, top to bottom as printed. Enter exactly one item per chosen column, in the SAME order as the Price table columns above (e.g. if you picked SKU / Ø / Price: \"HX 21 08 080\", \"8\", \"1.37\"). IMPORTANT: for a cell that is blank on the price list, type a single dash (-) — an empty entry is rejected, because the CMS would drop it and shift all following columns. Changed the column selection? Update these values to match the new order."
+          # above), then type one value per line into each row. The whole
+          # row lives in ONE multiline text on purpose: multiline strings
+          # survive the CMS round trip, while empty list/array items get
+          # stripped — which would shift every following column of the row.
+          - name: values
+            label: Values (one column value per line, same order)
+            type: text
+            description: "ONE line per chosen column, in the SAME order as the Price table columns above. Example (SKU / Ø / Price chosen): line 1 \"HX 21 08 080\", line 2 \"8\", line 3 \"1.37\". A cell that is blank on the price list = an EMPTY line: press Enter and keep going. You may also stop early — any missing trailing line counts as a blank cell. Changed the column selection? Rewrite the lines to match the new order."
 
   # ------------------------------------------------------- badge library
   - name: badges

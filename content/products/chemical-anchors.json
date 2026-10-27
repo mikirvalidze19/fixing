@@ -109,44 +109,16 @@
   ],
   "variants": [
     {
-      "cells": [
-        "XWE 01 00 585",
-        "-",
-        "-",
-        1,
-        75.57,
-        "epoxy; heavy constructions; C1/C2"
-      ]
+      "values": "XWE 01 00 585\n\n\n1\n75.57\nepoxy; heavy constructions; C1/C2"
     },
     {
-      "cells": [
-        "DGE 02 00 400",
-        "-",
-        "-",
-        1,
-        38.18,
-        "vinylester; heavy constructions; C1/C2"
-      ]
+      "values": "DGE 02 00 400\n\n\n1\n38.18\nvinylester; heavy constructions; C1/C2"
     },
     {
-      "cells": [
-        "DGE 04 00 400",
-        "-",
-        "-",
-        1,
-        32.51,
-        "hybrid two-component; medium-load constructions; C1/C2"
-      ]
+      "values": "DGE 04 00 400\n\n\n1\n32.51\nhybrid two-component; medium-load constructions; C1/C2"
     },
     {
-      "cells": [
-        "DGE 01 00 300",
-        "-",
-        "-",
-        1,
-        22.18,
-        "light constructions"
-      ]
+      "values": "DGE 01 00 300\n\n\n1\n22.18\nlight constructions"
     }
   ],
   "columns": [

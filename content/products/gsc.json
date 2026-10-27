@@ -20,14 +20,7 @@
   "features": [],
   "variants": [
     {
-      "cells": [
-        "GSC 04 00 030",
-        "-",
-        "-",
-        100,
-        0.26,
-        "-"
-      ]
+      "values": "GSC 04 00 030\n\n\n100\n0.26"
     }
   ],
   "columns": [

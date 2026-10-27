@@ -129,8 +129,9 @@ function useProductData(id: string | undefined): ProductData | null {
     : '';
   const prices = priceValues(product);
   const priceRange = priceRangeText(prices);
+  const variantCount = product.variants.length;
   const sizeUnit =
-    product.variants.length === 1 ? t('productPage.size') : t('productPage.sizes');
+    variantCount === 1 ? t('productPage.size') : t('productPage.sizes');
   /* Editor-written description wins; otherwise the auto-generated text. */
   const customAbout =
     i18n.language === 'ka' ? product.descriptionKa : product.descriptionEn;
@@ -150,21 +151,28 @@ function useProductData(id: string | undefined): ProductData | null {
     columns: product.columns,
     facts: buildFacts(product),
     videoId: product.youtube ?? undefined,
+    /* The variants section renders only when a column pick exists AND the
+     * product actually has variant rows (table-less products). */
+    hasTable: product.columns.length > 0 && variantCount > 0,
     hasPrice: prices.some((price) => price > 0),
     priceRange,
     sizeUnit,
     aboutText:
       (customAbout && customAbout.trim()) ||
-      buildAboutText(t, {
-        series: product.series,
-        count: product.variants.length,
-        sizeUnit,
-        category,
-        categoryLabel,
-        diameters: diameterColumn ? uniqNums(columnNumbers(product, diameterColumn)) : [],
-        lengths: lengthColumn ? uniqNums(columnNumbers(product, lengthColumn)) : [],
-        priceRange,
-      }),
+      /* The auto text is built from the variants; without a table there
+       * is nothing honest to auto-report. */
+      (variantCount > 0
+        ? buildAboutText(t, {
+            series: product.series,
+            count: variantCount,
+            sizeUnit,
+            category,
+            categoryLabel,
+            diameters: diameterColumn ? uniqNums(columnNumbers(product, diameterColumn)) : [],
+            lengths: lengthColumn ? uniqNums(columnNumbers(product, lengthColumn)) : [],
+            priceRange,
+          })
+        : ''),
   };
 }
 
@@ -198,7 +206,7 @@ export default function Product() {
       </div>
 
       <ProductFeatures features={data.features} />
-      {data.columns.length > 0 && (
+      {data.hasTable && (
         <>
           <h2 className={styles.sectionTitle}>{t('productPage.availableVariants')}</h2>
           <VariantTable product={data.product} />
@@ -274,19 +282,24 @@ function ProductMeta({
   const { t } = useTranslation();
   return (
     <div className={styles.meta}>
-      <div className={styles.metaRow}>
-        <span className={styles.metaLabel}>{t('productPage.startingFrom')}</span>
-        <strong className={styles.metaPrice}>
-          {formatGel(minPrice(product))}
-        </strong>
-      </div>
-      <div className={styles.metaRow}>
-        <span className={styles.metaLabel}>{t('productPage.variants')}</span>
-        <span className={styles.metaValue}>
-          {product.variants.length}{' '}
-          {sizeUnit}
-        </span>
-      </div>
+      {/* Rows are hidden for table-less products — no invented ₾0.00. */}
+      {hasPrice && (
+        <div className={styles.metaRow}>
+          <span className={styles.metaLabel}>{t('productPage.startingFrom')}</span>
+          <strong className={styles.metaPrice}>
+            {formatGel(minPrice(product))}
+          </strong>
+        </div>
+      )}
+      {product.variants.length > 0 && (
+        <div className={styles.metaRow}>
+          <span className={styles.metaLabel}>{t('productPage.variants')}</span>
+          <span className={styles.metaValue}>
+            {product.variants.length}{' '}
+            {sizeUnit}
+          </span>
+        </div>
+      )}
       <div className={styles.actions}>
         {!hasPrice && (
           <a
@@ -317,7 +330,7 @@ function ProductInfo({ data }: { data: ProductData }) {
     <div className={styles.info}>
       <h1 className={styles.name}>{product.series}</h1>
       <p className={styles.desc}>{title}</p>
-      <p className={styles.about}>{aboutText}</p>
+      {aboutText ? <p className={styles.about}>{aboutText}</p> : null}
 
       {specs.length > 0 && (
         <ul className={styles.specs} aria-label={t('productPage.technicalData')}>

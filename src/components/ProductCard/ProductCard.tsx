@@ -75,14 +75,17 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
       </div>
 
-      <div className={styles.priceBar}>
-        <span className={styles.from}>{t('productCard.from')}</span>
-        <strong className={styles.amount}>{formatGel(minPrice(product))}</strong>
-        <span className={styles.variants}>
-          {product.variants.length}{' '}
-          {product.variants.length === 1 ? t('productCard.variant') : t('productCard.variants')}
-        </span>
-      </div>
+      {/* No table → no invented "from ₾0.00" strip. */}
+      {product.variants.length > 0 && (
+        <div className={styles.priceBar}>
+          <span className={styles.from}>{t('productCard.from')}</span>
+          <strong className={styles.amount}>{formatGel(minPrice(product))}</strong>
+          <span className={styles.variants}>
+            {product.variants.length}{' '}
+            {product.variants.length === 1 ? t('productCard.variant') : t('productCard.variants')}
+          </span>
+        </div>
+      )}
     </article>
   );
 }

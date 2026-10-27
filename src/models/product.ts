@@ -34,8 +34,10 @@ export type ProductData = {
   documents: DocumentRow[];
   features: FeatureRow[];
   /* The variant table — fully generic, editors pick its columns per
-   * product from the shared Table columns library. */
+   * product from the shared Table columns library. False for table-less
+   * products (no column pick picked or no variant rows at all). */
   columns: VariantColumn[];
+  hasTable: boolean;
   facts: ValueFact[];
   videoId: string | undefined;
   hasPrice: boolean;

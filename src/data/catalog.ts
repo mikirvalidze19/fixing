@@ -6,8 +6,10 @@
  *
  * Products carry a generic variant table (docs/TABLE-ARCHITECTURE.md):
  * `columns` picks entries of the "Table columns" library and every variant
- * row stores one positional `cells` value per column. Pre-2026 files
- * (named fields + `variantColumns` slots) are converted here once.
+ * row keeps its values in one multiline `values` text — ONE line per
+ * column, with an empty line marking a blank cell (missing trailing lines
+ * are blank too). Pre-2026 files (named fields + `variantColumns` slots)
+ * and the earlier positional `cells` arrays are converted here.
  *
  * Consumers import: products, categories, categoryProducts,
  * productCategoryIndex, badges, specIcons, standardDefs, youtubeId. */
@@ -224,13 +226,14 @@ type RawProduct = {
   columns?: (string | (Partial<VariantColumn> & { key?: string }))[] | null;
   /* Pre-2026 shape (reference keys or inline objects). */
   variantColumns?: (string | (Partial<VariantColumn> & { key?: string }))[] | null;
-  /* Positions rows (generic) or legacy named-field rows. */
+  /* `values` rows (generic) or legacy named-field/`cells` rows. */
   variants?: Variant[] | LegacyVariant[];
 };
 
-/* Legacy named-field row. Never written anymore (see
- * scripts/migrate-table-columns.mjs) but still parsed so old checkouts and
- * the emergency seed keep rendering. */
+/* Non-current row shapes, still parsed so old checkouts and the
+ * emergency seed keep rendering: positional `cells` arrays (the first CMS
+ * flow) and pre-2026 named fields. Neither is written anymore —
+ * scripts/migrate-table-columns.mjs converts files to `values` text. */
 type LegacyVariant = Partial<{
   sku: string;
   diameterMm: number | string | null;
@@ -241,7 +244,7 @@ type LegacyVariant = Partial<{
   text1: string | null;
   text2: string | null;
   text3: string | null;
-}> & { cells?: unknown[] };
+}> & { cells?: unknown[]; values?: string | null };
 
 function normalizeSpecs(raw: RawProduct): SymbolRow[] {
   return (raw.specs ?? []).map((row) => {
@@ -307,10 +310,10 @@ function normalizeFeatures(raw: RawProduct): FeatureRow[] {
   }));
 }
 
-/* Blank-cell conventions: a blank printed cell is stored as a dash "-" in
- * the content files (a CMS-real string — the CMS strips null/"" from
- * arrays, which would misalign the table). Dashes, whitespace-only and
- * empty cell values all mean "blank" here. Numeric-looking strings in
+/* Blank cells: an empty, whitespace-only or dash-only value all mean
+ * "blank" (the dash was the earlier storage convention; the current one —
+ * docs/TABLE-ARCHITECTURE.md — keeps row values in a multiline `values`
+ * text where an empty line is the blank cell). Numeric-looking strings in
  * number columns become numbers so typed columns behave like numbers. */
 const BLANK = /^[-–—]*$/; // plain / en / em dash, trimmed
 
@@ -385,19 +388,25 @@ function legacySlot(column: VariantColumn): string {
 }
 
 /* Normalizes one variant to positional cells aligned with the columns.
- * Cells rows (CMS flow) map by index; named-field rows (pre-2026) look up
- * the old slot of each column. Rows are always pad/trimmed to the column
- * count so the table stays grid-aligned whatever editors typed. */
+ * `values` rows (CMS flow) are one line per column: an empty or dash-only
+ * line is a blank cell, and missing trailing lines are blank too — the
+ * editor may stop typing early. Legacy `cells` arrays map by index;
+ * pre-2026 named-field rows look up the old slot of each column. Rows are
+ * always pad/trimmed to the column count so the table stays grid-aligned
+ * whatever editors typed. */
 function normalizeVariant(
   source: Variant | LegacyVariant,
   columns: VariantColumn[],
 ): Variant {
-  const cells = Array.isArray((source as LegacyVariant).cells)
-    ? (source as LegacyVariant).cells ?? []
-    : columns.map((column) => {
-        const value = (source as Record<string, unknown>)[legacySlot(column)];
-        return value === undefined ? null : value;
-      });
+  const row = source as LegacyVariant;
+  const cells = typeof row.values === 'string'
+    ? row.values.split(/\r?\n/)
+    : Array.isArray(row.cells)
+      ? row.cells ?? []
+      : columns.map((column) => {
+          const value = (source as Record<string, unknown>)[legacySlot(column)];
+          return value === undefined ? null : value;
+        });
   return {
     cells: columns.map((column, index) => toCell(cells[index], column.type)),
   };

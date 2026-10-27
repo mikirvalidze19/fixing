@@ -57,7 +57,7 @@ This shows exactly how the CMS will store an editor's work:
   "columns": ["sku", "pricegel"],
   "variants": [
     {
-      "cells": ["TST 01 10 100", "2.50"]
+      "values": "TST 01 10 100\n2.50"
     }
   ]
 }
@@ -65,12 +65,14 @@ This shows exactly how the CMS will store an editor's work:
 
 This is the **"pick columns first, then values" flow**: `columns` lists the
 keys of the Table columns the product uses, in display order, and each
-variant row is just a `cells` array — **one value per column, in the same
-order**. Two picked columns → two cells; six picked columns → six cells.
-Rows are `cells`-only; legacy named-field rows (`"sku": "…"`,
-`"priceGel": 2.5`) are converted by the normalizer / `npm run migrate:table`
-and should not be used in new files. Blank cells are a dash `-` (empty
-entries are rejected — the CMS drops them, which would misalign the row).
+variant row is one `values` multiline string — **one line per column, in
+the same order**. Two picked columns → two lines; six picked columns → six
+lines. A cell that is blank on the price list is an **empty line** (the CMS
+strips empty entries out of real arrays, which would misalign the row — a
+multiline string is safe). You may also stop early: the site pads missing
+trailing lines with blanks. Legacy rows (`"cells": [...]` arrays or named
+fields like `"sku": "…"`) are converted by the normalizer /
+`npm run migrate:table` and should not be used in new files.
 
 2. Copy any product photo to `content/images/products/test-01.jpg`
    (any .jpg/.png/.webp works — the CMS will do this upload for the editor).

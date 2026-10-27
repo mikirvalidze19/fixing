@@ -1,4 +1,4 @@
-/* One-time migration to the generic variant-table architecture
+/* One-time migrations for the generic variant-table architecture
  * (docs/TABLE-ARCHITECTURE.md):
  *
  *   1. content/headers/*.json  → content/table-columns/*.json
@@ -7,12 +7,18 @@
  *      (text/number) and an optional feature `role` (sku/price/diameter/
  *      length). Existing table-columns files are never overwritten.
  *
- *   2. content/products/*.json → generic table shape
- *      `variantColumns` (+ the old named fields sku/diameterMm/…) become
- *      `columns: [key, …]` + `variants: [{ cells: [value, …] }]`,
- *      positionally aligned with the columns. Raw values keep their type.
+ *   2. content/products/*.json → the current table shape:
+ *      `columns: [key, …]` + per-variant `values` — a single multiline
+ *      string with ONE line per picked column. A blank printed cell is an
+ *      empty (or dash-only) line; missing trailing lines count as blank.
+ *      WHY text-not-list: Pages CMS strips null/"" items out of every
+ *      ARRAY on load and save (lib/schema.ts sanitizeObject), which
+ *      misaligned rows — multiline strings survive the round trip.
  *
- * Idempotent: products whose variants are already cells-rows are skipped.
+ * Handles every historical shape, idempotently (run again → no changes):
+ *   a) named-field rows (sku/diameterMm/…) + `variantColumns` → columns+values
+ *   b) positional `cells` arrays → `values` text (dash → empty line)
+ *   c) `values` rows stay as-is; an absent `columns` pick is added.
  *
  * Run from the repo root:  node scripts/migrate-table-columns.mjs
  */
@@ -47,21 +53,25 @@ const slotOfKey = new Map(LEGACY.map(([key, slot]) => [key, slot]));
 const SLOT_TYPE = new Map(LEGACY.map(([, slot, type]) => [slot, type]));
 const SLOT_ROLE = new Map(LEGACY.map(([, slot, , role]) => [slot, role]));
 
-/* --- 0. Blank-cell convention ------------------------------------------- */
+/* --- 0. Blank-cell conventions ------------------------------------------- */
 
-/* A blank printed cell is stored as a literal dash "-". WHY: Pages CMS
- * strips null/"" values out of every array (lib/schema.ts sanitizeObject)
- * when it loads a file into the editor AND when it saves it — an empty
- * cell would shift all following values and misalign the row. Dashes are
- * ordinary (non-empty) strings, so the round trip keeps every cell in
- * place; the site itself treats dashes (and stray spaces) as blank. */
+/* Blank anywhere in any shape: empty, whitespace-only or a dash-only
+ * string (the dash was an earlier storage convention, still tolerated on
+ * read — see scripts history; the CMS cannot round-trip empty array
+ * items, which is why blank values live in multiline text now). */
 const DASH = /^[-–—]*$/;
+const isBlank = (value) =>
+  value === null ||
+  value === undefined ||
+  (typeof value === 'string' && (value.trim() === '' || DASH.test(value.trim())));
 
-function dashifyCell(value) {
-  if (typeof value === 'string') {
-    return DASH.test(value.trim()) ? '-' : value;
-  }
-  return value ?? '-';
+/* One positional row → the `values` text: one line per column, empty line
+ * = blank cell. Trailing blanks are inferable (the app pads short rows to
+ * the column count), so they are trimmed off. */
+function rowValues(cells) {
+  const lines = (cells ?? []).map((value) => (isBlank(value) ? '' : String(value)));
+  while (lines.length > 0 && lines[lines.length - 1] === '') lines.pop();
+  return lines.join('\n');
 }
 
 /* --- 1. Column library -------------------------------------------------- */
@@ -149,36 +159,37 @@ function columnKeysFor(raw, headerDefs, warnings, id) {
   return known.length > 0 ? known : [...STANDARD_KEYS];
 }
 
+/* Shape (a) — legacy named-field rows → columns + `values` text. */
 function migrateProduct(raw, headerDefs, warnings) {
   const variants = raw.variants ?? [];
   const id = raw.id ?? '(no id)';
   const keys = columnKeysFor(raw, headerDefs, warnings, id);
 
-  const cells = variants.map((variant) =>
+  const rows = variants.map((variant) =>
     keys.map((key) => {
       const slot = headerDefs.get(key)?.slot ?? slotOfKey.get(key) ?? key;
-      return dashifyCell(variant[slot]);
+      const value = variant[slot];
+      return value === undefined ? null : value;
     }),
   );
 
   const out = { ...raw };
   delete out.variantColumns;
-  /* Preserve field order semantics: columns mirror the original
-   * variantColumns position (after description) when present. */
   out.columns = keys;
-  out.variants = cells.map((row) => ({ cells: row }));
+  out.variants = rows.map((cells) => ({ values: rowValues(cells) }));
   return { out };
 }
 
-/* Blank cells → dashes for products already in the generic shape (the
- * first migration run happened before the dash convention existed). */
-function dashifyProduct(raw) {
+/* Shape (b) — positional `cells` arrays → `values` text. */
+function valuesProduct(raw) {
   let changed = false;
   const variants = (raw.variants ?? []).map((variant) => {
     if (!Array.isArray(variant.cells)) return variant;
-    const cells = variant.cells.map(dashifyCell);
-    if (cells.some((cell, i) => cell !== variant.cells[i])) changed = true;
-    return { ...variant, cells };
+    const out = { ...variant };
+    delete out.cells;
+    out.values = rowValues(variant.cells);
+    changed = true;
+    return out;
   });
   if (!changed) return null;
   return { out: { ...raw, variants } };
@@ -190,29 +201,45 @@ const warnings = [];
 const headerDefs = readHeaderDefs();
 const seededColumns = ensureColumnFiles(headerDefs);
 
-let converted = 0;
-let dashified = 0;
+let converted = 0; // shape (a): legacy named fields
+let reshaped = 0; // shape (b) → values, or an explicit columns pick added
 let unchanged = 0;
+
 if (fs.existsSync(path.join(ROOT, PRODUCTS_DIR))) {
   for (const name of fs.readdirSync(path.join(ROOT, PRODUCTS_DIR))) {
     if (!name.endsWith('.json')) continue;
     const file = `${PRODUCTS_DIR}/${name}`;
     const raw = readJson(file);
     const variants = raw.variants ?? [];
-    const isGeneric = variants.length > 0 && variants.every((v) => Array.isArray(v.cells));
+    const hasNamedRows = variants.length > 0 && !variants.every(
+      (v) => Array.isArray(v.cells) || typeof v.values === 'string',
+    );
+    const hasCellsRows = variants.some((v) => Array.isArray(v.cells));
 
-    const result = isGeneric
-      ? dashifyProduct(raw)
-      : variants.length > 0 || !Array.isArray(raw.columns)
-        ? migrateProduct(raw, headerDefs, warnings)
-        : null;
+    let result = null;
+    if (hasNamedRows) {
+      /* Mixed named/cells files are not expected — cells rows would be
+       * dropped here; migrate them with a dedicated run if that ever
+       * shows up in the data. */
+      result = migrateProduct(raw, headerDefs, warnings);
+      converted += 1;
+    } else if (!Array.isArray(raw.columns)) {
+      /* Make the column pick explicit: the standard six for legacy-with-
+       * variants files, none for products without a table. */
+      result = {
+        out: { ...raw, columns: variants.length > 0 ? [...STANDARD_KEYS] : [] },
+      };
+      reshaped += 1;
+    } else if (hasCellsRows) {
+      result = valuesProduct(raw);
+      reshaped += 1;
+    }
 
     if (!result) { unchanged += 1; continue; }
     writeJson(file, result.out);
-    if (isGeneric) dashified += 1; else converted += 1;
   }
 }
 
 console.log(`Columns library seeded/kept: ${seededColumns} new → ${COLUMNS_DIR}/`);
-console.log(`Products converted: ${converted}, blank cells dashified: ${dashified}, unchanged: ${unchanged}`);
+console.log(`Products: ${converted} legacy converted, ${reshaped} reshaped to values text, ${unchanged} unchanged`);
 for (const w of warnings) console.warn(`WARNING: ${w}`);

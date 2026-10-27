@@ -33,44 +33,16 @@
   "features": [],
   "variants": [
     {
-      "cells": [
-        "ZZE 21 10 130",
-        10,
-        130,
-        200,
-        0.91,
-        "metal nail"
-      ]
+      "values": "ZZE 21 10 130\n10\n130\n200\n0.91\nmetal nail"
     },
     {
-      "cells": [
-        "ZZE 21 10 090",
-        10,
-        90,
-        200,
-        0.74,
-        "metal nail"
-      ]
+      "values": "ZZE 21 10 090\n10\n90\n200\n0.74\nmetal nail"
     },
     {
-      "cells": [
-        "ZZE 01 10 130",
-        10,
-        130,
-        200,
-        0.55,
-        "nylon nail"
-      ]
+      "values": "ZZE 01 10 130\n10\n130\n200\n0.55\nnylon nail"
     },
     {
-      "cells": [
-        "ZZE 01 10 090",
-        10,
-        90,
-        200,
-        0.43,
-        "nylon nail"
-      ]
+      "values": "ZZE 01 10 090\n10\n90\n200\n0.43\nnylon nail"
     }
   ],
   "columns": [

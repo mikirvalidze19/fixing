@@ -48,23 +48,24 @@ A product picks its columns and stores raw rows — the file *is* the table:
   "id": "hxe01",
   "columns": ["sku", "diametermm", "lengthmm", "unitsperbox", "pricegel", "note"],
   "variants": [
-    { "cells": ["HXE 01 08 080", "8", "80", "50", "1.51", "-"] },
-    { "cells": ["HXE 01 10 100", "10", "100", "25", "2.60", "-"] }
+    { "values": "HXE 01 08 080\n8\n80\n50\n1.51" }
   ]
 }
 ```
 
 * `columns[i]` — key from the Column library, in display order (the subset the
   editor chose for **this** product: e.g. 3 columns out of 10 in the library).
-* `variants[n].cells[i]` — the value for `columns[i]`, positionally aligned.
-* **Blank cells are a literal dash `-`** (or `—` /empty/space — all treated
-  as blank by the site). Why a dash: Pages CMS *strips* null/"" values from
-  every array when it loads a file into its editor and when it saves — a
-  blank column value would shift every following cell. Dashes survive the
-  round trip, keep every position, and the site renders them as blank.
-* CMS flow for editors (Add product): **Step 1** pick columns (multi-select in
-  the wanted display order) → **Step 2** each variant row offers exactly one
-  value per picked column (`-` for blank cells; empty entries are rejected).
+* `variants[n].values` — ONE multiline text: line *i* is the value for
+  `columns[i]`, in order. An **empty line is a blank cell**, and missing
+  trailing lines are blank too (the app pads short rows to the column count).
+* **Why a multiline string and not a list:** Pages CMS strips null/"" items
+  out of every array when it loads a file into its editor and when it saves
+  (its `sanitizeObject`), which would shift every following cell of a row.
+  Multiline strings survive the round trip untouched — an empty line can
+  never vanish, so blank cells stay exactly where the editor typed them.
+* A product **without a price table** simply has no `variants` (and no
+  `columns` pick): the CMS variants list is optional and the site gates the
+  variants section plus the price/count rows on `variants.length > 0`.
 
 ## Layer 3 — Normalized runtime model (`src/models/catalog.ts`)
 
@@ -77,12 +78,14 @@ type Product       = { …; columns: VariantColumn[]; variants: Variant[] };
 `src/data/catalog.ts` normalizes once, at build time:
 
 1. resolves `columns` keys against the library (unknown keys dropped, order kept);
-2. converts each cell by its column's `type` ("8" → 8 for number columns);
-3. pads/trims cells to the column count (`null` where the printed cell is blank);
-4. legacy support: `variantColumns` (old reference shape) and named-field rows
-   (`sku`, `diameterMm`, … — the pre-2026 files and the emergency seed in
-   `tecfi-georgia-planning/data/products.json`) are converted to the new shape
-   by a slot→column-key map. Only the *normalizer* knows legacy shapes.
+2. splits each row's `values` text on newlines → one positional cell per line;
+3. converts each cell by its column's `type` ("8" → 8 for number columns);
+4. pads/trims rows to the column count (`null` where the printed cell is blank);
+5. legacy support: `variantColumns` (old reference shape), positional `cells`
+   arrays and named-field rows (`sku`, `diameterMm`, … — the pre-2026 files
+   and the emergency seed in `tecfi-georgia-planning/data/products.json`) are
+   converted to the current shape by a slot→column-key map. Only the
+   *normalizer* knows legacy shapes.
 
 ## Runtime helpers (`src/utils/table.ts`)
 
@@ -96,7 +99,9 @@ type Product       = { …; columns: VariantColumn[]; variants: Variant[] };
 ## Consumers
 
 * **Product page** — `VariantTable` / `VariantCards` render `columns × cells`
-  purely generically; only visual styling keys off `role`.
+  purely generically; only visual styling keys off `role`. The section only
+  renders when the product has both columns and rows — table-less products
+  skip it (and the price/count rows on page and cards).
 * **Facts strip** — every picked `number` column becomes a "Label: 8, 10, 12"
   fact; `price` role additionally feeds the price range.
 * **Auto description** — "…offers N sizes [in category] [, diameters a–b mm]
@@ -107,8 +112,10 @@ type Product       = { …; columns: VariantColumn[]; variants: Variant[] };
 
 ## Migration / scripts
 
-* `scripts/migrate-table-columns.mjs` — one-time conversion (idempotent):
-  seeds `content/table-columns/` from the old headers, rewrites every product
-  to `columns` + `cells`, prints a report. Old `content/headers/` is removed.
+* `scripts/migrate-table-columns.mjs` — conversion script (idempotent):
+  seeds `content/table-columns/` from the old headers, converts every
+  product to the current shape (`columns` + `values` text — from legacy
+  named fields or the early `cells` arrays), prints a report. Old
+  `content/headers/` is removed.
 * Legacy seed stays as an emergency fallback for the (never expected) case of
   an empty `content/products/` — the normalizer converts it on the fly.
