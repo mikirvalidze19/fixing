@@ -159,7 +159,10 @@ type RawProduct = {
   /* Ordered header keys from the shared Table headers library, or the
    * legacy inline-object format. */
   variantColumns?: (string | (Partial<VariantColumn> & { key?: string }))[] | null;
-  variants: Variant[];
+  /* CMS rows are positional: `cells[i]` holds the value for table column i
+   * (order of the picked variantColumns, or the standard set). Existing
+   * files keep the named-field shape. */
+  variants?: (Partial<Variant> & { cells?: string[] | null })[];
 };
 
 function normalizeSpecs(raw: RawProduct): SymbolRow[] {
@@ -227,15 +230,95 @@ function normalizeFeatures(raw: RawProduct): FeatureRow[] {
 }
 
 /* Legacy JSON keeps numbers where the PDF had them; the CMS stores plain
- * strings. Both pass through untouched — the UI renders either. */
-function normalizeVariants(variants: Variant[]): Variant[] {
-  return variants.map((v) => ({
-    text1: null,
-    text2: null,
-    text3: null,
-    ...v,
-    note: v.note ?? null,
-  }));
+ * strings. Both pass through untouched — the UI renders either.
+ * The cells-based shape supports the CMS flow: the editor first picks the
+ * table columns (variantColumns → ordered slots or the standard set), then
+ * each variant row carries one value per column, in the same order. */
+const STANDARD_SLOTS = ['sku', 'diameterMm', 'lengthMm', 'unitsPerBox', 'priceGel', 'note'];
+
+function toNumber(value: unknown): number {
+  if (typeof value === 'number' && Number.isFinite(value)) return value;
+  if (typeof value !== 'string') return 0;
+  const n = Number(value.trim().replace(',', '.'));
+  return Number.isFinite(n) ? n : 0;
+}
+
+/* Numbers stored as strings ("8", "4.8") become numbers so the size/price
+ * facts (unique numeric lists) keep working; anything else stays text. */
+function smartValue(value: unknown): number | string | null {
+  if (value === undefined || value === null) return null;
+  const raw = typeof value === 'string' ? value.trim() : value;
+  if (raw === '') return null;
+  if (typeof raw === 'string' && /^-?\d+([.,]\d+)?$/.test(raw)) {
+    return Number(raw.replace(',', '.'));
+  }
+  return raw as number | string;
+}
+
+function normalizeVariants(raw: RawProduct): Variant[] {
+  const slots = raw.variantColumns?.length
+    ? normalizeColumns(raw).map((c) => c.slot)
+    : STANDARD_SLOTS;
+  return (raw.variants ?? []).map((v) => {
+    /* cells-based rows (CMS flow) */
+    if (Array.isArray(v.cells)) {
+      const row: Variant = {
+        sku: '',
+        diameterMm: null,
+        lengthMm: null,
+        unitsPerBox: 0,
+        priceGel: 0,
+        note: null,
+        text1: null,
+        text2: null,
+        text3: null,
+      };
+      slots.forEach((slot, i) => {
+        const value = v.cells?.[i];
+        if (value === undefined || value === null || value === '') return;
+        switch (slot) {
+          case 'sku':
+            row.sku = String(value).trim();
+            break;
+          case 'priceGel':
+            row.priceGel = toNumber(value);
+            break;
+          case 'unitsPerBox':
+            row.unitsPerBox = toNumber(value);
+            break;
+          case 'diameterMm':
+            row.diameterMm = smartValue(value);
+            break;
+          case 'lengthMm':
+            row.lengthMm = smartValue(value);
+            break;
+          case 'note':
+            row.note = String(value);
+            break;
+          case 'text1':
+          case 'text2':
+          case 'text3':
+            row[slot] = String(value);
+            break;
+          default:
+            break;
+        }
+      });
+      return row;
+    }
+    /* semantic rows (existing files) */
+    return {
+      sku: v.sku ?? '',
+      diameterMm: v.diameterMm ?? null,
+      lengthMm: v.lengthMm ?? null,
+      unitsPerBox: v.unitsPerBox ?? 0,
+      priceGel: v.priceGel ?? 0,
+      note: v.note ?? null,
+      text1: v.text1 ?? null,
+      text2: v.text2 ?? null,
+      text3: v.text3 ?? null,
+    };
+  });
 }
 
 /* Custom price-table columns. Editors pick ordered entries from the shared
@@ -283,7 +366,7 @@ function normalizeProduct(raw: RawProduct): Product {
     series: raw.series,
     titleKa: raw.titleKa ?? '',
     titleEn: raw.titleEn ?? raw.series,
-    variants: normalizeVariants(raw.variants ?? []),
+    variants: normalizeVariants(raw),
     groupNumber: raw.groupNumber,
     category: raw.category ?? null,
     youtube: youtubeId(raw.youtube),

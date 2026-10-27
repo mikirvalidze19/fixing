@@ -457,8 +457,10 @@ function VariantTable({
           </tr>
         </thead>
         <tbody>
-          {product.variants.map((v) => (
-            <tr key={v.sku}>
+          {/* Keys are positional, not SKU-based: cells-derived SKUs may be
+           * empty and rows must stay unique regardless of editor input. */}
+          {product.variants.map((v, i) => (
+            <tr key={`row-${i}`}>
               {columns.map((col) => {
                 const value = cellFor(v, col.slot);
                 return (
@@ -493,22 +495,24 @@ function VariantCards({
   columns: VariantColumn[];
 }) {
   const { t, i18n } = useTranslation();
-  const [openSku, setOpenSku] = useState<string | null>(null);
+  const [openRow, setOpenRow] = useState<number | null>(null);
   return (
     <ul className={styles.cards} aria-label={t('productPage.availableVariants')}>
-      {product.variants.map((v) => {
-        const open = openSku === v.sku;
+      {/* Row identity is the index, not the SKU: cells-derived SKUs may be
+       * empty or duplicated, so index keys keep the accordion stable. */}
+      {product.variants.map((v, i) => {
+        const open = openRow === i;
         return (
           <li
-            key={v.sku}
+            key={`row-${i}`}
             className={open ? `${styles.card} ${styles.open}` : styles.card}
           >
             <button
               type="button"
               className={styles.cardHead}
               aria-expanded={open}
-              aria-controls={`variant-${v.sku}`}
-              onClick={() => setOpenSku((prev) => (prev === v.sku ? null : v.sku))}
+              aria-controls={`variant-${i}`}
+              onClick={() => setOpenRow((prev) => (prev === i ? null : i))}
             >
               <span className={styles.cardSku}>{v.sku}</span>
               <ChevronDown
@@ -520,7 +524,7 @@ function VariantCards({
             </button>
             <div
               className={styles.cardBody}
-              id={`variant-${v.sku}`}
+              id={`variant-${i}`}
               role="region"
               aria-hidden={!open}
             >

@@ -54,18 +54,25 @@ This shows exactly how the CMS will store an editor's work:
   "standards": [],
   "documents": [],
   "features": [],
+  "variantColumns": [
+    { "key": "sku", "label": "SKU", "labelKa": null, "slot": "sku" },
+    { "key": "priceGel", "label": "Price ₾", "labelKa": "ფასი ₾", "slot": "priceGel" }
+  ],
   "variants": [
     {
-      "sku": "TST 01 10 100",
-      "diameterMm": 10,
-      "lengthMm": 100,
-      "unitsPerBox": 25,
-      "priceGel": 2.50,
-      "note": null
+      "cells": ["TST 01 10 100", "2.50"]
     }
   ]
 }
 ```
+
+This is the **new "pick columns first, then values" flow**: `variantColumns`
+chooses the table headers (this inline form is what the CMS writes when you
+pick from the **Table headers** library), and each variant row is just a
+`cells` array — one value per column, in the same order. A USD-style row
+without custom columns looks like `"cells": ["TST 01 10 100", "10", "100",
+"25", "2.50", ""]` (six standard slots). Old products using named fields
+(`"sku": "…"`, `"priceGel": 2.5`) keep working exactly as before.
 
 2. Copy any product photo to `content/images/products/test-01.jpg`
    (any .jpg/.png/.webp works — the CMS will do this upload for the editor).

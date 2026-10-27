@@ -201,14 +201,14 @@ content:
             type: text
             required: true
       - name: variantColumns
-        label: Price table columns (optional)
+        label: Price table columns (optional — choose before adding variants)
         type: reference
         options:
           collection: tableHeaders
           multiple: true
           value: "{key}"
           label: "{label}"
-        description: "Pick the columns in display order from the searchable list (leave empty for the standard table: SKU / Ø / Length / Units / Price / Note). Need a different header? Add it once under Table headers in the sidebar — it then appears here for every product. SKU and Price are still used for search and the 'from ₾' card price even when not shown in the table."
+        description: "STEP 1 — pick the table columns in display order from the searchable list (leave empty for the standard table: SKU / Ø / Length / Units / Price / Note). Need a different header? Add it once under Table headers in the sidebar. Then, in STEP 2 (Variants below), enter one value per chosen column, in that order."
       - name: variants
         label: Variants (prices)
         type: object
@@ -216,40 +216,45 @@ content:
           min: 1
           collapsible:
             collapsed: true
-            summary: "{sku}"
+            summary: "Row {index}"
         fields:
+          # STEP 2 of the variants flow: editor picks columns first (see
+          # variantColumns above), then enters one value per column here.
+          - name: cells
+            label: Values (one per chosen column, same order)
+            type: string
+            list: true
+            description: "Add one row item per cell of the price table, top to bottom as printed. Type exactly one value per chosen column, in the SAME order as the Price table columns above (e.g. if you picked SKU / Ø / Price: \"HX 21 08 080\", \"8\", \"1.37\"). Leave an item empty when the printed cell is blank."
+          # --- Legacy named fields (pre-CMS files) -----------------------
+          # Hidden from the editor but DECLARED so the CMS keeps writing
+          # them when an old product is re-saved. Do not remove.
           - name: sku
-            label: SKU
             type: string
-            required: true
-            description: Preserve spaces exactly as printed, e.g. "HXE 01 08 080"
+            hidden: true
           - name: diameterMm
-            label: Diameter (mm)
             type: string
+            hidden: true
           - name: lengthMm
-            label: Length (mm)
             type: string
+            hidden: true
           - name: unitsPerBox
-            label: Units per box
             type: number
+            hidden: true
           - name: priceGel
-            label: Price (GEL)
             type: number
+            hidden: true
           - name: note
-            label: Note
             type: string
+            hidden: true
           - name: text1
-            label: Extra 1 value
             type: string
-            description: Value for the custom column "Extra 1" if used in Price table columns
+            hidden: true
           - name: text2
-            label: Extra 2 value
             type: string
-            description: Value for the custom column "Extra 2" if used in Price table columns
+            hidden: true
           - name: text3
-            label: Extra 3 value
             type: string
-            description: Value for the custom column "Extra 3" if used in Price table columns
+            hidden: true
 
   # ------------------------------------------------------- badge library
   - name: badges
