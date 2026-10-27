@@ -37,10 +37,10 @@
   ],
   "variants": [
     {
-      "values": "ACM 01 06 100\n10\n100\n100\n\n25"
+      "values": "ACM 01 06 100\n10\n100\n\n\n25"
     },
     {
-      "values": "ACM 01 06 120\n10\n120\n20\n\n40"
+      "values": "ACM 01 06 120\n10\n120\n\n\n40"
     }
   ]
 }
