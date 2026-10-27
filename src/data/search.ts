@@ -1,5 +1,6 @@
 import { categoryProducts, categories, products } from './catalog';
 import type { Product } from '../models/catalog';
+import { roleColumn, variantValue } from '../utils/table';
 
 export type ProductSearchResult = {
   product: Product;
@@ -23,22 +24,42 @@ for (const [slug, ids] of Object.entries(productMap)) {
   }
 }
 
+/* SKU strings come from the column tagged `sku`; products without one get
+ * an empty list (search then works on series/title/other cells). */
+function skusOf(product: Product): string[] {
+  const skuColumn = roleColumn(product, 'sku');
+  if (!skuColumn) return [];
+  return product.variants
+    .map((variant) => variantValue(product, variant, skuColumn))
+    .filter((value): value is string | number => value !== null && value !== undefined)
+    .map((value) => String(value).toLowerCase());
+}
+
+/* Every table cell joins the fallback haystack so cheap search keeps
+ * working across whatever columns an editor chose. */
+function cellsOf(product: Product): string[] {
+  return product.variants.flatMap((variant) => variant.cells)
+    .filter((value): value is string | number => value !== null && value !== undefined)
+    .map(String);
+}
+
 const index: IndexEntry[] = products.map((product) => {
   const categorySlug = categorySlugByProduct.get(product.id) ?? null;
   const category = categorySlug ? categoriesBySlug.get(categorySlug) : undefined;
-  const skus = product.variants.map((variant) => variant.sku);
+  const skus = skusOf(product);
   return {
     product,
     categorySlug,
     categoryLabel: category?.label ?? null,
     series: product.series.toLowerCase(),
-    skus: skus.map((sku) => sku.toLowerCase()),
+    skus,
     haystack: [
       product.id,
       product.series,
       product.titleEn,
       product.titleKa,
       ...skus,
+      ...cellsOf(product),
       category?.label ?? '',
     ]
       .join(' ')

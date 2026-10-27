@@ -78,20 +78,32 @@
   ],
   "variants": [
     {
-      "sku": "SDC 01 16 070",
-      "diameterMm": 6.3,
-      "lengthMm": 70,
-      "unitsPerBox": 100,
-      "priceGel": 0.56,
-      "note": null
+      "cells": [
+        "SDC 01 16 070",
+        6.3,
+        70,
+        100,
+        0.56,
+        null
+      ]
     },
     {
-      "sku": "SDC 01 16 120",
-      "diameterMm": 6.3,
-      "lengthMm": 120,
-      "unitsPerBox": 100,
-      "priceGel": 0.82,
-      "note": null
+      "cells": [
+        "SDC 01 16 120",
+        6.3,
+        120,
+        100,
+        0.82,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

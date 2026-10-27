@@ -27,52 +27,72 @@
   "features": [],
   "variants": [
     {
-      "sku": "AR 01 00 008",
-      "diameterMm": 8,
-      "lengthMm": null,
-      "unitsPerBox": 1000,
-      "priceGel": 0.09,
-      "note": null
+      "cells": [
+        "AR 01 00 008",
+        8,
+        null,
+        1000,
+        0.09,
+        null
+      ]
     },
     {
-      "sku": "AR 01 00 010",
-      "diameterMm": 10,
-      "lengthMm": null,
-      "unitsPerBox": 1000,
-      "priceGel": 0.19,
-      "note": null
+      "cells": [
+        "AR 01 00 010",
+        10,
+        null,
+        1000,
+        0.19,
+        null
+      ]
     },
     {
-      "sku": "AR 01 00 012",
-      "diameterMm": 12,
-      "lengthMm": null,
-      "unitsPerBox": 1000,
-      "priceGel": 0.3,
-      "note": null
+      "cells": [
+        "AR 01 00 012",
+        12,
+        null,
+        1000,
+        0.3,
+        null
+      ]
     },
     {
-      "sku": "AR 01 00 016",
-      "diameterMm": 16,
-      "lengthMm": null,
-      "unitsPerBox": 1000,
-      "priceGel": 0.65,
-      "note": null
+      "cells": [
+        "AR 01 00 016",
+        16,
+        null,
+        1000,
+        0.65,
+        null
+      ]
     },
     {
-      "sku": "AR 01 00 020",
-      "diameterMm": 20,
-      "lengthMm": null,
-      "unitsPerBox": 500,
-      "priceGel": 1.2,
-      "note": null
+      "cells": [
+        "AR 01 00 020",
+        20,
+        null,
+        500,
+        1.2,
+        null
+      ]
     },
     {
-      "sku": "AR 01 00 024",
-      "diameterMm": 24,
-      "lengthMm": null,
-      "unitsPerBox": 500,
-      "priceGel": 2.01,
-      "note": null
+      "cells": [
+        "AR 01 00 024",
+        24,
+        null,
+        500,
+        2.01,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

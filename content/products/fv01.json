@@ -39,20 +39,32 @@
   ],
   "variants": [
     {
-      "sku": "FV 01 12 080",
-      "diameterMm": "6-8",
-      "lengthMm": 90,
-      "unitsPerBox": 25,
-      "priceGel": 0.63,
-      "note": null
+      "cells": [
+        "FV 01 12 080",
+        "6-8",
+        90,
+        25,
+        0.63,
+        null
+      ]
     },
     {
-      "sku": "FV 01 15 085",
-      "diameterMm": "8-10",
-      "lengthMm": 95,
-      "unitsPerBox": 25,
-      "priceGel": 0.69,
-      "note": null
+      "cells": [
+        "FV 01 15 085",
+        "8-10",
+        95,
+        25,
+        0.69,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

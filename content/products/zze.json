@@ -33,36 +33,52 @@
   "features": [],
   "variants": [
     {
-      "sku": "ZZE 21 10 130",
-      "diameterMm": 10,
-      "lengthMm": 130,
-      "unitsPerBox": 200,
-      "priceGel": 0.91,
-      "note": "metal nail"
+      "cells": [
+        "ZZE 21 10 130",
+        10,
+        130,
+        200,
+        0.91,
+        "metal nail"
+      ]
     },
     {
-      "sku": "ZZE 21 10 090",
-      "diameterMm": 10,
-      "lengthMm": 90,
-      "unitsPerBox": 200,
-      "priceGel": 0.74,
-      "note": "metal nail"
+      "cells": [
+        "ZZE 21 10 090",
+        10,
+        90,
+        200,
+        0.74,
+        "metal nail"
+      ]
     },
     {
-      "sku": "ZZE 01 10 130",
-      "diameterMm": 10,
-      "lengthMm": 130,
-      "unitsPerBox": 200,
-      "priceGel": 0.55,
-      "note": "nylon nail"
+      "cells": [
+        "ZZE 01 10 130",
+        10,
+        130,
+        200,
+        0.55,
+        "nylon nail"
+      ]
     },
     {
-      "sku": "ZZE 01 10 090",
-      "diameterMm": 10,
-      "lengthMm": 90,
-      "unitsPerBox": 200,
-      "priceGel": 0.43,
-      "note": "nylon nail"
+      "cells": [
+        "ZZE 01 10 090",
+        10,
+        90,
+        200,
+        0.43,
+        "nylon nail"
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

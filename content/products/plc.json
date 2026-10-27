@@ -63,12 +63,22 @@
   ],
   "variants": [
     {
-      "sku": "PLC 01 14 020",
-      "diameterMm": null,
-      "lengthMm": 20,
-      "unitsPerBox": 200,
-      "priceGel": 0.26,
-      "note": null
+      "cells": [
+        "PLC 01 14 020",
+        null,
+        20,
+        200,
+        0.26,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

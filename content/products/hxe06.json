@@ -69,28 +69,42 @@
   ],
   "variants": [
     {
-      "sku": "HXE 06 08 100",
-      "diameterMm": 8,
-      "lengthMm": 100,
-      "unitsPerBox": 50,
-      "priceGel": 2.18,
-      "note": null
+      "cells": [
+        "HXE 06 08 100",
+        8,
+        100,
+        50,
+        2.18,
+        null
+      ]
     },
     {
-      "sku": "HXE 06 08 120",
-      "diameterMm": 8,
-      "lengthMm": 120,
-      "unitsPerBox": 50,
-      "priceGel": 2.59,
-      "note": null
+      "cells": [
+        "HXE 06 08 120",
+        8,
+        120,
+        50,
+        2.59,
+        null
+      ]
     },
     {
-      "sku": "HXE 06 08 140",
-      "diameterMm": 8,
-      "lengthMm": 140,
-      "unitsPerBox": 50,
-      "priceGel": 2.94,
-      "note": null
+      "cells": [
+        "HXE 06 08 140",
+        8,
+        140,
+        50,
+        2.94,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

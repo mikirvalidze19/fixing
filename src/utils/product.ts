@@ -4,13 +4,16 @@
 
 import type { Product } from '../models/catalog';
 import { productImageUrl } from '../data/images';
+import { priceValues } from './table';
 
 export function productImageSrc(product: Product): string {
   return productImageUrl(product.id, product.image);
 }
 
+/* Lowest numeric value of the product's price-role column; 0 when the
+ * product has no price column / no numeric cells. */
 export function minPrice(product: Product): number {
-  const prices = product.variants.map((v) => v.priceGel);
+  const prices = priceValues(product);
   if (prices.length === 0) return 0;
   return Math.min(...prices);
 }

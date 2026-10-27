@@ -21,52 +21,72 @@
   "features": [],
   "variants": [
     {
-      "sku": "BF 05 08 100",
-      "diameterMm": 8,
-      "lengthMm": 1000,
-      "unitsPerBox": 35,
-      "priceGel": 7.48,
-      "note": null
+      "cells": [
+        "BF 05 08 100",
+        8,
+        1000,
+        35,
+        7.48,
+        null
+      ]
     },
     {
-      "sku": "BF 05 10 100",
-      "diameterMm": 10,
-      "lengthMm": 1000,
-      "unitsPerBox": 20,
-      "priceGel": 10.95,
-      "note": null
+      "cells": [
+        "BF 05 10 100",
+        10,
+        1000,
+        20,
+        10.95,
+        null
+      ]
     },
     {
-      "sku": "BF 05 12 100",
-      "diameterMm": 12,
-      "lengthMm": 1000,
-      "unitsPerBox": 14,
-      "priceGel": 15.31,
-      "note": null
+      "cells": [
+        "BF 05 12 100",
+        12,
+        1000,
+        14,
+        15.31,
+        null
+      ]
     },
     {
-      "sku": "BF 05 16 100",
-      "diameterMm": 16,
-      "lengthMm": 1000,
-      "unitsPerBox": 8,
-      "priceGel": 27.51,
-      "note": null
+      "cells": [
+        "BF 05 16 100",
+        16,
+        1000,
+        8,
+        27.51,
+        null
+      ]
     },
     {
-      "sku": "BF 05 20 100",
-      "diameterMm": 20,
-      "lengthMm": 1000,
-      "unitsPerBox": 5,
-      "priceGel": 44.7,
-      "note": null
+      "cells": [
+        "BF 05 20 100",
+        20,
+        1000,
+        5,
+        44.7,
+        null
+      ]
     },
     {
-      "sku": "BF 05 24 100",
-      "diameterMm": 24,
-      "lengthMm": 1000,
-      "unitsPerBox": 3,
-      "priceGel": 69.28,
-      "note": null
+      "cells": [
+        "BF 05 24 100",
+        24,
+        1000,
+        3,
+        69.28,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

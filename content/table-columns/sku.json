@@ -2,5 +2,6 @@
   "key": "sku",
   "label": "SKU",
   "labelKa": "SKU",
-  "slot": "sku"
+  "type": "text",
+  "role": "sku"
 }

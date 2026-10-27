@@ -21,12 +21,22 @@
   "features": [],
   "variants": [
     {
-      "sku": "HL 01 12 050",
-      "diameterMm": "M12",
-      "lengthMm": 50,
-      "unitsPerBox": 100,
-      "priceGel": 1.4,
-      "note": null
+      "cells": [
+        "HL 01 12 050",
+        "M12",
+        50,
+        100,
+        1.4,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

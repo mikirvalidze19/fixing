@@ -1,0 +1,110 @@
+# Variant table architecture (generic, CMS-driven)
+
+Describes how the "Available variants" price table on product pages works.
+Everything is defined by editors in Pages CMS — no developer touches code to
+change, add or reuse table columns.
+
+The core rule:
+
+> **A column has no meaning in code. The product says which columns it uses,
+> and every variant row stores exactly one value per chosen column.**
+
+---
+
+## Layer 1 — Column library (CMS section: "Table columns")
+
+One JSON file per column (`content/table-columns/<key>.json`). Editors manage
+it in Pages CMS under **Table columns** in the sidebar — same UX as Badges:
+
+```json
+{
+  "key": "diametermm",
+  "label": "Ø (mm)",
+  "labelKa": "Ø (mm)",
+  "type": "number",
+  "role": "diameter"
+}
+```
+
+| Field    | Meaning |
+|----------|---------|
+| `key`    | Unique short code. **This is the column's identity everywhere.** |
+| `label` / `labelKa` | Column header text shown on the site (EN / KA). |
+| `type`   | `text` (default, any string) or `number` (sortable values → powers the auto "facts" strip). |
+| `role`   | Optional *feature tag*, not a data mapping: `sku` (search + variant card title), `price` (price strip, "from ₾", price range), `diameter` / `length` (auto description sentences). Leave empty for plain data columns. |
+
+There is **no `slot` field and no fixed list of fields** — the old
+sku/Ø/length/units/price/note + text1–text3 slots are gone. Editors can create
+any number of columns ("Thread", "Coating", "Material grade", …) once, and
+reuse them on every product. At most the tags `sku` / `price` should be used
+once per product's pick if present — the first match wins.
+
+## Layer 2 — Product table data (stored per product)
+
+A product picks its columns and stores raw rows — the file *is* the table:
+
+```json
+{
+  "id": "hxe01",
+  "columns": ["sku", "diametermm", "lengthmm", "unitsperbox", "pricegel", "note"],
+  "variants": [
+    { "cells": ["HXE 01 08 080", "8", "80", "50", "1.51", null] },
+    { "cells": ["HXE 01 10 100", "10", "100", "25", "2.60", null] }
+  ]
+}
+```
+
+* `columns[i]` — key from the Column library, in display order (the subset the
+  editor chose for **this** product: e.g. 3 columns out of 10 in the library).
+* `variants[n].cells[i]` — the value for `columns[i]`, positionally aligned.
+  Numbers stay numbers, blanks stay `null`.
+* CMS flow for editors (Add product): **Step 1** pick columns (multi-select in
+  the wanted display order) → **Step 2** each variant row offers exactly one
+  value per picked column.
+
+## Layer 3 — Normalized runtime model (`src/models/catalog.ts`)
+
+```ts
+type VariantColumn = { key; label; labelKa?; type: 'text'|'number'; role: 'sku'|'price'|'diameter'|'length'|null };
+type Variant       = { cells: (number|string|null)[] };
+type Product       = { …; columns: VariantColumn[]; variants: Variant[] };
+```
+
+`src/data/catalog.ts` normalizes once, at build time:
+
+1. resolves `columns` keys against the library (unknown keys dropped, order kept);
+2. converts each cell by its column's `type` ("8" → 8 for number columns);
+3. pads/trims cells to the column count (`null` where the printed cell is blank);
+4. legacy support: `variantColumns` (old reference shape) and named-field rows
+   (`sku`, `diameterMm`, … — the pre-2026 files and the emergency seed in
+   `tecfi-georgia-planning/data/products.json`) are converted to the new shape
+   by a slot→column-key map. Only the *normalizer* knows legacy shapes.
+
+## Runtime helpers (`src/utils/table.ts`)
+
+| Helper | Purpose |
+|---|---|
+| `roleColumn(product, role)` | First picked column tagged with that role, or `null`. |
+| `variantValue(product, variant, col)` | Raw cell value (number/string/null). |
+| `variantNumber(...)` / `variantText(...)` | Typed access (`null` / "—"). |
+| `columnValues(product, col)` | All values of a column (facts strip, ranges). |
+
+## Consumers
+
+* **Product page** — `VariantTable` / `VariantCards` render `columns × cells`
+  purely generically; only visual styling keys off `role`.
+* **Facts strip** — every picked `number` column becomes a "Label: 8, 10, 12"
+  fact; `price` role additionally feeds the price range.
+* **Auto description** — "…offers N sizes [in category] [, diameters a–b mm]
+  [, lengths a–b mm] [. Prices ₾x – ₾y per pack]" — sentences appear only when
+  a matching role column exists.
+* **Search** — indexes `sku`-column values plus every cell in the fallback text.
+* **Cards** — "from ₾" uses the `price` column; card count = variant count.
+
+## Migration / scripts
+
+* `scripts/migrate-table-columns.mjs` — one-time conversion (idempotent):
+  seeds `content/table-columns/` from the old headers, rewrites every product
+  to `columns` + `cells`, prints a report. Old `content/headers/` is removed.
+* Legacy seed stays as an emergency fallback for the (never expected) case of
+  an empty `content/products/` — the normalizer converts it on the fly.

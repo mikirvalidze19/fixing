@@ -27,44 +27,62 @@
   "features": [],
   "variants": [
     {
-      "sku": "HX 21 08 080",
-      "diameterMm": 8,
-      "lengthMm": 80,
-      "unitsPerBox": 50,
-      "priceGel": 1.37,
-      "note": null
+      "cells": [
+        "HX 21 08 080",
+        8,
+        80,
+        50,
+        1.37,
+        null
+      ]
     },
     {
-      "sku": "HX 21 10 100",
-      "diameterMm": 10,
-      "lengthMm": 100,
-      "unitsPerBox": 25,
-      "priceGel": 2.75,
-      "note": null
+      "cells": [
+        "HX 21 10 100",
+        10,
+        100,
+        25,
+        2.75,
+        null
+      ]
     },
     {
-      "sku": "HX 21 12 110",
-      "diameterMm": 12,
-      "lengthMm": 110,
-      "unitsPerBox": 25,
-      "priceGel": 4.61,
-      "note": null
+      "cells": [
+        "HX 21 12 110",
+        12,
+        110,
+        25,
+        4.61,
+        null
+      ]
     },
     {
-      "sku": "HX 21 12 150",
-      "diameterMm": 12,
-      "lengthMm": 150,
-      "unitsPerBox": 25,
-      "priceGel": 6.07,
-      "note": null
+      "cells": [
+        "HX 21 12 150",
+        12,
+        150,
+        25,
+        6.07,
+        null
+      ]
     },
     {
-      "sku": "HX 21 16 090",
-      "diameterMm": 16,
-      "lengthMm": 90,
-      "unitsPerBox": 15,
-      "priceGel": 13.87,
-      "note": null
+      "cells": [
+        "HX 21 16 090",
+        16,
+        90,
+        15,
+        13.87,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

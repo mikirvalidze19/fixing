@@ -109,36 +109,52 @@
   ],
   "variants": [
     {
-      "sku": "XWE 01 00 585",
-      "diameterMm": null,
-      "lengthMm": null,
-      "unitsPerBox": 1,
-      "priceGel": 75.57,
-      "note": "epoxy; heavy constructions; C1/C2"
+      "cells": [
+        "XWE 01 00 585",
+        null,
+        null,
+        1,
+        75.57,
+        "epoxy; heavy constructions; C1/C2"
+      ]
     },
     {
-      "sku": "DGE 02 00 400",
-      "diameterMm": null,
-      "lengthMm": null,
-      "unitsPerBox": 1,
-      "priceGel": 38.18,
-      "note": "vinylester; heavy constructions; C1/C2"
+      "cells": [
+        "DGE 02 00 400",
+        null,
+        null,
+        1,
+        38.18,
+        "vinylester; heavy constructions; C1/C2"
+      ]
     },
     {
-      "sku": "DGE 04 00 400",
-      "diameterMm": null,
-      "lengthMm": null,
-      "unitsPerBox": 1,
-      "priceGel": 32.51,
-      "note": "hybrid two-component; medium-load constructions; C1/C2"
+      "cells": [
+        "DGE 04 00 400",
+        null,
+        null,
+        1,
+        32.51,
+        "hybrid two-component; medium-load constructions; C1/C2"
+      ]
     },
     {
-      "sku": "DGE 01 00 300",
-      "diameterMm": null,
-      "lengthMm": null,
-      "unitsPerBox": 1,
-      "priceGel": 22.18,
-      "note": "light constructions"
+      "cells": [
+        "DGE 01 00 300",
+        null,
+        null,
+        1,
+        22.18,
+        "light constructions"
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

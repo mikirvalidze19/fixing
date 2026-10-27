@@ -21,20 +21,32 @@
   "features": [],
   "variants": [
     {
-      "sku": "PM 01 12 100",
-      "diameterMm": 10,
-      "lengthMm": 1000,
-      "unitsPerBox": 1,
-      "priceGel": 26.43,
-      "note": null
+      "cells": [
+        "PM 01 12 100",
+        10,
+        1000,
+        1,
+        26.43,
+        null
+      ]
     },
     {
-      "sku": "PM 01 16 100",
-      "diameterMm": 14,
-      "lengthMm": 1000,
-      "unitsPerBox": 1,
-      "priceGel": 29.33,
-      "note": null
+      "cells": [
+        "PM 01 16 100",
+        14,
+        1000,
+        1,
+        29.33,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

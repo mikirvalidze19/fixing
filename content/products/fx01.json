@@ -26,20 +26,32 @@
   ],
   "variants": [
     {
-      "sku": "FX 01 14 080",
-      "diameterMm": 14,
-      "lengthMm": "80/105",
-      "unitsPerBox": 20,
-      "priceGel": 10.87,
-      "note": null
+      "cells": [
+        "FX 01 14 080",
+        14,
+        "80/105",
+        20,
+        10.87,
+        null
+      ]
     },
     {
-      "sku": "FX 01 14 105",
-      "diameterMm": 14,
-      "lengthMm": "105/130",
-      "unitsPerBox": 20,
-      "priceGel": 11.47,
-      "note": null
+      "cells": [
+        "FX 01 14 105",
+        14,
+        "105/130",
+        20,
+        11.47,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

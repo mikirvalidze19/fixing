@@ -2,5 +2,6 @@
   "key": "unitsperbox",
   "label": "Units / box",
   "labelKa": "Units / box",
-  "slot": "unitsPerBox"
+  "type": "number",
+  "role": null
 }

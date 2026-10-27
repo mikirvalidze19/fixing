@@ -1,8 +1,13 @@
 /* The single adapter between the UI and the product catalog (PRD §8).
  * Reads the editor-managed catalog under `content/` (Pages CMS), merges
- * the shared libraries (badges / spec icons / standards) into the
- * products, resolves every image reference to a build-time URL, and
- * keeps the legacy seed JSON as a fallback so the site never breaks.
+ * the shared libraries (badges / spec icons / standards / table columns)
+ * into the products, resolves every image reference to a build-time URL,
+ * and keeps the legacy seed JSON as a fallback so the site never breaks.
+ *
+ * Products carry a generic variant table (docs/TABLE-ARCHITECTURE.md):
+ * `columns` picks entries of the "Table columns" library and every variant
+ * row stores one positional `cells` value per column. Pre-2026 files
+ * (named fields + `variantColumns` slots) are converted here once.
  *
  * Consumers import: products, categories, categoryProducts,
  * productCategoryIndex, badges, specIcons, standardDefs, youtubeId. */
@@ -14,6 +19,9 @@ import type {
   Application,
   BadgeDef,
   CertRow,
+  ColumnDef,
+  ColumnRole,
+  ColumnType,
   DocumentRow,
   FeatureRow,
   Product,
@@ -22,13 +30,12 @@ import type {
   StandardDef,
   StandardRow,
   SymbolRow,
-  TableHeaderDef,
   Variant,
   VariantColumn,
 } from '../models/catalog';
 import { libraryImageUrl } from './images';
 
-export type { Application, Product, Variant } from '../models/catalog';
+export type { Application, Product, Variant, VariantColumn } from '../models/catalog';
 
 /* --- Editor-managed content ------------------------------------------- */
 
@@ -52,7 +59,15 @@ const standardFiles = import.meta.glob<any>(
   { eager: true, import: 'default' },
 );
 
-const headerFiles = import.meta.glob<any>(
+const columnFiles = import.meta.glob<any>(
+  '../../content/table-columns/*.json',
+  { eager: true, import: 'default' },
+);
+
+/* Pre-2026 header library (content/headers/) — only present in checkouts
+ * that have not run scripts/migrate-table-columns.mjs yet. Always empty
+ * after the migration. */
+const legacyHeaderFiles = import.meta.glob<any>(
   '../../content/headers/*.json',
   { eager: true, import: 'default' },
 );
@@ -89,7 +104,68 @@ function indexByKey<T extends { key: string }>(
 export const badges = indexByKey<BadgeDef>(badgeFiles);
 export const specIcons = indexByKey<SpecIconDef>(iconFiles);
 export const standardDefs = indexByKey<StandardDef>(standardFiles);
-export const tableHeaders = indexByKey<TableHeaderDef>(headerFiles);
+
+/* --- Table columns library ---------------------------------------------- */
+
+/* Legacy slot names are only a translation aid for pre-2026 data. */
+const LEGACY_SLOT_TYPE: Record<string, ColumnType> = {
+  diameterMm: 'number',
+  lengthMm: 'number',
+  unitsPerBox: 'number',
+  priceGel: 'number',
+};
+const LEGACY_SLOT_ROLE: Record<string, ColumnRole> = {
+  sku: 'sku',
+  priceGel: 'price',
+  diameterMm: 'diameter',
+  lengthMm: 'length',
+};
+/* Standard table (used when a product defines no columns — the emergency
+ * legacy seed), keyed like the library entries. */
+const STANDARD_COLUMN_KEYS = [
+  'sku',
+  'diametermm',
+  'lengthmm',
+  'unitsperbox',
+  'pricegel',
+  'note',
+] as const;
+const LEGACY_KEY_TO_SLOT: Record<string, string> = {
+  sku: 'sku',
+  diametermm: 'diameterMm',
+  lengthmm: 'lengthMm',
+  unitsperbox: 'unitsPerBox',
+  pricegel: 'priceGel',
+  note: 'note',
+  text1: 'text1',
+  text2: 'text2',
+  text3: 'text3',
+};
+/* Labels for the standard set when even the library is missing (legacy
+ * fallback only; Georgian labels then come from the EN default). */
+const STANDARD_FALLBACK_LABELS: Record<string, string> = {
+  sku: 'SKU',
+  diametermm: 'Ø (mm)',
+  lengthmm: 'Length (mm)',
+  unitsperbox: 'Units / box',
+  pricegel: 'Price',
+  note: 'Note',
+};
+
+export const columnDefs = indexByKey<ColumnDef>(columnFiles);
+for (const [path, raw] of Object.entries(legacyHeaderFiles)) {
+  const entry = raw as Partial<ColumnDef> & { slot?: string };
+  const key = (entry.key as string) || fileKey(path);
+  if (columnDefs[key]) continue; // table-columns wins
+  columnDefs[key] = {
+    ...entry,
+    key,
+    label: entry.label ?? key,
+    labelKa: entry.labelKa ?? null,
+    type: entry.type ?? (entry.slot ? LEGACY_SLOT_TYPE[entry.slot] ?? 'text' : 'text'),
+    role: entry.role ?? (entry.slot ? LEGACY_SLOT_ROLE[entry.slot] ?? null : null),
+  };
+}
 
 /* --- Legacy seed fallback (only used while content/ is empty) ---------- */
 
@@ -99,20 +175,8 @@ type LegacyRaw = {
   series: string;
   titleKa?: string;
   titleEn?: string;
-  variants: Variant[];
+  variants: LegacyVariant[];
 };
-
-function legacyFallbackProducts(): Product[] {
-  const raw = (legacySource as { products?: LegacyRaw[] }).products ?? [];
-  return raw.map((p) => ({
-    id: p.id,
-    series: p.series,
-    titleKa: p.titleKa ?? '',
-    titleEn: p.titleEn ?? p.series,
-    groupNumber: p.groupNumber,
-    variants: (p.variants ?? []).map((v) => ({ ...v, note: v.note ?? null })),
-  }));
-}
 
 /* --- YouTube ----------------------------------------------------------- */
 
@@ -156,14 +220,28 @@ type RawProduct = {
   standards?: (Partial<StandardRow> & { standard?: string })[] | null;
   documents?: (Partial<DocumentRow> & { name?: string; size?: string })[] | null;
   features?: (Partial<FeatureRow> & { label?: string | null; value?: string })[] | null;
-  /* Ordered header keys from the shared Table headers library, or the
-   * legacy inline-object format. */
+  /* Generic table: ordered library keys. */
+  columns?: (string | (Partial<VariantColumn> & { key?: string }))[] | null;
+  /* Pre-2026 shape (reference keys or inline objects). */
   variantColumns?: (string | (Partial<VariantColumn> & { key?: string }))[] | null;
-  /* CMS rows are positional: `cells[i]` holds the value for table column i
-   * (order of the picked variantColumns, or the standard set). Existing
-   * files keep the named-field shape. */
-  variants?: (Partial<Variant> & { cells?: string[] | null })[];
+  /* Positions rows (generic) or legacy named-field rows. */
+  variants?: Variant[] | LegacyVariant[];
 };
+
+/* Legacy named-field row. Never written anymore (see
+ * scripts/migrate-table-columns.mjs) but still parsed so old checkouts and
+ * the emergency seed keep rendering. */
+type LegacyVariant = Partial<{
+  sku: string;
+  diameterMm: number | string | null;
+  lengthMm: number | string | null;
+  unitsPerBox: number | null;
+  priceGel: number | null;
+  note: string | null;
+  text1: string | null;
+  text2: string | null;
+  text3: string | null;
+}> & { cells?: unknown[] };
 
 function normalizeSpecs(raw: RawProduct): SymbolRow[] {
   return (raw.specs ?? []).map((row) => {
@@ -229,151 +307,112 @@ function normalizeFeatures(raw: RawProduct): FeatureRow[] {
   }));
 }
 
-/* Legacy JSON keeps numbers where the PDF had them; the CMS stores plain
- * strings. Both pass through untouched — the UI renders either.
- * The cells-based shape supports the CMS flow: the editor first picks the
- * table columns (variantColumns → ordered slots or the standard set), then
- * each variant row carries one value per column, in the same order. */
-const STANDARD_SLOTS = ['sku', 'diameterMm', 'lengthMm', 'unitsPerBox', 'priceGel', 'note'];
-
-function toNumber(value: unknown): number {
-  if (typeof value === 'number' && Number.isFinite(value)) return value;
-  if (typeof value !== 'string') return 0;
-  const n = Number(value.trim().replace(',', '.'));
-  return Number.isFinite(n) ? n : 0;
-}
-
-/* Numbers stored as strings ("8", "4.8") become numbers so the size/price
- * facts (unique numeric lists) keep working; anything else stays text. */
-function smartValue(value: unknown): number | string | null {
-  if (value === undefined || value === null) return null;
-  const raw = typeof value === 'string' ? value.trim() : value;
-  if (raw === '') return null;
-  if (typeof raw === 'string' && /^-?\d+([.,]\d+)?$/.test(raw)) {
-    return Number(raw.replace(',', '.'));
+/* "8", "4,8" → numbers so typed (sortable) columns behave like numbers;
+ * anything unparseable stays text and blank stays null. */
+function toCell(value: unknown, type: ColumnType | null | undefined): number | string | null {
+  if (value === undefined || value === null || value === '') return null;
+  const trimmed = typeof value === 'string' ? value.trim() : value;
+  if (trimmed === '') return null;
+  if (type === 'number' && typeof trimmed === 'string' && /^-?\d+([.,]\d+)?$/.test(trimmed)) {
+    return Number(trimmed.replace(',', '.'));
   }
-  return raw as number | string;
+  return trimmed as number | string;
 }
 
-function normalizeVariants(raw: RawProduct): Variant[] {
-  const slots = raw.variantColumns?.length
-    ? normalizeColumns(raw).map((c) => c.slot)
-    : STANDARD_SLOTS;
-  return (raw.variants ?? []).map((v) => {
-    /* cells-based rows (CMS flow) */
-    if (Array.isArray(v.cells)) {
-      const row: Variant = {
-        sku: '',
-        diameterMm: null,
-        lengthMm: null,
-        unitsPerBox: 0,
-        priceGel: 0,
-        note: null,
-        text1: null,
-        text2: null,
-        text3: null,
-      };
-      slots.forEach((slot, i) => {
-        const value = v.cells?.[i];
-        if (value === undefined || value === null || value === '') return;
-        switch (slot) {
-          case 'sku':
-            row.sku = String(value).trim();
-            break;
-          case 'priceGel':
-            row.priceGel = toNumber(value);
-            break;
-          case 'unitsPerBox':
-            row.unitsPerBox = toNumber(value);
-            break;
-          case 'diameterMm':
-            row.diameterMm = smartValue(value);
-            break;
-          case 'lengthMm':
-            row.lengthMm = smartValue(value);
-            break;
-          case 'note':
-            row.note = String(value);
-            break;
-          case 'text1':
-          case 'text2':
-          case 'text3':
-            row[slot] = String(value);
-            break;
-          default:
-            break;
-        }
-      });
-      return row;
-    }
-    /* semantic rows (existing files) */
-    return {
-      sku: v.sku ?? '',
-      diameterMm: v.diameterMm ?? null,
-      lengthMm: v.lengthMm ?? null,
-      unitsPerBox: v.unitsPerBox ?? 0,
-      priceGel: v.priceGel ?? 0,
-      note: v.note ?? null,
-      text1: v.text1 ?? null,
-      text2: v.text2 ?? null,
-      text3: v.text3 ?? null,
-    };
-  });
-}
+/* The product's pick in display order. Reads the generic `columns` field,
+ * then the legacy `variantColumns` (reference keys/objects), and finally —
+ * only when the product defines neither but has variants, i.e. the
+ * emergency legacy seed — the standard six. Unknown keys are dropped with
+ * a warning; duplicates keep the first occurrence. */
+function resolveColumns(raw: RawProduct): VariantColumn[] {
+  let picked: (string | (Partial<VariantColumn> & { key?: string }))[] | null = null;
+  /* An explicit `columns` key always wins — even empty, meaning the editor
+   * intentionally turned the table off. Absent field = pre-2026 data. */
+  if (Array.isArray(raw.columns)) picked = raw.columns;
+  else if (Array.isArray(raw.variantColumns) && raw.variantColumns.length > 0) {
+    picked = raw.variantColumns;
+  }
 
-/* Custom price-table columns. Editors pick ordered entries from the shared
- * "Table headers" library (`content/headers/`). Accepts the reference
- * format (bare keys) plus the older inline-object format for safety.
- * Unknown or duplicate keys are ignored; slot defaults to the key. */
-function normalizeColumns(raw: RawProduct): VariantColumn[] {
+  if (!picked) {
+    if (!raw.variants?.length) return [];
+    return STANDARD_COLUMN_KEYS.map((key) => ({
+      key,
+      label: columnDefs[key]?.label ?? STANDARD_FALLBACK_LABELS[key] ?? key,
+      labelKa: columnDefs[key]?.labelKa ?? null,
+      type: columnDefs[key]?.type ?? LEGACY_SLOT_TYPE[LEGACY_KEY_TO_SLOT[key]] ?? 'text',
+      role: columnDefs[key]?.role ?? LEGACY_SLOT_ROLE[LEGACY_KEY_TO_SLOT[key]] ?? null,
+    }));
+  }
+
   const seen = new Set<string>();
   const out: VariantColumn[] = [];
-  for (const entry of raw.variantColumns ?? []) {
-    let col: VariantColumn | null = null;
-    if (typeof entry === 'string') {
-      const def = tableHeaders[entry];
-      if (!def) {
-        console.warn(`[catalog] Unknown table header "${entry}" on product ${raw.id} — column skipped`);
-        continue;
-      }
-      if (seen.has(def.key)) continue;
-      seen.add(def.key);
-      col = {
-        key: def.key,
-        slot: def.slot || def.key,
-        label: def.label || def.key,
-        labelKa: def.labelKa ?? null,
-      };
-    } else if (entry && typeof entry === 'object' && entry.key) {
-      if (seen.has(entry.key)) continue;
-      seen.add(entry.key);
-      col = {
-        key: entry.key,
-        slot: entry.slot || entry.key,
-        label: entry.label || entry.key,
-        labelKa: entry.labelKa ?? null,
-      };
+  for (const entry of picked) {
+    const key = typeof entry === 'string' ? entry : (entry?.key as string | undefined);
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    const def = typeof entry === 'string' ? columnDefs[key] : null;
+    if (!def) {
+      console.warn(`[catalog] Unknown table column "${key}" on product ${raw.id} — column skipped`);
+      continue;
     }
-    if (col) out.push(col);
+    /* `slot` only exists on legacy header defs — it names the old
+     * named-field row that the value came from. */
+    const slotKey = (def as ColumnDef & { slot?: string }).slot
+      ?? LEGACY_KEY_TO_SLOT[key]
+      ?? key;
+    out.push({
+      key: def.key,
+      label: def.label ?? key,
+      labelKa: def.labelKa ?? null,
+      type: def.type ?? LEGACY_SLOT_TYPE[slotKey] ?? 'text',
+      role: def.role ?? LEGACY_SLOT_ROLE[slotKey] ?? null,
+    });
   }
   return out;
 }
 
+/* Legacy slot of a column (for reading pre-2026 named-field rows: the
+ * value lived in `variant.diameterMm`, `variant.text1`, …). */
+function legacySlot(column: VariantColumn): string {
+  const def = columnDefs[column.key] as (ColumnDef & { slot?: string }) | undefined;
+  return def?.slot ?? LEGACY_KEY_TO_SLOT[column.key] ?? column.key;
+}
+
+/* Normalizes one variant to positional cells aligned with the columns.
+ * Cells rows (CMS flow) map by index; named-field rows (pre-2026) look up
+ * the old slot of each column. Rows are always pad/trimmed to the column
+ * count so the table stays grid-aligned whatever editors typed. */
+function normalizeVariant(
+  source: Variant | LegacyVariant,
+  columns: VariantColumn[],
+): Variant {
+  const cells = Array.isArray((source as LegacyVariant).cells)
+    ? (source as LegacyVariant).cells ?? []
+    : columns.map((column) => {
+        const value = (source as Record<string, unknown>)[legacySlot(column)];
+        return value === undefined ? null : value;
+      });
+  return {
+    cells: columns.map((column, index) => toCell(cells[index], column.type)),
+  };
+}
+
 function normalizeProduct(raw: RawProduct): Product {
   const certs = normalizeCerts(raw);
+  const columns = resolveColumns(raw);
   return {
     id: raw.id,
     series: raw.series,
     titleKa: raw.titleKa ?? '',
     titleEn: raw.titleEn ?? raw.series,
-    variants: normalizeVariants(raw),
+    variants: (raw.variants ?? []).map((v) => normalizeVariant(v, columns)),
+    columns,
     groupNumber: raw.groupNumber,
     category: raw.category ?? null,
     youtube: youtubeId(raw.youtube),
     image: raw.image ?? null,
     descriptionEn: raw.descriptionEn ?? null,
     descriptionKa: raw.descriptionKa ?? null,
-    variantColumns: normalizeColumns(raw),
     specs: normalizeSpecs(raw),
     certs,
     standards: normalizeStandards(raw),
@@ -435,3 +474,11 @@ export const productCategory = (id: string): ProductCategory => {
 export const applications = (
   legacySource as unknown as { applications?: Application[] }
 ).applications ?? [];
+
+/* Emergency fallback from the legacy seed JSON — never expected to run
+ * (the site ships with content/products committed); here only so the site
+ * survives an empty content folder during setup. */
+function legacyFallbackProducts(): Product[] {
+  const raw = (legacySource as { products?: LegacyRaw[] }).products ?? [];
+  return raw.map((p) => normalizeProduct(p as unknown as RawProduct));
+}

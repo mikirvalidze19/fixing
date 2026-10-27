@@ -10,7 +10,8 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "i18n:export": "node scripts/i18n-export.cjs",
-    "i18n:import": "node scripts/i18n-import.cjs"
+    "i18n:import": "node scripts/i18n-import.cjs",
+    "migrate:table": "node scripts/migrate-table-columns.mjs"
   },
   "dependencies": {
     "i18next": "^26.4.2",

@@ -16,20 +16,32 @@
   "features": [],
   "variants": [
     {
-      "sku": "DH 04 00 585",
-      "diameterMm": null,
-      "lengthMm": null,
-      "unitsPerBox": 1,
-      "priceGel": 255.09,
-      "note": null
+      "cells": [
+        "DH 04 00 585",
+        null,
+        null,
+        1,
+        255.09,
+        null
+      ]
     },
     {
-      "sku": "DH 01 00 400",
-      "diameterMm": null,
-      "lengthMm": null,
-      "unitsPerBox": 1,
-      "priceGel": 129.77,
-      "note": null
+      "cells": [
+        "DH 01 00 400",
+        null,
+        null,
+        1,
+        129.77,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

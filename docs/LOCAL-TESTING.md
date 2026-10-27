@@ -54,10 +54,7 @@ This shows exactly how the CMS will store an editor's work:
   "standards": [],
   "documents": [],
   "features": [],
-  "variantColumns": [
-    { "key": "sku", "label": "SKU", "labelKa": null, "slot": "sku" },
-    { "key": "priceGel", "label": "Price ₾", "labelKa": "ფასი ₾", "slot": "priceGel" }
-  ],
+  "columns": ["sku", "pricegel"],
   "variants": [
     {
       "cells": ["TST 01 10 100", "2.50"]
@@ -66,13 +63,13 @@ This shows exactly how the CMS will store an editor's work:
 }
 ```
 
-This is the **new "pick columns first, then values" flow**: `variantColumns`
-chooses the table headers (this inline form is what the CMS writes when you
-pick from the **Table headers** library), and each variant row is just a
-`cells` array — one value per column, in the same order. A USD-style row
-without custom columns looks like `"cells": ["TST 01 10 100", "10", "100",
-"25", "2.50", ""]` (six standard slots). Old products using named fields
-(`"sku": "…"`, `"priceGel": 2.5`) keep working exactly as before.
+This is the **"pick columns first, then values" flow**: `columns` lists the
+keys of the Table columns the product uses, in display order, and each
+variant row is just a `cells` array — **one value per column, in the same
+order**. Two picked columns → two cells; six picked columns → six cells.
+Rows are `cells`-only; legacy named-field rows (`"sku": "…"`,
+`"priceGel": 2.5`) are converted by the normalizer / `npm run migrate:table`
+and should not be used in new files.
 
 2. Copy any product photo to `content/images/products/test-01.jpg`
    (any .jpg/.png/.webp works — the CMS will do this upload for the editor).
@@ -102,7 +99,7 @@ Then:
 
 1. Open **https://app.pagescms.org** (or `http://localhost:5173/admin` — the redirect) and log in with GitHub.
 2. Select the repository `mikirvalidze19/fixing` → branch `main`.
-   The sidebar shows **Products**, **Badges**, **Spec icons**, **Standards**, **Featured products** — generated from `.pages.yml`.
+   The sidebar shows **Products**, **Badges**, **Spec icons**, **Standards**, **Table columns**, **Featured products** — generated from `.pages.yml`.
 3. **Products → Add product "TEST-02"**, upload an image, paste a YouTube link, tick a badge, add one variant row → **Save/Publish**.
 4. After ~2 minutes the product is visible on the live Cloudflare Pages site.
 5. Locally: `git pull` → restart `npm run dev` → same product on localhost. ✔

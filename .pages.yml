@@ -3,11 +3,12 @@
 # This file defines the editor forms for the Fixing Systems Georgia catalog.
 # Editors open https://app.pagescms.org/mikirvalidze19/fixing, log in with a
 # GitHub account that has write access to this repository, and manage the
-# products. Every save is a commit; Cloudflare Pages rebuilds and publishes
+# content. Every save is a commit; Cloudflare Pages rebuilds and publishes
 # automatically.
 #
 # The site (React app) reads everything from the `content/` folder at build
-# time via src/data/catalog.ts — no backend involved.
+# time via src/data/catalog.ts — no backend involved. The variant tables are
+# fully CMS-driven: see docs/TABLE-ARCHITECTURE.md.
 
 media:
   - name: products
@@ -200,15 +201,15 @@ content:
             label: Text
             type: text
             required: true
-      - name: variantColumns
-        label: Price table columns (optional — choose before adding variants)
+      - name: columns
+        label: Price table columns (pick these FIRST)
         type: reference
         options:
-          collection: tableHeaders
+          collection: tableColumns
           multiple: true
           value: "{key}"
           label: "{label}"
-        description: "STEP 1 — pick the table columns in display order from the searchable list (leave empty for the standard table: SKU / Ø / Length / Units / Price / Note). Need a different header? Add it once under Table headers in the sidebar. Then, in STEP 2 (Variants below), enter one value per chosen column, in that order."
+        description: "STEP 1 — choose which columns this product's price table uses, in display order, from the searchable Table columns list. If the site shows nothing useful here, add new columns once under Table columns in the sidebar (they then become available to every product). STEP 2 — each variant row below must carry exactly one value per chosen column, in this same order."
       - name: variants
         label: Variants (prices)
         type: object
@@ -218,43 +219,13 @@ content:
             collapsed: true
             summary: "Row {index}"
         fields:
-          # STEP 2 of the variants flow: editor picks columns first (see
-          # variantColumns above), then enters one value per column here.
+          # STEP 2 of the variants flow: pick columns first (see `columns`
+          # above), then enter one value per column here.
           - name: cells
             label: Values (one per chosen column, same order)
             type: string
             list: true
-            description: "Add one row item per cell of the price table, top to bottom as printed. Type exactly one value per chosen column, in the SAME order as the Price table columns above (e.g. if you picked SKU / Ø / Price: \"HX 21 08 080\", \"8\", \"1.37\"). Leave an item empty when the printed cell is blank."
-          # --- Legacy named fields (pre-CMS files) -----------------------
-          # Hidden from the editor but DECLARED so the CMS keeps writing
-          # them when an old product is re-saved. Do not remove.
-          - name: sku
-            type: string
-            hidden: true
-          - name: diameterMm
-            type: string
-            hidden: true
-          - name: lengthMm
-            type: string
-            hidden: true
-          - name: unitsPerBox
-            type: number
-            hidden: true
-          - name: priceGel
-            type: number
-            hidden: true
-          - name: note
-            type: string
-            hidden: true
-          - name: text1
-            type: string
-            hidden: true
-          - name: text2
-            type: string
-            hidden: true
-          - name: text3
-            type: string
-            hidden: true
+            description: "One row item per cell of the price table, top to bottom as printed. Enter exactly one value per chosen column, in the SAME order as the Price table columns above (e.g. if you picked SKU / Ø / Price: \"HX 21 08 080\", \"8\", \"1.37\"). Leave an item empty when the printed cell is blank. Changed the column selection? Update these values to match the new order."
 
   # ------------------------------------------------------- badge library
   - name: badges
@@ -362,11 +333,11 @@ content:
           media: standards
           rename: safe
 
-  # ------------------------------------------------------- table headers library
-  - name: tableHeaders
-    label: Table headers
+  # ------------------------------------------------------- table columns
+  - name: tableColumns
+    label: Table columns
     type: collection
-    path: content/headers
+    path: content/table-columns
     format: json
     filename: "{primary}.json"
     view:
@@ -387,30 +358,30 @@ content:
       - name: labelKa
         label: Header text (Georgian)
         type: string
-      - name: slot
-        label: What the column shows
+      - name: type
+        label: Column type
         type: select
-        required: true
+        options:
+          values:
+            - name: text
+              label: Text
+            - name: number
+              label: Number
+        description: "Number columns feed the facts strip under the product title (the site lists their distinct values, e.g. diameters 8–16). Text is fine for codes like SKU."
+      - name: role
+        label: Special use (optional)
+        type: select
         options:
           values:
             - name: sku
-              label: SKU
-            - name: diameterMm
-              label: Diameter mm
-            - name: lengthMm
-              label: Length mm
-            - name: unitsPerBox
-              label: Units per box
-            - name: priceGel
-              label: Price GEL
-            - name: note
-              label: Note
-            - name: text1
-              label: Extra text 1
-            - name: text2
-              label: Extra text 2
-            - name: text3
-              label: Extra text 3
+              label: SKU — product search & variant card titles
+            - name: price
+              label: Price — price strip, 'from ₾' labels & price range
+            - name: diameter
+              label: Diameter — used in auto product description
+            - name: length
+              label: Length — used in auto product description
+        description: "Optional feature wiring. Leave empty for ordinary data columns. Choose at most one SKU and one Price column per product's pick — the first match wins."
 
   # ------------------------------------------------------- featured on home
   - name: highlighted

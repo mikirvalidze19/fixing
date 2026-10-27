@@ -21,52 +21,72 @@
   "features": [],
   "variants": [
     {
-      "sku": "JO 01 00 008",
-      "diameterMm": 8,
-      "lengthMm": null,
-      "unitsPerBox": 2000,
-      "priceGel": 0.08,
-      "note": null
+      "cells": [
+        "JO 01 00 008",
+        8,
+        null,
+        2000,
+        0.08,
+        null
+      ]
     },
     {
-      "sku": "JO 01 00 010",
-      "diameterMm": 10,
-      "lengthMm": null,
-      "unitsPerBox": 2000,
-      "priceGel": 0.12,
-      "note": null
+      "cells": [
+        "JO 01 00 010",
+        10,
+        null,
+        2000,
+        0.12,
+        null
+      ]
     },
     {
-      "sku": "JO 01 00 012",
-      "diameterMm": 12,
-      "lengthMm": null,
-      "unitsPerBox": 1000,
-      "priceGel": 0.2,
-      "note": null
+      "cells": [
+        "JO 01 00 012",
+        12,
+        null,
+        1000,
+        0.2,
+        null
+      ]
     },
     {
-      "sku": "JO 01 00 016",
-      "diameterMm": 16,
-      "lengthMm": null,
-      "unitsPerBox": 1000,
-      "priceGel": 0.35,
-      "note": null
+      "cells": [
+        "JO 01 00 016",
+        16,
+        null,
+        1000,
+        0.35,
+        null
+      ]
     },
     {
-      "sku": "JO 01 00 020",
-      "diameterMm": 20,
-      "lengthMm": null,
-      "unitsPerBox": 500,
-      "priceGel": 0.54,
-      "note": null
+      "cells": [
+        "JO 01 00 020",
+        20,
+        null,
+        500,
+        0.54,
+        null
+      ]
     },
     {
-      "sku": "JO 01 00 024",
-      "diameterMm": 24,
-      "lengthMm": null,
-      "unitsPerBox": 500,
-      "priceGel": 1.02,
-      "note": null
+      "cells": [
+        "JO 01 00 024",
+        24,
+        null,
+        500,
+        1.02,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

@@ -7,30 +7,29 @@
  * `src/data/catalog.ts` — icon/badge references and file paths are resolved
  * to build-time URLs there, so pages render plain rows. */
 
-export type Variant = {
-  sku: string;
-  diameterMm: number | string | null;
-  lengthMm: number | string | null;
-  unitsPerBox: number;
-  priceGel: number;
-  note: string | null;
-  /* Free slots for products whose price-table columns differ from the
-   * standard set. Headers are defined per product in `variantColumns`. */
-  text1?: string | null;
-  text2?: string | null;
-  text3?: string | null;
-};
+/* One normalized variant-table column. Columns are defined ONCE in the
+ * shared "Table columns" library (content/table-columns/, managed like
+ * badges) and every product picks its own subset, in display order.
+ *
+ * A column carries no legacy "slot" mapping — its identity IS its `key`.
+ * `type` drives value handling (number parsing / sorting); `role` is an
+ * optional feature tag consumed outside the table (search, price strip). */
+export type ColumnType = 'text' | 'number';
+export type ColumnRole = 'sku' | 'price' | 'diameter' | 'length';
 
-/* One price-table column. Editors build tables by picking entries from the
- * shared "Table headers" library (content/headers/, managed like badges):
- * each library entry carries the header text (EN/KA) and the `slot` of the
- * Variant field it displays (sku, diameterMm, … or the free text1–text3
- * slots). `key` is the library identity, `slot` the data it shows. */
 export type VariantColumn = {
   key: string;
-  slot: string;
   label: string;
   labelKa?: string | null;
+  type: ColumnType;
+  role?: ColumnRole | null;
+};
+
+/* A variant row: positional `cells` aligned 1:1 with the product's
+ * `columns` (`cells[i]` is the value of `columns[i]`, `null` when the
+ * printed cell is blank). Number columns are already parsed here. */
+export type Variant = {
+  cells: Array<number | string | null>;
 };
 
 /* A spec-symbol row (small icon + label + optional value under the title).
@@ -77,6 +76,10 @@ export type Product = {
   titleKa: string;
   titleEn: string;
   variants: Variant[];
+  /* The columns this product's "Available variants" table uses, resolved
+   * against the shared library in display order — always present after
+   * normalization (never `undefined`). */
+  columns: VariantColumn[];
   /* Editor-managed extras (all optional; empty on the legacy seed) */
   groupNumber?: number;
   category?: string | null;
@@ -84,10 +87,6 @@ export type Product = {
   image?: string | null;
   descriptionEn?: string | null;
   descriptionKa?: string | null;
-  /* Custom "Available variants" table columns, in display order. When
-   * absent the standard set (SKU / Ø / length / pcs per box / price / note)
-   * is used — localized as before. */
-  variantColumns?: VariantColumn[];
   specs?: SymbolRow[];
   certs?: CertRow[];
   standards?: StandardRow[];
@@ -146,10 +145,13 @@ export type StandardDef = {
   badge?: string | null;
 };
 
-/* Price-table header definition (shared library, content/headers/). */
-export type TableHeaderDef = {
+/* Variant-table column definition (shared library, content/table-columns/).
+ * `type`/`role` are optional in the file and always resolved by the
+ * normalizer. */
+export type ColumnDef = {
   key: string;
   label: string;
   labelKa?: string | null;
-  slot: string;
+  type?: ColumnType | null;
+  role?: ColumnRole | null;
 };

@@ -13,6 +13,14 @@ import type {
   VariantColumn,
 } from './catalog';
 
+/* One "facts" strip row (under the title): a numeric table column and its
+ * distinct values across the product's variants. The component renders the
+ * column label (localized) and the sorted values. */
+export type ValueFact = {
+  col: VariantColumn;
+  values: number[];
+};
+
 /* View-model assembled by useProductData for the Product page. */
 export type ProductData = {
   product: Product;
@@ -25,12 +33,12 @@ export type ProductData = {
   standards: StandardRow[];
   documents: DocumentRow[];
   features: FeatureRow[];
+  /* The variant table — fully generic, editors pick its columns per
+   * product from the shared Table columns library. */
   columns: VariantColumn[];
+  facts: ValueFact[];
   videoId: string | undefined;
   hasPrice: boolean;
-  diameters: number[];
-  lengths: number[];
-  packs: number[];
   priceRange: string | null;
   sizeUnit: string;
   aboutText: string;

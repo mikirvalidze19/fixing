@@ -2,5 +2,6 @@
   "key": "note",
   "label": "Note",
   "labelKa": "Note",
-  "slot": "note"
+  "type": "text",
+  "role": null
 }

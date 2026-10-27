@@ -63,12 +63,22 @@
   ],
   "variants": [
     {
-      "sku": "KB 01 48 016",
-      "diameterMm": "4.8",
-      "lengthMm": 16,
-      "unitsPerBox": 500,
-      "priceGel": 0.29,
-      "note": null
+      "cells": [
+        "KB 01 48 016",
+        "4.8",
+        16,
+        500,
+        0.29,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

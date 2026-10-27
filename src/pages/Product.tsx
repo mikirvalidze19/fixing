@@ -18,9 +18,17 @@ import type {
   Variant,
   VariantColumn,
 } from '../models/catalog';
-import type { ProductData } from '../models/product';
+import type { ProductData, ValueFact } from '../models/product';
 import ProductCard from '../components/ProductCard/ProductCard';
 import { formatGel, minPrice, pickLabel, productImageSrc } from '../utils/product';
+import {
+  columnNumbers,
+  priceValues,
+  roleColumn,
+  variantText,
+  variantTitle,
+  variantValue,
+} from '../utils/table';
 import Placeholder from './Placeholder';
 import styles from './Product.module.css';
 
@@ -28,54 +36,29 @@ const { company } = companyData;
 
 const productMap = categoryProducts as Record<string, string[]>;
 
-/* Category lookup comes straight from the catalog adapter. */
-
-const cell = (value: number | string | null | undefined) => value ?? '—';
-
 /* Pure derivation helpers (ordinary functions — no JSX, no hooks). */
 
-/* Standard "Available variants" columns — identical for every product that
- * has no custom `variantColumns` (localized as before). */
-function defaultColumns(t: TFunction): VariantColumn[] {
-  return [
-    { key: 'sku', slot: 'sku', label: t('productPage.colSku') },
-    { key: 'diameterMm', slot: 'diameterMm', label: t('productPage.colDiameter') },
-    { key: 'lengthMm', slot: 'lengthMm', label: t('productPage.colLength') },
-    { key: 'unitsPerBox', slot: 'unitsPerBox', label: t('productPage.colUnits') },
-    { key: 'priceGel', slot: 'priceGel', label: t('productPage.colPrice') },
-    { key: 'note', slot: 'note', label: t('productPage.colNote') },
-  ];
-}
-
-/* Cell text for one variant + data slot. Standard slots keep their exact
- * legacy rendering (em dash when missing, formatted price). */
-function cellFor(variant: Variant, slot: string): string {
-  switch (slot) {
-    case 'sku':
-      return variant.sku;
-    case 'priceGel':
-      return typeof variant.priceGel === 'number'
-        ? formatGel(variant.priceGel)
-        : '—';
-    case 'diameterMm':
-      return String(cell(variant.diameterMm));
-    case 'lengthMm':
-      return String(cell(variant.lengthMm));
-    case 'unitsPerBox':
-      return String(cell(variant.unitsPerBox));
-    case 'note':
-      return String(cell(variant.note));
-    default: {
-      const value = (variant as unknown as Record<string, string | null>)[slot];
-      return String(cell(value));
-    }
+/* Display text of one table cell. Price columns get the formatted ₾ value
+ * (legacy style); everything else renders raw with an em dash when blank. */
+function displayCell(product: Product, variant: Variant, col: VariantColumn): string {
+  if (col.role === 'price') {
+    const value = variantValue(product, variant, col);
+    return typeof value === 'number' ? formatGel(value) : '—';
   }
+  return variantText(product, variant, col);
 }
 
-function uniqNums(values: (number | string | null)[]): number[] {
-  return [...new Set(values.filter((v): v is number => typeof v === 'number'))].sort(
-    (a, b) => a - b,
-  );
+function uniqNums(values: number[]): number[] {
+  return [...new Set(values)].sort((a, b) => a - b);
+}
+
+/* Facts strip: one row per picked numeric column (the price column has its
+ * own range row). Values are the distinct numbers across all variants. */
+function buildFacts(product: Product): ValueFact[] {
+  return product.columns
+    .filter((col) => col.type === 'number' && col.role !== 'price')
+    .map((col) => ({ col, values: uniqNums(columnNumbers(product, col)) }))
+    .filter(({ values }) => values.length > 0);
 }
 
 function rangeText(vals: number[], unit: string): string | null {
@@ -102,6 +85,9 @@ function findRelated(productId: string, category: ProductCategory): Product[] {
     .slice(0, 3);
 }
 
+/* Auto description — the parts about diameter/length ranges only appear
+ * when the product picked a column tagged with that role. Custom CMS
+ * descriptions (descriptionEn/Ka) win over this text. */
 function buildAboutText(
   t: TFunction,
   args: {
@@ -141,18 +127,15 @@ function useProductData(id: string | undefined): ProductData | null {
   const categoryLabel = category
     ? t(`categories.${category.slug}.label`, { defaultValue: category.label })
     : '';
-  const diameters = uniqNums(product.variants.map((v) => v.diameterMm));
-  const lengths = uniqNums(product.variants.map((v) => v.lengthMm));
-  const packs = uniqNums(product.variants.map((v) => v.unitsPerBox));
-  const prices = product.variants
-    .map((v) => v.priceGel)
-    .filter((v): v is number => typeof v === 'number');
+  const prices = priceValues(product);
   const priceRange = priceRangeText(prices);
   const sizeUnit =
     product.variants.length === 1 ? t('productPage.size') : t('productPage.sizes');
   /* Editor-written description wins; otherwise the auto-generated text. */
   const customAbout =
     i18n.language === 'ka' ? product.descriptionKa : product.descriptionEn;
+  const diameterColumn = roleColumn(product, 'diameter');
+  const lengthColumn = roleColumn(product, 'length');
   return {
     product,
     title: selectTitle(i18n.language, product),
@@ -164,17 +147,10 @@ function useProductData(id: string | undefined): ProductData | null {
     standards: product.standards ?? [],
     documents: product.documents ?? [],
     features: product.features ?? [],
-    columns:
-      product.variantColumns && product.variantColumns.length > 0
-        ? product.variantColumns
-        : defaultColumns(t),
+    columns: product.columns,
+    facts: buildFacts(product),
     videoId: product.youtube ?? undefined,
-    hasPrice: product.variants.some(
-      (v) => typeof v.priceGel === 'number' && v.priceGel > 0,
-    ),
-    diameters,
-    lengths,
-    packs,
+    hasPrice: prices.some((price) => price > 0),
     priceRange,
     sizeUnit,
     aboutText:
@@ -185,8 +161,8 @@ function useProductData(id: string | undefined): ProductData | null {
         sizeUnit,
         category,
         categoryLabel,
-        diameters,
-        lengths,
+        diameters: diameterColumn ? uniqNums(columnNumbers(product, diameterColumn)) : [],
+        lengths: lengthColumn ? uniqNums(columnNumbers(product, lengthColumn)) : [],
         priceRange,
       }),
   };
@@ -222,14 +198,17 @@ export default function Product() {
       </div>
 
       <ProductFeatures features={data.features} />
-      <h2 className={styles.sectionTitle}>{t('productPage.availableVariants')}</h2>
-      <VariantTable product={data.product} columns={data.columns} />
-      {/* key remount resets the open card on navigation — no reset effect */}
-      <VariantCards
-        key={data.product.id}
-        product={data.product}
-        columns={data.columns}
-      />
+      {data.columns.length > 0 && (
+        <>
+          <h2 className={styles.sectionTitle}>{t('productPage.availableVariants')}</h2>
+          <VariantTable product={data.product} />
+          {/* key remount resets the open card on navigation — no reset effect */}
+          <VariantCards
+            key={data.product.id}
+            product={data.product}
+          />
+        </>
+      )}
       <ProductDocuments documents={data.documents} />
       <ProductVideo videoId={data.videoId} series={data.product.series} />
       <RelatedProducts related={data.related} />
@@ -331,9 +310,9 @@ function ProductMeta({
 }
 
 function ProductInfo({ data }: { data: ProductData }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { product, title, aboutText, specs, category, categoryLabel } = data;
-  const { diameters, lengths, packs, priceRange } = data;
+  const { facts, priceRange } = data;
   return (
     <div className={styles.info}>
       <h1 className={styles.name}>{product.series}</h1>
@@ -367,24 +346,12 @@ function ProductInfo({ data }: { data: ProductData }) {
             </dd>
           </div>
         )}
-        {diameters.length > 0 && (
-          <div className={styles.fact}>
-            <dt>{t('productPage.diameters')}</dt>
-            <dd>{diameters.map((d) => `${d} mm`).join(', ')}</dd>
+        {facts.map(({ col, values }) => (
+          <div className={styles.fact} key={col.key}>
+            <dt>{pickLabel(col, i18n.language)}</dt>
+            <dd>{values.join(', ')}</dd>
           </div>
-        )}
-        {lengths.length > 0 && (
-          <div className={styles.fact}>
-            <dt>{t('productPage.lengths')}</dt>
-            <dd>{lengths.map((l) => `${l} mm`).join(', ')}</dd>
-          </div>
-        )}
-        {packs.length > 0 && (
-          <div className={styles.fact}>
-            <dt>{t('productPage.packSizes')}</dt>
-            <dd>{packs.map((p) => `${p} pcs`).join(', ')}</dd>
-          </div>
-        )}
+        ))}
         {priceRange && (
           <div className={styles.fact}>
             <dt>{t('productPage.priceRange')}</dt>
@@ -436,49 +403,44 @@ function ProductStandards({ rows }: { rows: StandardRow[] }) {
   );
 }
 
-function VariantTable({
-  product,
-  columns,
-}: {
-  product: Product;
-  columns: VariantColumn[];
-}) {
+/* The variant table is fully generic: columns come from the editor's pick
+ * (shared "Table columns" library) and every row is one cell per column.
+ * Only SKU/Price columns keep their legacy styling hooks. */
+function VariantTable({ product }: { product: Product }) {
   const { i18n } = useTranslation();
+  const lang = i18n.language;
   return (
     <div className={styles.tableWrap}>
       <table className={styles.table}>
         <thead>
           <tr>
-            {columns.map((col) => (
+            {product.columns.map((col) => (
               <th key={col.key} scope="col">
-                {pickLabel(col, i18n.language)}
+                {pickLabel(col, lang)}
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {/* Keys are positional, not SKU-based: cells-derived SKUs may be
-           * empty and rows must stay unique regardless of editor input. */}
-          {product.variants.map((v, i) => (
+          {/* Keys are positional, not SKU-based: SKU cells may be empty and
+           * rows must stay unique regardless of editor input. */}
+          {product.variants.map((variant, i) => (
             <tr key={`row-${i}`}>
-              {columns.map((col) => {
-                const value = cellFor(v, col.slot);
-                return (
-                  <td
-                    key={col.key}
-                    data-label={pickLabel(col, i18n.language)}
-                    className={
-                      col.slot === 'sku'
-                        ? styles.sku
-                        : col.slot === 'priceGel'
-                          ? styles.price
-                          : undefined
-                    }
-                  >
-                    {value}
-                  </td>
-                );
-              })}
+              {product.columns.map((col) => (
+                <td
+                  key={col.key}
+                  data-label={pickLabel(col, lang)}
+                  className={
+                    col.role === 'sku'
+                      ? styles.sku
+                      : col.role === 'price'
+                        ? styles.price
+                        : undefined
+                  }
+                >
+                  {displayCell(product, variant, col)}
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>
@@ -487,20 +449,16 @@ function VariantTable({
   );
 }
 
-function VariantCards({
-  product,
-  columns,
-}: {
-  product: Product;
-  columns: VariantColumn[];
-}) {
+/* Mobile accordion variant of the same table (same generic model). */
+function VariantCards({ product }: { product: Product }) {
   const { t, i18n } = useTranslation();
+  const lang = i18n.language;
   const [openRow, setOpenRow] = useState<number | null>(null);
   return (
     <ul className={styles.cards} aria-label={t('productPage.availableVariants')}>
-      {/* Row identity is the index, not the SKU: cells-derived SKUs may be
-       * empty or duplicated, so index keys keep the accordion stable. */}
-      {product.variants.map((v, i) => {
+      {/* Row identity is the index: cells may be empty or duplicated, so
+       * index keys keep the accordion stable. */}
+      {product.variants.map((variant, i) => {
         const open = openRow === i;
         return (
           <li
@@ -514,7 +472,9 @@ function VariantCards({
               aria-controls={`variant-${i}`}
               onClick={() => setOpenRow((prev) => (prev === i ? null : i))}
             >
-              <span className={styles.cardSku}>{v.sku}</span>
+              <span className={styles.cardSku}>
+                {variantTitle(product, variant)}
+              </span>
               <ChevronDown
                 className={styles.chevron}
                 size={20}
@@ -530,21 +490,18 @@ function VariantCards({
             >
               <div className={styles.cardInner}>
                 <dl className={styles.details}>
-                  {columns.map((col) => {
-                    const value = cellFor(v, col.slot);
-                    const label = pickLabel(col, i18n.language);
-                    return (
-                      <div
-                        key={col.key}
-                        className={styles.detail}
+                  {product.columns.map((col) => (
+                    <div key={col.key} className={styles.detail}>
+                      <dt>{pickLabel(col, lang)}</dt>
+                      <dd
+                        className={
+                          col.role === 'price' ? styles.price : undefined
+                        }
                       >
-                        <dt>{label}</dt>
-                        <dd className={col.slot === 'priceGel' ? styles.price : undefined}>
-                          {value}
-                        </dd>
-                      </div>
-                    );
-                  })}
+                        {displayCell(product, variant, col)}
+                      </dd>
+                    </div>
+                  ))}
                 </dl>
               </div>
             </div>

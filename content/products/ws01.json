@@ -27,20 +27,32 @@
   "features": [],
   "variants": [
     {
-      "sku": "WS 01 27 058",
-      "diameterMm": 33,
-      "lengthMm": 58,
-      "unitsPerBox": 25,
-      "priceGel": 2.46,
-      "note": null
+      "cells": [
+        "WS 01 27 058",
+        33,
+        58,
+        25,
+        2.46,
+        null
+      ]
     },
     {
-      "sku": "WS 01 27 090",
-      "diameterMm": 33,
-      "lengthMm": 90,
-      "unitsPerBox": 25,
-      "priceGel": 3.83,
-      "note": null
+      "cells": [
+        "WS 01 27 090",
+        33,
+        90,
+        25,
+        3.83,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

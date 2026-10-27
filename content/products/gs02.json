@@ -32,36 +32,52 @@
   "features": [],
   "variants": [
     {
-      "sku": "GS 02 75 090",
-      "diameterMm": "6 (7.5)",
-      "lengthMm": 90,
-      "unitsPerBox": 100,
-      "priceGel": 0.53,
-      "note": null
+      "cells": [
+        "GS 02 75 090",
+        "6 (7.5)",
+        90,
+        100,
+        0.53,
+        null
+      ]
     },
     {
-      "sku": "GS 02 75 100",
-      "diameterMm": "6 (7.5)",
-      "lengthMm": 100,
-      "unitsPerBox": 100,
-      "priceGel": 0.57,
-      "note": null
+      "cells": [
+        "GS 02 75 100",
+        "6 (7.5)",
+        100,
+        100,
+        0.57,
+        null
+      ]
     },
     {
-      "sku": "GS 02 75 120",
-      "diameterMm": "6 (7.5)",
-      "lengthMm": 120,
-      "unitsPerBox": 100,
-      "priceGel": 0.68,
-      "note": null
+      "cells": [
+        "GS 02 75 120",
+        "6 (7.5)",
+        120,
+        100,
+        0.68,
+        null
+      ]
     },
     {
-      "sku": "GS 02 75 150",
-      "diameterMm": "6 (7.5)",
-      "lengthMm": 150,
-      "unitsPerBox": 100,
-      "priceGel": 0.9,
-      "note": null
+      "cells": [
+        "GS 02 75 150",
+        "6 (7.5)",
+        150,
+        100,
+        0.9,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

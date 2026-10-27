@@ -20,12 +20,22 @@
   "features": [],
   "variants": [
     {
-      "sku": "GSC 04 00 030",
-      "diameterMm": null,
-      "lengthMm": null,
-      "unitsPerBox": 100,
-      "priceGel": 0.26,
-      "note": null
+      "cells": [
+        "GSC 04 00 030",
+        null,
+        null,
+        100,
+        0.26,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

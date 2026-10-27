@@ -2,5 +2,6 @@
   "key": "pricegel",
   "label": "Price",
   "labelKa": "Price",
-  "slot": "priceGel"
+  "type": "number",
+  "role": "price"
 }

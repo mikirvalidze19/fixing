@@ -2,5 +2,6 @@
   "key": "lengthmm",
   "label": "Length (mm)",
   "labelKa": "Length (mm)",
-  "slot": "lengthMm"
+  "type": "number",
+  "role": "length"
 }

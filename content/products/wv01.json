@@ -27,12 +27,22 @@
   "features": [],
   "variants": [
     {
-      "sku": "WV 01 23 050",
-      "diameterMm": 25,
-      "lengthMm": 50,
-      "unitsPerBox": 50,
-      "priceGel": 1.46,
-      "note": null
+      "cells": [
+        "WV 01 23 050",
+        25,
+        50,
+        50,
+        1.46,
+        null
+      ]
     }
+  ],
+  "columns": [
+    "sku",
+    "diametermm",
+    "lengthmm",
+    "unitsperbox",
+    "pricegel",
+    "note"
   ]
 }

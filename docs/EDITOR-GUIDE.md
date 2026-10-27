@@ -33,15 +33,15 @@ Open the editor → **Products** → **Add** and fill the form:
 | Standards box | Certificate rows for the right side (e.g. ETA / EAD number). |
 | Documents | Name, optional size and full PDF link (hosted anywhere online). |
 | Technical features | The bullet list under "Technical features". |
-| Variants (prices) | The price rows — one row per variant printed on the price list. Each row is a list of **values, one per table column, in the same order** as the columns you picked above (standard order by default: SKU / Ø / Length / Units / Price / Note). Keep SKU values exactly as printed, e.g. `HX 21 08 080`; leave a value empty when the printed cell is blank. |
-| Price table columns | **Choose these before adding variants.** Empty = standard table (SKU / Ø / Length / Units / Price / Note). Otherwise pick headers in your display order from the shared **Table headers** list, then every variant row wants one value per column in that same order. Need a header that doesn't exist yet (e.g. "Thread")? Add it once under **Table headers** in the sidebar — header text EN/KA + what data it shows (SKU, Ø, Length, Units, Price, Note, or a free Extra text slot) — and it becomes selectable for every product from then on. SKU and Price are still used for search and the card's "from ₾" price even when not shown as columns. |
+| Price table columns | **STEP 1 — pick these before adding variants.** Choose the columns this product's table uses from the shared **Table columns** list, in your display order (e.g. pick 3 columns out of 10 — the variant rows below will then show exactly those 3 inputs per row). Need a column that doesn't exist yet (e.g. "Thread")? Add it once under **Table columns** in the sidebar — header text EN/KA, type (Number/Text), optionally a special use (SKU / Price / Diameter / Length) — and it becomes selectable for every product from then on. |
+| Variants (prices) | **STEP 2 — the price rows.** One row per variant printed on the price list. Each row carries **one value per chosen column, in the same order** as the columns you picked above (standard order: SKU / Ø / Length / Units / Price / Note). Keep SKU values exactly as printed, e.g. `HX 21 08 080`; leave a value empty when the printed cell is blank. |
 
 Press **Save/Publish** → Pages CMS commits to GitHub → Cloudflare Pages publishes. Re-check the site in ~2 minutes.
 
 ## 3. Adding a new badge or spec icon (rare)
 
-1. In the sidebar open **Badges** (or **Spec icons** / **Standards** / **Table headers**) → **Add**.
-2. Enter a short lowercase **Key** (e.g. `hex-key-sw13`), a label (English / Georgian), and upload the artwork image.
+1. In the sidebar open **Badges** (or **Spec icons** / **Standards** / **Table columns**) → **Add**.
+2. Enter a short lowercase **Key** (e.g. `hex-key-sw13`), a label (English / Georgian), and upload the artwork image. For **Table columns** there is no image — instead set the type (Number/Text) and, when needed, a special use (SKU/Price/Diameter/Length).
 3. Publish. The item now appears automatically in every product's checkboxes/dropdowns.
 
 No developer needed — the library is just regular content managed the same way as products.
