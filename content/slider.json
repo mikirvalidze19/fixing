@@ -6,88 +6,70 @@
       "videoUrl": "https://storage.onpage.it/6d9e98e4e94b42a188164c8bbecf27f33884dc49/Tecfi%20S.p.A.%20-%20Fixing%20Systems%20-%20versione%20breve.mp4",
       "poster": "https://www.tecfi.it/wp-content/uploads/2024/10/poster_video_azienda.jpg",
       "titleEn": "Tecfi S.p.A. — Fixing Systems",
-      "titleKa": null,
       "textEn": "Design, testing and certified production of fixing systems — watch the Tecfi company video.",
-      "textKa": null,
+      "altEn": "Tecfi S.p.A. company video — Fixing Systems",
       "buttonTextEn": "Watch all videos",
-      "buttonTextKa": null,
-      "link": "/video",
-      "altEn": "Tecfi S.p.A. company video — Fixing Systems"
+      "link": "/video"
     },
     {
       "type": "image",
       "image": "/content/images/slider/Heavy-Duty.webp",
-      "foreground": null,
-      "variant": "heavy",
-      "eyebrow": "DXE00 · HL01 · AJE",
       "titleEn": "Heavy-duty metal anchors",
-      "titleKa": null,
       "textEn": "Drop-in and expansion anchors for cracked and non-cracked concrete. Safe, certified holding power for structural fixings.",
-      "textKa": null,
+      "altEn": "Heavy-duty metal anchors — expansion and drop-in anchors for structural concrete fixings",
+      "variant": "heavy",
       "buttonTextEn": "Find out more",
-      "buttonTextKa": null,
-      "link": "/products/heavy-duty-metallic",
-      "altEn": "Heavy-duty metal anchors — expansion and drop-in anchors for structural concrete fixings"
+      "link": "/products/heavy-duty-metallic"
     },
     {
       "type": "image",
       "image": "/content/images/slider/chemical.webp",
-      "foreground": null,
-      "variant": "chemical",
-      "eyebrow": "XWE01 · DGE · FV01 · PM01 · DH04",
       "titleEn": "Chemical anchoring systems",
-      "titleKa": null,
       "textEn": "High-strength resins, threaded rods, sleeves and applicator guns — certified hold for cracked concrete, solid and hollow materials",
-      "textKa": null,
+      "altEn": "Chemical anchoring system — applicator gun injecting high-strength resin",
+      "variant": "chemical",
       "buttonTextEn": "Find out more",
-      "buttonTextKa": null,
-      "link": "/products/chemical-fixings",
-      "altEn": "Chemical anchoring system — applicator gun injecting high-strength resin"
+      "link": "/products/chemical-fixings"
     },
     {
       "type": "image",
       "image": "/content/images/slider/roof.webp",
       "foreground": "/content/images/slider/roof1.webp",
-      "variant": null,
-      "eyebrow": "Roofing fixing systems",
       "titleEn": "Roofing fixing systems",
-      "titleKa": null,
       "textEn": "Certified excellence, high performance and a wide selection",
-      "textKa": null,
+      "altEn": "Roofing fixing systems — installer fixing metal roofing and Tecfi roofing screws",
       "buttonTextEn": "Find out more",
-      "buttonTextKa": null,
-      "link": "/products/roofing-fixing-systems",
-      "altEn": "Roofing fixing systems — installer fixing metal roofing and Tecfi roofing screws"
+      "link": "/products/roofing-fixing-systems"
     },
     {
       "type": "image",
       "image": "/content/images/slider/General fasteners.webp",
-      "foreground": null,
-      "variant": "fasteners",
-      "eyebrow": "BF · RL · AR · JO",
       "titleEn": "General fasteners",
-      "titleKa": null,
       "textEn": "Threaded rods, bolts, nuts and washers in zinc-plated steel — everyday assemblies and connections of every kind",
-      "textKa": null,
+      "altEn": "General fasteners — zinc-plated bolts, nuts, threaded rods and washers",
+      "variant": "fasteners",
       "buttonTextEn": "Find out more",
-      "buttonTextKa": null,
-      "link": "/products/general-fasteners",
-      "altEn": "General fasteners — zinc-plated bolts, nuts, threaded rods and washers"
+      "link": "/products/general-fasteners"
     },
     {
       "type": "image",
       "image": "/content/images/slider/Drywall-hollow-systems.jpeg",
-      "foreground": null,
-      "variant": "drywall",
-      "eyebrow": "ZZE · handyplug",
       "titleEn": "Drywall and hollow fixing systems",
-      "titleKa": null,
       "textEn": "Handyplug nylon anchors and cavity fixings for plasterboard, insulation panels and hollow walls — fast, secure fixing without specialist tools.",
-      "textKa": null,
+      "altEn": "ZZE handyplug plastic anchor for fixing thermo-acoustic insulation panels — drywall and hollow fixing systems",
+      "variant": "drywall",
       "buttonTextEn": "Find out more",
-      "buttonTextKa": null,
-      "link": "/products/drywall-hollow",
-      "altEn": "ZZE handyplug plastic anchor for fixing thermo-acoustic insulation panels — drywall and hollow fixing systems"
+      "link": "/products/drywall-hollow"
+    },
+    {
+      "type": "image",
+      "image": "/content/images/slider/fixing-systems-logo.png",
+      "titleEn": "test",
+      "titleKa": "test",
+      "textEn": "tes text",
+      "textKa": "test text",
+      "buttonTextEn": "test",
+      "buttonTextKa": "test"
     }
   ]
 }
