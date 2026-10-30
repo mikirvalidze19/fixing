@@ -31,6 +31,16 @@ media:
     input: content/images/standards
     output: /content/images/standards
     extensions: [webp, jpg, jpeg, png, svg]
+  - name: slider
+    label: Slider images
+    input: content/images/slider
+    output: /content/images/slider
+    extensions: [webp, jpg, jpeg, png]
+  - name: videos
+    label: Slider videos
+    input: content/videos
+    output: /content/videos
+    extensions: [mp4, webm, mov]
 
 content:
   # ---------------------------------------------------------------- products
@@ -229,6 +239,148 @@ content:
             label: Values (one column value per line, same order)
             type: text
             description: "ONE line per chosen column, in the SAME order as the Price table columns above. Example (SKU / Ø / Price chosen): line 1 \"HX 21 08 080\", line 2 \"8\", line 3 \"1.37\". A cell that is blank on the price list = an EMPTY line: press Enter and keep going. You may also stop early — any missing trailing line counts as a blank cell. Changed the column selection? Rewrite the lines to match the new order."
+
+  # ------------------------------------------------------- home slider
+  - name: slider
+    label: Home slider
+    type: file
+    path: content/slider.json
+    format: json
+    fields:
+      - name: autoplayMs
+        label: Rotation speed (milliseconds)
+        type: number
+        description: "Optional — how long a slide stays up before auto-advancing (6000 = 6 seconds). Leave empty for the site default (6000). Rotation pauses on hover/focus and while a slide's video plays."
+      - name: slides
+        label: Slides
+        type: block
+        blockKey: type
+        description: "ADD an item, then pick its type: an Image slide (photo background + texts) or a Video slide (uploaded/external video + texts). Drag the slide cards to reorder — the top card is the first slide visitors see."
+        list:
+          collapsible:
+            collapsed: true
+            summary: "Slide {index}"
+        blocks:
+          # Each slide is one of two block types; the editor clicks the
+          # wanted type and only that block's fields show up (Pages CMS
+          # block field, stored as { type: image|video, ...fields }).
+          - name: image
+            label: Image slide
+            fields:
+              - name: image
+                label: Background image
+                type: image
+                options:
+                  media: slider
+                  rename: safe
+                description: "Full-bleed photo behind the slide texts (wide webp/jpg works best). Optional — a slide can also be text-only on the themed background."
+              - name: foreground
+                label: Extra overlay image
+                type: image
+                options:
+                  media: slider
+                  rename: safe
+                description: "Optional art layered over the right side of the slide."
+              - name: titleEn
+                label: Title (English)
+                type: string
+              - name: titleKa
+                label: Title (Georgian)
+                type: string
+              - name: textEn
+                label: Text (English)
+                type: string
+                description: "One or two sentences shown under the title."
+              - name: textKa
+                label: Text (Georgian)
+                type: string
+                description: "One or two sentences shown under the title."
+              - name: altEn
+                label: Image description (a11y, English)
+                type: string
+                description: "Optional — what the picture shows, for screen readers. Defaults to the slide title."
+              - name: altKa
+                label: Image description (a11y, Georgian)
+                type: string
+                description: "Optional — Georgian version of the description above."
+              - name: variant
+                label: Look variant
+                type: select
+                description: "Optional colour accent for the slide; leave Default selection empty for the standard look."
+                options:
+                  values:
+                    - name: heavy
+                      label: Heavy-duty accent
+                    - name: chemical
+                      label: Chemical accent
+                    - name: fasteners
+                      label: Fasteners accent
+                    - name: drywall
+                      label: Drywall accent
+              - name: buttonTextEn
+                label: Button text (English)
+                type: string
+                description: "e.g. Find out more. Leave empty → this slide shows NO button."
+              - name: buttonTextKa
+                label: Button text (Georgian)
+                type: string
+                description: "Georgian button text; leave empty → the Georgian site shows no button."
+              - name: link
+                label: Button link
+                type: string
+                description: "Where the button goes — page address like /products/roofing-fixing-systems or /video. Empty link opens the product catalog (/products). Only matters when a button text is set."
+          - name: video
+            label: Video slide
+            fields:
+              - name: videoFile
+                label: Video file (upload)
+                type: file
+                options:
+                  media: videos
+                  rename: safe
+                description: "Upload the MP4/WebM here (up to ~25 MB per file for Cloudflare Pages). Fill EITHER this OR Video URL — the upload wins if both are set."
+              - name: videoUrl
+                label: Video URL (external)
+                type: string
+                description: "Full https://… link of a video hosted elsewhere (e.g. the Tecfi storage clip). Used when the upload above is empty."
+              - name: poster
+                label: Poster image
+                type: string
+                description: "Optional still image shown until the video loads — an uploaded slider image path (/content/images/slider/…) or a full https://… URL."
+              - name: titleEn
+                label: Title (English)
+                type: string
+              - name: titleKa
+                label: Title (Georgian)
+                type: string
+              - name: textEn
+                label: Text (English)
+                type: string
+                description: "One or two sentences shown under the title."
+              - name: textKa
+                label: Text (Georgian)
+                type: string
+                description: "One or two sentences shown under the title."
+              - name: altEn
+                label: Video description (a11y, English)
+                type: string
+                description: "Optional — what the video shows, for screen readers. Defaults to the slide title."
+              - name: altKa
+                label: Video description (a11y, Georgian)
+                type: string
+                description: "Optional — Georgian version of the description above."
+              - name: buttonTextEn
+                label: Button text (English)
+                type: string
+                description: "e.g. Watch all videos. Leave empty → this slide shows NO button."
+              - name: buttonTextKa
+                label: Button text (Georgian)
+                type: string
+                description: "Georgian button text; leave empty → the Georgian site shows no button."
+              - name: link
+                label: Button link
+                type: string
+                description: "Where the button goes — page address like /products/roofing-fixing-systems or /video. Empty link opens the product catalog (/products). Only matters when a button text is set."
 
   # ------------------------------------------------------- badge library
   - name: badges

@@ -83,3 +83,54 @@ export function libraryImageUrl(ref: string, kind: LibraryKind): string {
   }
   return '';
 }
+
+/* --- Hero slider media --------------------------------------------------- */
+
+/* Slide artwork and video posters live in content/images/slider; slide
+ * video uploads land in content/videos. External https:// values (e.g.
+ * the Tecfi storage clip) bypass the resolver entirely; bare file names
+ * fall back to the pre-migration asset folders so old content files
+ * still resolve. */
+const contentSliderImages = import.meta.glob<string>(
+  '../../content/images/slider/*',
+  { eager: true, query: '?url', import: 'default' },
+);
+
+const contentVideos = import.meta.glob<string>(
+  '../../content/videos/*',
+  { eager: true, query: '?url', import: 'default' },
+);
+
+const legacySliderImages = import.meta.glob<string>(
+  '../assets/slider/*.{png,webp,jpg,jpeg}',
+  { eager: true, query: '?url', import: 'default' },
+);
+
+const isExternalMedia = (ref: string): boolean =>
+  /^(https?:)?\/\//i.test(ref) || ref.startsWith('data:');
+
+/* Shared lookup order for slider images: the CMS slider folder, the CMS
+ * product photos (the old slider shared the products folder), then the
+ * two legacy asset folders. */
+const SLIDER_IMAGE_SOURCES = [
+  contentSliderImages,
+  contentProductImages,
+  legacySliderImages,
+  legacyProductImages,
+];
+
+export const sliderImageUrl = (ref?: string | null): string => {
+  if (!ref) return '';
+  if (isExternalMedia(ref)) return ref;
+  for (const urls of SLIDER_IMAGE_SOURCES) {
+    const hit = findBySuffix(urls, ref);
+    if (hit) return hit;
+  }
+  return '';
+};
+
+export const sliderVideoUrl = (ref?: string | null): string => {
+  if (!ref) return '';
+  if (isExternalMedia(ref)) return ref;
+  return findBySuffix(contentVideos, ref);
+};

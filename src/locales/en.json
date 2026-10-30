@@ -36,39 +36,7 @@
     "prev": "Previous slide",
     "next": "Next slide",
     "goTo": "Go to slide {{n}}: {{title}}",
-    "live": "Slide {{current}} of {{total}}: {{title}}",
-    "slides": {
-      "tecfi-company": {
-        "title": "Tecfi S.p.A. — Fixing Systems",
-        "text": "Design, testing and certified production of fixing systems — watch the Tecfi company video.",
-        "cta": "Watch all videos"
-      },
-      "heavy-duty-metallic": {
-        "title": "Heavy-duty metal anchors",
-        "text": "Drop-in and expansion anchors for cracked and non-cracked concrete. Safe, certified holding power for structural fixings.",
-        "cta": "Find out more"
-      },
-      "chemical-fixings": {
-        "title": "Chemical anchoring systems",
-        "text": "High-strength resins, threaded rods, sleeves and applicator guns — certified hold for cracked concrete, solid and hollow materials",
-        "cta": "Find out more"
-      },
-      "roofing-fixing-systems": {
-        "title": "Roofing fixing systems",
-        "text": "Certified excellence, high performance and a wide selection",
-        "cta": "Find out more"
-      },
-      "general-fasteners": {
-        "title": "General fasteners",
-        "text": "Threaded rods, bolts, nuts and washers in zinc-plated steel — everyday assemblies and connections of every kind",
-        "cta": "Find out more"
-      },
-      "drywall-hollow": {
-        "title": "Drywall and hollow fixing systems",
-        "text": "Handyplug nylon anchors and cavity fixings for plasterboard, insulation panels and hollow walls — fast, secure fixing without specialist tools.",
-        "cta": "Find out more"
-      }
-    }
+    "live": "Slide {{current}} of {{total}}: {{title}}"
   },
   "categories": {
     "roofing-fixing-systems": {

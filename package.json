@@ -12,7 +12,8 @@
     "i18n:export": "node scripts/i18n-export.cjs",
     "i18n:import": "node scripts/i18n-import.cjs",
     "migrate:table": "node scripts/migrate-table-columns.mjs",
-    "migrate:images": "node scripts/migrate-images.mjs"
+    "migrate:images": "node scripts/migrate-images.mjs",
+    "migrate:slider": "node scripts/migrate-slider.mjs"
   },
   "dependencies": {
     "i18next": "^26.4.2",

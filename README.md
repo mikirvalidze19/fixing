@@ -25,6 +25,7 @@ Non-developer editors add products through [Pages CMS](https://pagescms.org) (fo
 - `src/data/catalog.ts` is the single adapter that reads `content/` at build time; the legacy seed (`tecfi-georgia-planning/data/products.json`) remains as a fallback.
 - The migration from the legacy sidecar files was done by `scripts/migrate-catalog.mjs` (idempotent; re-runnable).
 - Variant tables are fully generic (`columns` + per-row `values` text — one line per column, empty line = blank cell; see **docs/TABLE-ARCHITECTURE.md**); the one-time conversion from the old hard-coded slot fields was done by `scripts/migrate-table-columns.mjs` (`npm run migrate:table`).
+- The home-page hero slider is CMS-managed under **Home slider** (`content/slider.json`, migrated by `npm run migrate:slider`): every slide is an **image or video block** with EN/KA texts, and a slide shows its button only when button text is set.
 
 See **docs/EDITOR-GUIDE.md** for the step-by-step editor guide.
 

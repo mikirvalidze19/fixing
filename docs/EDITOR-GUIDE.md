@@ -46,7 +46,23 @@ Press **Save/Publish** → Pages CMS commits to GitHub → Cloudflare Pages publ
 
 No developer needed — the library is just regular content managed the same way as products.
 
-## 4. Good to know
+## 4. Home page slider (slides — image or video)
+
+Open the editor → **Home slider** → the **Slides** field. Each slide is one card; click **Add an item** and pick its type, then fill the fields of that type:
+
+- **Image slide** — upload the **Background image** (a wide photo works best, e.g. 1920×1080 webp), optionally an **Extra overlay image** (art layered on the right side), then Title / Text in English and Georgian.
+- **Video slide** — upload the **Video file** (MP4/WebM, up to ~25 MB per file) OR paste a **Video URL** for an externally hosted MP4 (the upload wins if both are set), optionally a **Poster image** (still frame shown while loading), then the same Title / Text fields.
+
+| Field | Rule |
+|---|---|
+| Button text (EN / KA) | Optional. **No text → no button on that slide** (per language). |
+| Button link | Where the button goes, e.g. `/products/roofing-fixing-systems` or `/video`. Empty link opens the product catalog (`/products`). |
+| Look variant | Optional colour accent for image slides (Heavy-duty / Chemical / Fasteners / Drywall); leave on the default look unless told otherwise. |
+| Rotation speed | Optional — milliseconds a slide stays up (6000 = 6 s). |
+
+Drag the slide cards to reorder (top = first on the site). Press **Save/Publish** → the home page updates in ~2 minutes.
+
+## 5. Good to know
 
 - **Nothing is public before you publish.** Visitors of the website can never add or edit anything; only invited collaborators can.
 - Every change is a commit in GitHub history — mistakes can be reverted, and everything is attributed.
