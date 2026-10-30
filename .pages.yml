@@ -538,6 +538,36 @@ content:
               label: Length — used in auto product description
         description: "Optional feature wiring. Leave empty for ordinary data columns. Choose at most one SKU and one Price column per product's pick — the first match wins."
 
+  # ------------------------------------------------------- contact info
+  - name: contact
+    label: Contact info
+    type: file
+    path: content/contact.json
+    format: json
+    fields:
+      - name: nameEn
+        label: Company name (English)
+        type: string
+      - name: nameKa
+        label: Company name (Georgian)
+        type: string
+      - name: addressEn
+        label: Address (English)
+        type: string
+      - name: addressKa
+        label: Address (Georgian)
+        type: string
+      - name: phones
+        label: Phone numbers
+        type: string
+        list: true
+      - name: email
+        label: Email
+        type: string
+      - name: mapUrl
+        label: Map / directions URL
+        type: string
+
   # ------------------------------------------------------- featured on home
   - name: highlighted
     label: Featured products (home page)

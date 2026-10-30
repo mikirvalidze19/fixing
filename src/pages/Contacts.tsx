@@ -10,11 +10,9 @@ import {
   PackageCheck,
   Phone,
 } from 'lucide-react';
-import companyData from '../data/data.json';
+import { company } from '../data/contact';
 import CopyButton from '../components/CopyButton/CopyButton';
 import styles from './Contacts.module.css';
-
-const { company } = companyData;
 const embedSrc =
   'https://www.google.com/maps?q=Georgian-American+Friendship+Street+33+Tbilisi&output=embed';
 const tel = (p: string) => `tel:${p.replace(/[^+\d]/g, '')}`;
