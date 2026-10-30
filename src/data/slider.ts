@@ -33,6 +33,9 @@ type RawSlide = Partial<{
   cta: unknown;
   ctaEn: unknown;
   ctaKa: unknown;
+  buttonText: unknown;
+  buttonTextEn: unknown;
+  buttonTextKa: unknown;
   link: unknown;
   to: unknown;
   variant: unknown;
@@ -101,8 +104,8 @@ function normalizeSlide(raw: RawSlide, index: number): Slide | null {
     titleKa: str(raw.titleKa),
     textEn: str(raw.textEn) || str(raw.text),
     textKa: str(raw.textKa),
-    ctaEn: str(raw.ctaEn) || str(raw.cta),
-    ctaKa: str(raw.ctaKa),
+    ctaEn: str(raw.buttonTextEn) || str(raw.ctaEn) || str(raw.cta) || str(raw.buttonText),
+    ctaKa: str(raw.buttonTextKa) || str(raw.ctaKa),
     to: str(raw.link) || str(raw.to) || FALLBACK_LINK,
     variant: str(raw.variant) || undefined,
     altEn: str(raw.altEn) || str(raw.alt) || undefined,
