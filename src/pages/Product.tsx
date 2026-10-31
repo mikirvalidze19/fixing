@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
 import { ChevronDown, ExternalLink, FileText, Mail, Phone } from 'lucide-react';
-import companyData from '../data/data.json';
+import { company } from '../data/contact';
 import {
   categoryProducts,
   productCategory,
@@ -31,8 +31,6 @@ import {
 } from '../utils/table';
 import Placeholder from './Placeholder';
 import styles from './Product.module.css';
-
-const { company } = companyData;
 
 const productMap = categoryProducts as Record<string, string[]>;
 

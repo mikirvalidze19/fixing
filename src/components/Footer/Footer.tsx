@@ -4,7 +4,8 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import CopyButton from "../CopyButton/CopyButton";
 import logoPng from "../../assets/fixing-systems-logo.webp";
 import siteData from "../../data/site.json";
-import realData from "../../data/data.json";
+import { company } from "../../data/contact";
+import footerLabels from "../../data/data.json";
 import styles from "./Footer.module.css";
 
 const SITEMAP_KEYS: Record<string, string> = {
@@ -15,7 +16,11 @@ const SITEMAP_KEYS: Record<string, string> = {
 
 export default function Footer() {
   const { t, i18n } = useTranslation();
-  const { company, footer } = realData;
+  /* Company details come from the CMS ("Contact info") via the shared
+   * adapter — data.json is only the emergency fallback behind it.
+   * `footerLabels` is the small hard-coded block (copyright / column
+   * headings) until site settings move to the CMS too. */
+  const { footer } = footerLabels;
   const isKa = i18n.language === "ka";
   const companyName = isKa ? company.nameKa : company.nameEn;
   const address = isKa ? company.addressKa : company.addressEn;
@@ -32,7 +37,7 @@ export default function Footer() {
           <p className={styles.companyKa}>{company.nameKa}</p>
         </div>
 
-        {/* Contact — real data from data.json */}
+        {/* Contact — CMS-managed under "Contact info" */}
         <div className={styles.col}>
           <h5 className={styles.heading}>{t("footer.contact", { defaultValue: footer.contactTitle })}</h5>
           <address className={styles.address}>

@@ -66,6 +66,10 @@ content:
         type: string
         required: true
         description: "As printed on the price list, e.g. HXE01"
+      - name: groupNumber
+        label: Catalog order (1 = first)
+        type: number
+        description: "Optional — products are listed from the lowest number up (existing products already carry 1–28). Leave empty → sorted alphabetically at the end."
       - name: titleEn
         label: Title (English)
         type: string

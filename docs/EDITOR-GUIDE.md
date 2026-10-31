@@ -25,6 +25,7 @@ Open the editor → **Products** → **Add** and fill the form:
 |---|---|
 | ID | Short lowercase code, unique — e.g. `hxe02`. Becomes the page address. |
 | Series code | As printed on the price list, e.g. `HXE02`. |
+| Catalog order | Optional number — lower = earlier in the catalog lists (existing products use 1–28). Empty = end of the list. |
 | Title (English) / Title (Georgian) | The product family titles. |
 | Category | Where it belongs — used in the menu and catalog pages. |
 | YouTube link | Paste the full `youtube.com` or `youtu.be` link (or just the video ID). |
