@@ -128,5 +128,16 @@
     "unitsperbox",
     "pricegel",
     "note"
+  ],
+  "applications": [
+    "fire-resistance",
+    "scaffolding-and-nets",
+    "wood-carpentry",
+    "shelving",
+    "solar-panels",
+    "seismic-area",
+    "metal-carpentry",
+    "safety-line",
+    "electrical-systems"
   ]
 }

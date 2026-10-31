@@ -36,6 +36,11 @@ media:
     input: content/images/slider
     output: /content/images/slider
     extensions: [webp, jpg, jpeg, png]
+  - name: applications
+    label: Application images
+    input: content/images/applications
+    output: /content/images/applications
+    extensions: [webp, jpg, jpeg, png]
   - name: videos
     label: Slider videos
     input: content/videos
@@ -114,6 +119,15 @@ content:
               label: Drills, bits and sockets
             - name: inblister
               label: inBlister
+      - name: applications
+        label: Applications (usage pages the product belongs to)
+        type: reference
+        options:
+          collection: applications
+          multiple: true
+          value: "{id}"
+          label: "{labelEn}"
+        description: "Where this product is used — Roofing, Solar panels, HVAC… Multi-select; an application can mix products from one or more categories, so pick EVERY application that applies. The matching /applications/<id> page automatically lists this product (leave empty for none)."
       - name: youtube
         label: YouTube link
         type: string
@@ -541,6 +555,56 @@ content:
             - name: length
               label: Length — used in auto product description
         description: "Optional feature wiring. Leave empty for ordinary data columns. Choose at most one SKU and one Price column per product's pick — the first match wins."
+
+  # ------------------------------------------------------- applications
+  # Usage pages shown under /applications ("where products are used",
+  # mirroring tecfi.it). Applications carry NO product list of their own:
+  # an application page lists every product whose "Applications" pick
+  # contains it, so membership is maintained from the product side only
+  # (one application may mix products of several categories).
+  - name: applications
+    label: Applications (usage pages)
+    type: collection
+    path: content/applications
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: id
+      sort: order
+      order: asc
+    fields:
+      - name: id
+        label: ID (slug, lowercase)
+        type: string
+        required: true
+        pattern: "^[a-z0-9][a-z0-9-]*$"
+        description: "Becomes the page address (/applications/<id>) and the link between products and this page — e.g. roofing. Never change it after products have picked it."
+      - name: order
+        label: Order (1 = first)
+        type: number
+        description: "Optional — the Applications page lists cards from the lowest number up; empty ones come last, alphabetically."
+      - name: labelEn
+        label: Name (English)
+        type: string
+        required: true
+      - name: labelKa
+        label: Name (Georgian)
+        type: string
+        description: "Missing Georgian falls back to English (like the slider texts)."
+      - name: descriptionEn
+        label: Description (English)
+        type: text
+        description: "One or two sentences shown on the application page under the title."
+      - name: descriptionKa
+        label: Description (Georgian)
+        type: text
+      - name: image
+        label: Card image
+        type: image
+        options:
+          media: applications
+          rename: safe
+        description: "The tile photo on the /applications overview page (wide webp/jpg works best)."
 
   # ------------------------------------------------------- contact info
   - name: contact

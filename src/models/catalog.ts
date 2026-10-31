@@ -92,14 +92,25 @@ export type Product = {
   standards?: StandardRow[];
   documents?: DocumentRow[];
   features?: FeatureRow[];
+  /* Application slugs (CMS "Applications" library — see data/applications).
+   * The product side is the single source of truth; an application's page
+   * lists every product tagged with it (applications may mix categories). */
+  applications?: string[];
 };
 
+/* An application (usage page, e.g. "Roofing", "Solar panels") — CMS-managed
+ * under content/applications. Products of an application are NOT stored
+ * here: data/applications derives them from the products' `applications`
+ * tags, so one side stays editable (applications may mix categories). */
 export type Application = {
   slug: string;
-  label: string;
-  description: string;
+  labelEn: string;
+  labelKa: string;
+  descriptionEn: string;
+  descriptionKa: string;
   image: string;
-  products: string[];
+  /* Display position (1 = first). Missing → alphabetical after numbered. */
+  order?: number;
 };
 
 /* A product category row (product-categories.json). The `| undefined`

@@ -58,5 +58,10 @@
     "unitsperbox",
     "pricegel",
     "note"
+  ],
+  "applications": [
+    "shelving",
+    "metal-carpentry",
+    "safety-line"
   ]
 }

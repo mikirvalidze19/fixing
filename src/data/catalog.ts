@@ -18,7 +18,6 @@ import legacySource from '../../tecfi-georgia-planning/data/products.json';
 import legacyCategoryProducts from './category-products.json';
 import legacyCategories from './product-categories.json';
 import type {
-  Application,
   BadgeDef,
   CertRow,
   ColumnDef,
@@ -228,6 +227,8 @@ type RawProduct = {
   variantColumns?: (string | (Partial<VariantColumn> & { key?: string }))[] | null;
   /* `values` rows (generic) or legacy named-field/`cells` rows. */
   variants?: Variant[] | LegacyVariant[];
+  /* Application tags (CMS "Applications" library, value = slug). */
+  applications?: unknown[] | null;
 };
 
 /* Non-current row shapes, still parsed so old checkouts and the
@@ -433,6 +434,13 @@ function normalizeProduct(raw: RawProduct): Product {
     standards: normalizeStandards(raw),
     documents: normalizeDocuments(raw),
     features: normalizeFeatures(raw),
+    /* Application tags: strings straight into the "Applications" library
+     * (Reference field stores the `{id}` values). Unknown slugs are fine —
+     * the adapter drops them when it derives membership. */
+    applications:
+      Array.isArray(raw.applications)
+        ? raw.applications.filter((a): a is string => typeof a === 'string' && !!a.trim())
+        : [],
   };
 }
 
@@ -485,10 +493,9 @@ export const productCategory = (id: string): ProductCategory => {
   return slug ? categories.find((c) => c.slug === slug) : undefined;
 };
 
-/* Applications currently live outside the CMS; re-exported for stability. */
-export const applications = (
-  legacySource as unknown as { applications?: Application[] }
-).applications ?? [];
+/* Applications moved to their own adapter (data/applications.ts) — they
+ * are CMS-managed under content/applications and derive their product
+ * lists from the products' `applications` tags. */
 
 /* Emergency fallback from the legacy seed JSON — never expected to run
  * (the site ships with content/products committed); here only so the site

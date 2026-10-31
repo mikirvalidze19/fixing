@@ -91,5 +91,10 @@
     "unitsperbox",
     "pricegel",
     "note"
+  ],
+  "applications": [
+    "roofing",
+    "metal-carpentry",
+    "safety-line"
   ]
 }

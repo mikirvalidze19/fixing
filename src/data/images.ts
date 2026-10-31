@@ -134,3 +134,18 @@ export const sliderVideoUrl = (ref?: string | null): string => {
   if (isExternalMedia(ref)) return ref;
   return findBySuffix(contentVideos, ref);
 };
+
+/* --- Applications --------------------------------------------------------- */
+/* Card artwork for the "Applications" usage pages (content/applications).
+ * The CMS upload lands in content/images/applications; pre-CMS values are
+ * external https:// URLs (the Tecfi storage CDN) and pass through. */
+const contentApplicationImages = import.meta.glob<string>(
+  '../../content/images/applications/*',
+  { eager: true, query: '?url', import: 'default' },
+);
+
+export const applicationImageUrl = (ref?: string | null): string => {
+  if (!ref) return '';
+  if (isExternalMedia(ref)) return ref;
+  return findBySuffix(contentApplicationImages, ref);
+};

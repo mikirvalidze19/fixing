@@ -40,5 +40,9 @@
     "unitsperbox",
     "pricegel",
     "note"
+  ],
+  "applications": [
+    "ventilated-facades-and-panels-insulation",
+    "electrical-systems"
   ]
 }

@@ -61,5 +61,12 @@
     "unitsperbox",
     "pricegel",
     "note"
+  ],
+  "applications": [
+    "shelving",
+    "solar-panels",
+    "hvac",
+    "metal-carpentry",
+    "electrical-systems"
   ]
 }

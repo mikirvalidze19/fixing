@@ -1,0 +1,9 @@
+{
+  "id": "hvac",
+  "order": 9,
+  "labelEn": "HVAC",
+  "labelKa": null,
+  "descriptionEn": "Anchors and fixings for ventilation, heating and air-conditioning systems.",
+  "descriptionKa": null,
+  "image": "/content/images/applications/hvac.webp"
+}

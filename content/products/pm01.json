@@ -34,5 +34,8 @@
     "unitsperbox",
     "pricegel",
     "note"
+  ],
+  "applications": [
+    "metal-carpentry"
   ]
 }

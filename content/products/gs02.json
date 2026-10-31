@@ -51,5 +51,8 @@
     "unitsperbox",
     "pricegel",
     "note"
+  ],
+  "applications": [
+    "windows-and-frames"
   ]
 }

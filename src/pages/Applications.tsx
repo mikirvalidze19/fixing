@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { applications } from '../data/catalog';
+import { applications } from '../data/applications';
 import styles from './Applications.module.css';
 
 export default function Applications() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const ka = i18n.language === 'ka';
   return (
     <div className={styles.page}>
       <nav className={styles.crumbs} aria-label={t('common.breadcrumb')}>
@@ -22,7 +23,7 @@ export default function Applications() {
               <span className={styles.thumb}>
                 <img src={app.image} alt="" loading="lazy" />
               </span>
-              <span className={styles.label}>{app.label}</span>
+              <span className={styles.label}>{ka && app.labelKa ? app.labelKa : app.labelEn}</span>
             </Link>
           </li>
         ))}

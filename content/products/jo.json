@@ -46,5 +46,11 @@
     "unitsperbox",
     "pricegel",
     "note"
+  ],
+  "applications": [
+    "shelving",
+    "hydraulical-and-sanitary-systems",
+    "metal-carpentry",
+    "safety-line"
   ]
 }

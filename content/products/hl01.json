@@ -31,5 +31,10 @@
     "unitsperbox",
     "pricegel",
     "note"
+  ],
+  "applications": [
+    "hvac",
+    "metal-carpentry",
+    "electrical-systems"
   ]
 }

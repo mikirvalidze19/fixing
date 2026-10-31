@@ -3,6 +3,7 @@
  * live in models/catalog — this module holds the assembled view-model. */
 
 import type {
+  Application,
   CertRow,
   DocumentRow,
   FeatureRow,
@@ -27,6 +28,9 @@ export type ProductData = {
   title: string;
   category: ProductCategory;
   categoryLabel: string;
+  /* Application usage pages the editor tagged this product with
+   * (resolved Application objects, catalog-ID order). */
+  applications: Application[];
   related: Product[];
   specs: SymbolRow[];
   certs: CertRow[];

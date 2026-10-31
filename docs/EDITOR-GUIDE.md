@@ -6,6 +6,8 @@ This guide is for the people who add products to the **Fixing Systems** website.
 
 5. **ქართული შეჯამება (ფასების განახლება):** გახსენით „Price updater (bulk %)", ჩაწერეთ პროცენტი (მაგ. 10), აირჩიეთ მიმართულება (გაზრდა/შემცირება) და პროდუქტები (ან „Apply to ALL"), დააჭირეთ Save. ~1-2 წუთში ყველა არჩეული პროდუქტის საფასო ცხრილის ფასები განახლდება და ფორმა ავტომატურად ჩამოყალიბდება თავიდან (ხელახალი შენახვა არაფერს შეცვლის).
 
+6. **ქართული შეჯამება (გამოყენების გვერდები):** „Applications" განყოფილებაში ემატება სადაც პროდუქტი გამოიყენება (Roofing, Solar panels…). პროდუქტზე გახსნისას აირჩიეთ ველში Applications, თუ რომელ გამოყენების გვერდებზე უნდა გამოჩნდეს — გვერდი ავტომატურად ჩამოთვლის პროდუქტებს.
+
 ---
 
 ## 1. One-time setup (done once by the owner)
@@ -28,6 +30,7 @@ Open the editor → **Products** → **Add** and fill the form:
 | Catalog order | Optional number — lower = earlier in the catalog lists (existing products use 1–28). Empty = end of the list. |
 | Title (English) / Title (Georgian) | The product family titles. |
 | Category | Where it belongs — used in the menu and catalog pages. |
+| Applications | Where the product is USED — multi-select (Roofing, Fire resistance, Solar panels…). The matching `/applications/<id>` pages then list the product automatically; leave empty for none. See section 5. |
 | YouTube link | Paste the full `youtube.com` or `youtu.be` link (or just the video ID). |
 | Product photo | Upload the product image. Tip: name the file like the ID (`hxe02.jpg`) before uploading. |
 | Description (EN / KA) | Optional. If empty, the site auto-writes a summary from the price table. |
@@ -65,7 +68,26 @@ Open the editor → **Home slider** → the **Slides** field. Each slide is one 
 
 Drag the slide cards to reorder (top = first on the site). Press **Save/Publish** → the home page updates in ~2 minutes.
 
-## 5. Updating prices in bulk (by percent)
+## 5. Applications (usage pages — where products are used)
+
+The **Applications** sidebar section manages the cards on `/applications` (Roofing, Fire resistance, Solar panels, HVAC…). Each application is one row; click it to edit:
+
+| Field | What to enter |
+|---|---|
+| ID (slug) | The page address (`/applications/roofing`). **Never rename it** once products point to it. |
+| Order | Card position on the Applications page (1 = first). |
+| Name / Description (EN / KA) | Texts; missing Georgian falls back to English. |
+| Card image | Upload the tile photo (a wide webp/jpg works best). |
+
+**Important — an application does NOT have its own product list.** Instead, every product picks which applications it belongs to (the applications mirror the real product usage on tecfi.it, where one application can contain products from several categories):
+
+1. Open the **product** in the CMS.
+2. In the **Applications** field (right under Category) search and select **every application that applies** — e.g. HXE01 goes to Roofing, Fire resistance, Solar panels, HVAС and so on. Remove a selected chip to un-tag.
+3. Save → the `/applications/<id>` page automatically lists the product (in catalog order).
+
+Adding a **new application** works the same as products: **Applications → Add**, set the ID/Name/Description/Order, upload the image, save — the new card appears on the site, and it fills up with products as you tag them in the products' Applications field.
+
+## 6. Updating prices in bulk (by percent)
 
 Open the editor → **Price updater (bulk %)** → fill the form and press **Save/Publish**:
 
@@ -86,7 +108,7 @@ About 1 minute after you save, an automatic helper rewrites **every price cell o
 
 **Verify it worked:** open the product in the CMS ~2 minutes later and check the table, or look at the repository's **Actions** tab — the "Price update" run shows a summary like `+10% applied to 3 products (7 price cells)`.
 
-## 6. Good to know
+## 7. Good to know
 
 - **Nothing is public before you publish.** Visitors of the website can never add or edit anything; only invited collaborators can.
 - Every change is a commit in GitHub history — mistakes can be reverted, and everything is attributed.

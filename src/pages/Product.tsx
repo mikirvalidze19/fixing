@@ -10,6 +10,7 @@ import {
   products,
 } from '../data/catalog';
 import type {
+  Application,
   DocumentRow,
   FeatureRow,
   Product,
@@ -31,6 +32,7 @@ import {
 } from '../utils/table';
 import Placeholder from './Placeholder';
 import styles from './Product.module.css';
+import { applications } from '../data/applications';
 
 const productMap = categoryProducts as Record<string, string[]>;
 
@@ -140,6 +142,12 @@ function useProductData(id: string | undefined): ProductData | null {
     title: selectTitle(i18n.language, product),
     category,
     categoryLabel,
+    applications:
+      product.applications && product.applications.length > 0
+        ? product.applications
+            .map((slug) => applications.find((a) => a.slug === slug))
+            .filter((a): a is Application => Boolean(a))
+        : [],
     related: findRelated(product.id, category),
     specs: product.specs ?? [],
     certs: product.certs ?? [],
@@ -354,6 +362,23 @@ function ProductInfo({ data }: { data: ProductData }) {
             <dt>{t('productPage.category')}</dt>
             <dd>
               <Link to={`/products/${category.slug}`}>{categoryLabel}</Link>
+            </dd>
+          </div>
+        )}
+        {/* Application usage pages the product belongs to (CMS "Applications"
+         * picks on the product). Empty → row not rendered. */}
+        {data.applications.length > 0 && (
+          <div className={styles.fact}>
+            <dt>{t('productPage.applications')}</dt>
+            <dd>
+              {data.applications.map((app, i) => (
+                <span key={app.slug}>
+                  <Link to={`/applications/${app.slug}`}>
+                    {(i18n.language === 'ka' && app.labelKa) || app.labelEn}
+                  </Link>
+                  {i < data.applications.length - 1 ? ', ' : ''}
+                </span>
+              ))}
             </dd>
           </div>
         )}

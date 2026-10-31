@@ -98,5 +98,20 @@
     "unitsperbox",
     "pricegel",
     "note"
+  ],
+  "applications": [
+    "roofing",
+    "fire-resistance",
+    "scaffolding-and-nets",
+    "wood-carpentry",
+    "shelving",
+    "solar-panels",
+    "hydraulical-and-sanitary-systems",
+    "hvac",
+    "seismic-area",
+    "metal-carpentry",
+    "safety-line",
+    "windows-and-frames",
+    "electrical-systems"
   ]
 }

@@ -54,5 +54,9 @@
     "unitsperbox",
     "pricegel",
     "note"
+  ],
+  "applications": [
+    "roofing",
+    "windows-and-frames"
   ]
 }

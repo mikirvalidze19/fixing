@@ -39,5 +39,10 @@
     "unitsperbox",
     "pricegel",
     "note"
+  ],
+  "applications": [
+    "scaffolding-and-nets",
+    "hvac",
+    "safety-line"
   ]
 }
