@@ -4,6 +4,8 @@ This guide is for the people who add products to the **Fixing Systems** website.
 
 **ქართული შეჯამება:** პროდუქტი ემატება მარტივი ვებ-ფორმის საშუალებით — გახსენით `app.pages.cms`, შედით GitHub-ანგარიშით, დააჭირეთ „Products → Add", შეავსეთ ველები, ატვირთეთ სურათი, ჩასვით YouTube-ბმული და დააჭირეთ Publish. საიტი ავტომატურად განახლდება 1–2 წუთში. ახალი ბეჯი/ხატულა ემატება „Badges / Spec icons" განყოფილებაში და მერე ჩნდება არჩევის სიაში.
 
+5. **ქართული შეჯამება (ფასების განახლება):** გახსენით „Price updater (bulk %)", ჩაწერეთ პროცენტი (მაგ. 10), აირჩიეთ მიმართულება (გაზრდა/შემცირება) და პროდუქტები (ან „Apply to ALL"), დააჭირეთ Save. ~1-2 წუთში ყველა არჩეული პროდუქტის საფასო ცხრილის ფასები განახლდება და ფორმა ავტომატურად ჩამოყალიბდება თავიდან (ხელახალი შენახვა არაფერს შეცვლის).
+
 ---
 
 ## 1. One-time setup (done once by the owner)
@@ -62,7 +64,28 @@ Open the editor → **Home slider** → the **Slides** field. Each slide is one 
 
 Drag the slide cards to reorder (top = first on the site). Press **Save/Publish** → the home page updates in ~2 minutes.
 
-## 5. Good to know
+## 5. Updating prices in bulk (by percent)
+
+Open the editor → **Price updater (bulk %)** → fill the form and press **Save/Publish**:
+
+| Field | What it does |
+|---|---|
+| **Change by percent (%)** | Plain number: `10` = ±10%, `2.5` = ±2.5%. |
+| **Direction** | **Increase prices (+)** or **Decrease prices (−)**. |
+| **Apply to ALL products** | ON → every price cell of every product's table is updated. |
+| **Products** | When ALL is off — search and pick **one or several** products (click a chip to remove it). |
+
+About 1 minute after you save, an automatic helper rewrites **every price cell of the chosen products' tables** (all rows — if a table has 10 rows, all 10 prices move) and the site rebuilds. What happens per cell:
+
+- Blank price cells, dashes and text cells are left exactly as they are.
+- Results are rounded to 2 decimals (e.g. `25` +10% → `27.5`).
+- A price never drops below `0.01` even with a huge decrease.
+
+**Cheap safety:** after the update the form resets itself (percent → 0, picks cleared). Re-saving the same form does **not** double-apply — it only does something when you type a percent above 0 and pick products again. If you change your mind *before* the update finishes, contact the owner (within ~1 minute the job may already be running).
+
+**Verify it worked:** open the product in the CMS ~2 minutes later and check the table, or look at the repository's **Actions** tab — the "Price update" run shows a summary like `+10% applied to 3 products (7 price cells)`.
+
+## 6. Good to know
 
 - **Nothing is public before you publish.** Visitors of the website can never add or edit anything; only invited collaborators can.
 - Every change is a commit in GitHub history — mistakes can be reverted, and everything is attributed.

@@ -592,3 +592,48 @@ content:
           multiple: true
           value: "{id}"
           label: "{series}"
+
+  # ------------------------------------------------------- price updater
+  # Editors fill this form in the CMS; saving it triggers the "Price
+  # update" GitHub Action (docs/EDITOR-GUIDE.md — "Updating prices in
+  # bulk"), which rewrites every price cell of the chosen products by the
+  # entered percent and then resets this form, so saving the same form
+  # twice costs nothing.
+  - name: priceUpdater
+    label: Price updater (bulk %)
+    type: file
+    path: content/price-update.json
+    format: json
+    fields:
+      - name: percent
+        label: Change by percent (%)
+        type: number
+        description: "How much to move prices by, as a plain number — 10 means ±10%, 2.5 means ±2.5%. Leave 0 (the default) when nothing should happen."
+      - name: direction
+        label: Direction
+        type: select
+        default: increase
+        options:
+          values:
+            - name: increase
+              label: Increase prices (+)
+            - name: decrease
+              label: Decrease prices (−)
+        description: "Decrease is also safe — a price would never be allowed to drop below 0.01 (a 100% or larger decrease clamps to 0.01 instead of zero)."
+      - name: allProducts
+        label: Apply to ALL products
+        type: boolean
+        description: "ON → every price cell in every product's table is updated. Leave OFF to pick products below."
+      - name: products
+        label: Products (when not ALL)
+        type: reference
+        options:
+          collection: products
+          multiple: true
+          value: "{id}"
+          label: "{series} — {titleEn}"
+        description: "Search and pick one or several products (click a chip to remove it). Ignored when Apply to ALL is on."
+      - name: note
+        label: Note (optional, not published)
+        type: string
+        description: "Anything you want to remember about this update, e.g. 'Q2 supplier list'. Shown nowhere on the site."

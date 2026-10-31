@@ -1,0 +1,56 @@
+# Bulk price updates (docs/EDITOR-GUIDE.md — "Updating prices in bulk").
+#
+# When an editor saves the "Price updater" form in the CMS, Pages CMS
+# commits content/price-update.json — that push runs this workflow:
+#
+#   1. scripts/apply-price-update.mjs multiplies every numeric price cell
+#      of the chosen products by (1 ± percent/100) and resets the form,
+#   2. the changed product files (plus the reset form) are committed and
+#      pushed, which rebuilds the site on Cloudflare Pages.
+#
+# Running with percent 0 or no products is a deliberate no-op (script
+# exits without changes), so re-saves never double-apply.
+
+name: Price update
+
+on:
+  push:
+    paths:
+      - 'content/price-update.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: price-update
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Apply the price update
+        id: update
+        run: |
+          set -euo pipefail
+          output=$(node scripts/apply-price-update.mjs)
+          echo "$output"
+          echo "summary=$(echo "$output" | head -n 1)" >> "$GITHUB_OUTPUT"
+
+      - name: Commit changed prices (if any)
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/products content/price-update.json
+          git pull --rebase origin main
+          if git diff --cached --quiet; then
+            echo "No price changes — nothing to commit."
+          else
+            git commit -m "price: ${{ steps.update.outputs.summary }}"
+            git push origin main
+          fi

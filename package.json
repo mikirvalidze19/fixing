@@ -13,7 +13,8 @@
     "i18n:import": "node scripts/i18n-import.cjs",
     "migrate:table": "node scripts/migrate-table-columns.mjs",
     "migrate:images": "node scripts/migrate-images.mjs",
-    "migrate:slider": "node scripts/migrate-slider.mjs"
+    "migrate:slider": "node scripts/migrate-slider.mjs",
+    "price:apply": "node scripts/apply-price-update.mjs"
   },
   "dependencies": {
     "i18next": "^26.4.2",
