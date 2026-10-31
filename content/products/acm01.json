@@ -4,6 +4,10 @@
   "titleEn": "ACM01",
   "titleKa": "ACM01",
   "category": "roofing-fixing-systems",
+  "applications": [
+    "test",
+    "roofing"
+  ],
   "youtube": "https://youtu.be/LgrV0heTM7o?si=q9zLLdqdtX3W4pLw",
   "image": "/content/images/products/acm01.webp",
   "descriptionEn": "Zinc plated steel bar (one end threaded), with zinc plated hexagonal nut with zinc plated steel rhomboidal gasket with PE foam",
