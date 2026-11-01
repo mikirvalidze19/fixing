@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Search, X } from 'lucide-react';
 import { searchProducts, type ProductSearchResult } from '../../data/search';
+import { findCategory } from '../../data/categories';
 import { formatGel, minPrice, productImageSrc } from '../../utils/product';
 import styles from './SearchPanel.module.css';
 
@@ -35,12 +36,15 @@ export default function SearchPanel({ onClose }: { onClose: () => void }) {
       ? result.product.titleKa
       : result.product.titleEn;
 
-  const categoryFor = (result: ProductSearchResult) =>
-    result.categorySlug
-      ? t(`categories.${result.categorySlug}.label`, {
-          defaultValue: result.categoryLabel ?? result.categorySlug,
-        })
-      : '';
+  const categoryFor = (result: ProductSearchResult) => {
+    const category = result.categorySlug
+      ? findCategory(result.categorySlug)
+      : undefined;
+    if (!category) return '';
+    return i18n.language === 'ka' && category.labelKa
+      ? category.labelKa
+      : category.labelEn;
+  };
 
   return (
     <div id="site-search-panel" className={styles.panel} role="search" aria-label={t('search.title')}>

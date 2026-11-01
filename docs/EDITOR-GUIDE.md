@@ -8,6 +8,8 @@ This guide is for the people who add products to the **Fixing Systems** website.
 
 6. **ქართული შეჯამება (გამოყენების გვერდები):** „Applications" განყოფილებაში ემატება სადაც პროდუქტი გამოიყენება (Roofing, Solar panels…). პროდუქტზე გახსნისას აირჩიეთ ველში Applications, თუ რომელ გამოყენების გვერდებზე უნდა გამოჩნდეს — გვერდი ავტომატურად ჩამოთვლის პროდუქტებს.
 
+7. **ქართული შეჯამება (კატეგორიები):** „Catalog categories" განყოფილებაში მართეთ /products კატეგორიების გვერდები — ინგლისურ-ქართული სახელი და აღწერა, მენიუში სურათი და რიგის ნომერი. პროდუქტს Category ველიდან აირჩევს კატეგორიას.
+
 ---
 
 ## 1. One-time setup (done once by the owner)
@@ -29,12 +31,12 @@ Open the editor → **Products** → **Add** and fill the form:
 | Series code | As printed on the price list, e.g. `HXE02`. |
 | Catalog order | Optional number — lower = earlier in the catalog lists (existing products use 1–28). Empty = end of the list. |
 | Title (English) / Title (Georgian) | The product family titles. |
-| Category | Where it belongs — used in the menu and catalog pages. |
-| Applications | Where the product is USED — multi-select (Roofing, Fire resistance, Solar panels…). The matching `/applications/<id>` pages then list the product automatically; leave empty for none. See section 5. |
+| Category | Where it belongs — used in the menu and catalog pages. Managed under **Catalog categories** in the sidebar (section 3). |
+| Applications | Where the product is USED — multi-select (Roofing, Fire resistance, Solar panels…). The matching `/applications/<id>` pages then list the product automatically; leave empty for none. See section 6. |
 | YouTube link | Paste the full `youtube.com` or `youtu.be` link (or just the video ID). |
 | Product photo | Upload the product image. Tip: name the file like the ID (`hxe02.jpg`) before uploading. |
 | Description (EN / KA) | Optional. If empty, the site auto-writes a summary from the price table. |
-| Certifications | Tick badges (fire resistance, ETA…). Add new badges first in **Badges** (section 3). |
+| Certifications | Tick badges (fire resistance, ETA…). Add new badges first in **Badges** (section 4). |
 | Tech specs | Icon + label + value rows (e.g. Hex key / SW 13). Pick icons from **Spec icons**. |
 | Standards box | Certificate rows for the right side (e.g. ETA / EAD number). |
 | Documents | Name, optional size and full PDF link (hosted anywhere online). |
@@ -44,7 +46,20 @@ Open the editor → **Products** → **Add** and fill the form:
 
 Press **Save/Publish** → Pages CMS commits to GitHub → Cloudflare Pages publishes. Re-check the site in ~2 minutes.
 
-## 3. Adding a new badge or spec icon (rare)
+## 3. Catalog categories (the Products menu + category pages)
+
+The **Catalog categories** sidebar section manages the 15 section pages under `/products/<slug>` and the icons in the **Products** menu. Each category is one row:
+
+| Field | What to enter |
+|---|---|
+| ID (slug) | The page address (`/products/roofing-fixing-systems`). **Never rename it** — every product points at this exact value. |
+| Menu order | Display position (1 = first); empty numbers come last. |
+| Name / Description (EN / KA) | Texts on the category page and in the menu; missing Georgian falls back to English. |
+| Icon image | The small tile picture used in the Products menu (roughly square works best). |
+
+Products pick their category from the live list (the product's **Category** field), and new categories added here appear in every product's picker + the site menu automatically. Georgian texts can now be filled per category — previously these were English-only.
+
+## 4. Adding a new badge or spec icon (rare)
 
 1. In the sidebar open **Badges** (or **Spec icons** / **Standards** / **Table columns**) → **Add**.
 2. Enter a short lowercase **Key** (e.g. `hex-key-sw13`), a label (English / Georgian), and upload the artwork image. For **Table columns** there is no image — instead set the type (Number/Text) and, when needed, a special use (SKU/Price/Diameter/Length).
@@ -52,7 +67,7 @@ Press **Save/Publish** → Pages CMS commits to GitHub → Cloudflare Pages publ
 
 No developer needed — the library is just regular content managed the same way as products.
 
-## 4. Home page slider (slides — image or video)
+## 5. Home page slider (slides — image or video)
 
 Open the editor → **Home slider** → the **Slides** field. Each slide is one card; click **Add an item** and pick its type, then fill the fields of that type:
 
@@ -68,7 +83,7 @@ Open the editor → **Home slider** → the **Slides** field. Each slide is one 
 
 Drag the slide cards to reorder (top = first on the site). Press **Save/Publish** → the home page updates in ~2 minutes.
 
-## 5. Applications (usage pages — where products are used)
+## 6. Applications (usage pages — where products are used)
 
 The **Applications** sidebar section manages the cards on `/applications` (Roofing, Fire resistance, Solar panels, HVAC…). Each application is one row; click it to edit:
 
@@ -87,7 +102,7 @@ The **Applications** sidebar section manages the cards on `/applications` (Roofi
 
 Adding a **new application** works the same as products: **Applications → Add**, set the ID/Name/Description/Order, upload the image, save — the new card appears on the site, and it fills up with products as you tag them in the products' Applications field.
 
-## 6. Updating prices in bulk (by percent)
+## 7. Updating prices in bulk (by percent)
 
 Open the editor → **Price updater (bulk %)** → fill the form and press **Save/Publish**:
 
@@ -108,7 +123,7 @@ About 1 minute after you save, an automatic helper rewrites **every price cell o
 
 **Verify it worked:** open the product in the CMS ~2 minutes later and check the table, or look at the repository's **Actions** tab — the "Price update" run shows a summary like `+10% applied to 3 products (7 price cells)`.
 
-## 7. Good to know
+## 8. Good to know
 
 - **Nothing is public before you publish.** Visitors of the website can never add or edit anything; only invited collaborators can.
 - Every change is a commit in GitHub history — mistakes can be reverted, and everything is attributed.

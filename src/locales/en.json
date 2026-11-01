@@ -38,68 +38,6 @@
     "goTo": "Go to slide {{n}}: {{title}}",
     "live": "Slide {{current}} of {{total}}: {{title}}"
   },
-  "categories": {
-    "roofing-fixing-systems": {
-      "label": "Roofing fixing systems",
-      "description": "Professional fasteners for roofs — certified screws for every covering and supporting structure, saddle washers with foam or EPDM gaskets for a perfect seal, and accessories for safe, durable, weatherproof roofing systems."
-    },
-    "renewable-energy-plants": {
-      "label": "Fixing systems for renewable energy plants",
-      "description": "Fixing systems for photovoltaic and renewable energy plants — corrosion-resistant anchors and screws for mounting solar structures on any roof or ground support."
-    },
-    "heavy-duty-metallic": {
-      "label": "Heavy duty metallic fixing systems",
-      "description": "Heavy-duty metallic anchors and concrete screws for structural fixings — high load capacity in cracked and non-cracked concrete with certified performance."
-    },
-    "chemical-fixings": {
-      "label": "Chemical fixings and accessories",
-      "description": "Chemical anchoring adhesives with mesh sleeves and applicator guns — complete kits for threaded rods and rebar in solid and hollow base materials."
-    },
-    "scaffoldings-ropes-nets": {
-      "label": "Fixing systems for scaffoldings, ropes and nets",
-      "description": "Fixings for scaffoldings, ropes and nets — eye screws, ring bolts and anchors for temporary structures, safety lines and nets."
-    },
-    "windows-frames-facades": {
-      "label": "Windows, frames and façades",
-      "description": "Fixings for windows, frames and façades — frame anchors and screws for precise, durable installation on concrete, brick and hollow walls."
-    },
-    "light-fixing": {
-      "label": "Light Fixing systems",
-      "description": "Light fixing systems for fast, everyday installations — nylon plugs and screws for light loads on all common base materials."
-    },
-    "drywall-hollow": {
-      "label": "Drywall and hollow fixing systems",
-      "description": "Fixings for drywall and hollow walls — cavity anchors and insulation plugs for plasterboard, hollow blocks and thermal insulation."
-    },
-    "wood": {
-      "label": "Fixing systems for wood",
-      "description": "Screws and fixings for timber construction — hardened wood screws for structural joints with fast driving and high pull-out resistance."
-    },
-    "rivets": {
-      "label": "Rivets",
-      "description": "Blind rivets for metal sheets and profiles — quick, vibration-resistant joints in aluminium, steel and mixed materials."
-    },
-    "sealants-foams": {
-      "label": "Sealants and Foams",
-      "description": "Sealants and foams for joints and gaps — elastic sealing and PU foams for insulation, weatherproofing and acoustic comfort."
-    },
-    "cable-plumbing": {
-      "label": "Cable and Plumbing Fixings",
-      "description": "Cable and plumbing fixings — clips, saddles and clamps for neat, secure routing of pipes, cables and conduits."
-    },
-    "general-fasteners": {
-      "label": "General fasteners",
-      "description": "General fasteners — threaded rods, bolts, nuts and washers in zinc-plated steel for assemblies and connections of every kind."
-    },
-    "drills-bits-sockets": {
-      "label": "Drills, bits and sockets",
-      "description": "Drills, bits and sockets — professional accessories for drilling and driving, matched to our screws and anchors."
-    },
-    "inblister": {
-      "label": "inBlister",
-      "description": "inBlister retail packs — handy ready-to-use fixing kits for DIY and small jobs, clearly labelled and easy to store."
-    }
-  },
   "categoryPage": {
     "notFound": "Category not found",
     "showMore": "show more",

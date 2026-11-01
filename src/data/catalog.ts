@@ -16,7 +16,7 @@
 
 import legacySource from '../../tecfi-georgia-planning/data/products.json';
 import legacyCategoryProducts from './category-products.json';
-import legacyCategories from './product-categories.json';
+import { categories, findCategory } from './categories';
 import type {
   BadgeDef,
   CertRow,
@@ -79,13 +79,14 @@ function fileKey(path: string): string {
 
 /* --- Legacy categories ------------------------------------------------- */
 
-export const categories = legacyCategories as Array<{
-  id: number;
-  slug: string;
-  label: string;
-  icon: string;
-  description: string;
-}>;
+/* Categories are CMS-managed (data/categories.ts — content/categories);
+ * re-exported so every consumer keeps its import path. The legacy seed
+ * is the fallback inside the adapter. */
+export { categories, findCategory };
+export {
+  categoryLabel,
+  categoryDescription,
+} from './categories';
 
 /* --- Shared libraries --------------------------------------------------- */
 
@@ -490,7 +491,7 @@ for (const [slug, ids] of Object.entries(categoryProducts)) {
 
 export const productCategory = (id: string): ProductCategory => {
   const slug = productCategoryIndex.get(id);
-  return slug ? categories.find((c) => c.slug === slug) : undefined;
+  return slug ? findCategory(slug) : undefined;
 };
 
 /* Applications moved to their own adapter (data/applications.ts) — they

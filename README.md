@@ -26,8 +26,9 @@ Non-developer editors add products through [Pages CMS](https://pagescms.org) (fo
 - The migration from the legacy sidecar files was done by `scripts/migrate-catalog.mjs` (idempotent; re-runnable).
 - Variant tables are fully generic (`columns` + per-row `values` text — one line per column, empty line = blank cell; see **docs/TABLE-ARCHITECTURE.md**); the one-time conversion from the old hard-coded slot fields was done by `scripts/migrate-table-columns.mjs` (`npm run migrate:table`).
 - The home-page hero slider is CMS-managed under **Home slider** (`content/slider.json`, migrated by `npm run migrate:slider`): every slide is an **image or video block** with EN/KA texts, and a slide shows its button only when button text is set.
-- Bulk price changes are CMS-managed too: the **Price updater** form runs the `Price update` GitHub Action on save — percent, direction and one/many/all products, applied to every price cell of the chosen tables, then the form self-resets (docs/EDITOR-GUIDE.md §6).
+- Bulk price changes are CMS-managed too: the **Price updater** form runs the `Price update` GitHub Action on save — percent, direction and one/many/all products, applied to every price cell of the chosen tables, then the form self-resets (docs/EDITOR-GUIDE.md §7).
 - **Applications** (usage pages, `/applications`) are CMS-managed under `content/applications`: the products belong to applications via each product's "Applications" multi-pick, and an application page lists the products tagged with it — applications may mix categories exactly like on tecfi.it.
+- **Catalog categories** (the Products menu + `/products/<slug>` pages) are CMS-managed under `content/categories` — bilingual names/descriptions, icons and ordering; products pick from the live list ("Category" field) instead of a hardcoded dropdown (docs/EDITOR-GUIDE.md §3).
 
 See **docs/EDITOR-GUIDE.md** for the step-by-step editor guide.
 

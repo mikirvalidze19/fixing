@@ -12,15 +12,17 @@ const PREVIEW_CHARS = 180;
 const productMap = categoryProducts as Record<string, string[]>;
 
 export default function Category() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const ka = i18n.language === 'ka';
   const { slug } = useParams();
   const [expanded, setExpanded] = useState(false);
   const category = categories.find((c) => c.slug === slug);
-
   if (!category) return <Placeholder title={t('categoryPage.notFound')} />;
 
-  const label = t(`categories.${category.slug}.label`, { defaultValue: category.label });
-  const description = t(`categories.${category.slug}.description`, { defaultValue: category.description });
+  /* Bilingual texts live on the category itself (CMS "Catalog
+   * categories"); Georgian falls back to English. */
+  const label = (ka && category.labelKa) || category.labelEn;
+  const description = (ka && category.descriptionKa) || category.descriptionEn;
 
   const items = (productMap[category.slug] ?? [])
     .map((id) => products.find((p) => p.id === id))

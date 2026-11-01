@@ -149,3 +149,26 @@ export const applicationImageUrl = (ref?: string | null): string => {
   if (isExternalMedia(ref)) return ref;
   return findBySuffix(contentApplicationImages, ref);
 };
+
+/* --- Categories ----------------------------------------------------------- */
+/* Products-menu/search icons for the catalog section pages. The CMS
+ * upload lands in content/images/categories; bare file names from the
+ * pre-CMS data still resolve against the bundled legacy folders. */
+const contentCategoryImages = import.meta.glob<string>(
+  '../../content/images/categories/*',
+  { eager: true, query: '?url', import: 'default' },
+);
+
+const legacyCategoryImages = import.meta.glob<string>(
+  '../assets/categories/*.{webp,png,jpg,jpeg}',
+  { eager: true, query: '?url', import: 'default' },
+);
+
+export const categoryImageUrl = (ref?: string | null): string => {
+  if (!ref) return '';
+  if (isExternalMedia(ref)) return ref;
+  return (
+    findBySuffix(contentCategoryImages, ref) ||
+    findBySuffix(legacyCategoryImages, ref)
+  );
+};

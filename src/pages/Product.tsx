@@ -125,7 +125,7 @@ function useProductData(id: string | undefined): ProductData | null {
   if (!product) return null;
   const category = productCategory(product.id);
   const categoryLabel = category
-    ? t(`categories.${category.slug}.label`, { defaultValue: category.label })
+    ? (i18n.language === 'ka' && category.labelKa) || category.labelEn
     : '';
   const prices = priceValues(product);
   const priceRange = priceRangeText(prices);

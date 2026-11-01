@@ -113,17 +113,35 @@ export type Application = {
   order?: number;
 };
 
-/* A product category row (product-categories.json). The `| undefined`
- * preserves find-first semantics: a product may belong to no category. */
-export type ProductCategory =
-  | {
-      id: number;
-      slug: string;
-      label: string;
-      icon: string;
-      description: string;
-    }
-  | undefined;
+/* A catalog category (usage: category pages, the Products mega-menu,
+ * search) — bilingual, CMS-managed under content/categories. The
+ * `| undefined` preserves find-first semantics: a product may belong
+ * to no category. */
+export type CategoryRow = {
+  slug: string;
+  labelEn: string;
+  labelKa: string;
+  descriptionEn: string;
+  descriptionKa: string;
+  icon: string;
+  order?: number;
+};
+
+export type ProductCategory = CategoryRow | undefined;
+
+/* Loose shape of category rows (CMS file or the pre-CMS seed JSON). */
+export type RawCategory = Partial<{
+  id: unknown;
+  slug: unknown;
+  order: unknown;
+  label: unknown;
+  labelEn: unknown;
+  labelKa: unknown;
+  description: unknown;
+  descriptionEn: unknown;
+  descriptionKa: unknown;
+  icon: unknown;
+}>;
 
 /* --- Shared libraries (managed by editors through Pages CMS) ------------ */
 

@@ -1,6 +1,5 @@
 import { categoryProducts, categories, products } from './catalog';
-import type { Product } from '../models/catalog';
-import { roleColumn, variantValue } from '../utils/table';
+import type { Product } from '../models/catalog';import { roleColumn, variantValue } from '../utils/table';
 
 export type ProductSearchResult = {
   product: Product;
@@ -50,7 +49,7 @@ const index: IndexEntry[] = products.map((product) => {
   return {
     product,
     categorySlug,
-    categoryLabel: category?.label ?? null,
+    categoryLabel: category?.labelEn ?? null,
     series: product.series.toLowerCase(),
     skus,
     haystack: [
@@ -60,7 +59,8 @@ const index: IndexEntry[] = products.map((product) => {
       product.titleKa,
       ...skus,
       ...cellsOf(product),
-      category?.label ?? '',
+      category?.labelEn ?? '',
+      category?.labelKa ?? '',
     ]
       .join(' ')
       .toLowerCase(),

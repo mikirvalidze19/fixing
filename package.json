@@ -15,6 +15,7 @@
     "migrate:images": "node scripts/migrate-images.mjs",
     "migrate:slider": "node scripts/migrate-slider.mjs",
     "migrate:applications": "node scripts/migrate-applications.mjs",
+    "migrate:categories": "node scripts/migrate-categories.mjs",
     "price:apply": "node scripts/apply-price-update.mjs"
   },
   "dependencies": {

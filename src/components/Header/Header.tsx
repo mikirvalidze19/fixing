@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Check, ChevronDown, Globe, Menu, Search, X } from "lucide-react";
 import logoPng from "../../assets/fixing-systems-logo.webp";
 import siteData from "../../data/site.json";
-import { categories } from "../../data/catalog";
+import { categories } from "../../data/categories";
 import type { NavItem, NavLink as NavLinkType } from "../../models/navigation";
 import SearchPanel from "../SearchPanel/SearchPanel";
 import styles from "./Header.module.css";
@@ -22,20 +22,6 @@ const NAV_KEYS: Record<string, string> = {
 };
 
 const LANG_CODES = ["en", "ka"] as const;
-
-/* tecfi category icons bundled locally (downloaded with permission) */
-const categoryIconUrls = import.meta.glob("../../assets/categories/*.webp", {
-  eager: true,
-  query: "?url",
-  import: "default",
-}) as Record<string, string>;
-
-function categoryIcon(file: string): string {
-  const entry = Object.entries(categoryIconUrls).find(([path]) =>
-    path.endsWith(`/${file}`),
-  );
-  return entry ? entry[1] : "";
-}
 
 function LangSwitcher({
   lang,
@@ -128,8 +114,10 @@ export default function Header() {
   const changeLang = (code: string) => void i18n.changeLanguage(code);
   const navLabel = (label: string) =>
     t(NAV_KEYS[label] ?? label, { defaultValue: label });
-  const categoryLabel = (slug: string, fallback: string) =>
-    t(`categories.${slug}.label`, { defaultValue: fallback });
+  /* Category names are bilingual CMS content — Georgian falls back to
+   * English (like the slider texts). */
+  const categoryLabel = (cat: (typeof categories)[number]) =>
+    (lang === "ka" && cat.labelKa) || cat.labelEn;
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileCatsOpen, setMobileCatsOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -356,7 +344,7 @@ export default function Header() {
         <div className={styles.megaInner}>
           {categories.map((cat) => (
             <Link
-              key={cat.id}
+              key={cat.slug}
               to={`/products/${cat.slug}`}
               className={styles.megaItem}
               tabIndex={megaOpen ? 0 : -1}
@@ -364,13 +352,13 @@ export default function Header() {
             >
               <span className={styles.megaIcon}>
                 <img
-                  src={categoryIcon(cat.icon)}
+                  src={cat.icon}
                   alt=""
                   aria-hidden="true"
                   loading="lazy"
                 />
               </span>
-              <span className={styles.megaLabel}>{categoryLabel(cat.slug, cat.label)}</span>
+              <span className={styles.megaLabel}>{categoryLabel(cat)}</span>
             </Link>
           ))}
         </div>
@@ -402,19 +390,19 @@ export default function Header() {
                     className={`${styles.mobileCats} ${mobileCatsOpen ? styles.mobileCatsOpen : ""}`}
                   >
                     {categories.map((cat) => (
-                      <li key={cat.id}>
+                      <li key={cat.slug}>
                         <Link
                           to={`/products/${cat.slug}`}
                           className={styles.mobileCatItem}
                           onClick={() => setMobileOpen(false)}
                         >
                           <img
-                            src={categoryIcon(cat.icon)}
+                            src={cat.icon}
                             alt=""
                             aria-hidden="true"
                             loading="lazy"
                           />
-                          <span>{categoryLabel(cat.slug, cat.label)}</span>
+                          <span>{categoryLabel(cat)}</span>
                         </Link>
                       </li>
                     ))}

@@ -41,6 +41,11 @@ media:
     input: content/images/applications
     output: /content/images/applications
     extensions: [webp, jpg, jpeg, png]
+  - name: categories
+    label: Category icons
+    input: content/images/categories
+    output: /content/images/categories
+    extensions: [webp, jpg, jpeg, png]
   - name: videos
     label: Slider videos
     input: content/videos
@@ -85,40 +90,12 @@ content:
         required: true
       - name: category
         label: Category
-        type: select
-        description: Where the product appears in the catalog and navigation
+        type: reference
         options:
-          values:
-            - name: roofing-fixing-systems
-              label: Roofing fixing systems
-            - name: renewable-energy-plants
-              label: Fixing systems for renewable energy plants
-            - name: heavy-duty-metallic
-              label: Heavy duty metallic fixing systems
-            - name: chemical-fixings
-              label: Chemical fixings and accessories
-            - name: scaffoldings-ropes-nets
-              label: Fixing systems for scaffoldings, ropes and nets
-            - name: windows-frames-facades
-              label: Windows, frames and façades
-            - name: light-fixing
-              label: Light fixing systems
-            - name: drywall-hollow
-              label: Drywall and hollow fixing systems
-            - name: wood
-              label: Fixing systems for wood
-            - name: rivets
-              label: Rivets
-            - name: sealants-foams
-              label: Sealants and foams
-            - name: cable-plumbing
-              label: Cable and plumbing fixings
-            - name: general-fasteners
-              label: General fasteners
-            - name: drills-bits-sockets
-              label: Drills, bits and sockets
-            - name: inblister
-              label: inBlister
+          collection: categories
+          value: "{id}"
+          label: "{labelEn}"
+        description: "Where the product appears in the catalog and the Products menu — pick from the live list (add a new one under Catalog categories in the sidebar). Never rename a category's ID once products point to it."
       - name: applications
         label: Applications (usage pages the product belongs to)
         type: reference
@@ -257,6 +234,54 @@ content:
             label: Values (one column value per line, same order)
             type: text
             description: "ONE line per chosen column, in the SAME order as the Price table columns above. Example (SKU / Ø / Price chosen): line 1 \"HX 21 08 080\", line 2 \"8\", line 3 \"1.37\". A cell that is blank on the price list = an EMPTY line: press Enter and keep going. You may also stop early — any missing trailing line counts as a blank cell. Changed the column selection? Rewrite the lines to match the new order."
+
+  # ------------------------------------------------------- categories
+  # Catalog section pages (/products/<slug>, the Products mega-menu,
+  # breadcrumbs, search badges). Products point at these via their
+  # Category reference field, so an existing ID must never be renamed.
+  - name: categories
+    label: Catalog categories
+    type: collection
+    path: content/categories
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: id
+      sort: order
+      order: asc
+    fields:
+      - name: id
+        label: ID (slug, lowercase)
+        type: string
+        required: true
+        pattern: "^[a-z0-9][a-z0-9-]*$"
+        description: "Becomes the page address (/products/<id>) and the link from products — e.g. roofing-fixing-systems. NEVER rename it: products reference this exact value."
+      - name: order
+        label: Menu order (1 = first)
+        type: number
+        description: "Optional — categories are listed (menu + category pages) from the lowest number up; empty ones come last, alphabetically."
+      - name: labelEn
+        label: Name (English)
+        type: string
+        required: true
+      - name: labelKa
+        label: Name (Georgian)
+        type: string
+        description: "Missing Georgian falls back to English (like the slider texts)."
+      - name: descriptionEn
+        label: Description (English)
+        type: text
+        description: "The intro paragraph on the category page and in the menu."
+      - name: descriptionKa
+        label: Description (Georgian)
+        type: text
+      - name: icon
+        label: Icon image
+        type: image
+        options:
+          media: categories
+          rename: safe
+        description: "The small tile picture used in the Products menu (roughly square works best)."
 
   # ------------------------------------------------------- home slider
   - name: slider
