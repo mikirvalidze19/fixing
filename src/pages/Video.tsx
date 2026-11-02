@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import videos from '../data/videos.json';
+import { videos, videoTitle } from '../data/videos';
 import styles from './Video.module.css';
 
 function getYouTubeId(url: string): string {
@@ -20,7 +20,9 @@ function getYouTubeId(url: string): string {
 }
 
 export default function Video() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const ka = i18n.language === 'ka';
+  /* Titles are bilingual CMS content (Georgian falls back to English). */
   return (
     <div className={styles.page}>
       <nav className={styles.crumbs} aria-label={t('common.breadcrumb')}>
@@ -39,13 +41,13 @@ export default function Video() {
             <div className={styles.player}>
               <iframe
                 src={`https://www.youtube.com/embed/${getYouTubeId(video.youtube)}?rel=0`}
-                title={video.title}
+                title={videoTitle(video, ka)}
                 loading="lazy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
               />
             </div>
-            <h2 className={styles.cardTitle}>{video.title}</h2>
+            <h2 className={styles.cardTitle}>{videoTitle(video, ka)}</h2>
           </li>
         ))}
       </ul>

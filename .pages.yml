@@ -776,3 +776,41 @@ content:
         label: Note (optional, not published)
         type: string
         description: "Anything you want to remember about this update, e.g. 'Q2 supplier list'. Shown nowhere on the site."
+
+  # ------------------------------------------------------- video gallery
+  # The card grid on /video (an iframe per YouTube link). One row per
+  # video; drag rows (menu order) to rearrange the cards.
+  - name: videos
+    label: Video gallery
+    type: collection
+    path: content/videos
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: id
+      sort: order
+      order: asc
+    fields:
+      - name: id
+        label: ID (slug, lowercase)
+        type: string
+        required: true
+        pattern: "^[a-z0-9][a-z0-9_-]*$"
+        description: "Just the card's file name (e.g. hxe-concrete-screw, made from the YouTube ID) — keep it once created."
+      - name: order
+        label: Card order (1 = first)
+        type: number
+        description: "Position in the /video grid; empty numbers come last, alphabetically."
+      - name: youtube
+        label: YouTube link
+        type: string
+        required: true
+        description: "Any YouTube/youtu.be address of the video, e.g. https://youtu.be/DA2M-kUpvIo — the player card is built from it."
+      - name: titleEn
+        label: Title (English)
+        type: string
+        required: true
+      - name: titleKa
+        label: Title (Georgian)
+        type: string
+        description: "Missing Georgian falls back to English."

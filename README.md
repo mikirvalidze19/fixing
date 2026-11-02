@@ -30,6 +30,7 @@ Non-developer editors add products through [Pages CMS](https://pagescms.org) (fo
 - **Applications** (usage pages, `/applications`) are CMS-managed under `content/applications`: the products belong to applications via each product's "Applications" multi-pick, and an application page lists the products tagged with it — applications may mix categories exactly like on tecfi.it.
 - **Catalog categories** (the Products menu + `/products/<slug>` pages) are CMS-managed under `content/categories` — bilingual names/descriptions, icons and ordering; products pick from the live list ("Category" field) instead of a hardcoded dropdown (docs/EDITOR-GUIDE.md §3).
 - The home-page **stats band** (counting numbers) is one CMS file (`content/stats.json`) — bilingual headline, optional button (empty text hides it) and reorderable counters with EN/KA labels (docs/EDITOR-GUIDE.md §8).
+- The **/video gallery** is CMS-managed under `content/videos` — one row per card: YouTube link + bilingual title, reorderable (docs/EDITOR-GUIDE.md §9).
 
 See **docs/EDITOR-GUIDE.md** for the step-by-step editor guide.
 

@@ -12,6 +12,8 @@ This guide is for the people who add products to the **Fixing Systems** website.
 
 8. **ქართული შეჯამება (მთავარი გვერდის ციფრები):** „Home page numbers (stats band)" — ერთი ფაილი: სათაური და ღილაკი ინგლისურ-ქართულად (ღილაკის ცარიელი ტექსტი = ღილაკი არ ჩანს), და ციფრების სია (რიცხვი + EN/KA წარწერა). რიგების გადათრევით იცვლება თანმიმდევრობა.
 
+9. **ქართული შეჯამება (ვიდეო გალერეა):** „Video gallery" განყოფილებაში მართეთ /video გვერდის ბარათები — YouTube ბმული და ინგლისურ-ქართული სათაური, რიგის ნომერი. ახალი ვიდეო დაამატეთ ბმულისა და სათაურის შეყვანით.
+
 ---
 
 ## 1. One-time setup (done once by the owner)
@@ -136,7 +138,20 @@ The counting-numbers strip on the home page (below the featured products) is one
 | Button link | Page address for the button, e.g. `/contacts`. |
 | The numbers | One row per counter: **Number** + label in EN / KA. Drag rows to reorder; rows are counted up on scroll as before. |
 
-## 9. Good to know
+## 9. Video gallery (the /video page)
+
+Each card on `/video` is one row of the **Video gallery** sidebar section:
+
+| Field | What to enter |
+|---|---|
+| ID (slug) | Just the card's file name (made from the YouTube ID) — keep it once created. |
+| Card order | Position in the grid (1 = first); empty numbers come last. |
+| YouTube link | Any YouTube / youtu.be address — the player card is built from it. |
+| Title (EN / KA) | The caption under the card; missing Georgian falls back to English. |
+
+Adding a video: paste the YouTube link and the English title, save — the other fields are prefilled.
+
+## 10. Good to know
 
 - **Nothing is public before you publish.** Visitors of the website can never add or edit anything; only invited collaborators can.
 - Every change is a commit in GitHub history — mistakes can be reverted, and everything is attributed.
