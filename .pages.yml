@@ -283,6 +283,52 @@ content:
           rename: safe
         description: "The small tile picture used in the Products menu (roughly square works best)."
 
+  # ------------------------------------------------------- stats band
+  # The counting-numbers strip on the home page (below the featured
+  # products). One file, fully editable.
+  - name: stats
+    label: Home page numbers (stats band)
+    type: file
+    path: content/stats.json
+    format: json
+    fields:
+      - name: titleEn
+        label: Headline (English)
+        type: string
+        description: "The big sentence above the four numbers."
+      - name: titleKa
+        label: Headline (Georgian)
+        type: string
+      - name: ctaEn
+        label: Button text (English)
+        type: string
+        description: "The strip's button. Leave empty to show no button."
+      - name: ctaKa
+        label: Button text (Georgian)
+        type: string
+      - name: ctaLink
+        label: Button link
+        type: string
+        description: "Page address for the button, e.g. /contacts."
+      - name: items
+        label: The numbers
+        type: object
+        list:
+          collapsible:
+            collapsed: false
+        description: "Each row is one counter (number + label). Drag rows to reorder; the site counts the numbers up on scroll as before."
+        fields:
+          - name: value
+            label: Number
+            type: number
+            required: true
+          - name: labelEn
+            label: Label (English)
+            type: string
+          - name: labelKa
+            label: Label (Georgian)
+            type: string
+
   # ------------------------------------------------------- home slider
   - name: slider
     label: Home slider

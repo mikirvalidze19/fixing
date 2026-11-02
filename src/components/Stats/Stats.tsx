@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import statsData from '../../data/stats.json';
+import { statsContent } from '../../data/stats';
 import styles from './Stats.module.css';
 
 const DURATION_MS = 1600;
@@ -48,28 +48,41 @@ function Counter({ value, locale }: { value: number; locale: string }) {
 }
 
 export default function Stats() {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const locale = i18n.language === 'ka' ? 'ka' : 'en';
+  const ka = locale === 'ka';
+  /* All texts are CMS content (Georgian falls back to English); an
+   * empty button text hides it. Index keys: rows have no identity
+   * slug — reordering keeps the DOM consistent through React. */
+  const { titleEn, titleKa, ctaEn, ctaKa, ctaLink, items } = statsContent;
+  const title = (ka && titleKa) || titleEn;
+  const ctaText = (ka && ctaKa) || ctaEn;
   return (
     <section className={styles.band} aria-labelledby="stats-title">
       <div className={styles.overlay} aria-hidden="true" />
       <div className={styles.wrap}>
-        <h3 id="stats-title" className={styles.title}>
-          {t('stats.title', { defaultValue: statsData.title })}
-        </h3>
+        {title && (
+          <h3 id="stats-title" className={styles.title}>
+            {title}
+          </h3>
+        )}
         <dl className={styles.grid}>
-          {statsData.stats.map((stat) => (
-            <div key={stat.id} className={styles.item}>
+          {items.map((stat, index) => (
+            <div key={index} className={styles.item}>
               <dd className={styles.number}>
                 <Counter value={stat.value} locale={locale} />
               </dd>
-              <dt className={styles.label}>{t(`stats.${stat.id}`, { defaultValue: stat.label })}</dt>
+              <dt className={styles.label}>
+                {(ka && stat.labelKa) || stat.labelEn}
+              </dt>
             </div>
           ))}
         </dl>
-        <Link to={statsData.to} className={styles.cta}>
-          {t('stats.cta', { defaultValue: statsData.cta })}
-        </Link>
+        {ctaText && (
+          <Link to={ctaLink} className={styles.cta}>
+            {ctaText}
+          </Link>
+        )}
       </div>
     </section>
   );

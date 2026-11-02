@@ -1,0 +1,29 @@
+{
+  "titleEn": "Fixing Systems — certified products and fast delivery for unbeatable fixing solutions",
+  "titleKa": null,
+  "ctaEn": "Find out more",
+  "ctaKa": null,
+  "ctaLink": "/contacts",
+  "items": [
+    {
+      "value": 8304,
+      "labelEn": "Catalog products",
+      "labelKa": null
+    },
+    {
+      "value": 3047,
+      "labelEn": "Certified products",
+      "labelKa": null
+    },
+    {
+      "value": 2540,
+      "labelEn": "Clients",
+      "labelKa": null
+    },
+    {
+      "value": 65,
+      "labelEn": "Countries served",
+      "labelKa": null
+    }
+  ]
+}

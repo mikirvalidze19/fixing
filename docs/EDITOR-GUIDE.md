@@ -10,6 +10,8 @@ This guide is for the people who add products to the **Fixing Systems** website.
 
 7. **ქართული შეჯამება (კატეგორიები):** „Catalog categories" განყოფილებაში მართეთ /products კატეგორიების გვერდები — ინგლისურ-ქართული სახელი და აღწერა, მენიუში სურათი და რიგის ნომერი. პროდუქტს Category ველიდან აირჩევს კატეგორიას.
 
+8. **ქართული შეჯამება (მთავარი გვერდის ციფრები):** „Home page numbers (stats band)" — ერთი ფაილი: სათაური და ღილაკი ინგლისურ-ქართულად (ღილაკის ცარიელი ტექსტი = ღილაკი არ ჩანს), და ციფრების სია (რიცხვი + EN/KA წარწერა). რიგების გადათრევით იცვლება თანმიმდევრობა.
+
 ---
 
 ## 1. One-time setup (done once by the owner)
@@ -123,7 +125,18 @@ About 1 minute after you save, an automatic helper rewrites **every price cell o
 
 **Verify it worked:** open the product in the CMS ~2 minutes later and check the table, or look at the repository's **Actions** tab — the "Price update" run shows a summary like `+10% applied to 3 products (7 price cells)`.
 
-## 8. Good to know
+## 8. Home page numbers (stats band)
+
+The counting-numbers strip on the home page (below the featured products) is one editable file — **Home page numbers (stats band)** in the sidebar:
+
+| Field | What to enter |
+|---|---|
+| Headline (EN / KA) | The big sentence above the numbers; missing Georgian falls back to English. |
+| Button text (EN / KA) | The strip's button. Empty text = the button is not shown. |
+| Button link | Page address for the button, e.g. `/contacts`. |
+| The numbers | One row per counter: **Number** + label in EN / KA. Drag rows to reorder; rows are counted up on scroll as before. |
+
+## 9. Good to know
 
 - **Nothing is public before you publish.** Visitors of the website can never add or edit anything; only invited collaborators can.
 - Every change is a commit in GitHub history — mistakes can be reverted, and everything is attributed.
