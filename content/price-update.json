@@ -1,7 +1,5 @@
 {
-  "percent": 0,
+  "percent": 10,
   "direction": "increase",
-  "allProducts": false,
-  "products": [],
-  "note": ""
+  "allProducts": true
 }
